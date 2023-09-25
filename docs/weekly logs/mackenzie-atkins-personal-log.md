@@ -1,1 +1,1 @@
-
+Week of sept 18: Worked on team chain exercise. Did several sessions of planning then coding. At first was helping with the implementation until Nikhil found a better method, ended up helping with unit tests. 
