@@ -7,6 +7,7 @@ Excercise Tasks Worked On:
   - Error handling (remove duplicates/same inputted word conflicts)
   - Verify when the word chain had finished
   - Cleaned up the code with some functions
+  - Assisted in ensuring that the overall word chain ran as intended
 
 Other Tasks Worked On:
   - Ensuring I had the opportunity to speak with every member of the team to communicate responsibilities + to receive/provide an update if needed
