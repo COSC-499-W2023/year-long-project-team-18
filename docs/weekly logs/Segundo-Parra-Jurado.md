@@ -1,14 +1,14 @@
 ## Week: September 18th - 22nd**
 
 ### Word Chain Excercise
-Direct Excercise Tasks Worked On:
+Excercise Tasks Worked On:
   - I worked on creating a small project plan to help document the responsibilities that each team member had
   - Allowed user input to be read into the code
   - Error handling (remove duplicates/same inputted word conflicts)
   - Verify when the word chain had finished
   - Cleaned up the code with some functions
 
-Other Tasks:
+Other Tasks Worked On:
   - Ensuring I had the opportunity to speak with every member of the team to communicate responsibilities + to receive/provide an update if needed
   - Assisting Mackenzie in scheduling what times the team should meet to discuss/work on the excercise.
 
