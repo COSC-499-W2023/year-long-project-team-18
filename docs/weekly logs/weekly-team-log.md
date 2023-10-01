@@ -43,6 +43,7 @@ Worked on the project plan for the rest of the course.
 
 ### Project Board Completed Features: 
 ![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/9b36c0eb-9067-47a7-898a-67bbf55b1e60)
+
 Project plan overview - Ishaan
 Project plan envisioned usage - Nikhil
 Project plan tech stack - Sam
@@ -51,5 +52,7 @@ Project plan summary and editing - Segundo
 
 ### Project Board In-Progress Features: 
 ![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/e8ac9464-ccdf-41cd-aa85-7eae667491ab)
+
+Currently we are not working on any features but we will start developing our features in the following weeks.
 
 Our team is still awating access to AWS features to begin development on specific features. 
