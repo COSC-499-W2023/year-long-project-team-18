@@ -8,7 +8,7 @@ Worked on the Word Chain exercise, Helped with writing tests, writing 3 tests fo
 
 <h3>Students Goals</h3>
 Goal was complete the project plan and begin with scoping the project while identifying the technology the team is going to use, the features of the software and divind up responsibilities among the team based on their experiences with different aspects of Computer Science.
-<h3>Students Task on Board</h3>
+<h3>Student Tasks on Board</h3>
 -To identify envisioned usage for the product in development<br>
 -Explain different scenarios for the software<br>
 -Explain how users will be able to use the software<br>
