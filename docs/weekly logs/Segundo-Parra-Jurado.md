@@ -1,4 +1,17 @@
-## Week: September 18th - 22nd**
+## Week 4: September 26th - 28th
+
+### Project Plan Completion
+Excercise Tasks Worked On:
+  - Added a table of contents, a title page, changed the font and spacing
+  - Worked on the descriptions for tables 1, 2 and 3
+  - Assigned priority and size tags to the tasks in the Github Kanban board
+  - Created backlog tasks for the Github Kanban board
+  - Filled in my experience, expertise, areas of learning and areas of contribution in both tables 2 and 3
+
+![Screenshot 2023-10-01 at 9 26 50 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/fc0a6c3c-32c4-4da0-bf42-8a40024be327)
+
+
+## Week 3: September 19th - 21st
 
 ### Word Chain Excercise
 Excercise Tasks Worked On:
