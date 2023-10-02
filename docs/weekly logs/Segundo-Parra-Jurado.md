@@ -1,7 +1,7 @@
 ## Week 4: September 26th - 28th
 
 ### Project Plan Completion
-Excercise Tasks Worked On:
+Tasks Worked On:
   - Added a table of contents, a title page, changed the font and spacing
   - Worked on the descriptions for tables 1, 2 and 3
   - Assigned priority and size tags to the tasks in the Github Kanban board
