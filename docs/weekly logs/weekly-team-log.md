@@ -1,3 +1,37 @@
+# Week of Oct 1st - 8th
+## Team 18
+
+### Milestones
+The following are milestones we accomplished/worked towards this week:
+1. Obtaining an understanding on how Cognito functions
+2. Updated the Kanban board to best reflect current objectives to be completed during this sprint
+3. Started discussion on how to approach the entity-relationship model
+4. All members have completed the sign up process for AWS
+
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart:
+![Screenshot 2023-10-08 at 10 44 45 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/50c4d8a5-eea0-40e5-a8a4-b6827e8b6c94)
+
+### Project Board Completed Features: 
+![Screenshot 2023-10-08 at 11 16 22 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/033090e2-fbc1-4c5e-a097-a5b42093f94f)
+
+### Project Board In-Progress Features: 
+![Screenshot 2023-10-08 at 11 17 45 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/207ef9c3-4a17-4fbd-8549-6f4a54b44482)
+
+### Project Board This Sprint Features:
+![Screenshot 2023-10-08 at 10 53 31 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/28ac1ec7-bde2-44d8-8090-dc4934c63f09)
+
+### Project Board New (To Be Assigned) Features: 
+![Screenshot 2023-10-08 at 10 53 52 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/4bfa5ef2-d468-4f3b-8591-ccb34ef786ec)
+
+NOTE: We are having issues with permissions on Cognito.
+
 # Week of Sept 25-Oct 1
 ## Team 18
 
