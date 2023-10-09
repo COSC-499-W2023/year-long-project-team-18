@@ -18,6 +18,11 @@ Working on the draft for the ER Design for our Database.
 
 * Set up my AWS Account
 
+<h2>Screenshot of Peer Evaluation</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/e60dc068-4d9b-4838-8990-5b7862efb318)
+
+
 <h1>Week Sept 25 - Oct 1</h1>
 <h2>Student Goals</h2>
 
