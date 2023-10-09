@@ -1,3 +1,16 @@
+## Week 5: October 3rd - 5th
+
+### Tasks Worked On:
+  - Worked on organizing and structuring the Kanban board with new tasks
+  - Started the discussion with how to approach the entity-relationship model with Nik
+  - Completed this weeks team log
+
+![Screenshot 2023-10-08 at 11 12 19 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d0cbcc4c-b6cc-43cb-875d-3a1561f9fd42)
+
+### Tasks I am assigned to:
+
+![Screenshot 2023-10-08 at 10 59 46 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/b376fa7b-66dd-4761-ace1-e9ff07e6fdab)
+
 ## Week 4: September 26th - 28th
 
 ### Project Plan Completion
