@@ -19,10 +19,10 @@ The following are milestones we accomplished/worked towards this week:
 ![Screenshot 2023-10-08 at 10 44 45 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/50c4d8a5-eea0-40e5-a8a4-b6827e8b6c94)
 
 ### Project Board Completed Features: 
-![Screenshot 2023-10-08 at 10 51 53 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/567ad392-e403-44aa-9972-2004799ffa6c)
+![Screenshot 2023-10-08 at 11 16 22 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/033090e2-fbc1-4c5e-a097-a5b42093f94f)
 
 ### Project Board In-Progress Features: 
-![Screenshot 2023-10-08 at 10 52 19 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/7611a6cd-2def-446d-86eb-2e7d09236438)
+![Screenshot 2023-10-08 at 11 17 45 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/207ef9c3-4a17-4fbd-8549-6f4a54b44482)
 
 ### Project Board This Sprint Features:
 ![Screenshot 2023-10-08 at 10 53 31 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/28ac1ec7-bde2-44d8-8090-dc4934c63f09)
