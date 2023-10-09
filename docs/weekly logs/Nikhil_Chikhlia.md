@@ -10,6 +10,13 @@ Working on the draft for the ER Design for our Database.
 
 ![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/d4705912-c128-459d-a3bb-83bd087bb4af)
 
+<h2>In progress Tasks:</h2>
+
+* ER Design and Implementation/Creation of Database (Potential on the second point)
+
+<h2>Completed Tasks:</h2>
+
+* Set up my AWS Account
 
 <h1>Week Sept 25 - Oct 1</h1>
 <h2>Student Goals</h2>
