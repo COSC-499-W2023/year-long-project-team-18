@@ -1,3 +1,28 @@
+<h1>Week Oct 2 - Oct 8</h1>
+<h2>Student Goals</h2>
+
+* Our goal this week was more to identify which tasks we needed to prioritize working on this week and next week.
+* I have taken the role of working on our ER Relational Database diagram to ensure that our tables and normalization is ensured.
+
+<h2>Student Tasks on board:</h2>
+
+Working on the draft for the ER Design for our Database.
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/d4705912-c128-459d-a3bb-83bd087bb4af)
+
+<h2>In progress Tasks:</h2>
+
+* ER Design and Implementation/Creation of Database (Potential on the second point)
+
+<h2>Completed Tasks:</h2>
+
+* Set up my AWS Account
+
+<h2>Screenshot of Peer Evaluation</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/e60dc068-4d9b-4838-8990-5b7862efb318)
+
+
 <h1>Week Sept 25 - Oct 1</h1>
 <h2>Student Goals</h2>
 
