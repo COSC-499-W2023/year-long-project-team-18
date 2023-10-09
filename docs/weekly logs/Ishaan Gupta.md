@@ -1,5 +1,18 @@
 # Ishaan Gupta Individual Logs:
 
+## Week 5:
+Dates: 2nd Oct - 8th Oct
+
+### Student Goals:
+* Getting started on the project creating a project backlog to begin with.
+* Start working on tasks to start the base set up such as Cognito.
+
+### Completed Tasks:
+* Learned how to set up a User Pool in Cognito.
+* Created User Pool but I am unsure if we can proceed with Cognito.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/93b594d3-b1c6-4f49-b0e5-feb1dcf7270a)
+
+
 ## Week 4
 Dates: 25th Sep - 1st Oct
 ### Tasks Worked On
