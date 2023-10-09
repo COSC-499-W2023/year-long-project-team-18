@@ -7,7 +7,7 @@
 
 ![Screenshot 2023-10-08 at 11 12 19 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d0cbcc4c-b6cc-43cb-875d-3a1561f9fd42)
 
-### Tasks I am assigned to:
+### Tasks I Am Assigned To:
 
 ![Screenshot 2023-10-08 at 10 59 46 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/b376fa7b-66dd-4761-ace1-e9ff07e6fdab)
 
