@@ -24,6 +24,14 @@ Goal was complete the project plan and begin with scoping the project while iden
 -To identify and document the technology stack used<br>
 -Explain why the specific technology stack was chosen<br>
 
+<h2>Week Oct02 - Oct08</h2>
+<img width="1098" alt="Screenshot 2023-10-08 at 11 57 10 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/48abdcc0-6e77-426e-bf71-462985eb1e22">
 
-
+<h3>Students Goals</h3>
+-Creating a backlog for the project going about the semester<br>
+-Setup AWS Accounts<br>
+-FIgure out AWS Cognito for the login page and get it set up<br>
+<h3>Completed Tasks</h3>
+-Created a backlog for the first scrum until 24th Oct<br>
+-Setup AWS Account
 
