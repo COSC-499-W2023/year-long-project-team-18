@@ -1,3 +1,23 @@
+## Week of Oct 9-15
+### Student goals
+The goal this week was to start working on some tangible parts of the project. This week has not been a strong week as I have been balancing this with midterms.
+
+### Student tasks on board
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/da05e419-0e86-4849-afb7-29ea736cd326)
+
+### My in-progress tasks
+- Continue working on visual identity
+- Begin research into Angular
+
+### Tasks completed this week
+None
+
+
+### Peer evaluation screenshot
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/15b2e84c-a32e-488b-b0ba-9ad16d4bf8c5)
+
+
+
 ## Week of Oct 1-8
 ### Student goals
 Our goal was to begin the paper design for the project and start working on some basic features for the application. 
