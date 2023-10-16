@@ -1,3 +1,21 @@
+<h1>Week Oct 9 - Oct 15</h1>
+<h2>Student Goals</h2>
+
+* Get some of the ER Design started and think of some more fleshed out user scenarios to ensure that our code/program functions in a way that users will like.
+* Storyboarding with the group to see how pages will lead to another, and how the user would attempt to use our platform.
+
+<h2>Student tasks on board</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/f4f540b1-12cc-42c3-830f-03b73b181e12)
+
+<h2>In progress tasks:</h2>
+
+* Finishing up the ER Design and finalizing some of the storyboarding.
+
+<h2>Screenshot of Peer Evaluation</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/de1b01b1-5be4-472d-8e53-e20eba79474a)
+
 <h1>Week Oct 2 - Oct 8</h1>
 <h2>Student Goals</h2>
 
