@@ -35,3 +35,17 @@ Goal was complete the project plan and begin with scoping the project while iden
 -Created a backlog for the first scrum until 24th Oct<br>
 -Setup AWS Account
 
+
+<h2>Week Oct09 - Oct16</h2>
+![Screenshot 2023-10-16 at 12 06 24 AM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/aedceee7-645c-443f-ac30-618c26ee3ab6)
+<h3>Students Goals</h3>
+-Figuring out Connecting AWS Cognito to Java<br>
+-Planning for Presentation<br>
+-Planning on Task priorities for First Milestone<br>
+<h3>In-Progress Tasks</h3>
+-Make a storybaord<br>
+-Complete login and signup feature<br>
+<h3>Completed Tasks</h3>
+-Figuring out Connecting AWS Cognito to Java<br>
+-Planning for Presentation<br>
+-Planning on Task priorities for First Milestone<br>
