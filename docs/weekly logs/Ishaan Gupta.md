@@ -1,5 +1,17 @@
 # Ishaan Gupta Individual Logs:
 
+## Week 6:
+Dates: 9th Oct - 15th Oct
+
+### Student Goals:
+* Continue working on the base setup for the project such as the ER Design, User Pool and Design.
+* Finish setting up our first User Pool with the sign up and sign in features finished.
+
+### Completed Tasks:
+* Set up our first User Pool on Cognito.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/1b251028-216e-460a-b088-9c1ce0cb2379)
+
+
 ## Week 5:
 Dates: 2nd Oct - 8th Oct
 
