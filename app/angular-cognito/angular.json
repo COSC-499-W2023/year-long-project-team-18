@@ -23,7 +23,13 @@
                 "ulid",
                 "uuid",
                 "buffer",
-                "cookies"
+                "cookies",        "url",
+                "camelcase-keys",
+                "@aws-crypto/sha256-browser",
+                "@aws-crypto/crc32",
+                "isomorphic-unfetch",
+                "js-cookie",
+                "cookie"
 
              ],
             "outputPath": "dist/angular-cognito",
@@ -113,6 +119,7 @@
             "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/@aws-amplify/ui-angular/theme.css",
               "src/styles.scss"
             ],
             "scripts": [
