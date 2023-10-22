@@ -20,6 +20,24 @@
             </div>
           </div>
           <div class="row">
+            <div class="col mb-2">
+              <label for="name" class="form-label">Name:</label>
+              <input type="text" id="name" name="name" #name="ngModel" [(ngModel)]="user.given_name" class="form-control form-control-sm">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mb-2">
+              <label for="familyName" class="form-label">Family Name:</label>
+              <input type="text" id="familyName" name="familyName" #familyName="ngModel" [(ngModel)]="user.family_name" class="form-control form-control-sm">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mb-2">
+              <label for="birthdate" class="form-label">Birthdate:</label>
+              <input type="text" id="birthdate" name="birthdate" #birthdate="ngModel" [(ngModel)]="user.birthdate" class="form-control form-control-sm">
+            </div>
+          </div>
+          <div class="row">
             <div class="col d-grid">
               <button type="button" (click)="signUp()" class="btn btn-sm btn-success" [disabled]="loading">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
