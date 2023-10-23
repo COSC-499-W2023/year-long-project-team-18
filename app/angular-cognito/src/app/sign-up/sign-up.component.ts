@@ -20,25 +20,49 @@ export class SignUpComponent {
     this.user = {} as IUser;
   }
 
-  public signUp(): void{
+  public signUp(): void {
     this.loading = true;
-    this,this.cognitoService.signUp(this.user).then(()=>{
-      this.loading = false;
-      this.isConfirm = true;
-    }).catch(()=> {
-      this.loading = false;
-    })
+    this.cognitoService.signUp(this.user)
+      .then(() => {
+        this.loading = false;
+        this.isConfirm = true;
+      })
+      .catch((error) => {
+        console.error('Sign Up Error:', error);
+        this.loading = false;
+      });
   }
-
-  public confirmSignUp(): void{
+  
+  
+  public confirmSignUp(): void {
     this.loading = true;
-    this.cognitoService.confirmSignUp(this.user).then(()=>{
-      this.router.navigate(['/signIn']);
-    }).catch(()=>{
-      this.loading = false;
-    })
+  
+    this.cognitoService.confirmSignUp(this.user)
+      .then((confirmationResult) => {
+        // Confirmation was successful
+        console.log('Confirmation result:', confirmationResult);
+        this.router.navigate(['/signIn']);
+      })
+      .catch((error) => {
+        console.error('Confirm Sign Up Error:', error);
+        this.loading = false;
+      });
   }
-
+  public resendConfirmationCode(): void {
+    this.loading = true;
+  
+    this.cognitoService.resendConfirmationCode(this.user)
+      .then(() => {
+        console.log('Code resent successfully');
+        this.loading = false;
+      })
+      .catch((error) => {
+        console.error('Error resending code:', error);
+        this.loading = false;
+      });
+  }
+  
+  
   
 
 }

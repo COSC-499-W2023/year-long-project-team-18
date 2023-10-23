@@ -10,6 +10,13 @@
           </div>
           <div class="row">
             <div class="col mb-2">
+              <label for="username" class="form-label">Username:</label>
+               <input type="text" id="username" name="username" #username="ngModel" [(ngModel)]="user.username" class="form-control form-control-sm">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col mb-2">
               <label for="password" class="form-label">Password:</label>
               <div class="input-group input-group-sm">
                 <input [type]="user.showPassword ? 'text' : 'password'" id="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control form-control-sm">
@@ -58,6 +65,13 @@
               <button type="button" (click)="confirmSignUp()" class="btn btn-sm btn-success" [disabled]="loading">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
                 Confirm
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col d-grid">
+              <button type="button" (click)="resendConfirmationCode()" class="btn btn-sm btn-primary">
+                Resend Code
               </button>
             </div>
           </div>
