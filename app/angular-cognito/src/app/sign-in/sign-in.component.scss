@@ -1,4 +1,4 @@
-$page-font: 'Libre Baskerville';
+$page-font: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 $primary-1: #194a81;
 $primary-2: #0097b2;
 
@@ -36,9 +36,12 @@ div.col-4 {
     width: 500px;
 }
 
-div.row.justify-content-center.my-5 {
+div.row.justify-content-center {
     margin: 0;
-    padding: 64px;
+    padding: 106px;
+    font-size: 100%;
+    vertical-align: baseline;
+    border: 0;
     background-image: linear-gradient(to bottom, $primary-1, $primary-2);
 }
 
