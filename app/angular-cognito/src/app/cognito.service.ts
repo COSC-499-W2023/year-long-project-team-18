@@ -6,11 +6,16 @@ import { environment } from '../environments/environment';
 
 export interface IUser {
   email: string;
+  username: string;
   password: string;
   showPassword: boolean;
   code: string;
-  name: string;
+  given_name: string;
+  family_name: string;
+  birthdate: string;
 }
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -35,12 +40,19 @@ export class CognitoService {
     });
   }
 
-   public signUp(user: IUser): Promise<any>{
+  public signUp(user: IUser): Promise<any>{
     return Auth.signUp({
-      username: user.email,
-      password: user.password
+      username: user.username,
+      password: user.password,
+      attributes: {
+        email: user.email,
+        given_name: user.given_name,
+        family_name: user.family_name,
+        birthdate: user.birthdate,
+      }
     });
-   }
+  }
+  
 
    public confirmSignUp(user: IUser): Promise<any>{
     return Auth.confirmSignUp(user.email, user.code);
@@ -67,6 +79,11 @@ export class CognitoService {
       });
     }
    }
+
+public resendConfirmationCode(user:IUser): Promise<any> {
+  return Auth.resendSignUp(user.email);
+}
+
 
    public getUser(): Promise<any>{
     return Auth.currentUserInfo();
