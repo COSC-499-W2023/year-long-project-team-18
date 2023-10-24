@@ -46,6 +46,15 @@
             </div>
           </div>
           <div class="row">
+            <div class="col mb-2">
+              <label for="account_type" class="form-label">Account type:</label>
+              <select id="account_type" name="account_type" #account_type="ngModel" [(ngModel)]="user['custom:account_type']" class="form-control form-control-sm">
+                <option value="personal">Personal</option>
+                <option value="business">Business</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
             <div class="col d-grid">
               <button type="button" (click)="signUp()" class="btn btn-sm btn-success" [disabled]="loading">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
