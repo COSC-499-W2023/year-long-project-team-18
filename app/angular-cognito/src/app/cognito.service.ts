@@ -13,6 +13,7 @@ export interface IUser {
   given_name: string;
   family_name: string;
   birthdate: string;
+  'custom:account_type': string;
 }
 
 
@@ -49,6 +50,7 @@ export class CognitoService {
         given_name: user.given_name,
         family_name: user.family_name,
         birthdate: user.birthdate,
+        'custom:account_type': user['custom:account_type']
       }
     });
   }
