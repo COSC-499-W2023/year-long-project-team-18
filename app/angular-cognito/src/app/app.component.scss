@@ -1,0 +1,30 @@
+$nav-colour: #E3F4F2;
+$nav-font: Lato;
+
+nav.navbar.navbar-expand-sm.navbar-light.bg-light {
+    padding: 0;
+}
+
+div.container-fluid {
+    background-color: $nav-colour;
+    font-family: $nav-font;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#navbarContent {
+    font-weight: regular;
+    font-size: 18px;
+
+    a:hover {
+        background-color: #BDD6DC;
+    }
+}
+
+a.navbar-brand {
+    font-size: 22px;
+}
+
+a.nav-link {
+    font-weight: bold;
+}
