@@ -1,3 +1,70 @@
+# Week (2 of them) of Oct 15th - Oct 29th
+## Team 18
+
+### Milestones
+The following are milestones we accomplished/worked towards these 2 weeks:
+1. Set up majority of Cognito functionality. User pools and user permissions are now set up, linked to our Signup page.
+2. Updated the Kanban board to best reflect current objectives to be completed during this sprint.
+3. Finalized our Entity-Relationship model and design.
+4. Set up the user Login and Signup pages with functionality. The signup page has user permissions set up, with their individual roles as well.
+5. CSS Finalized to create a tangible pleasing look for the pages.
+6. Cleaned up Project Plan and identified which assets we are fully using for our Tech Stack.
+7. Storyboarding of both the Business account and Personal account to identify how each would function, and the overall look of their home pages compared to each other.
+
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart:
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/13a88d1d-5306-434e-b54b-a4fdd5153d7e)
+
+### Project Board Completed Features:
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/ae75464a-37d4-4dee-97f6-61dcaf62fce4)
+
+### Project Board In-Progress Features:
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/f8aa2aa1-893d-410d-8f54-8509d7a31789)
+
+### Project Board This Sprint Features:
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/1e3793f1-99df-4ec9-9bf4-17a91f66c3c8)
+
+### Project Board New (To Be Assigned) Features:
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/dda3dc74-2754-4b3f-994c-377045f72e49)
+
+# Week of Oct 8th - 15th
+## Team 18
+
+### Milestones
+The following are milestones we accomplished/worked towards this week:
+1. Worked on the entity-relationship model
+2. Updated the Kanban board to best reflect current objectives to be completed during this sprint
+3. Created a logo and project name
+4. Members individually researched/worked toward accomplishing assigned tasks
+
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart:
+![Screenshot 2023-10-15 at 11 59 08 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/39d12828-1c45-449e-8670-24f21d948f6d)
+
+### Project Board Completed Features:
+![Screenshot 2023-10-15 at 11 57 39 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/19d3084f-5f99-45b9-b201-1910858040c3)
+
+### Project Board In-Progress Features: 
+![Screenshot 2023-10-15 at 11 58 13 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/b84a1902-7098-4e75-870d-5344740684f7)
+
+### Project Board This Sprint Features:
+![Screenshot 2023-10-15 at 11 58 31 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/1dda7504-9437-4f18-aa2f-c703d548165b)
+
+### Project Board New (To Be Assigned) Features: 
+![Screenshot 2023-10-15 at 11 58 48 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/f3a61b74-7955-4e58-ac86-25c922e6a628)
+
 # Week of Oct 1st - 8th
 ## Team 18
 
