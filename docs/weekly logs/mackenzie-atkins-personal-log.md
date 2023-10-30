@@ -1,3 +1,25 @@
+## Oct 16-29
+
+### Student goals
+The goal for these last couple weeks have been creating the essential parts of our app. 
+
+### Student tasks on board
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/00e229f6-f191-4e3c-a0d5-1bf48d68e37c)
+
+### My in-progress tasks
+Currently all my tasks for this sprint are completed
+
+### Tasks completed this period
+- Created Angular app and initial components
+- Created a log-in page and assisted with signup page
+- Added account types
+- Helped with adjustments to the user pool in AWS Cognito
+
+### Peer eveluation screenshot
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/ea2a70b5-59b3-4b15-a047-efe197057da8)
+
+
+
 ## Week of Oct 9-15
 ### Student goals
 The goal this week was to start working on some tangible parts of the project. This week has not been a strong week as I have been balancing this with midterms.
