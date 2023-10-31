@@ -13,6 +13,10 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'dashboard',
+    component: DashboardComponent,
+  },
+  {
     path: 'profile',
     component: ProfileComponent,
   },
@@ -28,10 +32,6 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'signIn',
   },
-  {
-    path: 'dashboard',
-    component: DashboardComponent
-  }
 ];
 
 @NgModule({
