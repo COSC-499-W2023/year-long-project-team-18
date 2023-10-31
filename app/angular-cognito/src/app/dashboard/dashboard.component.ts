@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 
@@ -9,6 +9,20 @@ import { IUser, CognitoService} from '../cognito.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+  loading: boolean;
+  user: IUser;
+
+  constructor(private cognitoService: CognitoService) {
+    this.loading = false;
+    this.user = {} as IUser;
+  }
+
+  public ngOnInit(): void {
+    this.cognitoService.getUser()
+    .then((user: any) => {
+      this.user = user.attributes;
+    });
+  }
 
 }
