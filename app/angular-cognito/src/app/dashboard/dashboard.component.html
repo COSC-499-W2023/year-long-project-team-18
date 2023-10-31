@@ -1,1 +1,15 @@
-<p>dashboard works!</p>
+<div class="row justify-content-center">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col mb-2">
+              <label for="email" class="form-label">Account type:</label>
+              <input type="text" id="account_type" name="account_type" #account_type="ngModel" [ngModel]="user['custom:account_type']" disabled
+                class="form-control form-control-sm">
+            </div>
+          </div>
+          </div>
+        </div>
+    </div>
+</div>  
