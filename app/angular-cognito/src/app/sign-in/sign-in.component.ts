@@ -13,8 +13,7 @@ export class SignInComponent {
   loading: boolean;
   user: IUser;
 
-  constructor(private router: Router,
-              private cognitoService: CognitoService) {
+  constructor(private router: Router, private cognitoService: CognitoService) {
     this.loading = false;
     this.user = {} as IUser;
   }
