@@ -15,7 +15,10 @@
           <div class="col mb-2">
             <label for="email" class="form-label">Email:</label>
             <input type="email" id="email" name="email" #email="ngModel" [(ngModel)]="user.email"
-              class="form-control form-control-sm">
+              class="form-control form-control-sm" [ngClass]="{'is-invalid': email.invalid && email.touched}">
+            <div *ngIf="email.invalid && email.touched" class="invalid-feedback">
+              Please enter a valid email address.
+            </div>
           </div>
         </div>
         <div class="row">
