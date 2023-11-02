@@ -82,5 +82,28 @@ div.card {
 }
 
 div.col-4 {
-    width: 40%;
+    width: 30%;
+}
+
+@media only screen and (max-width: 1500px) {
+    p.header-text {
+        font-size: 62px;
+    }
+
+    p.subheader-text {
+        font-size: 15px;
+    }
+
+    label.form-label {
+        font-size: 14px;
+    }
+
+    p i {
+        font-size: 12px;
+    }
+
+    div.row.justify-content-center {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
 }
