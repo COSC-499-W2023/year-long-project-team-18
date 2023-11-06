@@ -5,7 +5,7 @@
 The following are milestones we accomplished/worked towards these 2 weeks:
 1. Created and presented our live demo presentation which included a variety of different tasks we had worked on to better achieve our milestones
 2. Completed our storyboarding, which consisted of both personal and business account panels
-3. Created test cases to better test the code
+3. Created test cases
 
 ### Usernames:
 - Mackenzie Atkins - maxa2
