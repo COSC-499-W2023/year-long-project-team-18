@@ -61,3 +61,17 @@ Goal was complete the project plan and begin with scoping the project while iden
 -Coded the sign-up page and added additional attributes to it so it registers user properly in Cognito<br>
 -Added a pre-signup lambda trigger on congito<br>
 -Coded the lambda trigger to autoverify emails
+
+<h2>Week Oct30 - Nov05</h2>
+<img width="1093" alt="Screenshot 2023-11-05 at 11 45 37 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/b112943e-0219-499c-99ac-330e6b8af7dc">
+<h3>Students Goals</h3>
+-Practice for presentation in class
+-Add slides and material to presentation
+-Add error handling and validation to sign-up page
+
+<h3>In-Progress Tasks</h3>
+
+<h3>Completed Tasks</h3>
+-Practice for presentation in class
+-Added slides about AWS tools to the presentation
+-Added email validation to sign-up page

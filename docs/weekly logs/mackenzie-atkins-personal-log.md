@@ -1,3 +1,29 @@
+## Oct 30 - Nov 05
+
+### Student Goals
+
+Our focus for this last week has been completing our group presentation and then presenting it, as well as getting tests figured out.
+
+### Student tasks on board
+*Please note that the backlog has not been created for this sprint as our focus was on the presentation this week
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/7cc8cc4d-3e21-4e34-9b64-d8a0e4d3f962)
+
+
+### My in-progress tasks
+
+- Get Jest working with our project
+- Create the dashboard component of our angular app
+- Add working elements to the dashboard
+
+### Tasks completed this period
+- Created slideshow for presentation
+- Created dashboard
+
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/05a938b8-2bc1-4ee7-8ec6-bc8902736ad8)
+
+
 ## Oct 16-29
 
 ### Student goals
