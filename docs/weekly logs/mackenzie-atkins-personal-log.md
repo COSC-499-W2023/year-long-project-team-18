@@ -1,4 +1,4 @@
-## Oct 30 - Nob 05
+## Oct 30 - Nov 05
 
 ### Student Goals
 
