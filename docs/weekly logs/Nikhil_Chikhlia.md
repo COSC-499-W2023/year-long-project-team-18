@@ -1,3 +1,21 @@
+<h1>Week Oct 30 - Nov 5</h1>
+<h1>Student Goals:</h1>
+
+* Practice our presentation to present in-class
+* Get our storyboarding ready for our presentation
+
+<h2>Student Tasks on board:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/786faf98-4b9f-4844-8690-75a812ffafe4)
+
+<h2>In progress tasks:</h2>
+
+* Getting started on getting the framework for SQL and our Database created for this sprint
+
+<h2>Screenshot of Peer Evaluation:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/f1c6fe61-6de8-4a17-ae14-522532b13795)
+
 <h1>Week Oct 16 - Oct 22 AND Oct 23 - Oct 29</h1>
 <h1>Student Goals:</h1>
 
