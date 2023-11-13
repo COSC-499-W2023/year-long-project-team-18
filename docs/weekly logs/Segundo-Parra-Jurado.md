@@ -1,3 +1,17 @@
+## Week 10: November 5th - 12th
+
+### Tasks Worked On:
+  - None
+
+### Tasks I am planning to work on this upcoming week:
+  - Will begin to work through the tasks assigned to me currently in this sprint
+  
+![Screenshot 2023-11-12 at 11 45 26 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/1df8761d-96a4-40b9-b002-bcf0d9c3bd32)
+
+### Tasks I Am Assigned To:
+
+![Screenshot 2023-11-12 at 11 56 02 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/88f08642-ac0c-4f5b-99be-51b9229a9204)
+
 ## Week 9: October 29th - November 5th
 
 ### Tasks Worked On:
