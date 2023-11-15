@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { CognitoService } from './cognito.service';
+import { CognitoService, IUser } from './cognito.service';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +11,23 @@ import { CognitoService } from './cognito.service';
 export class AppComponent implements OnInit {
 
   isAuthenticated: boolean;
+  user: IUser;
 
   constructor(private router: Router,
     private cognitoService: CognitoService) {
     this.isAuthenticated = false;
+    this.user = {} as IUser;
   }
 
   public ngOnInit(): void {
+    this.cognitoService.getUser()
     this.cognitoService.isAuthenticated()
     .then((success: boolean) => {
       this.isAuthenticated = success;
+    });
+    this.cognitoService.getUser()
+    .then((user: any) => {
+      this.user = user.attributes;
     });
   }
 
@@ -28,6 +35,8 @@ export class AppComponent implements OnInit {
     this.cognitoService.signOut()
     .then(() => {
       this.router.navigate(['/signIn']);
+    }).then(()=>{
+      window.location.reload();
     });
   }
 
