@@ -28,15 +28,15 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  public update(): void {
+  public joinOrg(): void{
     this.loading = true;
-
     this.cognitoService.updateUser(this.user)
-    .then(() => {
+    .then(()=>{
       this.loading = false;
-    }).catch(() => {
+    }).catch(()=> {
       this.loading = false;
-    });
+    })
+    console.log("success");
   }
 
 }

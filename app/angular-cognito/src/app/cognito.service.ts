@@ -14,6 +14,7 @@ export interface IUser {
   family_name: string;
   birthdate: string;
   'custom:account_type': string;
+  'custom:organization': string;
 }
 
 

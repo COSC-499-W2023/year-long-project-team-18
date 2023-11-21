@@ -10,8 +10,18 @@
               <input type="text" id="account_type" name="account_type" #account_type="ngModel" [ngModel]="user['custom:account_type']" disabled
                 class="form-control form-control-sm">
             </div>
-            
           </div>
+          
+          <div class="row" *ngIf="user['custom:organization']==null else elseBlock">
+              <label class="form-label">Have an organization? Type the code here to join:</label>
+              <input type="text" id="organization" name="organization" #organization="ngModel" [ngModel]="user['custom:organization']"
+              class="form-control form-control-sm">
+              <button type="button" (click)="joinOrg()" class="btn btn-sm btn-success" [disabled]="loading">Join</button>
+          </div>
+          <ng-template #elseBlock>
+            <label class="form-label">Organization number: </label>
+            <p>{{user['custom:organization']}}</p>
+          </ng-template>
           </div>
         </div>
     </div>
