@@ -114,28 +114,8 @@ export class VideoRecorderComponent implements OnInit, OnDestroy {
     this.saveRecordingToKinesis();
   }
   
-  private async bindKinesisVideoClientToPlayer(videoElement: any) {
-    try {
-      const streamName = 'prvcy_stream';
-      const region = 'ca-central';
-      const kinesisVideoClient = new KinesisVideo({ region });
-
-      const createSignalingChannelParams = { ChannelName: streamName };
-     // const createSignalingChannelResponse = await kinesisVideoClient.createSignalingChannel(createSignalingChannelParams).promise();
-      //const signalingChannelARN = createSignalingChannelResponse.ChannelARN;
-     // console.log('Signaling channel created:', signalingChannelARN);
-  
-      const attachMediaStreamParams = {
-       // ChannelARN: signalingChannelARN,
-        StreamName: streamName,
-        IsMaster: true,
-      };
-  
-      this.bindKinesisVideoClientToPlayer(videoElement);
-  
-    } catch (error) {
-      console.error('Error binding Kinesis Video client to player:', error);
-    }
+bindKinesisVideoClientToPlayer(videoElement: any) {
+    //Incomplete
   }
   private initializeKinesisVideoClient() {
     const streamName = 'prvcy_stream';
