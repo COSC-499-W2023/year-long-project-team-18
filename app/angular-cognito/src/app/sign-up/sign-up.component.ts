@@ -22,23 +22,23 @@ export class SignUpComponent {
     this.loading = true;
 
     this.cognitoService.signUp(this.user)
+    .then(()=>{
+      this.cognitoService.signIn(this.user)
+    })
+    .then(()=>{
+      this.router.navigate(['/orgPage'])
+    })
+    .then(()=>{
+      window.location.reload();
+    })
     .catch((error) => {
       console.error('Sign Up Error:', error);
       this.loading = false;
   });
 
 }
-// public signIn(): void {
-//   this.loading = true;
-//   this.cognitoService.signIn(this.user)
-//   .then(() => {
-//     this.router.navigate(['/orgPage']);
-//   }).then(()=>{
-//     window.location.reload();
-//   }).catch(() => {
-//     this.loading = false;
-//   });
-// }
+
+
   
   
   public confirmSignUp(): void {

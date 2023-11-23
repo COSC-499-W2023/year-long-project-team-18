@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { IUser, CognitoService} from '../cognito.service';
@@ -8,7 +8,7 @@ import { IUser, CognitoService} from '../cognito.service';
   templateUrl: './org-page.component.html',
   styleUrls: ['./org-page.component.scss']
 })
-export class OrgPageComponent {
+export class OrgPageComponent implements OnInit {
   loading: boolean;
   user: IUser;
   isAuthenticated: boolean;
@@ -18,7 +18,7 @@ export class OrgPageComponent {
     this.user = {} as IUser;
     this.isAuthenticated = true;
   }
-  
+
   public ngOnInit(): void {
     this.cognitoService.getUser()
     .then((user: any) => {
@@ -30,7 +30,7 @@ export class OrgPageComponent {
     this.loading = true;
     this.cognitoService.updateUser(this.user)
     .then(()=>{
-      this.loading = false;
+      this.router.navigate(['/dashboard'])
     }).catch(()=> {
       this.loading = false;
     })

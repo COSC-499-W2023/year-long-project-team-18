@@ -6,7 +6,7 @@
                 <label class="form-label">Have an organization? Type the code here to join:</label>
                 <input type="text" id="organization" name="organization" #organization="ngModel" [ngModel]="user['custom:organization']"
                 class="form-control form-control-sm">
-                <button type="button" (click)="joinOrg()" class="btn btn-sm btn-success" [disabled]="loading">Join</button>
+                <button type="button" (click)="joinOrg()" class="btn btn-sm btn-success">Join</button>
                 <button type="button" (click)="skip()">Skip for now</button>
             </div>    
         </div>

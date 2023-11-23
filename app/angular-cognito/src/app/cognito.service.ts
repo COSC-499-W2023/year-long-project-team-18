@@ -52,7 +52,7 @@ export class CognitoService {
         family_name: user.family_name,
         birthdate: user.birthdate,
         'custom:account_type': user['custom:account_type'],
-        'custom:organization': user['custom:organization']
+        'custom:organization': 'default'
       }
     })
     .then((signUpResult) => {

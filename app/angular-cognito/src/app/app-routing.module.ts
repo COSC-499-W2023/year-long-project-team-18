@@ -26,16 +26,16 @@ const routes: Routes = [
     component: SignInComponent,
   },
   {
+    path: 'orgPage',
+    component: OrgPageComponent
+  },
+  {
     path: 'signUp',
     component: SignUpComponent,
   },
   {
     path: '**',
     redirectTo: 'signIn',
-  },
-  {
-    path: 'orgPage',
-    component: OrgPageComponent
   }
 ];
 
