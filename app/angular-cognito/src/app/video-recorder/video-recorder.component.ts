@@ -1,13 +1,11 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ElementRef
-} from '@angular/core';
-
+import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
+import { CognitoService, IUser } from '../cognito.service';
+import { Router } from '@angular/router';
+import * as AWS from 'aws-sdk';
 import videojs from 'video.js';
-import * as RecordRTC from 'recordrtc';
-import * as Record from 'videojs-record/dist/videojs.record.js';
+import Record from 'videojs-record/dist/videojs.record.js';
+import 'src/app/videojs-record';
+import { KinesisVideo, KinesisVideoClient } from '@aws-sdk/client-kinesis-video';
 
 @Component({
   selector: 'app-video-recorder',
@@ -16,15 +14,12 @@ import * as Record from 'videojs-record/dist/videojs.record.js';
 })
 export class VideoRecorderComponent implements OnInit, OnDestroy {
 
-  idx = 'clip1';
   private config: any;
   private player: any;
-  private plugin: any;
+  private kinesisVideoClient: KinesisVideo = new KinesisVideo({ region: 'ca-central' });
 
-  constructor(elementRef: ElementRef) {
-    this.player = false;
-    this.plugin = Record;
-
+  constructor(private cognitoService: CognitoService, private router: Router) {
+    this.kinesisVideoClient = new KinesisVideo({});
     this.config = {
       controls: true,
       autoplay: false,
@@ -46,52 +41,130 @@ export class VideoRecorderComponent implements OnInit, OnDestroy {
     };
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.checkAuthenticationStatus();
+    this.initializeKinesisVideoClient();
+  }
+
+  checkAuthenticationStatus() {
+    this.cognitoService.isAuthenticated().then(isAuthenticated => {
+      if (isAuthenticated) {
+        console.log('User is authenticated');
+      } else {
+        console.log('User is not authenticated');
+        this.router.navigate(['/signIn']);
+      }
+    }).catch(error => {
+      console.error('Authentication status check error:', error);
+    });
+  }
 
   ngAfterViewInit() {
-    let el = 'video_' + this.idx;
-    const element = document.getElementById(el)!;
+    const element = document.getElementById('my-video');
 
-    this.player = videojs(element, this.config, () => {
-      console.log('player ready! id:', el);
-
-      // Check if the 'version' property exists on the videojs object
-      if ('version' in this.player) {
-        const msg = 'Using video.js ' + this.player.version() +
-          ' with videojs-record ' + videojs.getPluginVersion('record') +
-          ' and recordrtc ' + RecordRTC.version;
-        videojs.log(msg);
-      } else {
-        console.warn('Unable to determine videojs version');
-      }
-
-      this.player.on('deviceReady', () => {
-        console.log('device is ready!');
-      });
-
-      this.player.on('startRecord', () => {
-        console.log('started recording!');
-      });
-
-      this.player.on('finishRecord', () => {
-        console.log('finished recording: ', this.player.recordedData);
-        this.player.record().saveAs({'video': 'my-video-file-name.webm'});
+    if (element) {
+      this.player = videojs(element, this.config, () => {
+        console.log('Video.js player is ready!');
       });
 
       this.player.on('error', (element: any, error: any) => {
-        console.warn(error);
-      });
-
-      this.player.on('deviceError', () => {
-        console.error('device error:', this.player.deviceErrorCode);
-      });
-    });
+        console.error('Video.js error:', error);
+      });this.bindKinesisVideoClientToPlayer(element);
+  } else {
+    console.error('Video element not found!');
+  }
   }
 
   ngOnDestroy() {
     if (this.player) {
       this.player.dispose();
-      this.player = false;
+      this.player = null;
+    }
+    //this.releaseKinesisVideoResources();
+  }
+
+
+  startRecording() {
+    if (this.player && this.player.record) {
+      this.player.record().start();
+      console.log('Recording started!');
+    } else {
+      console.error('Recording not available or player not ready.');
+    }
+    this.startStreamingToKinesis();
+  }
+
+  stopRecording() {
+    if (this.player && this.player.record) {
+      this.player.record().stop();
+      console.log('Recording stopped!');
+    } else {
+      console.error('Recording not available or player not ready.');
+    }
+    this.stopStreamingToKinesis();
+  }
+
+  saveRecording() {
+    if (this.player && this.player.record) {
+      this.player.record().saveAs({'video': 'my-video-file-name.webm'});
+      console.log('Recording saved!');
+    } else {
+      console.error('Recording not available or player not ready.');
+    }
+    this.saveRecordingToKinesis();
+  }
+  
+  private async bindKinesisVideoClientToPlayer(videoElement: any) {
+    try {
+      const streamName = 'prvcy_stream';
+      const region = 'ca-central';
+      const kinesisVideoClient = new KinesisVideo({ region });
+
+      const createSignalingChannelParams = { ChannelName: streamName };
+     // const createSignalingChannelResponse = await kinesisVideoClient.createSignalingChannel(createSignalingChannelParams).promise();
+      //const signalingChannelARN = createSignalingChannelResponse.ChannelARN;
+     // console.log('Signaling channel created:', signalingChannelARN);
+  
+      const attachMediaStreamParams = {
+       // ChannelARN: signalingChannelARN,
+        StreamName: streamName,
+        IsMaster: true,
+      };
+  
+      this.bindKinesisVideoClientToPlayer(videoElement);
+  
+    } catch (error) {
+      console.error('Error binding Kinesis Video client to player:', error);
+    }
+  }
+  private initializeKinesisVideoClient() {
+    const streamName = 'prvcy_stream';
+    const region = 'ca-central';
+    this.kinesisVideoClient = new KinesisVideo({ region });
+  }
+  
+  private startStreamingToKinesis(){
+
+    //arn:aws:kinesis:ca-central-1:952490130013:stream/prvcy_stream  ARN Number
+
+  }
+
+
+  private stopStreamingToKinesis() {
+    if (this.player && this.player.record && this.player.record().getEngine()) {
+      const kinesisVideoProducer = this.player.record().getEngine().getKinesisVideoProducer();
+      if (kinesisVideoProducer) {
+        kinesisVideoProducer.stop();
+      }
+    }
+  }
+  
+  private saveRecordingToKinesis() {
+    if (this.player && this.player.record) {
+      this.player.record().saveAs({
+        'video': 'my-video-file-name.webm'
+      });
+      this.stopStreamingToKinesis();
     }
   }
 }
