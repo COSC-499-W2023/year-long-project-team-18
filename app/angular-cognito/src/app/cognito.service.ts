@@ -16,7 +16,7 @@ export interface IUser {
   'custom:account_type': string;
   'custom:organization': string;
 }
-
+  
 
 
 @Injectable({
@@ -51,7 +51,8 @@ export class CognitoService {
         given_name: user.given_name,
         family_name: user.family_name,
         birthdate: user.birthdate,
-        'custom:account_type': user['custom:account_type']
+        'custom:account_type': user['custom:account_type'],
+        'custom:organization': user['custom:organization']
       }
     })
     .then((signUpResult) => {
