@@ -1,3 +1,21 @@
+## Week 9: October 29th - November 5th
+
+### Tasks Worked On:
+  - Helped build the canva presentation for our live demo presentation this week
+  - Participated in a meeting to organize the presentation structure and rehearsed the presentation
+  - Presented the opening slides for our team's live demo this week
+  - Watched and gave feedback to 5 other team's presentations
+  - Completed the business account storyboard
+
+### Tasks I am planning to work on this upcoming week:
+  - During our next team meeting we will plan and distribute work according to our next milestones
+
+<img width="1091" alt="Screenshot 2023-11-05 at 11 37 09 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/c8827d6a-5636-43fd-af8b-91b8afa15eeb">
+
+### Tasks I Am Assigned To:
+
+![Screenshot 2023-11-05 at 11 42 01 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d5866898-5a1c-4b47-a2b5-003268cf3b74)
+
 ## Week 7-8: October 15th - 29th
 
 ### Tasks Worked On:

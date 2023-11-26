@@ -1,3 +1,34 @@
+# Week of Oct 29th - Nov 5th
+## Team 18
+
+### Milestones
+The following are milestones we accomplished/worked towards these 2 weeks:
+1. Created and presented our live demo presentation which included a variety of different tasks we had worked on to better achieve our milestones
+2. Completed our storyboarding, which consisted of both personal and business account panels
+3. Created test cases
+
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart:
+![Screenshot 2023-11-05 at 11 46 53 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/bc769113-fb68-4489-ba8b-54702ae3a01e)
+
+### Project Board Completed Features:
+![Screenshot 2023-11-05 at 11 53 29 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/db6d66dc-de6d-4897-ae6b-79f99105368b)
+
+### Project Board In-Progress Features:
+![Screenshot 2023-11-05 at 11 56 26 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/0a29a05c-9741-449f-a80e-52ea31610f5f)
+
+### Project Board This Sprint Features:
+![Screenshot 2023-11-05 at 11 56 44 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/037ca58d-589e-4f0b-9695-29f60847cd37)
+
+### Project Board New (To Be Assigned) Features:
+![Screenshot 2023-11-05 at 11 57 03 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/19ab0e5e-0b1b-423e-8926-e8ce78d5ec62)
+
 # Week (2 of them) of Oct 15th - Oct 29th
 ## Team 18
 
