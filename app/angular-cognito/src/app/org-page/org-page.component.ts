@@ -29,11 +29,13 @@ export class OrgPageComponent implements OnInit {
   public joinOrg(): void{
     this.loading = true;
     this.cognitoService.updateUser(this.user)
-    .then(()=>{
-      this.router.navigate(['/dashboard'])
-    }).catch(()=> {
+    .then(() => {
+      this.router.navigate(['/dashboard']);
+    }).then(()=>{
+      window.location.reload();
+    }).catch(() => {
       this.loading = false;
-    })
+    });
     console.log("success");
   }
 
