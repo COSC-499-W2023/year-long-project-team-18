@@ -32,6 +32,7 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="" routerLinkActive="active" *ngIf="isAuthenticated && user['custom:account_type']=='business'" >Request a new video</a>
         </li>
+        <!-- signout to right margin -->
         <li class="nav-item">
           <a class="nav-link" routerLink="" (click)="signOut()" *ngIf="isAuthenticated">Sign out</a>
         </li>
