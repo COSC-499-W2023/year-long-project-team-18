@@ -49,3 +49,29 @@ Goal was complete the project plan and begin with scoping the project while iden
 -Figuring out Connecting AWS Cognito to Java<br>
 -Planning for Presentation<br>
 -Planning on Task priorities for First Milestone<br>
+
+<h2>Week Oct17 - Oct29</h2>
+<img width="1089" alt="Screenshot 2023-10-29 at 9 16 26 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/3a90117f-94c7-4bb6-99e7-b14539b2a631">
+<h3>Students Goals</h3>
+-Complete Milestone 1 and create a login and sign-up page for the web app<br>
+-Configure and change AWS Cognito to fit with additional attributes required for the login and sign-up pages<br>
+<h3>In-Progress Tasks</h3>
+
+<h3>Completed Tasks</h3>
+-Coded the sign-up page and added additional attributes to it so it registers user properly in Cognito<br>
+-Added a pre-signup lambda trigger on congito<br>
+-Coded the lambda trigger to autoverify emails
+
+<h2>Week Oct30 - Nov05</h2>
+<img width="1093" alt="Screenshot 2023-11-05 at 11 45 37 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/b112943e-0219-499c-99ac-330e6b8af7dc">
+<h3>Students Goals</h3>
+-Practice for presentation in class
+-Add slides and material to presentation
+-Add error handling and validation to sign-up page
+
+<h3>In-Progress Tasks</h3>
+
+<h3>Completed Tasks</h3>
+-Practice for presentation in class
+-Added slides about AWS tools to the presentation
+-Added email validation to sign-up page

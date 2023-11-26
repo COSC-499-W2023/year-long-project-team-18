@@ -1,3 +1,40 @@
+<h1>Week Oct 30 - Nov 5</h1>
+<h1>Student Goals:</h1>
+
+* Practice our presentation to present in-class
+* Get our storyboarding ready for our presentation
+
+<h2>Student Tasks on board:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/786faf98-4b9f-4844-8690-75a812ffafe4)
+
+<h2>In progress tasks:</h2>
+
+* Getting started on getting the framework for SQL and our Database created for this sprint
+
+<h2>Screenshot of Peer Evaluation:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/f1c6fe61-6de8-4a17-ae14-522532b13795)
+
+<h1>Week Oct 16 - Oct 22 AND Oct 23 - Oct 29</h1>
+<h1>Student Goals:</h1>
+
+* Get the storyboarding finalized and to develop more user scenarios/details to fully understand how they would be using the web application.
+* Cross-referencing the Project Plan to understand exactly what we are setting up, and describe more specifics on which features are being implemented, as well as their detail to ensure that we deliver the correct end product.
+
+<h2>Student tasks on board</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/a9fd97c7-9fdf-4786-981e-7b4f02d6f25e)
+
+<h2>In progress tasks:</h2>
+
+* Preparing the presentation powerpoint and structure
+* Refining the Storyboards to understand how users will navigate to each page - I will aim for this to be done by the presentation date to avoid confusion when presenting
+
+<h2>Screenshot of Peer Evaluation</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/1bd1b749-6607-40c0-a3f1-c772513ae84d)
+
 <h1>Week Oct 9 - Oct 15</h1>
 <h2>Student Goals</h2>
 

@@ -1,5 +1,33 @@
 # Ishaan Gupta Individual Logs:
 
+## Week 9:
+Dates: 30th Oct - 5th Nov
+
+### Student Goals:
+* Get the team presentation along with the demo ready to present in front of class.
+* Rehearse the presentation with the team.
+* Add responsive CSS design for some devices.
+
+### Completed Tasks:
+* Rehearsed presentation + demo with the team.
+* Watched other teams' presentations and did peer evaluation.
+* Added more CSS to make the pages responsive for some devices.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/ab8653c7-8746-487f-8599-c2f3b828f027)
+
+
+## Week 7-8:
+Dates: 16th Oct - 29th Oct
+
+### Student Goals:
+* Create front page for the website as well as the profile page.
+* Get the login and sign up features working with Cognito.
+
+### Completed Tasks: 
+* Wrote the SCSS code for the sign-in, sign-up, profile pages. 
+* Edited some HTML for the page layouts.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/b19686f0-918a-4e71-ad95-f0269ef52110)
+
+
 ## Week 6:
 Dates: 9th Oct - 15th Oct
 

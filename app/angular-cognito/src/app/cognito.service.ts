@@ -13,6 +13,7 @@ export interface IUser {
   given_name: string;
   family_name: string;
   birthdate: string;
+  'custom:account_type': string;
 }
 
 
@@ -40,7 +41,7 @@ export class CognitoService {
     });
   }
 
-  public signUp(user: IUser): Promise<any>{
+  public signUp(user: IUser): Promise<any> {
     return Auth.signUp({
       username: user.username,
       password: user.password,
@@ -49,9 +50,21 @@ export class CognitoService {
         given_name: user.given_name,
         family_name: user.family_name,
         birthdate: user.birthdate,
+        'custom:account_type': user['custom:account_type']
       }
+    })
+    .then((signUpResult) => {
+      // Log the verification code here
+      console.log('User confirmed:', signUpResult.userConfirmed);
+  
+      // Continue with other processing
+    })
+    .catch((error) => {
+      console.error('Sign Up Error:', error);
+      throw error; // Propagate the error
     });
   }
+  
   
 
    public confirmSignUp(user: IUser): Promise<any>{
@@ -64,25 +77,17 @@ export class CognitoService {
     });
    }
 
-   public isAuthenticated(): Promise<boolean>{
-    if(this,this.authenticationSubject.value){
-      return Promise.resolve(true);
-    }else{
-      return this.getUser().then((user: any) =>{
-        if(user){
-          return true;
-        }else{
-          return false;
-        }
-      }).catch(()=>{
+   public isAuthenticated(): Promise<boolean> {
+    return Auth.currentAuthenticatedUser()
+      .then(() => {
+        this.authenticationSubject.next(true);
+        return true;
+      })
+      .catch(() => {
+        this.authenticationSubject.next(false);
         return false;
       });
-    }
-   }
-
-public resendConfirmationCode(user:IUser): Promise<any> {
-  return Auth.resendSignUp(user.email);
-}
+  }
 
 
    public getUser(): Promise<any>{

@@ -1,3 +1,39 @@
+## Week 9: October 29th - November 5th
+
+### Tasks Worked On:
+  - Helped build the canva presentation for our live demo presentation this week
+  - Participated in a meeting to organize the presentation structure and rehearsed the presentation
+  - Presented the opening slides for our team's live demo this week
+  - Watched and gave feedback to 5 other team's presentations
+  - Completed the business account storyboard
+
+### Tasks I am planning to work on this upcoming week:
+  - During our next team meeting we will plan and distribute work according to our next milestones
+
+<img width="1091" alt="Screenshot 2023-11-05 at 11 37 09 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/c8827d6a-5636-43fd-af8b-91b8afa15eeb">
+
+### Tasks I Am Assigned To:
+
+![Screenshot 2023-11-05 at 11 42 01 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d5866898-5a1c-4b47-a2b5-003268cf3b74)
+
+## Week 7-8: October 15th - 29th
+
+### Tasks Worked On:
+  - Finished creating the first ER diagram draft, will update the diagram as we progress through the coding
+  - Finished the UI mockup design, the UI design was a good foundation for the coded CSS implementation of the webpage
+  - Discussed and planned in meetings on our timeline of tasks for the upcoming presentation
+  - As a group we reviewed and updated the project plan to better reflect our goals (updated tech stack)
+
+### Tasks I am planning to work on this upcoming week:
+  - Working with Nik to create the presentation by Tuesday
+  - Finishing the storyboard design
+
+![Screenshot 2023-10-29 at 9 09 31 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/04e4743d-6e73-449c-b5f9-ba346b58796d)
+
+### Tasks I Am Assigned To:
+
+![Screenshot 2023-10-29 at 9 13 25 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/4c1310a1-9a38-45f6-9bfa-51e844754f97)
+
 ## Week 6: October 8th - 15th
 
 ### Tasks Worked On:
@@ -6,8 +42,8 @@
 
 ### Tasks I am planning to work on this upcoming week:
   - Adding more detail to the project plan
-  - Creating/helping create the storyboard to better visualize how the website should look
-  - Assisting in creating a basic functioning login webpage
+  - Creating/helping create the ~~storyboard~~ UI mockup to better visualize how the website should look
+  - ~~Assisting in creating a basic functioning login webpage~~
 
 ![Screenshot 2023-10-16 at 12 06 17 AM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/b68b9a77-d3c2-4b5a-a738-6e185f215096)
 

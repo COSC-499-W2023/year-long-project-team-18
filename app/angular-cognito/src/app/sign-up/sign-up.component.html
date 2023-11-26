@@ -6,7 +6,7 @@
 
   <div class="col-4">
     <div class="card">
-      <div class="card-body" *ngIf="!isConfirm">
+      <div class="card-body">
         <div class="header">
           <p class="header-text">PRVCY</p>
           <hr>
@@ -16,7 +16,10 @@
           <div class="col mb-2">
             <label for="email" class="form-label">Email:</label>
             <input type="email" id="email" name="email" #email="ngModel" [(ngModel)]="user.email"
-              class="form-control form-control-sm">
+              class="form-control form-control-sm" [ngClass]="{'is-invalid': email.invalid && email.touched}">
+            <div *ngIf="email.invalid && email.touched" class="invalid-feedback">
+              Please enter a valid email address.
+            </div>
           </div>
         </div>
         <div class="row">
@@ -26,7 +29,6 @@
               class="form-control form-control-sm">
           </div>
         </div>
-
         <div class="row">
           <div class="col mb-2">
             <label for="password" class="form-label">Password:</label>
@@ -64,34 +66,20 @@
           </div>
         </div>
         <div class="row">
+          <div class="col mb-2">
+            <label for="account_type" class="form-label">Account type:</label>
+            <select id="account_type" name="account_type" #account_type="ngModel" [(ngModel)]="user['custom:account_type']"
+              class="form-control form-control-sm">
+              <option value="personal">Personal</option>
+              <option value="business">Business</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
           <div class="col d-grid">
             <button type="button" (click)="signUp()" class="btn btn-sm btn-success" [disabled]="loading">
               <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
               Sign up
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="card-body" *ngIf="isConfirm">
-        <div class="row">
-          <div class="col mb-2">
-            <label for="code" class="form-label">Code:</label>
-            <input type="text" id="code" name="code" #code="ngModel" [(ngModel)]="user.code"
-              class="form-control form-control-sm">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col d-grid">
-            <button type="button" (click)="confirmSignUp()" class="btn btn-sm btn-success" [disabled]="loading">
-              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
-              Confirm
-            </button>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col d-grid">
-            <button type="button" (click)="resendConfirmationCode()" class="btn btn-sm btn-primary">
-              Resend Code
             </button>
           </div>
         </div>
