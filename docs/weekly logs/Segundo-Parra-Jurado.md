@@ -8,7 +8,7 @@
   - Reaching out to the TA to understand why the database connection is not working
   - Starting the design documentation task assigned to me
   
-### Peer Evaluations
+### Peer Evaluations:
 
 ![Screenshot 2023-11-26 at 11 57 41 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/6d5fc5ee-5077-40fe-9e22-7d54ae618894)
 
