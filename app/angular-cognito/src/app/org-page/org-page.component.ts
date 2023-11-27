@@ -26,17 +26,18 @@ export class OrgPageComponent implements OnInit {
     });
   }
 
-  public joinOrg(): void{
+
+  public joinOrg(orgCode: string): void{
     this.loading = true;
-    this.cognitoService.updateUser(this.user)
+    this.cognitoService.updateUserAttribute(orgCode)    
     .then(() => {
       this.router.navigate(['/dashboard']);
     }).then(()=>{
       window.location.reload();
-    }).catch(() => {
+    }).catch(()=>{
       this.loading = false;
-    });
-    console.log("success");
+    })
+  
   }
 
   public skip(): void{

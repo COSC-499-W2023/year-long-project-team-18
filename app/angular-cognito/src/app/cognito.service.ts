@@ -102,4 +102,15 @@ export class CognitoService {
     })
    }
 
+   public updateUserAttribute(attributeValue: any): Promise<any> {
+    return Auth.currentAuthenticatedUser()
+      .then((user) => {
+        return Auth.updateUserAttributes(user, { "custom:organization": attributeValue });
+      })
+      .catch((error) => {
+        console.error('Error updating user attribute', error);
+        throw error;
+      });
+
+    }
 }

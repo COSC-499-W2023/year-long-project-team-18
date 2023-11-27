@@ -20,23 +20,37 @@ export class DashboardComponent implements OnInit {
     this.user = {} as IUser;
     this.isAuthenticated = true;
   }
+  showJoinForm = false;
 
   public ngOnInit(): void {
     this.cognitoService.getUser()
     .then((user: any) => {
       this.user = user.attributes;
     });
+    this.checkOrganization();
+    
   }
 
-  public joinOrg(): void{
+
+  checkOrganization() {
+    if (this.user['custom:organization'] == null || this.user['custom:organization'] == 'default') {
+      this.showJoinForm = true;
+    } else {
+      this.showJoinForm = false;
+    }
+  }
+  
+  public joinOrg(orgCode: string): void{
     this.loading = true;
-    this.cognitoService.updateUser(this.user)
-    .then(()=>{
-      this.loading = false;
-    }).catch(()=> {
+    this.cognitoService.updateUserAttribute(orgCode)
+    .then(() =>{
+      this.loading=false
+    }).then(()=>{
+      window.location.reload();
+    }).catch(()=>{
       this.loading = false;
     })
-    console.log("success");
+  
   }
 
 }
