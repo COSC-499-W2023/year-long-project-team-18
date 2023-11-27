@@ -4,6 +4,10 @@ import {Amplify, Auth } from 'aws-amplify';
 
 import { environment } from '../environments/environment';
 
+Amplify.configure({
+  Auth: environment.cognito
+});
+
 export interface IUser {
   email: string;
   username: string;

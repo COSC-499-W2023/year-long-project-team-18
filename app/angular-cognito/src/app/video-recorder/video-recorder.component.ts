@@ -1,122 +1,140 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { CognitoService, IUser } from '../cognito.service';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import * as RecordRTC from 'recordrtc';
+import { IUser, CognitoService } from '../cognito.service';
 import { Router } from '@angular/router';
-import videojs from 'video.js';
-import 'videojs-record/dist/videojs.record.js';
+import AWS, { S3 } from 'aws-sdk';
+import { CognitoIdentityCredentials } from 'aws-sdk';
 
 @Component({
   selector: 'app-video-recorder',
   templateUrl: './video-recorder.component.html',
   styleUrls: ['./video-recorder.component.scss']
 })
-export class VideoRecorderComponent implements AfterViewInit, OnInit, OnDestroy {
+export class VideoRecorderComponent implements AfterViewInit {
 
-  config: any;
- player: any;
+  private stream!: MediaStream;
+  private recordRTC: any;
+  
 
-  constructor(private cognitoService: CognitoService, private router: Router) {
-    this.config = {
-      controls: true,
-      autoplay: false,
-      fluid: false,
-      loop: false,
-      width: 320,
-      height: 240,
-      bigPlayButton: false,
-      controlBar: {
-        volumePanel: false
-      },
-      plugins: {
-        record: {
-          audio: true,
-          video: true,
-          debug: true,
-          maxRecordingLength:0,
-        }
-      }
-    };
-  }
+  @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
 
-  ngOnInit(): void {
-    this.checkAuthenticationStatus();
-  }
 
-  checkAuthenticationStatus() {
-    this.cognitoService.isAuthenticated().then(isAuthenticated => {
-      if (isAuthenticated) {
-        console.log('User is authenticated');
-      } else {
-        console.log('User is not authenticated');
-        this.router.navigate(['/signIn']);
-      }
-    }).catch(error => {
-      console.error('Authentication status check error:', error);
-    });
-  }
-
+  constructor(private cognitoService: CognitoService, private router: Router) {}
   ngAfterViewInit() {
-    const element = document.getElementById('my-video');
-  
-    if (element) {
-      this.player = videojs(element, this.config, () => {
-        console.log('Video.js player is ready!');
+    let video: HTMLVideoElement = this.video.nativeElement;
+    video.muted = false;
+    video.controls = true;
+    video.autoplay = false;
+  }
+
+  toggleControls() {
+    let video: HTMLVideoElement = this.video.nativeElement;
+    video.muted = !video.muted;
+    video.controls = !video.controls;
+    video.autoplay = !video.autoplay;
+  }
+
+  successCallback(stream: MediaStream) {
+    this.stream = stream;
+    if (this.stream) {
+      let options = {
+        type: 'video',
+        mimeType: 'video/webm',
+        bitsPerSecond: 500000,
+      };
+
+      this.recordRTC = new RecordRTC(this.stream, {
+        type: 'video',
+        mimeType: 'video/webm',
+        bitsPerSecond: 5000000,
       });
+      this.recordRTC.startRecording();
   
-      this.player.on('error', (error: any) => {
-        console.error('Video.js error:', error);
-      });
-      this.player.record();
+      let video: HTMLVideoElement = this.video.nativeElement;
+      video.srcObject = stream;
+      this.toggleControls();
     } else {
-      console.error('Video element not found!');
+      console.error('Error: Media stream is not available.');
     }
+  }
+
+  processVideo(audioVideoWebMURL: any) {
+    let video: HTMLVideoElement = this.video.nativeElement;
+    let recordRTC = this.recordRTC;
+    video.src = audioVideoWebMURL;
+    this.toggleControls();
+    var recordedBlob = recordRTC.getBlob();
   }
   
-
-  ngOnDestroy() {
-    if (this.player) {
-      this.player.dispose();
-      this.player = null;
-    }
+  errorCallback(error: any) {
+    console.error('Error accessing media devices:', error);
   }
-
 
   startRecording() {
-    if (this.player && this.player.record) {
-      if (!this.player.record().isRecording()) {
-        this.player.record().start();
-        console.log('Recording started!');
-      } else {
-        console.warn('Recording is already in progress.');
-      }
-    } else {
-      console.error('Recording not available or player not ready.');
-    }
+    let mediaConstraints: MediaStreamConstraints = {
+      video: {
+        width: { min: 1280 },
+        height: { min: 720 },
+      },
+      audio: true,
+    };
+  
+    navigator.mediaDevices
+      .getUserMedia(mediaConstraints)
+      .then(this.successCallback.bind(this))
+      .catch(this.errorCallback.bind(this));
   }
   
+
   stopRecording() {
-    if (this.player && this.player.record) {
-      if (this.player.record().isRecording()) {
-        this.player.record().stop();
-        console.log('Recording stopped!');
-      } else {
-        console.warn('No recording in progress.');
-      }
-    } else {
-      console.error('Recording not available or player not ready.');
-    }
+    let recordRTC = this.recordRTC;
+    recordRTC.stopRecording(this.processVideo.bind(this));
+    let stream = this.stream;
+    stream.getAudioTracks().forEach(track => track.stop());
+    stream.getVideoTracks().forEach(track => track.stop());
   }
-  
-  saveRecording() {
-    if (this.player && this.player.record) {
-      const isRecording = this.player.record().isRecording();
-      if (isRecording) {
-        this.player.record().saveAs({ 'video': 'my-video-file-name.webm' });
-        console.log('Recording saved!');
-      } else {
-        console.warn('No recording to save.');
-      }
+
+  download() {
+    this.recordRTC.save('video.webm');
+  }
+
+  saveToS3() {
+    if (this.recordRTC) {
+      const recordedBlob = this.recordRTC.getBlob();
+
+      const bucketName = 'prvcy';
+      const key = `videos/${Date.now()}_recorded_video.webm`;
+
+      const identityPoolId = 'ca-central-1:4fb80f2f-1e09-4c97-9ac7-d9490489e35e';
+      const region = 'ca-central-1';
+
+      const credentials = new CognitoIdentityCredentials({
+        IdentityPoolId: identityPoolId,
+      });
+
+      AWS.config.credentials = credentials;
+
+      const s3 = new AWS.S3({
+        region: region,
+      });
+
+      const params = {
+        Bucket: bucketName,
+        Key: key,
+        Body: recordedBlob,
+        ContentType: 'video/webm',
+      };
+
+      s3.upload(params, (err: Error | null, data: S3.ManagedUpload.SendData) => {
+        if (err) {
+          console.error('Error uploading to S3:', err);
+        } else {
+          console.log('Upload successful. Object URL:', data.Location);
+        }
+      });
+      
     } else {
-      console.error('Recording not available or player not ready.');
+      console.error('No recording to save.');
     }
   }
 }

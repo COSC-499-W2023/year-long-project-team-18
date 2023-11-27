@@ -1,62 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Recorder App</title>
-  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
-  <link href="https://unpkg.com/videojs-record/dist/css/videojs.record.css" rel="stylesheet" />
-</head>
-<body>
-
-  <div>
-    <video
-      id="my-video"
-      class="video-js vjs-default-skin"
-      playsinline
-      ngNonBindable
-    ></video>
+<div class="row justify-content-center">
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-xs-12 mb-2">
+            <video #video class="video"></video>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 mb-2">
+            <button class="btn btn-sm btn-success button-record" (click)="startRecording()"> Record </button>
+            <button class="btn btn-sm btn-success button-record" (click)="stopRecording()"> Stop</button>
+            <button class="btn btn-sm btn-success button-record" (click)="saveToS3()">Upload Video</button>
+            <button class="btn btn-sm btn-success button-record" (click)="download()"> Download</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <script src="https://vjs.zencdn.net/7.15.4/video.js"></script>
-  <script src="https://unpkg.com/videojs-record/dist/videojs.record.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/aws-sdk/dist/aws-sdk.min.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var config = {
-        controls: true,
-        autoplay: false,
-        fluid: false,
-        loop: false,
-        width: 320,
-        height: 240,
-        bigPlayButton: false,
-        controlBar: {
-          volumePanel: false
-        },
-        plugins: {
-          record: {
-            audio: true,
-            video: true,
-            debug: true,
-            maxRecordingLength:0,
-          }
-        }
-      };
-
-      var videoPlayer = document.getElementById('my-video');
-      var player = videojs(videoPlayer, config, function () {
-        console.log('Video.js player is ready!');
-      });
-
-      player.on('error', function (element, error) {
-        console.error('Video.js error:', error);
-      });
-
-      player.record();
-    });
-  </script>
-
-</body>
-</html>
+</div>
