@@ -1,3 +1,21 @@
+## Week 10: November 19th - 26th
+
+### Tasks Worked On:
+  - Created a small UI mockup to be implemented into the website
+  - Troubleshooted both Aurora (MySQL Compatible) & MariaDB databases. However, neither database has been able to provide a succesful connection which has not allowed me to implement it into the code succesfully.
+
+### Tasks I am planning to work on this upcoming week:
+  - Reaching out to the TA to understand why the database connection is not working
+  - Starting the design documentation task assigned to me
+  
+### Peer Evaluations
+
+![Screenshot 2023-11-26 at 11 57 41 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/6d5fc5ee-5077-40fe-9e22-7d54ae618894)
+
+### Tasks I Am Assigned To:
+
+![Screenshot 2023-11-26 at 11 55 51 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/e9579834-092c-4d68-92b6-560f3f61d5c2)
+
 ## Week 10: November 5th - 12th
 
 ### Tasks Worked On:
