@@ -1,3 +1,39 @@
+# Week of Nov 20th - 26th
+## Team 18
+
+### Milesstones
+The following are milestones we worked towards/completed:
+1. Creating a dashboard and adjusting routing for sign-in to go the dashboard
+2. Adding functionality for joining organizations
+3. Set up relational DB using MariaDB
+4. Worked on adding functionality for user video recording
+5. Worked on implementation of site map
+
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/26ff2fa6-483f-4dbf-9103-cb42cd802d62)
+
+### Completed features
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/7b69aaf5-249d-4b2a-b175-248580901245)
+
+### In progress
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/166975e0-1e48-4970-95b7-9c3069289ca6)
+
+### Features in backlog for current sprint
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/1dcf4a89-2873-466f-a90a-ee3acec07aef)
+
+### Unassigned features
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/ab80f7bc-7500-4969-b09e-a71037b7066b)
+
+
+
+
 # Week of Oct 29th - Nov 5th
 ## Team 18
 
