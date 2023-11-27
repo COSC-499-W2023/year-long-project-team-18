@@ -1,46 +1,62 @@
-<div id="my-video" class="video-js vjs-default-skin" playsinline></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Recorder App</title>
+  <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
+  <link href="https://unpkg.com/videojs-record/dist/css/videojs.record.css" rel="stylesheet" />
+</head>
+<body>
 
-<!-- Include Video.js library -->
-<link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
-<script src="https://unpkg.com/video.js/dist/video.js"></script>
+  <div>
+    <video
+      id="my-video"
+      class="video-js vjs-default-skin"
+      playsinline
+      ngNonBindable
+    ></video>
+  </div>
 
-<!-- Include Video.js Record plugin -->
-<link href="https://unpkg.com/videojs-record/dist/css/videojs.record.css" rel="stylesheet">
-<script src="https://unpkg.com/videojs-record/dist/videojs.record.js"></script>
+  <script src="https://vjs.zencdn.net/7.15.4/video.js"></script>
+  <script src="https://unpkg.com/videojs-record/dist/videojs.record.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aws-sdk/dist/aws-sdk.min.js"></script>
 
-<!-- Include AWS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/aws-sdk/dist/aws-sdk.min.js"></script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var config = {
-      controls: true,
-      autoplay: false,
-      fluid: false,
-      loop: false,
-      width: 320,
-      height: 240,
-      bigPlayButton: false,
-      controlBar: {
-        volumePanel: false
-      },
-      plugins: {
-        record: {
-          audio: true,
-          video: true,
-          debug: true
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var config = {
+        controls: true,
+        autoplay: false,
+        fluid: false,
+        loop: false,
+        width: 320,
+        height: 240,
+        bigPlayButton: false,
+        controlBar: {
+          volumePanel: false
+        },
+        plugins: {
+          record: {
+            audio: true,
+            video: true,
+            debug: true,
+            maxRecordingLength:0,
+          }
         }
-      }
-    };
+      };
 
-    var player = videojs('my-video', config, function () {
-      console.log('Video.js player is ready!');
+      var videoPlayer = document.getElementById('my-video');
+      var player = videojs(videoPlayer, config, function () {
+        console.log('Video.js player is ready!');
+      });
+
+      player.on('error', function (element, error) {
+        console.error('Video.js error:', error);
+      });
+
+      player.record();
     });
+  </script>
 
-    player.on('error', function (element, error) {
-      console.error('Video.js error:', error);
-    });
-
-    // Additional code for binding and other functionalities
-  });
-</script>
+</body>
+</html>
