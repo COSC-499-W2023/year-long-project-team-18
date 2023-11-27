@@ -1,3 +1,26 @@
+<h1>Week Nov 12 - Nov 26</h1>
+<h1>Student Goals</h1>
+
+* Getting familiar with the develop environment as I am joining it a little late. This is solely because I did more design work before approaching developing/coding
+* Understanding how Kinesis works, working alongside Sam to implement features in that regard.
+* Finishing up ER Design per feedback given in the presentation
+* It is worth noting that I started the Database work with Segundo to try and figure out how to move forward. We initially used MySQL since we were familiar with it, however upon reaching a lot of complications, Segundo moved forward with MariaDB, and he is working on that himself.
+
+<h2>Student Tasks on board:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/658d1e0c-6a62-4bd9-adaa-5752140dbd7c)
+
+<h2>In progress tasks:</h2>
+
+* ER Design cleanup
+* Understanding Kinesis and getting familiar with the environment
+* Video recording feature with sub features for the entire component
+
+<h2>Screenshot of Peer Evaluation:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/7acd111a-a11a-49cd-9948-c207706e3632)
+
+
 <h1>Week Oct 30 - Nov 5</h1>
 <h1>Student Goals:</h1>
 
