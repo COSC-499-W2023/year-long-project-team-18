@@ -119,4 +119,4 @@ export class VideoRecorderComponent implements AfterViewInit, OnInit, OnDestroy 
       console.error('Recording not available or player not ready.');
     }
   }
-}  
+}
