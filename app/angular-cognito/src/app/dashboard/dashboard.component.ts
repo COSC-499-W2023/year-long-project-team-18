@@ -27,18 +27,15 @@ export class DashboardComponent implements OnInit {
     .then((user: any) => {
       this.user = user.attributes;
     });
-    this.checkOrganization();
-    
-  }
-
-
-  checkOrganization() {
     if (this.user['custom:organization'] == null || this.user['custom:organization'] == 'default') {
       this.showJoinForm = true;
     } else {
       this.showJoinForm = false;
     }
+    
   }
+
+
   
   public joinOrg(orgCode: string): void{
     this.loading = true;
