@@ -1,4 +1,4 @@
-<meta name="viewport" content="width=device-width" initial-scale=1 />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="row justify-content-center">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,6 +37,15 @@
             <button type="button" (click)="signIn()" class="btn btn-sm btn-success" [disabled]="loading">
               <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
               Sign in
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-grid">
+            <p><i>Don't have an account?</i></p>
+            <button type="button" routerLink="/signUp" class="btn btn-sm btn-success" [disabled]="loading" id="signUpButton">
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
+              Sign up
             </button>
           </div>
         </div>

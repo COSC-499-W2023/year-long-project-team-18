@@ -1,3 +1,44 @@
+<h1>Week Nov 12 - Nov 26</h1>
+<h1>Student Goals</h1>
+
+* Getting familiar with the develop environment as I am joining it a little late. This is solely because I did more design work before approaching developing/coding
+* Understanding how Kinesis works, working alongside Sam to implement features in that regard.
+* Finishing up ER Design per feedback given in the presentation
+* It is worth noting that I started the Database work with Segundo to try and figure out how to move forward. We initially used MySQL since we were familiar with it, however upon reaching a lot of complications, Segundo moved forward with MariaDB, and he is working on that himself.
+
+<h2>Student Tasks on board:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/658d1e0c-6a62-4bd9-adaa-5752140dbd7c)
+
+<h2>In progress tasks:</h2>
+
+* ER Design cleanup
+* Understanding Kinesis and getting familiar with the environment
+* Video recording feature with sub features for the entire component
+
+<h2>Screenshot of Peer Evaluation:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/7acd111a-a11a-49cd-9948-c207706e3632)
+
+
+<h1>Week Oct 30 - Nov 5</h1>
+<h1>Student Goals:</h1>
+
+* Practice our presentation to present in-class
+* Get our storyboarding ready for our presentation
+
+<h2>Student Tasks on board:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/786faf98-4b9f-4844-8690-75a812ffafe4)
+
+<h2>In progress tasks:</h2>
+
+* Getting started on getting the framework for SQL and our Database created for this sprint
+
+<h2>Screenshot of Peer Evaluation:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/f1c6fe61-6de8-4a17-ae14-522532b13795)
+
 <h1>Week Oct 16 - Oct 22 AND Oct 23 - Oct 29</h1>
 <h1>Student Goals:</h1>
 

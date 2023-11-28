@@ -94,3 +94,41 @@ p.subheader-text {
     padding-bottom: 30px;
     padding-top: 15px;
 }
+
+#signUpButton{
+    background-color: #ff4f4f;
+    border: none;
+}
+
+
+@media only screen and (max-width: 1500px) {
+    p.header-text {
+        font-size: 62px;
+    }
+
+    p.subheader-text {
+        font-size: 15px;
+        padding-bottom: 0;
+    }
+
+    label.form-label {
+        font-size: 14px;
+    }
+
+    p i {
+        font-size: 12px;
+    }
+
+    div.row.justify-content-center {
+        padding-top: 70px;
+        padding-bottom: 100px;
+    }
+
+    div.row:nth-child(4) {
+        padding: 0;
+    }
+
+    div.col-4 {
+        width: 30%;
+    }
+}

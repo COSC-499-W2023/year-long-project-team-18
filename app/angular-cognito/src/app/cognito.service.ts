@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import {Amplify, Auth } from 'aws-amplify';
+import { Router } from '@angular/router';
 
 import { environment } from '../environments/environment';
 
@@ -26,7 +27,7 @@ export class CognitoService {
   private authenticationSubject: BehaviorSubject<any>;
   
 
-  constructor() {
+  constructor(private router: Router) {
     Amplify.configure({
       Auth: environment.cognito
     });
@@ -76,6 +77,10 @@ export class CognitoService {
    public signOut(): Promise<any>{
     return Auth.signOut().then(()=>{
       this.authenticationSubject.next(false);
+    }).then(() => {
+      this.router.navigate(['/signIn']);
+    }).then(()=>{
+      window.location.reload();
     });
    }
 

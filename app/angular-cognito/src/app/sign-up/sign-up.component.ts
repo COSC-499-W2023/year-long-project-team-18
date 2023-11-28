@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
 
 import { IUser, CognitoService} from '../cognito.service';
 import { NgModel } from '@angular/forms';
@@ -19,9 +20,21 @@ export class SignUpComponent {
     this.user = {} as IUser;
   }
 
-  public signUp(organization: string): void {
-    this.loading = true;
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+  isEmailValid(): boolean {
+    return this.emailFormControl.valid;
+  }
 
+
+  public signUp(organization: string): void {
+      this.loading = true;
+      if (!this.isEmailValid()) {
+      console.error('Invalid email address');
+      return;
+}
     if(organization == null){
       this.user['custom:organization'] = 'default';
     }
