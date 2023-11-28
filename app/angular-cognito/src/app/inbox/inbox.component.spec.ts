@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrgPageComponent } from './org-page.component';
+import { InboxComponent } from './inbox.component';
 
-describe('OrgPageComponent', () => {
-  let component: OrgPageComponent;
-  let fixture: ComponentFixture<OrgPageComponent>;
+describe('InboxComponent', () => {
+  let component: InboxComponent;
+  let fixture: ComponentFixture<InboxComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [OrgPageComponent]
+      declarations: [InboxComponent]
     });
-    fixture = TestBed.createComponent(OrgPageComponent);
+    fixture = TestBed.createComponent(InboxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
