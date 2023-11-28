@@ -72,8 +72,15 @@
           </div>
         </div>
         <div class="row">
+          <div class="col mb-2">
+            <label class="form-label">Type your organization code here, otherwise leave it blank</label>
+            <input type="text" id="organization" name="organization" #organization="ngModel" [(ngModel)]="user['custom:organization']"
+            class="form-control form-control-sm">
+          </div>  
+        </div>
+        <div class="row">
           <div class="col d-grid">
-            <button type="button" (click)="signUp()" class="btn btn-sm btn-success" [disabled]="loading">
+            <button type="button" (click)="signUp(user['custom:organization'])" class="btn btn-sm btn-success" [disabled]="loading">
               <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
               Sign up
             </button>

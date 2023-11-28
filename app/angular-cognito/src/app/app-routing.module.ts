@@ -5,7 +5,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { OrgPageComponent } from './org-page/org-page.component';
+
 
 const routes: Routes = [
   {
@@ -24,10 +24,6 @@ const routes: Routes = [
   {
     path: 'signIn',
     component: SignInComponent,
-  },
-  {
-    path: 'orgPage',
-    component: OrgPageComponent
   },
   {
     path: 'signUp',

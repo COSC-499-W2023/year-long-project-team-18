@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { IUser, CognitoService} from '../cognito.service';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -18,17 +19,18 @@ export class SignUpComponent {
     this.user = {} as IUser;
   }
 
-  public signUp(): void {
+  public signUp(organization: string): void {
     this.loading = true;
+
+    if(organization == null){
+      this.user['custom:organization'] = 'default';
+    }
 
     this.cognitoService.signUp(this.user)
     .then(()=>{
-      this.signIn()
-    }).then(()=>{
-      this.router.navigate(['/orgPage'])
-    })
-    .then(()=>{
       window.location.reload();
+    }).then(()=>{
+      this.router.navigate(['/signIn']);
     })
     .catch((error) => {
       console.error('Sign Up Error:', error);
@@ -36,25 +38,11 @@ export class SignUpComponent {
   });
 
 }
-
-public signIn(): void {
-  this.loading = true;
-  this.cognitoService.signIn(this.user)
-  .then(() => {
-    this.router.navigate(['/orgPage']);
-  }).then(()=>{
-    window.location.reload();
-  }).catch(() => {
-    this.loading = false;
-  });
-}
-
-
   
   
   public confirmSignUp(): void {
     this.loading = true;
-  
+    
     this.cognitoService.confirmSignUp(this.user)
       .then((confirmationResult) => {
         // Confirmation was successful
