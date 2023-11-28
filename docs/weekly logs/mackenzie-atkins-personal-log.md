@@ -1,3 +1,53 @@
+## Nov 20 - 26
+
+### Student Goals
+
+My focus for this week was the improving the sign-up features, general UX improvement, creating a user dashboard and adding the ability to change organization
+
+### Student tasks on board
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/18e4cf60-78ba-4272-b1df-588a748f1112)
+
+### My in-progress tasks
+
+- Get jest working (still)
+- Refine dashboard
+- Refine organization joining
+
+  ### Tasks Completed during this period
+
+  Not much, though lots of work has been done towards progressing current tasks in progress
+
+  ![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/e4bfbca2-0af7-475c-b2d1-44d2b511ce71)
+
+
+
+## Oct 30 - Nov 05
+
+### Student Goals
+
+Our focus for this last week has been completing our group presentation and then presenting it, as well as getting tests figured out.
+
+### Student tasks on board
+*Please note that the backlog has not been created for this sprint as our focus was on the presentation this week
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/7cc8cc4d-3e21-4e34-9b64-d8a0e4d3f962)
+
+
+### My in-progress tasks
+
+- Get Jest working with our project
+- Create the dashboard component of our angular app
+- Add working elements to the dashboard
+
+### Tasks completed this period
+- Created slideshow for presentation
+- Created dashboard
+
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/05a938b8-2bc1-4ee7-8ec6-bc8902736ad8)
+
+
 ## Oct 16-29
 
 ### Student goals

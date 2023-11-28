@@ -1,5 +1,33 @@
 # Ishaan Gupta Individual Logs:
 
+## Week 12:
+dates: 20th Nov - 26th Nov
+
+### Student Goals:
+* Get an idea for what the site map should be and visualize it using a software / pen and paper.
+* Add styles to newly added pages and learn how to use flexbox for CSS.
+
+### Completed Tasks:
+* Created a visualisation for the sitemap.
+* Learned how to add new components for new pages and added a new page.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/b71e2758-2093-4a05-a5b9-477d609d70bc)
+
+
+## Week 9:
+Dates: 30th Oct - 5th Nov
+
+### Student Goals:
+* Get the team presentation along with the demo ready to present in front of class.
+* Rehearse the presentation with the team.
+* Add responsive CSS design for some devices.
+
+### Completed Tasks:
+* Rehearsed presentation + demo with the team.
+* Watched other teams' presentations and did peer evaluation.
+* Added more CSS to make the pages responsive for some devices.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/ab8653c7-8746-487f-8599-c2f3b828f027)
+
+
 ## Week 7-8:
 Dates: 16th Oct - 29th Oct
 

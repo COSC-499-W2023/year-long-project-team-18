@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import {Amplify, Auth } from 'aws-amplify';
+import { Router } from '@angular/router';
 
 import { environment } from '../environments/environment';
 
@@ -14,8 +15,9 @@ export interface IUser {
   family_name: string;
   birthdate: string;
   'custom:account_type': string;
+  'custom:organization': string;
 }
-
+  
 
 
 @Injectable({
@@ -25,7 +27,7 @@ export class CognitoService {
   private authenticationSubject: BehaviorSubject<any>;
   
 
-  constructor() {
+  constructor(private router: Router) {
     Amplify.configure({
       Auth: environment.cognito
     });
@@ -50,7 +52,8 @@ export class CognitoService {
         given_name: user.given_name,
         family_name: user.family_name,
         birthdate: user.birthdate,
-        'custom:account_type': user['custom:account_type']
+        'custom:account_type': user['custom:account_type'],
+        'custom:organization': user['custom:organization']
       }
     })
     .then((signUpResult) => {
@@ -74,6 +77,10 @@ export class CognitoService {
    public signOut(): Promise<any>{
     return Auth.signOut().then(()=>{
       this.authenticationSubject.next(false);
+    }).then(() => {
+      this.router.navigate(['/signIn']);
+    }).then(()=>{
+      window.location.reload();
     });
    }
 
@@ -100,4 +107,15 @@ export class CognitoService {
     })
    }
 
+   public updateUserAttribute(attributeValue: any): Promise<any> {
+    return Auth.currentAuthenticatedUser()
+      .then((user) => {
+        return Auth.updateUserAttributes(user, { "custom:organization": attributeValue });
+      })
+      .catch((error) => {
+        console.error('Error updating user attribute', error);
+        throw error;
+      });
+
+    }
 }

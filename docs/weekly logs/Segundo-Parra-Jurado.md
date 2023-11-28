@@ -1,3 +1,53 @@
+## Week 10: November 19th - 26th
+
+### Tasks Worked On:
+  - Created a small UI mockup to be implemented into the website
+  - Troubleshooted both Aurora (MySQL Compatible) & MariaDB databases. However, neither database has been able to provide a succesful connection which has not allowed me to implement it into the code succesfully.
+
+### Tasks I am planning to work on this upcoming week:
+  - Reaching out to the TA to understand why the database connection is not working
+  - Starting the design documentation task assigned to me
+  
+### Peer Evaluations:
+
+![Screenshot 2023-11-26 at 11 57 41 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/6d5fc5ee-5077-40fe-9e22-7d54ae618894)
+
+### Tasks I Am Assigned To:
+
+![Screenshot 2023-11-26 at 11 55 51 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/e9579834-092c-4d68-92b6-560f3f61d5c2)
+
+## Week 10: November 5th - 12th
+
+### Tasks Worked On:
+  - None
+
+### Tasks I am planning to work on this upcoming week:
+  - Will begin to work through the tasks assigned to me currently in this sprint
+  
+![Screenshot 2023-11-12 at 11 45 26 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/1df8761d-96a4-40b9-b002-bcf0d9c3bd32)
+
+### Tasks I Am Assigned To:
+
+![Screenshot 2023-11-12 at 11 56 02 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/88f08642-ac0c-4f5b-99be-51b9229a9204)
+
+## Week 9: October 29th - November 5th
+
+### Tasks Worked On:
+  - Helped build the canva presentation for our live demo presentation this week
+  - Participated in a meeting to organize the presentation structure and rehearsed the presentation
+  - Presented the opening slides for our team's live demo this week
+  - Watched and gave feedback to 5 other team's presentations
+  - Completed the business account storyboard
+
+### Tasks I am planning to work on this upcoming week:
+  - During our next team meeting we will plan and distribute work according to our next milestones
+
+<img width="1091" alt="Screenshot 2023-11-05 at 11 37 09 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/c8827d6a-5636-43fd-af8b-91b8afa15eeb">
+
+### Tasks I Am Assigned To:
+
+![Screenshot 2023-11-05 at 11 42 01 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d5866898-5a1c-4b47-a2b5-003268cf3b74)
+
 ## Week 7-8: October 15th - 29th
 
 ### Tasks Worked On:

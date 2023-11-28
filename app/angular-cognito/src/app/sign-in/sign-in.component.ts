@@ -13,8 +13,7 @@ export class SignInComponent {
   loading: boolean;
   user: IUser;
 
-  constructor(private router: Router,
-              private cognitoService: CognitoService) {
+  constructor(private router: Router, private cognitoService: CognitoService) {
     this.loading = false;
     this.user = {} as IUser;
   }
@@ -23,7 +22,9 @@ export class SignInComponent {
     this.loading = true;
     this.cognitoService.signIn(this.user)
     .then(() => {
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/dashboard']);
+    }).then(()=>{
+      window.location.reload();
     }).catch(() => {
       this.loading = false;
     });
