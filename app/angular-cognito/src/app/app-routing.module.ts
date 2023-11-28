@@ -4,8 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { SupportComponent } from './support/support.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VideoRecorderComponent } from './video-recorder/video-recorder.component';
+
 
 const routes: Routes = [
   {
@@ -16,6 +18,10 @@ const routes: Routes = [
   {
     path: 'video-recorder',
     component: VideoRecorderComponent,
+  },
+  {
+    path: 'support',
+    component: SupportComponent,
   },
   {
     path: 'dashboard',
@@ -36,7 +42,7 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: 'signIn',
-  },
+  }
 ];
 
 @NgModule({
