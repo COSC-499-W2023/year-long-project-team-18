@@ -1,3 +1,27 @@
+## Nov 20 - 26
+
+### Student Goals
+
+My focus for this week was the improving the sign-up features, general UX improvement, creating a user dashboard and adding the ability to change organization
+
+### Student tasks on board
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/18e4cf60-78ba-4272-b1df-588a748f1112)
+
+### My in-progress tasks
+
+- Get jest working (still)
+- Refine dashboard
+- Refine organization joining
+
+  ### Tasks Completed during this period
+
+  Not much, though lots of work has been done towards progressing current tasks in progress
+
+  ![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/e4bfbca2-0af7-475c-b2d1-44d2b511ce71)
+
+
+
 ## Oct 30 - Nov 05
 
 ### Student Goals

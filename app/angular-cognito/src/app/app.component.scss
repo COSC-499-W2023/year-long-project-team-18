@@ -28,3 +28,7 @@ a.navbar-brand {
 a.nav-link {
     font-weight: bold;
 }
+
+li:last-child a {
+    float: right;
+}
