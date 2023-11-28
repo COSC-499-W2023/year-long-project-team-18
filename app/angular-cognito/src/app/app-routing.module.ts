@@ -7,6 +7,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SupportComponent } from './support/support.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+
 const routes: Routes = [
   {
     path: '',
@@ -36,7 +37,7 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: 'signIn',
-  },
+  }
 ];
 
 @NgModule({
