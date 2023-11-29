@@ -11,7 +11,6 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SupportComponent } from './support/support.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VideoRecorderComponent } from './video-recorder/video-recorder.component';
-import { OrgPageComponent } from './org-page/org-page.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { OrganizationPageComponent } from './organization-page/organization-page.component';
 
@@ -25,7 +24,6 @@ import { OrganizationPageComponent } from './organization-page/organization-page
     SupportComponent,
     DashboardComponent,
     VideoRecorderComponent,
-    OrgPageComponent,
     InboxComponent,
     OrganizationPageComponent,
   ],
