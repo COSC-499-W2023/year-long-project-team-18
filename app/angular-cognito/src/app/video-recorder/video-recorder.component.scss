@@ -1,0 +1,25 @@
+$primary-1: #194a81;
+$primary-2: #0097b2;
+$button-colour: #ff4f4f;
+$page-font: 'Lato', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+.video {
+  box-shadow: 1px 6px 10px 2px rgba(35, 35, 35, 0.62);
+  height: 600px;
+  max-height: 800px;
+  width: 1067px;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+.button-record {
+  font-size: 18px;
+  font-family: $page-font;
+  padding: 8px;
+  background-color: $button-colour;
+  border-radius: 25px;
+  border: 0;
+}
+

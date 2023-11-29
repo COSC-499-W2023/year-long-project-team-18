@@ -1,0 +1,21 @@
+<div class="row justify-content-center">
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-xs-12 mb-2">
+            <video #video class="video"></video>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 mb-2">
+            <button class="btn btn-sm btn-success button-record" (click)="startRecording()"> Record </button>
+            <button class="btn btn-sm btn-success button-record" (click)="stopRecording()"> Stop</button>
+            <button class="btn btn-sm btn-success button-record" (click)="saveToS3()">Upload Video</button>
+            <button class="btn btn-sm btn-success button-record" (click)="download()"> Download</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
