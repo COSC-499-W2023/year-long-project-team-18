@@ -1,5 +1,5 @@
 
-import {describe, expect, test} from '@jest/globals';
+import {describe, test} from '@jest/globals';
 import { AppComponent } from './app.component';
 import { Amplify, Auth } from "aws-amplify";
 import { createComponent } from '@angular/core';
