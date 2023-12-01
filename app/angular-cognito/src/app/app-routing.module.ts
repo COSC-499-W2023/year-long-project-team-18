@@ -12,7 +12,7 @@ import { VideoRecorderComponent } from './video-recorder/video-recorder.componen
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'signIn',
+    redirectTo: 'video-recorder',
     pathMatch: 'full',
   },
   {
