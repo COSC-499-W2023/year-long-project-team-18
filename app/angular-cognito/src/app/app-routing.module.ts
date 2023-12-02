@@ -14,7 +14,7 @@ import { OrganizationPageComponent } from './organization-page/organization-page
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'signIn',
+    redirectTo: 'video-recorder',
     pathMatch: 'full',
   },
   {
