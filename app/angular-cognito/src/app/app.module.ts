@@ -8,7 +8,12 @@ import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { SupportComponent } from './support/support.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { VideoRecorderComponent } from './video-recorder/video-recorder.component';
+import { InboxComponent } from './inbox/inbox.component';
+import { OrganizationPageComponent } from './organization-page/organization-page.component';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +21,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ProfileComponent,
     SignInComponent,
     SignUpComponent,
+    SupportComponent,
     DashboardComponent,
+    VideoRecorderComponent,
+    InboxComponent,
+    OrganizationPageComponent,
   ],
   imports: [
     BrowserModule,

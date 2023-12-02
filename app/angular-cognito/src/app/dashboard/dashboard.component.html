@@ -12,11 +12,13 @@
             </div>
           </div>
           
-          <div class="row" *ngIf="user['custom:organization']==null else elseBlock">
+          <div class="row" *ngIf="showJoinForm == true else elseBlock">
+            <form (ngSubmit)="joinOrg(organization.value)">
               <label class="form-label">Have an organization? Type the code here to join:</label>
-              <input type="text" id="organization" name="organization" #organization="ngModel" [ngModel]="user['custom:organization']"
+              <input type="text" id="organization" name="organization" #organization="ngModel" [(ngModel)]="user['custom:organization']"
               class="form-control form-control-sm">
-              <button type="button" (click)="joinOrg()" class="btn btn-sm btn-success" [disabled]="loading">Join</button>
+              <button type="submit" class="btn btn-sm btn-success" [disabled]="loading">Join</button>
+            </form>
           </div>
           <ng-template #elseBlock>
             <label class="form-label">Organization number: </label>

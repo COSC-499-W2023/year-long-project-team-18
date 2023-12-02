@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 
 import { environment } from '../environments/environment';
 
+Amplify.configure({
+  Auth: environment.cognito
+});
+
 export interface IUser {
   email: string;
   username: string;
@@ -17,7 +21,7 @@ export interface IUser {
   'custom:account_type': string;
   'custom:organization': string;
 }
-
+  
 
 
 @Injectable({
@@ -52,7 +56,8 @@ export class CognitoService {
         given_name: user.given_name,
         family_name: user.family_name,
         birthdate: user.birthdate,
-        'custom:account_type': user['custom:account_type']
+        'custom:account_type': user['custom:account_type'],
+        'custom:organization': user['custom:organization']
       }
     })
     .then((signUpResult) => {
@@ -106,4 +111,15 @@ export class CognitoService {
     })
    }
 
+   public updateUserAttribute(attributeValue: any): Promise<any> {
+    return Auth.currentAuthenticatedUser()
+      .then((user) => {
+        return Auth.updateUserAttributes(user, { "custom:organization": attributeValue });
+      })
+      .catch((error) => {
+        console.error('Error updating user attribute', error);
+        throw error;
+      });
+
+    }
 }
