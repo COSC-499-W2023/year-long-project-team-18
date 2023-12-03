@@ -15,6 +15,7 @@ div.container-fluid {
 #navbarContent {
     font-weight: regular;
     font-size: 18px;
+    display: flex;
 
     a:hover {
         background-color: #BDD6DC;
@@ -30,5 +31,5 @@ a.nav-link {
 }
 
 #signOut {
-    margin-left: 670px;
+    align-self: right;
 }
