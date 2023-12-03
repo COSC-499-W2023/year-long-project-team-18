@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 
 import { environment } from '../environments/environment';
 
+Amplify.configure({
+  Auth: environment.cognito
+});
+
 export interface IUser {
   email: string;
   username: string;
