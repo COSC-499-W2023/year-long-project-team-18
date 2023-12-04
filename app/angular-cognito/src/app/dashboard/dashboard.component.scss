@@ -4,7 +4,7 @@ $primary-2: #0097b2;
 
 div.row.justify-content-center {
     margin: 0;
-    padding: 225px 99px 350px;
+    padding: 225px 99px 336px;
     font-size: 100%;
     vertical-align: baseline;
     border: 0;
@@ -27,7 +27,7 @@ form {
 }
 
 button {
-    margin-top: 20px;
+    //margin-top: 20px;
     background-color: $primary-1;
     width: 17%;
 }
@@ -40,19 +40,31 @@ div.card {
     width: 70%;
 }
 
-.orgButton{
+p {
+    font-size: 1.5em;
+}
+
+#newOrgTxt {
+    font-size: 1.5em;
+    margin-top: 1em;
+}
+
+.orgButton {
     width: 8em;
-    height: 8em;
+    height: 4em;
     background-color: #194a81;
     margin-right: 1em;
     font-size: larger;
     display: inline;
-
 }
 
-.orgButton:hover{
+.orgButton:hover {
     background-color: #0097b2;
 }
-.orgButton:active{
-    background-color: green;
+
+#joinButton {
+    width: 5em;
+    height: 2.5em;
+    display: block;
+    font-size: 1em;
 }
