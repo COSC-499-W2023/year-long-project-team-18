@@ -3,13 +3,13 @@ import { IUser, CognitoService } from '../cognito.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import * as AWS from 'aws-sdk';
-import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 @Component({
   selector: 'app-video-recorder',
   templateUrl: './video-recorder.component.html',
   styleUrls: ['./video-recorder.component.scss']
 })
+
 export class VideoRecorderComponent implements AfterViewInit {
 
   loading: boolean;
@@ -23,6 +23,9 @@ export class VideoRecorderComponent implements AfterViewInit {
   selectedFile: File | null = null;
   private s3: AWS.S3;
   private recordedChunks: Blob[] = [];
+  private playbackBlobURL: string | null = null;
+
+
 
   @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
 
@@ -103,6 +106,9 @@ export class VideoRecorderComponent implements AfterViewInit {
     let stream = this.stream;
     stream.getAudioTracks().forEach(track => track.stop());
     stream.getVideoTracks().forEach(track => track.stop());
+    const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+    this.playbackBlobURL = URL.createObjectURL(recordedBlob);
+    this.playback();
     this.uploadToS3();
   }
 
@@ -183,4 +189,20 @@ export class VideoRecorderComponent implements AfterViewInit {
       URL.revokeObjectURL(url);
 
   }
+
+  playback(){
+    if(this.playbackBlobURL){
+      //console.log("Success")
+      let video: HTMLVideoElement = this.video.nativeElement;
+      video.src = this.playbackBlobURL;
+      video.controls = true;
+      video.addEventListener('loadeddata', () => {
+        video.play().catch(err => console.error('Error playing back the video:', err));
+      });
+    }
+    else{
+      console.error("Not working :(")
+    }
+  }
+
 }
