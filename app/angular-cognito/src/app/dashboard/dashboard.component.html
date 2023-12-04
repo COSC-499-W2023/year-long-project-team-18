@@ -7,10 +7,12 @@
       <div class="card-body">
         <div class="row">
           <div class="col mb-2">
-        <p>Your organizations: </p>
-        <button class="btn btn-sm btn-success orgButton">{{user['custom:organization']}}</button>
-        <button mat-raised-button (click)="openDialog()" class="btn btn-sm btn-success orgButton">+</button>
+            <p>Your Current Organizations: </p>
+            <button class="btn btn-sm btn-success orgButton">{{user['custom:organization']}}</button>
+            <p id="newOrgTxt">Or Join a New Organization:</p>
+            <button mat-raised-button (click)="openDialog()" class="btn btn-sm btn-success orgButton"
+              id="joinButton">Join</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
