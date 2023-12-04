@@ -78,31 +78,6 @@ export class VideoRecorderComponent implements AfterViewInit {
     video.controls = !video.controls;
     video.autoplay = !video.autoplay;
   }
-
-  successCallback(stream: MediaStream) {
-    this.stream = stream;
-  
-    if (this.stream && this.stream.getVideoTracks().length > 0 && this.stream.getAudioTracks().length > 0) {
-      let video: HTMLVideoElement = this.video.nativeElement;
-      video.srcObject = stream;
-      this.toggleControls();
-  
-      this.kinesisVideoStream = new MediaStream();
-      
-      const videoTracks = this.stream.getVideoTracks();
-      const audioTracks = this.stream.getAudioTracks();
-  
-      if (videoTracks.length > 0) {
-        this.kinesisVideoStream.addTrack(videoTracks[0]);
-      }
-  
-      if (audioTracks.length > 0) {
-        this.kinesisVideoStream.addTrack(audioTracks[0]);
-      }
-    } else {
-      console.error('Error: Media stream is not available or does not have video/audio tracks.');
-    }
-  }
   
   errorCallback(error: any) {
     console.error('Error accessing media devices:', error);
@@ -131,7 +106,9 @@ export class VideoRecorderComponent implements AfterViewInit {
   }
 
   private uploadToS3() {
+    console.log('Recorded Chunks:', this.recordedChunks);
     const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+    console.log('Blob size:', recordedBlob.size);
     const timestamp = new Date().toISOString();
     const key = `private/recorded-video-${timestamp}.webm`;
 
@@ -150,8 +127,58 @@ export class VideoRecorderComponent implements AfterViewInit {
       }
     });
   }
+  successCallback(stream: MediaStream) {
+    this.stream = stream;
+  
+    if (this.stream && this.stream.getVideoTracks().length > 0 && this.stream.getAudioTracks().length > 0) {
+      let video: HTMLVideoElement = this.video.nativeElement;
+      video.srcObject = stream;
+      this.toggleControls();
+  
+      this.kinesisVideoStream = new MediaStream();
+  
+      const videoTracks = this.stream.getVideoTracks();
+      const audioTracks = this.stream.getAudioTracks();
+  
+      if (videoTracks.length > 0) {
+        this.kinesisVideoStream.addTrack(videoTracks[0]);
+      }
+  
+      if (audioTracks.length > 0) {
+        this.kinesisVideoStream.addTrack(audioTracks[0]);
+      }
+
+      const mediaRecorder = new MediaRecorder(this.kinesisVideoStream);
+      mediaRecorder.ondataavailable = (event: BlobEvent) => {
+        if (event.data.size > 0) {
+          this.recordedChunks.push(event.data);
+        }
+      };
+  
+      mediaRecorder.onstop = () => {
+        console.log('Recording stopped. Recorded chunks:', this.recordedChunks);
+      };
+  
+      mediaRecorder.start();
+      setTimeout(() => mediaRecorder.stop(), 5000);
+    } else {
+      console.error('Error: Media stream is not available or does not have video/audio tracks.');
+    }
+  }
+  
 
   download() {
-    // Add logic for downloading if needed
+      const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+      const downloadLink = document.createElement('a');
+      const url = URL.createObjectURL(recordedBlob);
+  
+      downloadLink.href = url;
+      downloadLink.download = 'recorded-video.webm';
+      
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+  
+      URL.revokeObjectURL(url);
   }
 }
