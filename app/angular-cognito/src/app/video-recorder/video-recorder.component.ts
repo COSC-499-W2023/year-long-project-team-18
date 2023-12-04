@@ -3,6 +3,7 @@ import { IUser, CognitoService } from '../cognito.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import * as AWS from 'aws-sdk';
+import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 @Component({
   selector: 'app-video-recorder',
@@ -111,7 +112,7 @@ export class VideoRecorderComponent implements AfterViewInit {
     console.log('Blob size:', recordedBlob.size);
     const timestamp = new Date().toISOString();
     const key = `private/recorded-video-${timestamp}.webm`;
-
+    this.recordedChunks = [];
     const params: AWS.S3.PutObjectRequest = {
       Bucket: 'prvcy-storage-ba20e15b50619-staging',
       Key: key,
@@ -180,5 +181,6 @@ export class VideoRecorderComponent implements AfterViewInit {
       document.body.removeChild(downloadLink);
   
       URL.revokeObjectURL(url);
+
   }
 }
