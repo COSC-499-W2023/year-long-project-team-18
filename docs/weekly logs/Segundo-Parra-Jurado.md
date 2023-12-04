@@ -1,4 +1,21 @@
-## Week 10: November 19th - 26th
+## Week 13: November 26th - Dec. 3rd
+
+### Tasks Worked On:
+  - Created and actively configuring the MySQL database. Connectivity issues are still occuring within the Amazon AWS RDS which both the professor and TA are aware about.
+  - Worked on the video playback feature. This feature allows user's to preview their video before they decide to submit it, in case they want to re-record their video. This feature is currently not working, but I am actively working on finding the solution. 
+
+### Tasks I am planning to work on this upcoming week:
+  - Complete the RDS and playback feature troubleshooting in preparation for Thursday's class.
+  
+### Peer Evaluations:
+
+![Screenshot 2023-12-03 at 10 43 33 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/b5711e15-14a7-4289-adf8-4e74dffb188a)
+
+### Tasks I Am Assigned To:
+
+![Screenshot 2023-12-03 at 10 42 19 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/1515e73c-87e8-4014-bb09-563015800893)
+
+## Week 12: November 19th - 26th
 
 ### Tasks Worked On:
   - Created a small UI mockup to be implemented into the website
@@ -7,6 +24,8 @@
 ### Tasks I am planning to work on this upcoming week:
   - Reaching out to the TA to understand why the database connection is not working
   - Starting the design documentation task assigned to me
+
+
   
 ### Peer Evaluations:
 

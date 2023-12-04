@@ -99,3 +99,20 @@ Goal was complete the project plan and begin with scoping the project while iden
 -Create a video recording tool<br>
 -Add download options<br>
 -Teem Meeting for upcoming design milestone<br>
+
+
+<h2>Week13 Nov27 - Dec03</h2>
+<img width="1093" alt="Screenshot 2023-12-03 at 9 14 06 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/745633e5-9c31-4a47-8204-f8aed7403970">
+<h3>Students Goals</h3>
+-Finish upcoming Milestone and get 2 features done<br>
+-Write an UploadToS3 method to upload recorded videos to S3 Bucket<br>
+-Fix recording issues saving 0 bytes<br>
+-Implementation of S3<br>
+-Add Blurring privacy feature<br>
+<h3>In-Progress Tasks</h3>
+-Blurring privacy feature for Videos<br>
+<h3>Completed Tasks</h3>
+-Finish upcoming Milestone and get 2 features done<br>
+-Write an UploadToS3 method to upload recorded videos to S3 Bucket<br>
+-Fix recording issues saving 0 bytes<br>
+-Implementation of S3<br>
