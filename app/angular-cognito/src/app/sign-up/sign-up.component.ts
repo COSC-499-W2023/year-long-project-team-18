@@ -31,10 +31,7 @@ export class SignUpComponent {
 
   public signUp(organization: string): void {
       this.loading = true;
-      if (!this.isEmailValid()) {
-      console.error('Invalid email address');
-      return;
-}
+      
     if(organization == null){
       this.user['custom:organization'] = 'default';
     }

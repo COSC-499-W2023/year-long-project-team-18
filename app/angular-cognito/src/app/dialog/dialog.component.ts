@@ -4,14 +4,13 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialo
 import { Router } from '@angular/router';
 
 import { IUser, CognitoService} from '../cognito.service';
-import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-dialog',
+  templateUrl: './dialog.component.html',
+  styleUrls: ['./dialog.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DialogComponent {
   loading: boolean;
   user: IUser;
   isAuthenticated: boolean;
@@ -21,23 +20,8 @@ export class DashboardComponent implements OnInit {
     this.user = {} as IUser;
     this.isAuthenticated = true;
   }
-  showJoinForm = false;
-
-  public ngOnInit(): void {
-    this.cognitoService.getUser()
-    .then((user: any) => {
-      this.user = user.attributes;
-    });
-    if (this.user['custom:organization'] == null || this.user['custom:organization'] == 'default') {
-      this.showJoinForm = true;
-    } else {
-      this.showJoinForm = false;
-    }
-    
-  }
 
 
-  
   public joinOrg(orgCode: string): void{
     this.loading = true;
     this.cognitoService.updateUserAttribute(orgCode)
@@ -50,8 +34,9 @@ export class DashboardComponent implements OnInit {
     })
   
   }
-  openDialog(): void {
-    this.dialog.open(DialogComponent)
+
+  public closeDialog(){
+    this.dialog.closeAll();
   }
 
 }
