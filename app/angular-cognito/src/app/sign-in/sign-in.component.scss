@@ -38,7 +38,7 @@ div.col-4 {
 
 div.row.justify-content-center {
     margin: 0;
-    padding: 99px;
+    padding: 8px 99px 99px;
     font-size: 100%;
     vertical-align: baseline;
     border: 0;
@@ -95,11 +95,18 @@ p.subheader-text {
     padding-top: 15px;
 }
 
-#signUpButton{
+#signUpButton {
     background-color: #ff4f4f;
     border: none;
 }
 
+#signInRow {
+    padding-bottom: 32px;
+}
+
+#signUpRow {
+    padding-bottom: 32px;
+}
 
 @media only screen and (max-width: 1500px) {
     p.header-text {
