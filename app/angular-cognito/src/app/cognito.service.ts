@@ -66,6 +66,9 @@ export class CognitoService {
   
       // Continue with other processing
     })
+    .then(()=>{
+      this.router.navigate(['/signIn']);
+    })
     .catch((error) => {
       console.error('Sign Up Error:', error);
       throw error; // Propagate the error
