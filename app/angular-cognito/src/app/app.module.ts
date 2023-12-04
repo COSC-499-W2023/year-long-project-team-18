@@ -13,6 +13,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { VideoRecorderComponent } from './video-recorder/video-recorder.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { OrganizationPageComponent } from './organization-page/organization-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogComponent } from './dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCommonModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -26,11 +30,15 @@ import { OrganizationPageComponent } from './organization-page/organization-page
     VideoRecorderComponent,
     InboxComponent,
     OrganizationPageComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatCommonModule
   ],
   providers: [
   ],

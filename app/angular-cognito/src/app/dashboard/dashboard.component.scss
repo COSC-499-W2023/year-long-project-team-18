@@ -39,3 +39,20 @@ button:hover {
 div.card {
     width: 70%;
 }
+
+.orgButton{
+    width: 8em;
+    height: 8em;
+    background-color: #194a81;
+    margin-right: 1em;
+    font-size: larger;
+    display: inline;
+
+}
+
+.orgButton:hover{
+    background-color: #0097b2;
+}
+.orgButton:active{
+    background-color: green;
+}
