@@ -32,7 +32,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" id="signInRow">
           <div class="col d-grid">
             <button type="button" (click)="signIn()" class="btn btn-sm btn-success" [disabled]="loading">
               <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
@@ -40,10 +40,11 @@
             </button>
           </div>
         </div>
-        <div class="row">
+        <div class="row" id="signUpRow">
           <div class="col d-grid">
             <p><i>Don't have an account?</i></p>
-            <button type="button" routerLink="/signUp" class="btn btn-sm btn-success" [disabled]="loading" id="signUpButton">
+            <button type="button" routerLink="/signUp" class="btn btn-sm btn-success" [disabled]="loading"
+              id="signUpButton">
               <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
               Sign up
             </button>
