@@ -3,6 +3,7 @@ import { IUser, CognitoService } from '../cognito.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import * as AWS from 'aws-sdk';
+import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 @Component({
   selector: 'app-video-recorder',
@@ -134,7 +135,7 @@ export class VideoRecorderComponent implements AfterViewInit {
     const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
     const timestamp = new Date().toISOString();
     const key = `private/recorded-video-${timestamp}.webm`;
-
+    this.recordedChunks = [];
     const params: AWS.S3.PutObjectRequest = {
       Bucket: 'prvcy-storage-ba20e15b50619-staging',
       Key: key,
@@ -153,5 +154,33 @@ export class VideoRecorderComponent implements AfterViewInit {
 
   download() {
     // Add logic for downloading if needed
+    
+    const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+    const timestamp = new Date().toISOString();
+    const key = `private/recorded-video-${timestamp}.webm`;
+
+    const params: AWS.S3.PutObjectRequest = {
+      Bucket: 'prvcy-storage-ba20e15b50619-staging',
+      Key: key,
+      // Body: recordedBlob,
+      // ContentType: 'video/webm',
+    };
+
+    this.s3.getSignedUrl('getObject', params, (err, url) => {
+      if (err) {
+        console.error('Error generating pre-signed URL:', err);
+      } else {
+        // Create a download link
+        const fileName = `recorded-video-${timestamp}.webm`;
+        const downloadLink = document.createElement('a');
+        downloadLink.href = url;
+        downloadLink.download = fileName;
+  
+        // Append the link to the body and trigger the download
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+    }
+  });
+
   }
 }
