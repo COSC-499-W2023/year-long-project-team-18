@@ -3,7 +3,6 @@ import { IUser, CognitoService } from '../cognito.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import * as AWS from 'aws-sdk';
-import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 @Component({
   selector: 'app-video-recorder',
