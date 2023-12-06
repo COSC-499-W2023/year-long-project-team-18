@@ -3,12 +3,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import {expect, jest, test} from '@jest/globals';
 
-beforeEach(()=>{
-  let component: AppComponent
-})
+describe('AppComponent', () => {
+  let component: AppComponent;
+  test('app is created',()=>{
+      expect(component)
+  });
 
-test('app is created',()=>{
-  expect(component).toBeTruthy
-
-})
-
+});
