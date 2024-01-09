@@ -1,30 +1,18 @@
-
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <div class="row justify-content-center">
-    <div class="col-4">
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col mb-2">
-              <label for="email" class="form-label">Account type:</label>
-              <input type="text" id="account_type" name="account_type" #account_type="ngModel" [ngModel]="user['custom:account_type']" disabled
-                class="form-control form-control-sm">
-            </div>
-          </div>
-          
-          <div class="row" *ngIf="showJoinForm == true else elseBlock">
-            <form (ngSubmit)="joinOrg(organization.value)">
-              <label class="form-label">Have an organization? Type the code here to join:</label>
-              <input type="text" id="organization" name="organization" #organization="ngModel" [(ngModel)]="user['custom:organization']"
-              class="form-control form-control-sm">
-              <button type="submit" class="btn btn-sm btn-success" [disabled]="loading">Join</button>
-            </form>
-          </div>
-          <ng-template #elseBlock>
-            <label class="form-label">Organization number: </label>
-            <p>{{user['custom:organization']}}</p>
-          </ng-template>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col mb-2">
+            <p>Your Current Organizations: </p>
+            <button class="btn btn-sm btn-success orgButton">{{user['custom:organization']}}</button>
+            <p id="newOrgTxt">Or Join a New Organization:</p>
+            <button mat-raised-button (click)="openDialog()" class="btn btn-sm btn-success orgButton"
+              id="joinButton">Join</button>
           </div>
         </div>
+      </div>
     </div>
-</div>  

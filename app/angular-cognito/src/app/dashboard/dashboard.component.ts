@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { AppComponent } from '../app.component';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { Router } from '@angular/router';
 
 import { IUser, CognitoService} from '../cognito.service';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +16,7 @@ export class DashboardComponent implements OnInit {
   user: IUser;
   isAuthenticated: boolean;
 
-  constructor(private router: Router, private cognitoService: CognitoService) {
+  constructor(private router: Router, private cognitoService: CognitoService, public dialog: MatDialog) {
     this.loading = false;
     this.user = {} as IUser;
     this.isAuthenticated = true;
@@ -48,6 +49,9 @@ export class DashboardComponent implements OnInit {
       this.loading = false;
     })
   
+  }
+  openDialog(): void {
+    this.dialog.open(DialogComponent)
   }
 
 }

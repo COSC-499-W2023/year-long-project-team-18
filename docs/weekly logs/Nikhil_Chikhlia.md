@@ -1,3 +1,22 @@
+<h1>Week Nov 27 - Dec 3</h1>
+<h1>Student Goals</h1>
+
+* Incorporating the download feature to the video recording part of the app
+* Fixing up the ER design/diagram
+
+<h2>Student tasks on board:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/fbeb4677-085e-4bf3-a005-15a176f351f1)
+
+<h2>In progress Tasks:</h2>
+
+* Auto-Captioning for the videos.
+
+<h2>Screenshot of Peer Evaluation:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/42fff4a6-d72b-4f7b-8961-cb563e99e1b0)
+
+
 <h1>Week Nov 12 - Nov 26</h1>
 <h1>Student Goals</h1>
 

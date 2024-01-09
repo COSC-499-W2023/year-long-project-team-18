@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import * as RecordRTC from 'recordrtc';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { IUser, CognitoService } from '../cognito.service';
 import { Router } from '@angular/router';
-import AWS, { S3 } from 'aws-sdk';
-import { CognitoIdentityCredentials } from 'aws-sdk';
+import { environment } from 'src/environments/environment';
+import * as AWS from 'aws-sdk';
+
 
 @Component({
   selector: 'app-video-recorder',
@@ -12,19 +12,65 @@ import { CognitoIdentityCredentials } from 'aws-sdk';
 })
 export class VideoRecorderComponent implements AfterViewInit {
 
+  loading: boolean;
+  user: IUser;
+  isAuthenticated: boolean;
+
   private stream!: MediaStream;
-  private recordRTC: any;
-  
+  private kinesisVideoClient: AWS.KinesisVideo | null = null;
+  private kinesisVideoStream: MediaStream | null = null;
+  private kinesisVideoStreamArn: string | null = null;
+  selectedFile: File | null = null;
+  private s3: AWS.S3;
+  private recordedChunks: Blob[] = [];
 
   @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
 
+  constructor(private cognitoService: CognitoService, private router: Router) {
+    this.loading = false;
+    this.user = {} as IUser;
+    this.isAuthenticated = true;
+    AWS.config.update({
+      accessKeyId: environment.aws.accessKeyId,
+      secretAccessKey: environment.aws.secretAccessKey,
+      sessionToken: environment.aws.sessionToken,
+      region: environment.aws.region
+    });
+    this.s3 = new AWS.S3();
+  }
 
-  constructor(private cognitoService: CognitoService, private router: Router) {}
   ngAfterViewInit() {
     let video: HTMLVideoElement = this.video.nativeElement;
     video.muted = false;
     video.controls = true;
     video.autoplay = false;
+
+    AWS.config.update({
+      accessKeyId: environment.aws.accessKeyId,
+      secretAccessKey: environment.aws.secretAccessKey,
+      sessionToken : environment.aws.sessionToken,
+      region: environment.aws.region
+    });
+
+    this.kinesisVideoClient = new AWS.KinesisVideo();
+    this.createKinesisVideoStream();
+  }
+
+  createKinesisVideoStream() {
+    const params = {
+      StreamName: 'prvcy_stream',
+    };
+    this.kinesisVideoClient!.describeStream(params, (err: AWS.AWSError, data: AWS.KinesisVideo.DescribeStreamOutput) => {
+      if (err) {
+        console.error('Error describing Kinesis Video stream:', err);
+      } else {
+        console.log('Kinesis Video stream described successfully:', data);
+
+        this.kinesisVideoStreamArn = data.StreamInfo?.StreamARN ?? null;
+
+        this.startRecording();
+      }
+    });
   }
 
   toggleControls() {
@@ -32,38 +78,6 @@ export class VideoRecorderComponent implements AfterViewInit {
     video.muted = !video.muted;
     video.controls = !video.controls;
     video.autoplay = !video.autoplay;
-  }
-
-  successCallback(stream: MediaStream) {
-    this.stream = stream;
-    if (this.stream) {
-      let options = {
-        type: 'video',
-        mimeType: 'video/webm',
-        bitsPerSecond: 500000,
-      };
-
-      this.recordRTC = new RecordRTC(this.stream, {
-        type: 'video',
-        mimeType: 'video/webm',
-        bitsPerSecond: 5000000,
-      });
-      this.recordRTC.startRecording();
-  
-      let video: HTMLVideoElement = this.video.nativeElement;
-      video.srcObject = stream;
-      this.toggleControls();
-    } else {
-      console.error('Error: Media stream is not available.');
-    }
-  }
-
-  processVideo(audioVideoWebMURL: any) {
-    let video: HTMLVideoElement = this.video.nativeElement;
-    let recordRTC = this.recordRTC;
-    video.src = audioVideoWebMURL;
-    this.toggleControls();
-    var recordedBlob = recordRTC.getBlob();
   }
   
   errorCallback(error: any) {
@@ -78,64 +92,97 @@ export class VideoRecorderComponent implements AfterViewInit {
       },
       audio: true,
     };
-  
+
     navigator.mediaDevices
       .getUserMedia(mediaConstraints)
       .then(this.successCallback.bind(this))
       .catch(this.errorCallback.bind(this));
   }
-  
 
   stopRecording() {
-    let recordRTC = this.recordRTC;
-    recordRTC.stopRecording(this.processVideo.bind(this));
     let stream = this.stream;
     stream.getAudioTracks().forEach(track => track.stop());
     stream.getVideoTracks().forEach(track => track.stop());
+    this.uploadToS3();
   }
 
-  download() {
-    this.recordRTC.save('video.webm');
+  private uploadToS3() {
+    console.log('Recorded Chunks:', this.recordedChunks);
+    const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+    console.log('Blob size:', recordedBlob.size);
+    const timestamp = new Date().toISOString();
+    const key = `private/recorded-video-${timestamp}.webm`;
+    this.recordedChunks = [];
+    const params: AWS.S3.PutObjectRequest = {
+      Bucket: 'prvcy-storage-ba20e15b50619-staging',
+      Key: key,
+      Body: recordedBlob,
+      ContentType: 'video/webm',
+    };
+
+    this.s3.upload(params, (err, data) => {
+      if (err) {
+        console.error('Error uploading to S3:', err);
+      } else {
+        console.log('Upload to S3 successful:', data);
+      }
+    });
   }
+  successCallback(stream: MediaStream) {
+    this.stream = stream;
+  
+    if (this.stream && this.stream.getVideoTracks().length > 0 && this.stream.getAudioTracks().length > 0) {
+      let video: HTMLVideoElement = this.video.nativeElement;
+      video.srcObject = stream;
+      this.toggleControls();
+  
+      this.kinesisVideoStream = new MediaStream();
+  
+      const videoTracks = this.stream.getVideoTracks();
+      const audioTracks = this.stream.getAudioTracks();
+  
+      if (videoTracks.length > 0) {
+        this.kinesisVideoStream.addTrack(videoTracks[0]);
+      }
+  
+      if (audioTracks.length > 0) {
+        this.kinesisVideoStream.addTrack(audioTracks[0]);
+      }
 
-  saveToS3() {
-    if (this.recordRTC) {
-      const recordedBlob = this.recordRTC.getBlob();
-
-      const bucketName = 'prvcy';
-      const key = `videos/${Date.now()}_recorded_video.webm`;
-
-      const identityPoolId = 'ca-central-1:4fb80f2f-1e09-4c97-9ac7-d9490489e35e';
-      const region = 'ca-central-1';
-
-      const credentials = new CognitoIdentityCredentials({
-        IdentityPoolId: identityPoolId,
-      });
-
-      AWS.config.credentials = credentials;
-
-      const s3 = new AWS.S3({
-        region: region,
-      });
-
-      const params = {
-        Bucket: bucketName,
-        Key: key,
-        Body: recordedBlob,
-        ContentType: 'video/webm',
-      };
-
-      s3.upload(params, (err: Error | null, data: S3.ManagedUpload.SendData) => {
-        if (err) {
-          console.error('Error uploading to S3:', err);
-        } else {
-          console.log('Upload successful. Object URL:', data.Location);
+      const mediaRecorder = new MediaRecorder(this.kinesisVideoStream);
+      mediaRecorder.ondataavailable = (event: BlobEvent) => {
+        if (event.data.size > 0) {
+          this.recordedChunks.push(event.data);
         }
-      });
-      
+      };
+  
+      mediaRecorder.onstop = () => {
+        console.log('Recording stopped. Recorded chunks:', this.recordedChunks);
+      };
+  
+      mediaRecorder.start();
+      setTimeout(() => mediaRecorder.stop(), 5000);
     } else {
-      console.error('No recording to save.');
+      console.error('Error: Media stream is not available or does not have video/audio tracks.');
     }
   }
 }
 
+  
+
+  download() {
+      const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+      const downloadLink = document.createElement('a');
+      const url = URL.createObjectURL(recordedBlob);
+  
+      downloadLink.href = url;
+      downloadLink.download = 'recorded-video.webm';
+      
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+  
+      URL.revokeObjectURL(url);
+
+  }
+}
