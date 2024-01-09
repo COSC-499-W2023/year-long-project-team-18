@@ -138,3 +138,4 @@ export class VideoRecorderComponent implements AfterViewInit {
     }
   }
 }
+
