@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import * as AWS from 'aws-sdk';
 
 
+
 @Component({
   selector: 'app-video-recorder',
   templateUrl: './video-recorder.component.html',
@@ -166,23 +167,25 @@ export class VideoRecorderComponent implements AfterViewInit {
       console.error('Error: Media stream is not available or does not have video/audio tracks.');
     }
   }
-}
-
-  
-
   download() {
-      const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
-      const downloadLink = document.createElement('a');
-      const url = URL.createObjectURL(recordedBlob);
-  
-      downloadLink.href = url;
-      downloadLink.download = 'recorded-video.webm';
-      
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-  
-      URL.revokeObjectURL(url);
+    const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+    const downloadLink = document.createElement('a');
+    const url = URL.createObjectURL(recordedBlob);
 
-  }
+    downloadLink.href = url;
+    downloadLink.download = 'recorded-video.webm';
+    
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+
+    URL.revokeObjectURL(url);
+
 }
+
+
+}
+
+  
+
+
