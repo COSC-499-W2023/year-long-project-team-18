@@ -1,2 +1,2 @@
-index.html
-clover.xml
+**/index.html
+**/clover.xml
