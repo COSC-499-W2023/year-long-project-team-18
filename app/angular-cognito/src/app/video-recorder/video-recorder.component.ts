@@ -25,8 +25,6 @@ export class VideoRecorderComponent implements AfterViewInit {
   private recordedChunks: Blob[] = [];
   private playbackBlobURL: string | null = null;
 
-
-
   @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
 
   constructor(private cognitoService: CognitoService, private router: Router) {
@@ -190,19 +188,30 @@ export class VideoRecorderComponent implements AfterViewInit {
 
   }
 
-  playback(){
-    if(this.playbackBlobURL){
-      //console.log("Success")
+   playback(){
+
+    console.log("Success")
+      let video: HTMLVideoElement = this.video.nativeElement;
+      video.src = 'assets/test-video.mp4';
+      video.load();
+      video.play().catch(error => {
+        console.error('Error attempting to play the video:', error);
+      })
+
+    /* if(this.playbackBlobURL){
+      console.log("Success")
       let video: HTMLVideoElement = this.video.nativeElement;
       video.src = this.playbackBlobURL;
       video.controls = true;
       video.addEventListener('loadeddata', () => {
         video.play().catch(err => console.error('Error playing back the video:', err));
-      });
+      }); 
+
     }
     else{
       console.error("Not working :(")
     }
+    */
   }
 
 }
