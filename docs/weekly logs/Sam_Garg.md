@@ -116,3 +116,16 @@ Goal was complete the project plan and begin with scoping the project while iden
 -Write an UploadToS3 method to upload recorded videos to S3 Bucket<br>
 -Fix recording issues saving 0 bytes<br>
 -Implementation of S3<br>
+
+<h2>T2 Week1 Jan08 - Jan14</h2>
+<img width="1100" alt="Screenshot 2024-01-14 at 10 19 33 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/8841e69b-a832-403f-8428-3daa45719746">
+<h3>Students Goals</h3>
+- Testing<br>
+- Add Feature to exhcange and send videos<br>
+- Encrypt Videos<br>
+<h3>In-Progress Tasks</h3>
+- Jest tests<br>
+- Add Feature to exhcange and send videos<br>
+- Encryption<br>
+<h3>Completed Tasks</h3>
+
