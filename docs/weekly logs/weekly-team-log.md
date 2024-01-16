@@ -1,7 +1,44 @@
+# Week of Nov 27th - Dec 3rd
+## Team 18
+
+### Milestones
+The following are milestones we worked towards/completed:
+1. Added organizations and the ability to join them.
+2. Created dashboard where more important features will also be added.
+3. Created functionality to record a video through kinesis.
+4. Added an option to download the video.
+5. Added functionality to upload the video to AWS.
+6. Heavily configured the database but it does not connect.
+7. Worked on playback feature but it currently does not work.
+8. Create all files for each page in the file structure and add links.
+9. Added CSS for new pages and updated for some older pages.
+
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/0bb7ed2f-a80c-4285-8d91-b551d5e2cd9d)
+
+### Completed Features
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/549d2723-7898-46be-a3e0-1fabf23b1549)
+
+### In Progress
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/2690ed4f-6375-493e-98dd-b79e701c5b80)
+
+### Features in Backlog and Unassigned Features
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/003a9c3a-bb0a-4325-a672-814723fd8de7)
+
+
+
+
 # Week of Nov 20th - 26th
 ## Team 18
 
-### Milesstones
+### Milestones
 The following are milestones we worked towards/completed:
 1. Creating a dashboard and adjusting routing for sign-in to go the dashboard
 2. Adding functionality for joining organizations
@@ -19,10 +56,10 @@ The following are milestones we worked towards/completed:
 ### Burnup Chart
 ![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/26ff2fa6-483f-4dbf-9103-cb42cd802d62)
 
-### Completed features
+### Completed Features
 ![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/7b69aaf5-249d-4b2a-b175-248580901245)
 
-### In progress
+### In Progress
 ![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/166975e0-1e48-4970-95b7-9c3069289ca6)
 
 ### Features in backlog for current sprint

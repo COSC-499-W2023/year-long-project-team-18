@@ -1,7 +1,21 @@
 # Ishaan Gupta Individual Logs:
 
+## Week 13:
+Dates: 27th Nov - 3rd Dec
+
+### Student Goals:
+* Add CSS to any newly created pages or features.
+* Update CSS changes in some outdated files.
+* Finish documentation for the design document and video demo.
+
+### Completed Tasks:
+* Added CSS for new pages and updated CSS for some old files.
+* Met with the team and finished out the design document and video.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/1560718f-9b12-489d-8087-72776c3fff40)
+
+
 ## Week 12:
-dates: 20th Nov - 26th Nov
+Dates: 20th Nov - 26th Nov
 
 ### Student Goals:
 * Get an idea for what the site map should be and visualize it using a software / pen and paper.

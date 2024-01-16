@@ -1,3 +1,29 @@
+## Nov 27 - Dec 3
+
+### Student Goals
+
+My focus for this week was finishing up the dashboard and organization features as well as creating part of the design milestone video.
+
+### Roadblocks
+
+This week I ran into a few issues with Cognito and user attributes - specifically Cognito allows for only 1 value per attribute. This caused an issue for me as we intend for users to be able to join multiple organizations, so this is how it will be until we fully implement the database. 
+Additionally, I attempted to add tests to the code but we are encountering issues with Jest and AWS components. I need to explore this further since all of the group is having problems with implementing tests.
+
+### Student tasks on board
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/62081ed8-71c5-4555-bf35-2c7893099575)
+
+### In-progress tasks
+- Jest testing
+
+### Tasks completed during this period
+- Refining of dashboard
+- Organization joining, based on current limitations as mentioned above
+
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/6df78d8e-183c-47a6-9188-008f5972ba29)
+
+
 ## Nov 20 - 26
 
 ### Student Goals
