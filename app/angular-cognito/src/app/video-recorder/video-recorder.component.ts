@@ -8,9 +8,13 @@ import * as AWS from 'aws-sdk';
   selector: 'app-video-recorder',
   templateUrl: './video-recorder.component.html',
   styleUrls: ['./video-recorder.component.scss']
+  
 })
 
 export class VideoRecorderComponent implements AfterViewInit {
+
+  @ViewChild('video') videoElement!: ElementRef<HTMLVideoElement>;
+
 
   loading: boolean;
   user: IUser;
@@ -106,8 +110,8 @@ export class VideoRecorderComponent implements AfterViewInit {
     stream.getVideoTracks().forEach(track => track.stop());
     const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
     this.playbackBlobURL = URL.createObjectURL(recordedBlob);
-    this.playback();
-    this.uploadToS3();
+    //this.playback();
+    //this.uploadToS3();
   }
 
   private uploadToS3() {
@@ -190,28 +194,42 @@ export class VideoRecorderComponent implements AfterViewInit {
 
    playback(){
 
-    console.log("Success")
-      let video: HTMLVideoElement = this.video.nativeElement;
-      video.src = 'assets/test-video.mp4';
-      video.load();
-      video.play().catch(error => {
-        console.error('Error attempting to play the video:', error);
-      })
+    console.log("TEST");
 
-    /* if(this.playbackBlobURL){
-      console.log("Success")
+    let video: HTMLVideoElement = this.video.nativeElement;
+    video.src = 'assets/test-video.mp4';
+    video.load();
+    video.play().catch(error => {
+      console.error('Error attempting to play the video:', error);
+    })
+
+      /*
+     if(this.playbackBlobURL){
+      console.log("Playback started"); //Testing
       let video: HTMLVideoElement = this.video.nativeElement;
       video.src = this.playbackBlobURL;
+      video.load();
       video.controls = true;
-      video.addEventListener('loadeddata', () => {
-        video.play().catch(err => console.error('Error playing back the video:', err));
-      }); 
+      video.play().catch(err => console.error('Error playing back the video:', err));
+      } else {
+        console.error("Playback URL not available");
+      }
+      */
 
-    }
-    else{
-      console.error("Not working :(")
-    }
-    */
+      /*
+      if (this.recordedChunks.length > 0) {
+        const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+        this.playbackBlobURL = URL.createObjectURL(recordedBlob);
+      
+        const video: HTMLVideoElement = this.videoElement.nativeElement;
+        video.src = this.playbackBlobURL;
+        video.load();
+        video.play().catch(err => console.error('Error playing back the video:', err));
+      } else {
+        console.error("No recorded video available for playback");
+      }
+      */
+    
   }
 
 }
