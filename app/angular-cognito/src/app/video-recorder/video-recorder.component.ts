@@ -4,14 +4,17 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import * as AWS from 'aws-sdk';
 
-
-
 @Component({
   selector: 'app-video-recorder',
   templateUrl: './video-recorder.component.html',
   styleUrls: ['./video-recorder.component.scss']
+  
 })
+
 export class VideoRecorderComponent implements AfterViewInit {
+
+  @ViewChild('video') videoElement!: ElementRef<HTMLVideoElement>;
+
 
   loading: boolean;
   user: IUser;
@@ -24,6 +27,7 @@ export class VideoRecorderComponent implements AfterViewInit {
   selectedFile: File | null = null;
   private s3: AWS.S3;
   private recordedChunks: Blob[] = [];
+  private playbackBlobURL: string | null = null;
 
   @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
 
@@ -104,7 +108,10 @@ export class VideoRecorderComponent implements AfterViewInit {
     let stream = this.stream;
     stream.getAudioTracks().forEach(track => track.stop());
     stream.getVideoTracks().forEach(track => track.stop());
-    this.uploadToS3();
+    const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+    this.playbackBlobURL = URL.createObjectURL(recordedBlob);
+    //this.playback();
+    //this.uploadToS3();
   }
 
   private uploadToS3() {
@@ -189,3 +196,46 @@ export class VideoRecorderComponent implements AfterViewInit {
   
 
 
+  }
+
+   playback(){
+
+    console.log("TEST");
+
+    let video: HTMLVideoElement = this.video.nativeElement;
+    video.src = 'assets/test-video.mp4';
+    video.load();
+    video.play().catch(error => {
+      console.error('Error attempting to play the video:', error);
+    })
+
+      /*
+     if(this.playbackBlobURL){
+      console.log("Playback started"); //Testing
+      let video: HTMLVideoElement = this.video.nativeElement;
+      video.src = this.playbackBlobURL;
+      video.load();
+      video.controls = true;
+      video.play().catch(err => console.error('Error playing back the video:', err));
+      } else {
+        console.error("Playback URL not available");
+      }
+      */
+
+      /*
+      if (this.recordedChunks.length > 0) {
+        const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+        this.playbackBlobURL = URL.createObjectURL(recordedBlob);
+      
+        const video: HTMLVideoElement = this.videoElement.nativeElement;
+        video.src = this.playbackBlobURL;
+        video.load();
+        video.play().catch(err => console.error('Error playing back the video:', err));
+      } else {
+        console.error("No recorded video available for playback");
+      }
+      */
+    
+  }
+
+}
