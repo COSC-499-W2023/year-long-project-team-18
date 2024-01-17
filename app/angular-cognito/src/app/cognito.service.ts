@@ -113,6 +113,15 @@ export class CognitoService {
       return Auth.updateUserAttributes(cognitoUser, user);
     })
    }
+   s
+   public getUsername(): Promise<string> {
+    return Auth.currentAuthenticatedUser()
+      .then(user => user.username)
+      .catch(error => {
+        console.error('Error getting username:', error);
+        throw error;
+      });
+  }
 
    public updateUserAttribute(attributeValue: any): Promise<any> {
     return Auth.currentAuthenticatedUser()

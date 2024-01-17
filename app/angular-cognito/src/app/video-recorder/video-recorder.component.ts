@@ -110,32 +110,65 @@ export class VideoRecorderComponent implements AfterViewInit {
     stream.getVideoTracks().forEach(track => track.stop());
     const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
     this.playbackBlobURL = URL.createObjectURL(recordedBlob);
-    //this.playback();
-    //this.uploadToS3();
   }
 
-  private uploadToS3() {
-    console.log('Recorded Chunks:', this.recordedChunks);
-    const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
-    console.log('Blob size:', recordedBlob.size);
+  uploadToS3() {
+    this.cognitoService.getUsername()
+      .then(username => {
+        console.log('Username:', username);
+  
+        if (!username) {
+          console.error('User information not available for creating a folder.');
+          return;
+        }
+  
+        const folderKey = `${username}/`;
+  
+        this.s3.headObject({ Bucket: 'prvcy-storage-ba20e15b50619-staging', Key: folderKey }, (err, metadata) => {
+          if (err && err.code === 'NotFound') {
+            this.s3.putObject({ Bucket: 'prvcy-storage-ba20e15b50619-staging', Key: folderKey }, (folderErr, folderData) => {
+              if (folderErr) {
+                console.error('Error creating user folder in S3:', folderErr);
+              } else {
+                console.log('User folder created successfully in S3:', folderData);
+                this.uploadVideo(username);
+              }
+            });
+          } else if (!err) {
+            this.uploadVideo(username);
+          } else {
+            console.error('Error checking user folder in S3:', err);
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Error getting username:', error);
+      });
+  }
+  
+  private uploadVideo(username: string) {
     const timestamp = new Date().toISOString();
-    const key = `private/recorded-video-${timestamp}.webm`;
+    const key = `${username}/recorded-video-${timestamp}.webm`;
+  
+    const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
     this.recordedChunks = [];
+  
     const params: AWS.S3.PutObjectRequest = {
       Bucket: 'prvcy-storage-ba20e15b50619-staging',
       Key: key,
       Body: recordedBlob,
       ContentType: 'video/webm',
     };
-
-    this.s3.upload(params, (err, data) => {
-      if (err) {
-        console.error('Error uploading to S3:', err);
+  
+    this.s3.upload(params, (uploadErr, data) => {
+      if (uploadErr) {
+        console.error('Error uploading to S3:', uploadErr);
       } else {
         console.log('Upload to S3 successful:', data);
       }
     });
   }
+  
   successCallback(stream: MediaStream) {
     this.stream = stream;
   
@@ -190,52 +223,44 @@ export class VideoRecorderComponent implements AfterViewInit {
 
 }
 
+  playback(){
 
-}
+  console.log("TEST");
 
-  
+  let video: HTMLVideoElement = this.video.nativeElement;
+  video.src = 'assets/test-video.mp4';
+  video.load();
+  video.play().catch(error => {
+    console.error('Error attempting to play the video:', error);
+  })
 
-
-  }
-
-   playback(){
-
-    console.log("TEST");
-
+    /*
+   if(this.playbackBlobURL){
+    console.log("Playback started"); //Testing
     let video: HTMLVideoElement = this.video.nativeElement;
-    video.src = 'assets/test-video.mp4';
+    video.src = this.playbackBlobURL;
     video.load();
-    video.play().catch(error => {
-      console.error('Error attempting to play the video:', error);
-    })
+    video.controls = true;
+    video.play().catch(err => console.error('Error playing back the video:', err));
+    } else {
+      console.error("Playback URL not available");
+    }
+    */
 
-      /*
-     if(this.playbackBlobURL){
-      console.log("Playback started"); //Testing
-      let video: HTMLVideoElement = this.video.nativeElement;
+    /*
+    if (this.recordedChunks.length > 0) {
+      const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+      this.playbackBlobURL = URL.createObjectURL(recordedBlob);
+    
+      const video: HTMLVideoElement = this.videoElement.nativeElement;
       video.src = this.playbackBlobURL;
       video.load();
-      video.controls = true;
       video.play().catch(err => console.error('Error playing back the video:', err));
-      } else {
-        console.error("Playback URL not available");
-      }
-      */
-
-      /*
-      if (this.recordedChunks.length > 0) {
-        const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
-        this.playbackBlobURL = URL.createObjectURL(recordedBlob);
-      
-        const video: HTMLVideoElement = this.videoElement.nativeElement;
-        video.src = this.playbackBlobURL;
-        video.load();
-        video.play().catch(err => console.error('Error playing back the video:', err));
-      } else {
-        console.error("No recorded video available for playback");
-      }
-      */
-    
-  }
+    } else {
+      console.error("No recorded video available for playback");
+    }
+    */
+  
+}
 
 }
