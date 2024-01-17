@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCommonModule } from '@angular/material/core';
+import { ShareVideoComponent } from './share-video/share-video.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { MatCommonModule } from '@angular/material/core';
     InboxComponent,
     OrganizationPageComponent,
     DialogComponent,
+    ShareVideoComponent,
   ],
   imports: [
     BrowserModule,
