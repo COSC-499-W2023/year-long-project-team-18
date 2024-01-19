@@ -188,17 +188,9 @@ export class VideoRecorderComponent implements AfterViewInit {
 
     URL.revokeObjectURL(url);
 
-}
-
-
-}
-
-  
-
-
   }
 
-   playback(){
+  playback(){
 
     console.log("TEST");
 
