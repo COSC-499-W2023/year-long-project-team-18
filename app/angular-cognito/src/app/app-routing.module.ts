@@ -9,14 +9,24 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { VideoRecorderComponent } from './video-recorder/video-recorder.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { OrganizationPageComponent } from './organization-page/organization-page.component';
+import { ShareVideoComponent } from './share-video/share-video.component';
+import { VideoListComponent } from './video-list/video-list.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'video-recorder',
+    redirectTo: 'signIn',
     pathMatch: 'full',
   },
+  {
+    path: 'video-list',
+    component: VideoListComponent,
+  }, 
+{
+  path: 'share-video',
+  component: ShareVideoComponent,
+}, 
   {
     path: 'video-recorder',
     component: VideoRecorderComponent,

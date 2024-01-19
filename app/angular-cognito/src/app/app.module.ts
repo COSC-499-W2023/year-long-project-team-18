@@ -18,6 +18,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCommonModule } from '@angular/material/core';
 import { ShareVideoComponent } from './share-video/share-video.component';
+import { VideoListComponent } from './video-list/video-list.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ShareVideoComponent } from './share-video/share-video.component';
     OrganizationPageComponent,
     DialogComponent,
     ShareVideoComponent,
+    VideoListComponent,
   ],
   imports: [
     BrowserModule,

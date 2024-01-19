@@ -113,7 +113,7 @@ export class CognitoService {
       return Auth.updateUserAttributes(cognitoUser, user);
     })
    }
-   s
+   
    public getUsername(): Promise<string> {
     return Auth.currentAuthenticatedUser()
       .then(user => user.username)
