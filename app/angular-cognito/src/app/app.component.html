@@ -37,8 +37,8 @@
             *ngIf="isAuthenticated && user['custom:account_type']=='personal'">Create a new video</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="" routerLinkActive="active"
-            *ngIf="isAuthenticated && user['custom:account_type']=='business'">Video Archive</a>
+          <a class="nav-link" routerLink="/video-list" routerLinkActive="active"
+            *ngIf="isAuthenticated">Video Archive</a>
         </li>
         <!-- signout to right margin -->
         <li class="nav-item">

@@ -1,1 +1,23 @@
-<p>video-list works!</p>
+<div class="card">
+  <div class="video-list-container">
+    <h2>My Videos</h2>
+    <div *ngIf="videos.length === 0; else videoList">
+      <p>No videos available.</p>
+    </div>
+    <ng-template #videoList>
+      <div class="row">
+        <div *ngFor="let video of videos" class="video-item">
+          <video controls>
+            <source [src]="getVideoUrl(video.key)" type="video/webm">
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-metadata">
+            <p>{{ video.name }}</p>
+            <p>Date: {{ video.date }}</p>
+            <p>Creator: {{ video.creator }}</p>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
