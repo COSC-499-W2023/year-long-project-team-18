@@ -3,5 +3,6 @@ export interface VideoMetadata {
     name: string;
     date: string;
     creator: string;
+    isSelected?: boolean;
   }
   

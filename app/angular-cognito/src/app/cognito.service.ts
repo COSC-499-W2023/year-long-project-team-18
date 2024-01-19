@@ -61,17 +61,15 @@ export class CognitoService {
       }
     })
     .then((signUpResult) => {
-      // Log the verification code here
       console.log('User confirmed:', signUpResult.userConfirmed);
-  
-      // Continue with other processing
+
     })
     .then(()=>{
       this.router.navigate(['/signIn']);
     })
     .catch((error) => {
       console.error('Sign Up Error:', error);
-      throw error; // Propagate the error
+      throw error;
     });
   }
   
@@ -134,4 +132,15 @@ export class CognitoService {
       });
 
     }
-}
+    public getAccountType(): Promise<string | undefined> {
+      return Auth.currentAuthenticatedUser()
+        .then(user => {
+          const accountType = user.attributes['custom:account_type'];
+          return accountType;
+        })
+        .catch(error => {
+          console.error('Error getting account type:', error);
+          return undefined;
+        });
+    }
+  }

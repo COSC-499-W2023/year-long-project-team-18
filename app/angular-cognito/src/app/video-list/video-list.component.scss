@@ -68,3 +68,15 @@ video {
 .scroll-arrow.right {
   right: 0;
 }
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .video-checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+}
