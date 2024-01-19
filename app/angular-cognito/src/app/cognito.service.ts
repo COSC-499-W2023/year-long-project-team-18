@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import {Amplify, Auth } from 'aws-amplify';
 import { Router } from '@angular/router';
+import * as AWS from 'aws-sdk';
+
 
 import { environment } from '../environments/environment';
 
@@ -142,5 +144,54 @@ export class CognitoService {
           console.error('Error getting account type:', error);
           return undefined;
         });
+    }
+
+    public checkS3UserFolder(folderKey: string): Promise<boolean> {
+      return new Promise<boolean>((resolve, reject) => {
+        const params = {
+          Bucket: 'your-s3-bucket-name',
+          Prefix: folderKey
+        };
+        AWS.config.update({
+          accessKeyId: environment.aws.accessKeyId,
+          secretAccessKey: environment.aws.secretAccessKey,
+          sessionToken: environment.aws.sessionToken,
+          region: environment.aws.region
+        });
+    
+        const s3 = new AWS.S3();
+        s3.listObjectsV2(params, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(!!(data && data.Contents && data.Contents.length > 0));
+          }
+        });
+      });
+    }
+    
+    public createS3UserFolder(folderKey: string): Promise<void> {
+      return new Promise<void>((resolve, reject) => {
+        const params = {
+          Bucket: 'your-s3-bucket-name',
+          Key: folderKey
+        };
+  
+        AWS.config.update({
+          accessKeyId: environment.aws.accessKeyId,
+          secretAccessKey: environment.aws.secretAccessKey,
+          sessionToken: environment.aws.sessionToken,
+          region: environment.aws.region
+        });
+  
+        const s3 = new AWS.S3();
+        s3.putObject(params, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        });
+      });
     }
   }
