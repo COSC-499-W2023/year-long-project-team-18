@@ -129,3 +129,17 @@ Goal was complete the project plan and begin with scoping the project while iden
 - Encryption<br>
 <h3>Completed Tasks</h3>
 
+<h2>T2 Week2 Jan15 - Jan22</h2>
+<img width="1084" alt="Screenshot 2024-01-21 at 8 58 41 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/7a4e9c9c-7759-4513-8b43-5f0d231c3ee6">
+<h3>Students Goals</h3>
+- Testing<br>
+- Add Feature to exchange and send videos<br>
+- Archive Page<br>
+- MetaData access from S3 bucket<br>
+<h3>In-Progress Tasks</h3>
+- Jest tests<br>
+- Add Feature to exchange and send videos<br>
+<h3>Completed Tasks</h3>
+- Archive Page<br>
+- MetaData access from S3 bucket<br>
+- Users can now add custom names to save videos<br>
