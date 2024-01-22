@@ -1,6 +1,6 @@
-## Jan 17 - 21
+## Jan 15 - 21
 
-### Student Goalds
+### Student Goals
 
 I aimed to implement some very basic Jest tests just to have some that pass
 
