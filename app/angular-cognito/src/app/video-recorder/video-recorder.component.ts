@@ -8,8 +8,13 @@ import * as AWS from 'aws-sdk';
   selector: 'app-video-recorder',
   templateUrl: './video-recorder.component.html',
   styleUrls: ['./video-recorder.component.scss']
+  
 })
+
 export class VideoRecorderComponent implements AfterViewInit {
+
+  @ViewChild('video') videoElement!: ElementRef<HTMLVideoElement>;
+
 
   loading: boolean;
   user: IUser;
@@ -102,7 +107,7 @@ export class VideoRecorderComponent implements AfterViewInit {
     let stream = this.stream;
     stream.getAudioTracks().forEach(track => track.stop());
     stream.getVideoTracks().forEach(track => track.stop());
-    this.uploadToS3();
+    const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
   }
 
   private uploadToS3() {
@@ -165,21 +170,34 @@ export class VideoRecorderComponent implements AfterViewInit {
       console.error('Error: Media stream is not available or does not have video/audio tracks.');
     }
   }
-  
 
   download() {
-      const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
-      const downloadLink = document.createElement('a');
-      const url = URL.createObjectURL(recordedBlob);
-  
-      downloadLink.href = url;
-      downloadLink.download = 'recorded-video.webm';
-      
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-  
-      URL.revokeObjectURL(url);
+    const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+    const downloadLink = document.createElement('a');
+    const url = URL.createObjectURL(recordedBlob);
+
+    downloadLink.href = url;
+    downloadLink.download = 'recorded-video.webm';
+    
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+
+    URL.revokeObjectURL(url);
 
   }
+
+  playback(){
+    if (this.recordedChunks.length > 0) {
+      const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+      const playbackBlobURL = URL.createObjectURL(recordedBlob);
+      let video: HTMLVideoElement = this.video.nativeElement;
+      window.open(playbackBlobURL, '_blank');
+    }
+    else {
+      console.error("No recorded video available for playback");
+    }
+    
+  }
+
 }

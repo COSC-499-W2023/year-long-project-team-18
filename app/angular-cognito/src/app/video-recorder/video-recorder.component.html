@@ -1,6 +1,7 @@
 <div class="row justify-content-center">
-  <div class="col">
-    <div class="row">
+  <div class="col text-center">
+    <h1 class="text-center " style="color: #ffffff">Video Recording Submission</h1>
+    <div class="video-container row">
       <div id="video" class="col-xs-12 mb-2">
         <video #video class="video"></video>
       </div>
@@ -9,6 +10,7 @@
       <button class="btn btn-sm btn-success button-record" (click)="startRecording()"> Record </button>
       <button class="btn btn-sm btn-success button-record" (click)="stopRecording()"> Stop</button>
       <button class="btn btn-sm btn-success button-record" (click)="download()"> Download</button>
+      <button class="btn btn-sm btn-success button-record" (click)="playback()"> Playback</button>
     </div>
   </div>
 </div>
