@@ -1,3 +1,34 @@
+# Week of Jan 15th - Jan 22nd
+## Team 18
+
+### Milestones
+The following are milestones we worked towards/completed:
+1. Added a feature to add custom names to videos
+2. Created a video archive page
+3. Video Playback implemented
+4. RDS transferred into DynamoDB, but looking to implement RDS through SST as it was advised we keep our database relational
+5. Working on Captioning feature for videos
+6. Working on Blurring privacy feature
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart
+<img width="1084" alt="Screenshot 2024-01-21 at 9 08 09 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/c681fbb8-e860-40dc-8e54-3918cbc4fc43">
+
+### Completed Features
+<img width="1114" alt="Screenshot 2024-01-21 at 9 12 59 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/e6cca8bb-7332-477b-bf67-43872969fea9">
+
+### In Progress
+<img width="1140" alt="Screenshot 2024-01-21 at 9 11 26 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/76df73ce-d15a-487f-9254-a6bf9d0fec00">
+
+### Features in Backlog and Unassigned Features
+<img width="1114" alt="Screenshot 2024-01-21 at 9 13 29 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/5d353d77-cd21-46e0-b43f-d67198c59e2c">
+
+
 # Week of Nov 27th - Dec 3rd
 ## Team 18
 

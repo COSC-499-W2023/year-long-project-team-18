@@ -1,5 +1,20 @@
 # Ishaan Gupta Individual Logs:
 
+## TERM 2
+
+## Week 2:
+Dates: 15th Jan - 21st Jan
+
+### Student Goals:
+* Do personal research on some AWS features to get a better understanding to work on face blurring.
+* Set up container for AWS ECR.
+* Set up AWS Step Function and AWS Rekognition.
+
+### Completed Tasks: 
+* Finished researching, took a lot longer than expected as there was a lot of new information.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/c5093897-d927-436b-85d7-c0e08f2aa853)
+
+
 ## Week 13:
 Dates: 27th Nov - 3rd Dec
 
