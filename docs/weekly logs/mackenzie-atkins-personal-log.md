@@ -1,4 +1,4 @@
-![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/efdaae09-2c5d-4838-abe1-1abf207ad4ab)## Jan 17 - 21
+## Jan 17 - 21
 
 ### Student Goalds
 
