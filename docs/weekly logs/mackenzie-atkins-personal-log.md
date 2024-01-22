@@ -1,3 +1,29 @@
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/efdaae09-2c5d-4838-abe1-1abf207ad4ab)## Jan 17 - 21
+
+### Student Goalds
+
+I aimed to implement some very basic Jest tests just to have some that pass
+
+### Roadblocks
+Implementing testing has been an ongoing battle for a while. We need to better understand mocking in order to implement more complicated tests.
+
+### Student tasks on board
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/29fe7f87-e3ff-4def-9412-77714b06a3ca)
+
+
+### In progress tasks
+- Refining jest tests
+- Dockerization
+
+### Tasks completed during this period
+- Implemented basic tests
+
+### Peer evaluation
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/8e369e27-33f2-4eaf-90a5-20e1fbaacde4)
+
+
+
 ## Nov 27 - Dec 3
 
 ### Student Goals
