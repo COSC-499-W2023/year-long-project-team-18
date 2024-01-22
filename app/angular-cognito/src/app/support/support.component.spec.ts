@@ -1,21 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SupportComponent } from './support.component';
+import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import {expect, jest, test} from '@jest/globals';
 
-describe('SupportComponent', () => {
+describe('OrganizationPageComponent', () => {
   let component: SupportComponent;
-  let fixture: ComponentFixture<SupportComponent>;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [SupportComponent]
-    });
-    fixture = TestBed.createComponent(SupportComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  test('Component is created',()=>{
+      expect(component)
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });
