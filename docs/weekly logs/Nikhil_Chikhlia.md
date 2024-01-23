@@ -1,3 +1,23 @@
+<h1>Week Jan 14 - Jan 21</h1>
+<h1>Student Goals</h1>
+
+* Getting the captioning ready for use.
+* Helping with RDS implementation and figuring out a possible solution.
+
+<h2> Student tasks on board:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/767f1738-8fc6-47dd-836a-7fbed76ce5aa)
+
+<h2>In Progress tasks:</h2>
+
+* Auto-captioning
+* Chat system (mostly Segundo though)
+* Profile editing
+
+<h2>Screemshot of Peer Evaluation:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/2b9cc65e-a7ab-4b79-9cb4-9311c025ffb8)
+
 <h1>Week Nov 27 - Dec 3</h1>
 <h1>Student Goals</h1>
 
