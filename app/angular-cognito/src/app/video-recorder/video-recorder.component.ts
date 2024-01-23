@@ -109,7 +109,7 @@ export class VideoRecorderComponent implements AfterViewInit {
     stream.getAudioTracks().forEach(track => track.stop());
     stream.getVideoTracks().forEach(track => track.stop());
     const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
-    this.playbackBlobURL = URL.createObjectURL(recordedBlob);
+    //this.playbackBlobURL = URL.createObjectURL(recordedBlob);
   }
 
   uploadToS3(videoName: string) {
@@ -173,8 +173,45 @@ export class VideoRecorderComponent implements AfterViewInit {
         console.log('Upload to S3 successful:', data);
       }
     });
+    this.transcribeUpload(username, videoName);
   }
   
+  private transcribeUpload(username: string, videoName: string) {
+    const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
+    const key = videoName;
+    const region = 'ca-central-1';
+    const credentials = {
+      accessKeyId: environment.aws.accessKeyId,
+      secretAccessKey: environment.aws.secretAccessKey,
+      sessionToken: environment.aws.sessionToken
+    };
+    
+    const input = {
+      TranscriptionJobName: "test-transcript",
+      LanguageCode: "en-US",
+      Media: {
+        MediaFileUri: `s3://prvcy-storage-ba20e15b50619-staging/private/${key}`
+      },
+      OutputBucketName: `${username}`,
+    };
+
+    async function startTranscriptionRequest() {
+      const transcribeConfig = {
+        region,
+        credentials
+      };
+      const transcribeClient = new TranscribeClient(transcribeConfig);
+      const transcribeCommand = new StartTranscriptionJobCommand(input);
+      try {
+        const transcribeResponse = await transcribeClient.send(transcribeCommand);
+        console.log("Transcription job created, the details:");
+        console.log(transcribeResponse.TranscriptionJob);
+      } catch(err) {
+        console.log(err);
+      }
+    }
+    startTranscriptionRequest();
+  }
 
   successCallback(stream: MediaStream) {
     this.stream = stream;
