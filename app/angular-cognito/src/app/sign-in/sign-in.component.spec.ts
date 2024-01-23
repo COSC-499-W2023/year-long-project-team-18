@@ -1,9 +1,7 @@
+import { Component } from '@angular/core';
 import { SignInComponent } from './sign-in.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {expect, jest, test} from '@jest/globals';
-import { Action } from 'rxjs/internal/scheduler/Action';
 import { CognitoService, IUser } from '../cognito.service';
 
 describe('SignInComponent', () => {
