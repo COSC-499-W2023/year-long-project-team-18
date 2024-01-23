@@ -8,17 +8,18 @@ import * as AWS from 'aws-sdk';
   selector: 'app-video-recorder',
   templateUrl: './video-recorder.component.html',
   styleUrls: ['./video-recorder.component.scss']
-  
 })
 
 export class VideoRecorderComponent implements AfterViewInit {
 
   @ViewChild('video') videoElement!: ElementRef<HTMLVideoElement>;
 
-
   loading: boolean;
   user: IUser;
   isAuthenticated: boolean;
+
+  videoName: string = '';
+  isSubmitDisabled: boolean = true;
 
   private stream!: MediaStream;
   private kinesisVideoClient: AWS.KinesisVideo | null = null;
@@ -108,47 +109,90 @@ export class VideoRecorderComponent implements AfterViewInit {
     stream.getAudioTracks().forEach(track => track.stop());
     stream.getVideoTracks().forEach(track => track.stop());
     const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+    this.playbackBlobURL = URL.createObjectURL(recordedBlob);
   }
 
-  private uploadToS3() {
-    console.log('Recorded Chunks:', this.recordedChunks);
+  uploadToS3(videoName: string) {
+    this.cognitoService.getUsername()
+      .then(username => {
+        console.log('Username:', username);
+
+        if (!username) {
+          console.error('User information not available for creating a folder.');
+          return;
+        }
+
+        const folderKey = `${username}/`;
+
+        this.s3.headObject({ Bucket: 'prvcy-storage-ba20e15b50619-staging', Key: folderKey }, (err, metadata) => {
+          if (err && err.code === 'NotFound') {
+            this.s3.putObject({ Bucket: 'prvcy-storage-ba20e15b50619-staging', Key: folderKey }, (folderErr, folderData) => {
+              if (folderErr) {
+                console.error('Error creating user folder in S3:', folderErr);
+              } else {
+                console.log('User folder created successfully in S3:', folderData);
+                this.uploadVideo(username, videoName);
+              }
+            });
+          } else if (!err) {
+            this.uploadVideo(username, videoName);
+          } else {
+            console.error('Error checking user folder in S3:', err);
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Error getting username:', error);
+      });
+  }
+
+  private uploadVideo(username: string, videoName: string) {
+    // Ensure that the videoName is valid and not empty
+    if (!videoName.trim()) {
+      console.error('Video name cannot be empty');
+      return;
+    }
+  
+    // Concatenate the username and videoName for the filename
+    const key = `${username}/${videoName}.webm`;
+  
     const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
-    console.log('Blob size:', recordedBlob.size);
-    const timestamp = new Date().toISOString();
-    const key = `private/recorded-video-${timestamp}.webm`;
     this.recordedChunks = [];
+  
     const params: AWS.S3.PutObjectRequest = {
       Bucket: 'prvcy-storage-ba20e15b50619-staging',
       Key: key,
       Body: recordedBlob,
       ContentType: 'video/webm',
     };
-
-    this.s3.upload(params, (err, data) => {
-      if (err) {
-        console.error('Error uploading to S3:', err);
+  
+    this.s3.upload(params, (uploadErr, data) => {
+      if (uploadErr) {
+        console.error('Error uploading to S3:', uploadErr);
       } else {
         console.log('Upload to S3 successful:', data);
       }
     });
   }
+  
+
   successCallback(stream: MediaStream) {
     this.stream = stream;
-  
+
     if (this.stream && this.stream.getVideoTracks().length > 0 && this.stream.getAudioTracks().length > 0) {
       let video: HTMLVideoElement = this.video.nativeElement;
       video.srcObject = stream;
       this.toggleControls();
-  
+
       this.kinesisVideoStream = new MediaStream();
-  
+
       const videoTracks = this.stream.getVideoTracks();
       const audioTracks = this.stream.getAudioTracks();
-  
+
       if (videoTracks.length > 0) {
         this.kinesisVideoStream.addTrack(videoTracks[0]);
       }
-  
+
       if (audioTracks.length > 0) {
         this.kinesisVideoStream.addTrack(audioTracks[0]);
       }
@@ -159,11 +203,11 @@ export class VideoRecorderComponent implements AfterViewInit {
           this.recordedChunks.push(event.data);
         }
       };
-  
+
       mediaRecorder.onstop = () => {
         console.log('Recording stopped. Recorded chunks:', this.recordedChunks);
       };
-  
+
       mediaRecorder.start();
       setTimeout(() => mediaRecorder.stop(), 5000);
     } else {
@@ -185,7 +229,21 @@ export class VideoRecorderComponent implements AfterViewInit {
 
     URL.revokeObjectURL(url);
 
+
+}
+submitVideo() {
+  if (this.videoName.trim() === '') {
+    console.error('Video name cannot be empty');
+    return;
   }
+  this.uploadToS3(this.videoName.trim());
+  this.videoName = '';
+  this.isSubmitDisabled = true;
+}
+onVideoNameChange() {
+  this.isSubmitDisabled = this.videoName.trim() === '';
+}
+
 
   playback(){
     if (this.recordedChunks.length > 0) {
