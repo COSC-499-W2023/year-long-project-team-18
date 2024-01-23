@@ -1,12 +1,50 @@
 import { SignInComponent } from './sign-in.component';
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {expect, jest, test} from '@jest/globals';
+import { Action } from 'rxjs/internal/scheduler/Action';
+import { CognitoService, IUser } from '../cognito.service';
 
-describe('OrganizationPageComponent', () => {
+describe('SignInComponent', () => {
   let component: SignInComponent;
-  test('Component is created',()=>{
-      expect(component)
+  let routerMock: Router;
+  let cognitoServiceMock: CognitoService;
+
+  beforeEach(() => {
+    component = new SignInComponent(
+      routerMock,
+      cognitoServiceMock
+    );
+  });
+
+  describe('SignIn', () => {
+    it('should return an error if no username or password', () => {
+      const mockUser: IUser = {
+        email: '',
+        password: '',
+        username: '',
+        showPassword: false,
+        code: '',
+        given_name: '',
+        family_name: '',
+        birthdate: '',
+        'custom:account_type': '',
+        'custom:organization': '',
+      };
+      
+      component.user = mockUser;
+      component.signIn();
+      expect(component.errorMessage).toEqual('Email and password are required');
+    });
+    
+  });
+
+  //Testing
+  describe('1+1', () => {
+    it('checks if 1 + 1 equals 2', () => {
+      expect(1 + 1).toBe(2);
+    });
   });
 
 });

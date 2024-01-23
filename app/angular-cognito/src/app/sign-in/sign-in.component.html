@@ -12,6 +12,13 @@
           <hr>
           <p class="subheader-text">Video Sharing</p>
         </div>
+        <div *ngIf="errorMessage" class="row">
+          <div class="col">
+            <div class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col mb-2">
             <label for="email" class="form-label">Email:</label>
