@@ -2,9 +2,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormField } from '@angular/material/form-field';
-
+import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { IUser, CognitoService } from '../cognito.service';
 
 @Component({
@@ -16,6 +14,7 @@ export class SignUpComponent {
 
   loading: boolean;
   user: IUser;
+  hide = true;
 
   constructor(private router: Router, private cognitoService: CognitoService) {
     this.loading = false;
@@ -23,6 +22,19 @@ export class SignUpComponent {
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
+  StrongPasswordRegx: RegExp =
+  /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/;
+
+  password = new FormControl('', {
+    validators: [Validators.required, Validators.pattern(this.StrongPasswordRegx)],
+  })
+
+  getPasswordErrorMessage(){
+    if(this.password.hasError('required')){
+      return 'You must enter a value';
+    }
+    return this.password.hasError('pattern') ? 'Password must contain an uppercase, lowercase and special character':'';
+  }
 
   getErrorMessage() {
     if (this.email.hasError('required')) {

@@ -96,6 +96,7 @@ div.col-4 {
 
     label.form-label {
         font-size: 14px;
+        
     }
 
     p i {
@@ -106,4 +107,18 @@ div.col-4 {
         padding-top: 50px;
         padding-bottom: 50px;
     }
+}
+
+.matFormField{
+    width: 100%;
+}
+.matLabel{
+    color:#194a81;
+}
+.matInput{
+    border: #0097b2;
+    border-width: thick;
+}
+#eye{
+    outline: none;
 }

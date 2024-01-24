@@ -21,6 +21,7 @@ import { ShareVideoComponent } from './share-video/share-video.component';
 import { VideoListComponent } from './video-list/video-list.component';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import {MatIcon, MatIconModule} from '@angular/material/icon'
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
 
   ],
   providers: [
