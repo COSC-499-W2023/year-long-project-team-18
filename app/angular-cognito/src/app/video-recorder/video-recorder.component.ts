@@ -109,7 +109,6 @@ export class VideoRecorderComponent implements AfterViewInit {
     stream.getAudioTracks().forEach(track => track.stop());
     stream.getVideoTracks().forEach(track => track.stop());
     const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
-    this.playbackBlobURL = URL.createObjectURL(recordedBlob);
   }
 
   uploadToS3(videoName: string) {
