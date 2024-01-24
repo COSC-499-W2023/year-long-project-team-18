@@ -129,7 +129,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     this.mediaRecorder = null;
   }
 
-  private uploadToS3(videoName: string): Promise<void> {
+  private uploadToS3(videoName: string, format: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       this.cognitoService.getUsername()
         .then(username => {
@@ -151,11 +151,11 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
                   reject('Error creating user folder in S3.');
                 } else {
                   console.log('User folder created successfully in S3:', folderData);
-                  this.uploadVideo(username, videoName, resolve, reject);
+                  this.uploadVideo(username, videoName, format, resolve, reject);
                 }
               });
             } else if (!err) {
-              this.uploadVideo(username, videoName, resolve, reject);
+              this.uploadVideo(username, videoName, format, resolve, reject);
             } else {
               console.error('Error checking user folder in S3:', err);
               reject('Error checking user folder in S3.');
@@ -169,23 +169,23 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     });
   }
   
-  private uploadVideo(username: string, videoName: string, resolve: () => void, reject: (error: string) => void) {
+  private uploadVideo(username: string, videoName: string, format: string, resolve: () => void, reject: (error: string) => void) {
     if (!videoName.trim()) {
       console.error('Video name cannot be empty');
       reject('Video name cannot be empty.');
       return;
     }
   
-    const key = `${username}/${videoName}.webm`;
+    const key = `${username}/${videoName}.${format}`;
   
-    const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+    const recordedBlob = new Blob(this.recordedChunks, { type: `video/${format}` });
     this.recordedChunks = [];
   
     const params: AWS.S3.PutObjectRequest = {
       Bucket: 'prvcy-storage-ba20e15b50619-staging',
       Key: key,
       Body: recordedBlob,
-      ContentType: 'video/webm',
+      ContentType: `video/${format}`,
     };
   
     this.s3.upload(params, (uploadErr, data) => {
@@ -198,6 +198,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
       }
     });
   }
+  
   
   
   successCallback(stream: MediaStream) {
@@ -267,7 +268,7 @@ async submitVideo() {
   }
 
   try {
-    await this.uploadToS3(this.videoName.trim());
+    await this.uploadToS3(this.videoName.trim(), 'mp4');
     this.videoName = '';
     this.isSubmitDisabled = true;
     this.router.navigate(['/share-video']);
