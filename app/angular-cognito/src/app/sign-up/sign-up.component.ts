@@ -2,6 +2,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormField } from '@angular/material/form-field';
 
 import { IUser, CognitoService } from '../cognito.service';
 
@@ -20,13 +22,14 @@ export class SignUpComponent {
     this.user = {} as IUser;
   }
 
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+  email = new FormControl('', [Validators.required, Validators.email]);
 
-  isEmailValid(): boolean {
-    return this.emailFormControl.valid;
+  getErrorMessage() {
+    if (this.email.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
   public signUp(organization: string): void {
