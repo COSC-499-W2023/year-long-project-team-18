@@ -18,10 +18,11 @@
         </ng-template>
       </div>
       <div class="contact-list">
-        <p>Contact List:</p>
-        <ul>
-          <li *ngFor="let contact of contactList">{{ contact }}</li>
-        </ul>
+        <p>Select Contact:</p>
+        <select [(ngModel)]="selectedContact">
+          <option *ngFor="let contact of contactList" [value]="contact">{{ contact }}</option>
+        </select>
+        <button (click)="sendVideoToContact(selectedContact)">Send</button>
       </div>
     </div>
   </div>

@@ -194,12 +194,11 @@ export class CognitoService {
         });
       });
     }
-    public getUsernames(): Promise<string[]> {
+    public getContactListFromS3(): Promise<string[]> {
       return new Promise<string[]>((resolve, reject) => {
         const params = {
-          UserPoolId: environment.cognito.userPoolId,
-          AttributesToGet: ['username'],
-          Limit: 10
+          Bucket: environment.s3.bucketName,
+          Delimiter: '/'
         };
   
         AWS.config.update({
@@ -209,12 +208,12 @@ export class CognitoService {
           region: environment.aws.region
         });
   
-        const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
-        cognitoIdentityServiceProvider.listUsers(params, (err, data) => {
+        const s3 = new AWS.S3();
+        s3.listObjectsV2(params, (err, data) => {
           if (err) {
             reject(err);
           } else {
-            const usernames = data.Users?.map(user => user.Attributes?.find(attr => attr.Name === 'username')?.Value || '') || [];
+            const usernames = data.CommonPrefixes?.map(prefix => prefix.Prefix?.replace('/', '') || '') || [];
             resolve(usernames);
           }
         });

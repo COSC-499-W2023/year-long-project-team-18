@@ -27,12 +27,12 @@ export class ShareVideoComponent implements OnInit {
   }
 
   fetchContactList() {
-    this.cognitoService.getUsernames().then(
+    this.cognitoService.getContactListFromS3().then(
       (usernames: string[]) => {
         this.contactList = usernames;
       },
       (error) => {
-        console.error('Error fetching usernames:', error);
+        console.error('Error fetching contact list from S3:', error);
       }
     );
   }

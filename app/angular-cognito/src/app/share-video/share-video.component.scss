@@ -29,7 +29,7 @@ $page-font: 'Lato', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Luci
 }
 
 video {
-  width: 100%;
+  width: 80%;
   max-width: 100%;
   box-shadow: 1px 6px 10px 2px rgba(35, 35, 35, 0.62);
   border: 2px solid #D3FFE9;
@@ -41,6 +41,7 @@ video {
   border-radius: 8px;
   box-shadow: 1px 6px 10px 2px rgba(35, 35, 35, 0.62);
   margin-left: 20px;
+  align-self: flex-start;
 }
 
 .contact-list p {
