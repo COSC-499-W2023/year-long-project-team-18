@@ -22,6 +22,8 @@ import { VideoListComponent } from './video-list/video-list.component';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import {MatIcon, MatIconModule} from '@angular/material/icon'
+import { NgIconsModule } from '@ng-icons/core';
+// import { matHideSource } from '@ng-icons/material-icons/outline';
 
 
 @NgModule({
@@ -49,7 +51,8 @@ import {MatIcon, MatIconModule} from '@angular/material/icon'
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    // NgIconsModule.withIcons({matHideSource})
 
   ],
   providers: [

@@ -23,6 +23,8 @@
     "@aws-amplify/ui-angular": "^4.0.9",
     "@aws-sdk/client-kinesis-video": "^3.454.0",
     "@material/dialog": "^14.0.0",
+    "@ng-icons/core": "^26.3.0",
+    "@ng-icons/material-icons": "^26.3.0",
     "amazon-kinesis-video-streams-webrtc": "^2.2.0",
     "aws-amplify": "^5.3.11",
     "aws-install": "^0.0.1",
