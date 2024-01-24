@@ -27,8 +27,16 @@
     <h3>Notification Requests</h3>
     <p>Notification content goes here...</p>
   </div>
-  <div *ngIf="accountType === 'personal'" class="heading-container">
-    <h3>Send Your Video!</h3>
-    <p>Checkbox-selected videos can be sent here...</p>
+  
+<div *ngIf="accountType === 'personal'" class="heading-container">
+  <h3>Send Your Video!</h3>
+  <p>Checkbox-selected videos can be sent here...</p>
+  <div class="contact-list">
+    <p>Select Contact:</p>
+    <select [(ngModel)]="selectedContact">
+      <option *ngFor="let contact of contactList" [value]="contact">{{ contact }}</option>
+    </select>
+    <button (click)="sendSelectedVideosToContact(selectedContact)">Send</button>
   </div>
+</div>
 </div>

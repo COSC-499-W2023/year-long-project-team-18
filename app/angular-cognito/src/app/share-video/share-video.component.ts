@@ -26,16 +26,18 @@ export class ShareVideoComponent implements OnInit {
     this.loadMostRecentVideo();
   }
 
-  fetchContactList() {
-    this.cognitoService.getContactListFromS3().then(
-      (usernames: string[]) => {
-        this.contactList = usernames;
-      },
-      (error) => {
-        console.error('Error fetching contact list from S3:', error);
-      }
-    );
+  async fetchContactList() {
+    try {
+      const usernames = await this.cognitoService.getContactListFromS3();
+      const ownUsername = await this.cognitoService.getUsername();
+      const filteredUsernames = usernames.filter(username => username !== ownUsername);
+      
+      this.contactList = filteredUsernames;
+    } catch (error) {
+      console.error('Error fetching usernames from S3:', error);
+    }
   }
+  
 
   loadMostRecentVideo(): void {
     this.VideoListingService.getVideos().subscribe(
@@ -56,5 +58,18 @@ export class ShareVideoComponent implements OnInit {
   }
 
   sendVideoToContact(contact: any) {
-  }
+    if (this.recentVideo) {
+      const sourceKey = this.recentVideo.key;
+      console.log('Source Key:', sourceKey);
+    
+      this.cognitoService.copyVideoToContactFolder(sourceKey, contact).then(
+        () => {
+          console.log(`Video successfully sent to ${contact}`);
+        },
+        (error) => {
+          console.error(`Error sending video to ${contact}:`, error);
+        }
+      );
+    }
+  }  
 }
