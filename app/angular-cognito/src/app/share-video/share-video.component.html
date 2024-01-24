@@ -1,1 +1,28 @@
-<p>share-video works!</p>
+<div class="card">
+  <div class="video-list-container">
+    <div class="row">
+      <div class="video-container">
+        <ng-container *ngIf="recentVideo">
+          <video controls>
+            <source [src]="getVideoUrl(recentVideo.key)" type="video/webm">
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-metadata">
+            <p>{{ recentVideo.name }}</p>
+            <p>Date: {{ recentVideo.date }}</p>
+            <p>Creator: {{ recentVideo.creator }}</p>
+          </div>
+        </ng-container>
+        <ng-template #noVideos>
+          <p>No recent videos available.</p>
+        </ng-template>
+      </div>
+      <div class="contact-list">
+        <p>Contact List:</p>
+        <ul>
+          <li *ngFor="let contact of contactList">{{ contact }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

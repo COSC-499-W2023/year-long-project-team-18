@@ -194,4 +194,30 @@ export class CognitoService {
         });
       });
     }
+    public getUsernames(): Promise<string[]> {
+      return new Promise<string[]>((resolve, reject) => {
+        const params = {
+          UserPoolId: environment.cognito.userPoolId,
+          AttributesToGet: ['username'],
+          Limit: 10
+        };
+  
+        AWS.config.update({
+          accessKeyId: environment.aws.accessKeyId,
+          secretAccessKey: environment.aws.secretAccessKey,
+          sessionToken: environment.aws.sessionToken,
+          region: environment.aws.region
+        });
+  
+        const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
+        cognitoIdentityServiceProvider.listUsers(params, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            const usernames = data.Users?.map(user => user.Attributes?.find(attr => attr.Name === 'username')?.Value || '') || [];
+            resolve(usernames);
+          }
+        });
+      });
+    }
   }

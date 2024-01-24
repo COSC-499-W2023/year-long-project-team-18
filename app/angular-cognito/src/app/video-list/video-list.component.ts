@@ -14,7 +14,7 @@ export class VideoListComponent implements OnInit {
   accountType: string | undefined;
 
   constructor(
-    private videoListingService: VideoListingService,
+    private VideoListingService: VideoListingService,
     private cognitoService: CognitoService
   ) { }
 
@@ -24,7 +24,7 @@ export class VideoListComponent implements OnInit {
   }
 
   loadVideos(): void {
-    this.videoListingService.getVideos().subscribe(
+    this.VideoListingService.getVideos().subscribe(
       (videos: VideoMetadata[]) => {
         console.log('Videos:', videos);
         this.videos = videos;
