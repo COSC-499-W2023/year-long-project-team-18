@@ -23,8 +23,10 @@ import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import {MatIcon, MatIconModule} from '@angular/material/icon'
 import { NgIconsModule } from '@ng-icons/core';
-// import { matHideSource } from '@ng-icons/material-icons/outline';
-
+import { matHideSourceOutline, matCircleOutline } from '@ng-icons/material-icons/outline';
+import {MatDatepicker, MatDatepickerModule} from '@angular/material/datepicker'
+import { MatNativeDateModule  } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,11 @@ import { NgIconsModule } from '@ng-icons/core';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatIconModule,
-    // NgIconsModule.withIcons({matHideSource})
+    NgIconsModule.withIcons({matHideSourceOutline, matCircleOutline}),
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule
+    
 
   ],
   providers: [
