@@ -82,6 +82,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         console.log('Kinesis Video stream described successfully:', data);
 
         this.kinesisVideoStreamArn = data.StreamInfo?.StreamARN ?? null;
+
       }
     });
   }
@@ -168,7 +169,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         });
     });
   }
-  
+
   private uploadVideo(username: string, videoName: string, format: string, resolve: () => void, reject: (error: string) => void) {
     if (!videoName.trim()) {
       console.error('Video name cannot be empty');
@@ -194,13 +195,51 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         reject('Error uploading to S3.');
       } else {
         console.log('Upload to S3 successful:', data);
+        this.transcribeUpload(username, videoName, key);
         resolve();
       }
     });
+    
   }
-  
-  
-  
+ 
+  private transcribeUpload(username: string, videoName: string, mediaFileKey: string) {
+    const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
+    const region = environment.aws.region;
+    const credentials = {
+      accessKeyId: environment.aws.accessKeyId,
+      secretAccessKey: environment.aws.secretAccessKey,
+      sessionToken: environment.aws.sessionToken
+    };
+    
+    const input = {
+      TranscriptionJobName: `${videoName}-captions`,
+      LanguageCode: "en-US",
+      Media: {
+        MediaFileUri: `s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`
+      },
+      OutputBucketName: 'prvcy-storage-ba20e15b50619-staging',
+      OutputKey: `${username}/${videoName}-captions.json`
+    };
+
+    async function startTranscriptionRequest() {
+      const transcribeConfig = {
+        region,
+        credentials
+      };
+      const transcribeClient = new TranscribeClient(transcribeConfig);
+      const transcribeCommand = new StartTranscriptionJobCommand(input);
+      console.log(`s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`);
+      try {
+        const transcribeResponse = await transcribeClient.send(transcribeCommand);
+        console.log("Transcription job created, the details:");
+        console.log(transcribeResponse.TranscriptionJob);
+      } catch(err) {
+        console.log(err);
+      }
+    }
+    startTranscriptionRequest();
+  }
+
   successCallback(stream: MediaStream) {
     this.stream = stream;
 
@@ -253,15 +292,13 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     document.body.removeChild(downloadLink);
 
     URL.revokeObjectURL(url);
-
-
 }
+
 async submitVideo() {
   if (this.recordedChunks.length === 0) {
     console.error('No recorded video to submit');
     return;
   }
-
   if (this.videoName.trim() === '') {
     console.error('Video name cannot be empty');
     return;
@@ -282,17 +319,17 @@ onVideoNameChange() {
 }
 
 
-  playback(){
-    if (this.recordedChunks.length > 0) {
-      const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
-      const playbackBlobURL = URL.createObjectURL(recordedBlob);
-      let video: HTMLVideoElement = this.video.nativeElement;
-      window.open(playbackBlobURL, '_blank');
-    }
-    else {
-      console.error("No recorded video available for playback");
-    }
-    
+playback(){
+  if (this.recordedChunks.length > 0) {
+    const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+    const playbackBlobURL = URL.createObjectURL(recordedBlob);
+    let video: HTMLVideoElement = this.video.nativeElement;
+    window.open(playbackBlobURL, '_blank');
   }
+  else {
+    console.error("No recorded video available for playback");
+  }
+  
+}
 
 }
