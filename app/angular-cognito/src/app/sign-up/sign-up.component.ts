@@ -53,7 +53,56 @@ export class SignUpComponent {
   }
 
   public signUp(organization: string): void {
+    console.log(this.user.birthdate);
+
+    var bdate = this.user.birthdate.toString();
+    var split = bdate.split(' ', 4)
+    
+    switch (split[1].toString().toLowerCase()) {
+      case 'jan':
+        split[1] = '01';
+        break;
+      case 'feb':
+        split[1] = '02';
+        break;
+      case 'mar':
+        split[1] = '03';
+        break;
+      case 'apr':
+        split[1] = '04';
+        break;
+      case 'may':
+        split[1] = '05';
+        break;
+      case 'jun':
+        split[1] = '06';
+        break;
+      case 'jul':
+        split[1] = '07';
+        break;
+      case 'aug':
+        split[1] = '08';
+        break;
+      case 'sep':
+        split[1] = '09';
+        break;
+      case 'oct':
+        split[1] = '10';
+        break;
+      case 'nov':
+        split[1] = '11';
+        break;
+      case 'dec':
+        split[1] = '12';
+        break;
+      default:
+        split[1] = 'Invalid Month';
+        break;
+    }
+    
+    console.log(split[3] + "-" + split[1] + "-" + split[2]);
     this.loading = true;
+    this.user.birthdate = split[3] + "-" + split[1] + "-" + split[2]
 
     if (organization == null) {
       this.user['custom:organization'] = 'default';
@@ -99,6 +148,7 @@ export class SignUpComponent {
         console.error('Error getting username:', error);
       });
   }
+
 
   public confirmSignUp(): void {
     this.loading = true;
