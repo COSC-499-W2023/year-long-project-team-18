@@ -9,7 +9,7 @@
     </div>
   
     <div id="buttons" class="row">
-      <button class="btn btn-sm btn-success button-record" (click)="startRecording()"> Record </button>
+      <button class="btn btn-sm btn-success button-record" (click)="startRecordingButtonClicked()"> Record </button>
       <button class="btn btn-sm btn-success button-record" (click)="stopRecording()"> Stop</button>
       <button class="btn btn-sm btn-success button-record" (click)="playback()"> Playback</button>
     </div>
@@ -17,7 +17,7 @@
     <div class="form-group text-center"> 
       <label for="videoName" style="color: #ffffff">Video Name:</label>
       <input type="text" id="videoName" [(ngModel)]="videoName" (input)="onVideoNameChange()" class="form-control d-inline-block mx-auto"/>
-      <button class="btn btn-sm btn-success button-record" routerLink="/share-video" [disabled]="isSubmitDisabled" (click)="submitVideo()"> Submit</button>
+      <button class="btn btn-sm btn-success button-record" [disabled]="isSubmitDisabled" (click)="submitVideo()"> Submit</button>
     </div>
   </div>
-</div>
+  </div>
