@@ -29,17 +29,17 @@ export class SignUpComponent {
     return this.emailFormControl.valid;
   }
 
-  public signUp(organization: string): void {
+  public signUp(username: string, organization: string): void {
     this.loading = true;
-
+  
     if (organization == null) {
       this.user['custom:organization'] = 'default';
     }
-
+    this.user.username = username;
+  
     this.cognitoService.signUp(this.user)
       .then(() => {
-        // Create user folder in S3 when sign-up is successful
-        this.createS3UserFolder();
+        this.createS3UserFolder(username);
         this.router.navigate(['/signIn']);
       })
       .catch((error) => {
@@ -47,34 +47,18 @@ export class SignUpComponent {
         this.loading = false;
       });
   }
-
-  private createS3UserFolder(): void {
-    this.cognitoService.getUsername()
-      .then(username => {
-        console.log('Username:', username);
-
-        if (!username) {
-          console.error('User information not available for creating a folder.');
-          return;
+  
+  private createS3UserFolder(username: string): void {
+    const folderKey = `${username}/`;
+    this.cognitoService.checkS3UserFolder(folderKey)
+      .then(folderExists => {
+        if (!folderExists) {
+          this.cognitoService.createS3UserFolder(folderKey)
+            .then(() => console.log('User folder created successfully in S3'))
+            .catch(err => console.error('Error creating user folder in S3:', err));
         }
-
-        const folderKey = `${username}/`;
-
-        // Check if the folder already exists
-        this.cognitoService.checkS3UserFolder(folderKey)
-          .then(folderExists => {
-            if (!folderExists) {
-              // Create the folder in S3
-              this.cognitoService.createS3UserFolder(folderKey)
-                .then(() => console.log('User folder created successfully in S3'))
-                .catch(err => console.error('Error creating user folder in S3:', err));
-            }
-          })
-          .catch(err => console.error('Error checking user folder in S3:', err));
       })
-      .catch(error => {
-        console.error('Error getting username:', error);
-      });
+      .catch(err => console.error('Error checking user folder in S3:', err));
   }
 
   public confirmSignUp(): void {
