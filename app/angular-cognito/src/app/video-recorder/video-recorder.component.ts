@@ -10,7 +10,7 @@ import * as AWS from 'aws-sdk';
   styleUrls: ['./video-recorder.component.scss']
 })
 
-export class VideoRecorderComponent implements AfterViewInit {
+export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('video') videoElement!: ElementRef<HTMLVideoElement>;
 
@@ -50,14 +50,14 @@ export class VideoRecorderComponent implements AfterViewInit {
     video.muted = false;
     video.controls = true;
     video.autoplay = false;
-
+  
     AWS.config.update({
       accessKeyId: environment.aws.accessKeyId,
       secretAccessKey: environment.aws.secretAccessKey,
-      sessionToken : environment.aws.sessionToken,
+      sessionToken: environment.aws.sessionToken,
       region: environment.aws.region
     });
-
+  
     this.kinesisVideoClient = new AWS.KinesisVideo();
     this.createKinesisVideoStream();
   }
@@ -70,7 +70,7 @@ export class VideoRecorderComponent implements AfterViewInit {
       this.stream.getTracks().forEach(track => track.stop());
     }
   }
-
+  
   createKinesisVideoStream() {
     const params = {
       StreamName: 'prvcy_stream',
@@ -201,7 +201,7 @@ export class VideoRecorderComponent implements AfterViewInit {
     });
     
   }
-  
+ 
   private transcribeUpload(username: string, videoName: string, mediaFileKey: string) {
     const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
     const region = environment.aws.region;
@@ -299,7 +299,6 @@ async submitVideo() {
     console.error('No recorded video to submit');
     return;
   }
-
   if (this.videoName.trim() === '') {
     console.error('Video name cannot be empty');
     return;

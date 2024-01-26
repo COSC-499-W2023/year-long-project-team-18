@@ -1,3 +1,32 @@
+## Term 2 Week 2: Jan 16th - 18th
+
+### Tasks Worked On:
+  - Fixed the playback feature, this involved opening a new window to show the video playback rather than playing it back to the same recording window.
+  - Met with Professor Hui to further find a solution towards the problems with RDS, created some DynamoDB tables but it was highly reccomended we take a look into implementing SST to help us still use an RDS as we would benefit more greatly from a relational database. I am currently reading throught the documentation and test implementing it locally, but it may require more of a team effort to implement as it affects all AWS backend archictecure.
+  - Adding more Jest testing
+
+### Tasks I am planning to work on this upcoming week:
+  - Ideally the SST or an alternative RDS solution is implemented
+  - This past week was more RDS/Jest/Playback fix heavy so I was unable to start working on my first Term 2 feature which is the comments attached to a video + contact list of users to send the video to.
+  
+### Peer Evaluations:
+
+<img width="1089" alt="Screenshot 2024-01-22 at 11 36 39 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/c7f20f27-fc92-4839-ac60-96daa584bf12">
+
+### Tasks I Am Assigned To:
+
+<img width="1448" alt="Screenshot 2024-01-22 at 11 49 57 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/17e367da-b158-42d2-9e5a-525d73172f4d">
+
+## Term 2 Week 1: Jan 10th - 11th
+
+### Tasks Worked On:
+  - Worked towards fixing the RDS + playback
+
+### Tasks I am planning to work on this upcoming week:
+  - Finding a solution to both features I had from Term 1
+  - Starting to make more progress towards Jest testing + my first Term 2 feature
+  
+
 ## Week 13: November 26th - Dec. 3rd
 
 ### Tasks Worked On:
