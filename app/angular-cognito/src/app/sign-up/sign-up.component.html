@@ -80,9 +80,11 @@
         </div>
         <div class="row">
           <div class="col mb-2">
-            <label class="form-label">Enter your organization code if you have one here:</label>
-            <input type="text" id="organization" name="organization" #organization="ngModel"
-              [(ngModel)]="user['custom:organization']" class="form-control form-control-sm">
+            <mat-form-field class="matFormField" appearance="outline">
+              <mat-label class="matLabel">Organization code: </mat-label>
+              <mat-hint>Enter your organization code if you have one.</mat-hint>
+              <input class="matInput" matInput [(ngModel)]="user['custom:organization']">
+            </mat-form-field>
           </div>
         </div>
         <div class="row">

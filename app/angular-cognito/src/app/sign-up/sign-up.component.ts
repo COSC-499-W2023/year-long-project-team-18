@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { IUser, CognitoService } from '../cognito.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,10 +16,17 @@ export class SignUpComponent {
   loading: boolean;
   user: IUser;
   hide = true;
+  durationInSeconds = 5;
 
-  constructor(private router: Router, private cognitoService: CognitoService) {
+  constructor(private router: Router, private cognitoService: CognitoService, private snackBar: MatSnackBar) {
     this.loading = false;
     this.user = {} as IUser;
+    
+  }
+  openSnackBar(){
+    this.snackBar.open("Successfully registered","Dismiss", {
+      duration: this.durationInSeconds*1000
+    })
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
