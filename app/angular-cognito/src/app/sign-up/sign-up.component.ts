@@ -52,8 +52,9 @@ export class SignUpComponent {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
-  public signUp(organization: string): void {
-    console.log(this.user.birthdate);
+
+   public signUp(username: string, organization: string): void {
+    this.loading = true;
 
     var bdate = this.user.birthdate.toString();
     var split = bdate.split(' ', 4)
@@ -100,18 +101,16 @@ export class SignUpComponent {
         break;
     }
     
-    console.log(split[3] + "-" + split[1] + "-" + split[2]);
-    this.loading = true;
     this.user.birthdate = split[3] + "-" + split[1] + "-" + split[2]
 
     if (organization == null) {
       this.user['custom:organization'] = 'default';
     }
-
+    this.user.username = username;
+  
     this.cognitoService.signUp(this.user)
       .then(() => {
-        // Create user folder in S3 when sign-up is successful
-        this.createS3UserFolder();
+        this.createS3UserFolder(username);
         this.router.navigate(['/signIn']);
       })
       .catch((error) => {
@@ -119,34 +118,18 @@ export class SignUpComponent {
         this.loading = false;
       });
   }
-
-  private createS3UserFolder(): void {
-    this.cognitoService.getUsername()
-      .then(username => {
-        console.log('Username:', username);
-
-        if (!username) {
-          console.error('User information not available for creating a folder.');
-          return;
+  
+  private createS3UserFolder(username: string): void {
+    const folderKey = `${username}/`;
+    this.cognitoService.checkS3UserFolder(folderKey)
+      .then(folderExists => {
+        if (!folderExists) {
+          this.cognitoService.createS3UserFolder(folderKey)
+            .then(() => console.log('User folder created successfully in S3'))
+            .catch(err => console.error('Error creating user folder in S3:', err));
         }
-
-        const folderKey = `${username}/`;
-
-        // Check if the folder already exists
-        this.cognitoService.checkS3UserFolder(folderKey)
-          .then(folderExists => {
-            if (!folderExists) {
-              // Create the folder in S3
-              this.cognitoService.createS3UserFolder(folderKey)
-                .then(() => console.log('User folder created successfully in S3'))
-                .catch(err => console.error('Error creating user folder in S3:', err));
-            }
-          })
-          .catch(err => console.error('Error checking user folder in S3:', err));
       })
-      .catch(error => {
-        console.error('Error getting username:', error);
-      });
+      .catch(err => console.error('Error checking user folder in S3:', err));
   }
 
 
