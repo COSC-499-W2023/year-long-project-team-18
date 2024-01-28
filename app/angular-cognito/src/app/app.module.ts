@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -15,10 +15,19 @@ import { InboxComponent } from './inbox/inbox.component';
 import { OrganizationPageComponent } from './organization-page/organization-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogComponent } from './dialog/dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatCommonModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ShareVideoComponent } from './share-video/share-video.component';
 import { VideoListComponent } from './video-list/video-list.component';
+import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import {MatIcon, MatIconModule} from '@angular/material/icon'
+import { NgIconsModule } from '@ng-icons/core';
+import { matHideSourceOutline, matCircleOutline } from '@ng-icons/material-icons/outline';
+import {MatDatepicker, MatDatepickerModule} from '@angular/material/datepicker'
+import { MatNativeDateModule  } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar'
 
 
 @NgModule({
@@ -41,8 +50,19 @@ import { VideoListComponent } from './video-list/video-list.component';
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatCommonModule,
     MatDialogModule,
-    MatCommonModule
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    NgIconsModule.withIcons({matHideSourceOutline, matCircleOutline}),
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    
+
   ],
   providers: [
   ],
