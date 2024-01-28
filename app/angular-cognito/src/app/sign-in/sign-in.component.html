@@ -31,7 +31,7 @@
           <div class="col mb-2">
             <mat-form-field class="matFormField" appearance="outline">
               <mat-label class="matLabel" for="password">Password: </mat-label>
-              <input matInput [type]="user.showPassword ? 'text' : 'password'" id="password" name="password" #password="ngModel"
+              <input matInput [type]="hide? 'password' : 'text'" id="password" name="password" #password="ngModel"
               [(ngModel)]="user.password">
               <button id="maticon" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
