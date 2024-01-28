@@ -21,12 +21,8 @@ export class SignUpComponent {
   constructor(private router: Router, private cognitoService: CognitoService, private snackBar: MatSnackBar) {
     this.loading = false;
     this.user = {} as IUser;
+
     
-  }
-  openSnackBar(){
-    this.snackBar.open("Successfully registered","Dismiss", {
-      duration: this.durationInSeconds*1000
-    })
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -111,7 +107,9 @@ export class SignUpComponent {
     this.cognitoService.signUp(this.user)
       .then(() => {
         this.createS3UserFolder(username);
-        this.router.navigate(['/signIn']);
+        this.router.navigate(['/signIn']).then(()=>{
+          this.snackBar.open("Successfully registered", "Dismiss",{duration: 5000})
+        })
       })
       .catch((error) => {
         console.error('Sign Up Error:', error);
@@ -135,11 +133,11 @@ export class SignUpComponent {
 
   public confirmSignUp(): void {
     this.loading = true;
-
     this.cognitoService.confirmSignUp(this.user)
       .then((confirmationResult) => {
         console.log('Confirmation result:', confirmationResult);
-        this.router.navigate(['/signIn']);
+        
+        this.router.navigate(['/signIn'])
       })
       .catch((error) => {
         console.error('Confirm Sign Up Error:', error);
