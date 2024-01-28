@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PRVCY - Video Sharing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="row justify-content-center">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -91,18 +87,17 @@
               <input class="matInput" matInput [(ngModel)]="user['custom:organization']">
             </mat-form-field>
           </div>
-          <div class="row">
-            <div class="col d-grid">
-              <button type="button" (click)="signUp(user.username, user['custom:organization'])" class="btn btn-sm btn-success"
-                [disabled]="loading">
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
-                Sign up
-              </button>
-            </div>
+        </div>
+        <div class="row">
+          <div class="col d-grid">
+            <button type="button" (click)="signUp(user.username, user['custom:organization'])" class="btn btn-sm btn-success"
+              [disabled]="loading">
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
+              Sign up
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-</body>
-</html>
+</div>
