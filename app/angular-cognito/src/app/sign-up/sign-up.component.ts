@@ -134,6 +134,7 @@ export class SignUpComponent {
   public confirmSignUp(): void {
     this.loading = true;
     this.cognitoService.confirmSignUp(this.user)
+      //I'm not entirely sure this part of the code is accessed at all
       .then((confirmationResult) => {
         console.log('Confirmation result:', confirmationResult);
         
