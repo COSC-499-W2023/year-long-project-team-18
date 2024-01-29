@@ -44,12 +44,91 @@ p {
     font-size: 1.5em;
 }
 
-#newOrgTxt {
-    font-size: 1.5em;
-    margin-top: 1em;
+//Remove the white spaces on the edge of the screen
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
 }
 
-.orgButton {
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+//Rectangle Box Content (Video Recording Box)
+
+.rectangle-box {
+    position: relative;
+    background-color: white;
+    border: 1px solid #000;
+    margin-bottom: 20px;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    height: 96%;
+}
+
+.rectangle-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 10%;
+    padding-bottom: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+//Square Box Content (Organizations, Chats)
+
+.square-box {
+    width: 100%;
+    padding-top: 60%;
+    position: relative;
+    background-color: white;
+    border: 1px solid #000;
+    margin-bottom: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+.square-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+//Title Styling
+
+.title {
+    width: 100%;
+    font-size: 30px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #000;
+    margin-bottom: 20px;
+}
+
+//Button Styling
+
+.button {
+    flex: 0;
+    margin-left: 10px;
+    border-radius: 5px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
     width: 8em;
     height: 4em;
     background-color: #194a81;
@@ -58,8 +137,30 @@ p {
     display: inline;
 }
 
-.orgButton:hover {
+.button:hover {
     background-color: #0097b2;
+}
+  
+.btn-sm {
+    padding: 5px 70px;
+    font-size: 15px;
+    text-align: center;
+    display: flex;
+}
+
+.content-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.content-row p {
+    font-size: 15px;
+    margin: 0;
+    flex: 1;
+    text-align: left;
 }
 
 #joinButton {
@@ -67,4 +168,5 @@ p {
     height: 2.5em;
     display: block;
     font-size: 1em;
+    display: flex;
 }
