@@ -14,21 +14,23 @@
           </div>
           <div class="content-row">
             <p>Join Organization</p>
-            <button mat-raised-button (click)="openDialog()" class="btn btn-sm btn-success button" id="joinButton">Join</button>
+            <button mat-raised-button (click)="openDialog()" class="btn btn-sm btn-success button">Join</button>
           </div>
         </div>
       </div>
       <div class="square-box">
         <div class="square-content">
-          <div>Chats</div>
+          <div class="title">Record a Video</div>
+          <div class="content-row">
+            <button class="btn btn-sm btn-success button" routerLink="/video-recorder" routerLinkActive="active" *ngIf="isAuthenticated">Record</button>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6">
       <div class="rectangle-box">
         <div class="rectangle-content">
-          <div class="title">Record a Video</div>
-          <button class="btn btn-sm btn-success button" routerLink="/video-recorder" routerLinkActive="active" *ngIf="isAuthenticated">Record</button>
+          <div class="title">Inbox</div>
         </div>
       </div>
     </div>

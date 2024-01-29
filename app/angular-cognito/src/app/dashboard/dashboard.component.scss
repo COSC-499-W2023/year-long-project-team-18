@@ -1,6 +1,8 @@
 $page-font: Lato, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-$primary-1: #194a81;
-$primary-2: #0097b2;
+/*$primary-1: #194a81;*/
+$primary-1: #e7e7e7;
+/*$primary-2: #0097b2;*/
+$primary-2: #e7e7e7;
 
 div.row.justify-content-center {
     margin: 0;
@@ -24,16 +26,6 @@ div.col.mb-2 {
 form {
     padding-top: 10px;
     padding-bottom: 20px;
-}
-
-button {
-    //margin-top: 20px;
-    background-color: $primary-1;
-    width: 17%;
-}
-
-button:hover {
-    background-color: $primary-2;
 }
 
 div.card {
@@ -65,7 +57,8 @@ p {
     margin-bottom: 20px;
     font-family: 'Lato', sans-serif;
     text-align: center;
-    height: 96%;
+    height: 98%;
+    border-radius: 20px;
 }
 
 .rectangle-content {
@@ -75,7 +68,7 @@ p {
     bottom: 0;
     right: 0;
     padding: 10%;
-    padding-bottom: 600px;
+    padding-bottom: 800px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -92,6 +85,7 @@ p {
     border: 1px solid #000;
     margin-bottom: 20px;
     font-family: 'Lato', sans-serif;
+    border-radius: 20px;
 }
 
 .square-content {
@@ -101,6 +95,7 @@ p {
     bottom: 0;
     right: 0;
     padding: 10%;
+    padding-bottom: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -121,6 +116,16 @@ p {
 
 //Button Styling
 
+button {
+    //margin-top: 20px;
+    background-color: #194a81;
+    width: 17%;
+}
+
+button:hover {
+    background-color: $primary-2;
+}
+
 .button {
     flex: 0;
     margin-left: 10px;
@@ -129,12 +134,11 @@ p {
     display: flex;
     justify-content: center;
 
-    width: 8em;
-    height: 4em;
-    background-color: #194a81;
-    margin-right: 1em;
-    font-size: larger;
-    display: inline;
+    width: 5em;
+    height: 2.5em;
+    display: block;
+    font-size: 1em;
+    display: flex;
 }
 
 .button:hover {
@@ -161,12 +165,4 @@ p {
     margin: 0;
     flex: 1;
     text-align: left;
-}
-
-#joinButton {
-    width: 5em;
-    height: 2.5em;
-    display: block;
-    font-size: 1em;
-    display: flex;
 }
