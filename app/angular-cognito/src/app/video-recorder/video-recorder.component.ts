@@ -3,6 +3,7 @@ import { IUser, CognitoService } from '../cognito.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import * as AWS from 'aws-sdk';
+import TranscribeService from 'aws-sdk/clients/transcribeservice';
 
 @Component({
   selector: 'app-video-recorder',
@@ -195,22 +196,25 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         reject('Error uploading to S3.');
       } else {
         console.log('Upload to S3 successful:', data);
-        this.transcribeUpload(username, videoName, key);
         resolve();
+        this.transcribeUpload(username, videoName, key);
       }
-    });
-    
+    }); 
+
   }
  
   private transcribeUpload(username: string, videoName: string, mediaFileKey: string) {
-    const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
+    const { TranscribeClient, StartTranscriptionJobCommand, GetTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
     const region = environment.aws.region;
     const credentials = {
       accessKeyId: environment.aws.accessKeyId,
       secretAccessKey: environment.aws.secretAccessKey,
       sessionToken: environment.aws.sessionToken
     };
-    
+    const transcribeConfig = {
+      region,
+      credentials
+    };
     const input = {
       TranscriptionJobName: `${videoName}-captions`,
       LanguageCode: "en-US",
@@ -218,14 +222,10 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         MediaFileUri: `s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`
       },
       OutputBucketName: 'prvcy-storage-ba20e15b50619-staging',
-      OutputKey: `${username}/${videoName}-captions.json`
+      OutputKey: `${username}/${videoName}-captions.vtt`
     };
-
     async function startTranscriptionRequest() {
-      const transcribeConfig = {
-        region,
-        credentials
-      };
+      
       const transcribeClient = new TranscribeClient(transcribeConfig);
       const transcribeCommand = new StartTranscriptionJobCommand(input);
       console.log(`s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`);
@@ -238,6 +238,22 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
       }
     }
     startTranscriptionRequest();
+    var done = false;
+    const inputCheck = {
+      TranscriptionJobName: `${videoName}-captions`
+    }
+    async function check() {
+      const transcribeClient = new TranscribeClient(transcribeConfig);
+      const transcribeGetCommand = new GetTranscriptionJobCommand(inputCheck);
+      while (!done) {
+        const transcribeResponse = await transcribeClient.send(transcribeGetCommand);
+        console.log(transcribeResponse.TranscriptionJobStatus);
+        if (transcribeResponse.TranscriptionJobStatus === "COMPLETED") {
+          done = true;
+        }
+      }
+    }
+    check();
   }
 
   successCallback(stream: MediaStream) {
@@ -303,21 +319,48 @@ async submitVideo() {
     console.error('Video name cannot be empty');
     return;
   }
-
   try {
     await this.uploadToS3(this.videoName.trim(), 'mp4');
     this.videoName = '';
     this.isSubmitDisabled = true;
-    this.router.navigate(['/share-video']);
+    //this.router.navigate(['/share-video']);
+    
   } catch (error) {
     console.error('Error during S3 upload:', error);
+  } 
+}
+
+checkTranscription(transcriptionJobName: string) {
+  const { TranscribeClient, GetTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
+  const region = environment.aws.region;
+  const credentials = {
+    accessKeyId: environment.aws.accessKeyId,
+    secretAccessKey: environment.aws.secretAccessKey,
+    sessionToken: environment.aws.sessionToken
+  };
+  const transcribeConfig = {
+    region,
+    credentials
+  };
+  const input = {
+    TranscriptionJobName: transcriptionJobName
   }
+  
+    const transcribeClient = new TranscribeClient(transcribeConfig);
+    const transcribeCommand = new GetTranscriptionJobCommand(input);
+      try {
+        const transcribeResponse = transcribeClient.send(transcribeCommand);
+        console.log(transcribeResponse.TranscriptionJob.TranscriptionJobStatus);
+      } catch (err) {
+        console.log(err);
+      }
+  
+  
 }
 
 onVideoNameChange() {
   this.isSubmitDisabled = this.videoName.trim() === '';
 }
-
 
 playback(){
   if (this.recordedChunks.length > 0) {
