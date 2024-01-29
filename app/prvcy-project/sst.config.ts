@@ -4,8 +4,8 @@ import { API } from "./stacks/MyStack";
 export default {
   config(_input) {
     return {
-      name: "prvcy-app",
-      region: "us-east-1",
+      name: "prvcy-project",
+      region: "ca-central-1",
     };
   },
   stacks(app) {

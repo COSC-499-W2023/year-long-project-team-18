@@ -1,5 +1,5 @@
 import { ApiHandler } from "sst/node/api";
-import { Todo } from "@prvcy-app/core/todo";
+import { Todo } from "@prvcy-project/core/todo";
 
 export const create = ApiHandler(async (_evt) => {
   await Todo.create();

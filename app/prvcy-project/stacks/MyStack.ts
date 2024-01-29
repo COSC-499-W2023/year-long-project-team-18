@@ -1,4 +1,4 @@
-import { StackContext, Api, EventBus } from "sst/constructs";
+import { StackContext, Api, EventBus, StaticSite } from "sst/constructs";
 
 export function API({ stack }: StackContext) {
   const bus = new EventBus(stack, "bus", {
@@ -27,4 +27,14 @@ export function API({ stack }: StackContext) {
   stack.addOutputs({
     ApiEndpoint: api.url,
   });
+
+  const web = new StaticSite(stack, "web", {
+    path: "packages/web",
+    buildOutput: "dist",
+    buildCommand: "npm run build",
+    environment: {
+      VITE_APP_API_URL: api.url,
+    },
+  }); 
+
 }

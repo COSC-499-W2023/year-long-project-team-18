@@ -5,7 +5,7 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@prvcy-app/core/*": ["../core/src/*"]
+      "@prvcy-project/core/*": ["../core/src/*"]
     }
   }
 }
