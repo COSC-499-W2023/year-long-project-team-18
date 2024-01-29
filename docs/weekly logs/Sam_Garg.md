@@ -143,3 +143,17 @@ Goal was complete the project plan and begin with scoping the project while iden
 - Archive Page<br>
 - MetaData access from S3 bucket<br>
 - Users can now add custom names to save videos<br>
+
+<h2>T2 Week3 Jan23 - Jan30</h2>
+<img width="1114" alt="Screenshot 2024-01-28 at 8 05 50 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/881a00d0-be22-48c5-a09f-3a535c8a3801">
+
+<h3>Students Goals</h3>
+- Add Feature to exchange and send videos<br>
+- Adding a notification and email system<br>
+<h3>In-Progress Tasks</h3>
+- Jest tests<br>
+- Adding a notification and email system<br>
+<h3>Completed Tasks</h3>
+- Add Feature to exchange and send videos<br>
+- Fix camera issues with recording<br>
+- Fix automatic recording issue when the page loads<br>
