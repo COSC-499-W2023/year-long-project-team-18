@@ -30,14 +30,16 @@ export class SignUpComponent {
   /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/;
 
   password = new FormControl('', {
-    validators: [Validators.required, Validators.pattern(this.StrongPasswordRegx)],
+    validators: [Validators.required, Validators.pattern(this.StrongPasswordRegx), Validators.minLength(8)],
   })
 
   getPasswordErrorMessage(){
     if(this.password.hasError('required')){
       return 'You must enter a value';
+    }if(this.password.hasError('minlength')){
+      return 'Must be 8 characters';
     }
-    return this.password.hasError('pattern') ? 'Password must contain an uppercase, lowercase and special character':'';
+    return this.password.hasError('pattern') ? 'Password must contain an uppercase, number and special character':'';
   }
 
   getErrorMessage() {
