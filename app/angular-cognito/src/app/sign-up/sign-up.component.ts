@@ -106,7 +106,7 @@ export class SignUpComponent {
   
     this.cognitoService.signUp(this.user)
       .then(() => {
-        this.createS3UserFolder(username);
+        this.createS3UserFolder(this.user.username);
         this.router.navigate(['/signIn']).then(()=>{
           this.snackBar.open("Successfully registered", "Dismiss",{duration: 5000})
         })
