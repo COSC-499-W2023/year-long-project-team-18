@@ -2,6 +2,12 @@ $page-font: Lato, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida
 $primary-1: #194a81;
 $primary-2: #0097b2;
 
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
 label.form-label {
     font-family: $page-font;
     color: $primary-2
