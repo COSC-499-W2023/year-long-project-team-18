@@ -1,12 +1,12 @@
 $page-font: Lato, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-/*$primary-1: #194a81;*/
+//$primary-1: #194a81;
 $primary-1: #e7e7e7;
-/*$primary-2: #0097b2;*/
+//$primary-2: #0097b2;
 $primary-2: #e7e7e7;
 
 div.row.justify-content-center {
     margin: 0;
-    padding: 225px 99px 336px;
+    padding: 225px 100px 400px;
     font-size: 100%;
     vertical-align: baseline;
     border: 0;
@@ -37,7 +37,6 @@ p {
 }
 
 //Remove the white spaces on the edge of the screen
-
 .container-fluid {
     padding-left: 0;
     padding-right: 0;
@@ -49,7 +48,6 @@ p {
 }
 
 //Rectangle Box Content (Video Recording Box)
-
 .rectangle-box {
     position: relative;
     background-color: white;
@@ -76,7 +74,6 @@ p {
 }
 
 //Square Box Content (Organizations, Chats)
-
 .square-box {
     width: 100%;
     padding-top: 60%;
@@ -104,7 +101,6 @@ p {
 }
 
 //Title Styling
-
 .title {
     width: 100%;
     font-size: 30px;
@@ -115,7 +111,6 @@ p {
 }
 
 //Button Styling
-
 button {
     //margin-top: 20px;
     background-color: #194a81;

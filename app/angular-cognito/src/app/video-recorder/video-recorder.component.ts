@@ -319,6 +319,9 @@ onVideoNameChange() {
   this.isSubmitDisabled = this.videoName.trim() === '';
 }
 
+addCommentToVideo(){
+
+}
 
 playback(){
   if (this.recordedChunks.length > 0) {
