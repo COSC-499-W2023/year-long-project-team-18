@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import {Amplify, Auth } from 'aws-amplify';
 import { Router } from '@angular/router';
 import * as AWS from 'aws-sdk';
+import { SNS } from 'aws-sdk';
 
 
 import { environment } from '../environments/environment';
@@ -244,5 +245,30 @@ export class CognitoService {
           }
         });
       });
+    }   
+    public async subscribeUserToSnsTopic(email: string, topicArn: string): Promise<void> {
+      try {
+        AWS.config.update({
+          accessKeyId: environment.aws.accessKeyId,
+          secretAccessKey: environment.aws.secretAccessKey,
+          sessionToken: environment.aws.sessionToken,
+          region: environment.aws.region
+        });
+    
+        const sns = new AWS.SNS();
+    
+        const params = {
+          Protocol: 'email',
+          TopicArn: topicArn,
+          Endpoint: email,
+        };
+    
+        await sns.subscribe(params).promise();
+    
+        console.log(`Subscribed ${email} to topic ${topicArn}`);
+      } catch (error) {
+        console.error('Error subscribing user to SNS topic:', error);
+        throw error;
+      }
     }    
   }    

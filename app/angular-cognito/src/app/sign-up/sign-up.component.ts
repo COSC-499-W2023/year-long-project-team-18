@@ -25,22 +25,8 @@ export class SignUpComponent {
     Validators.email,
   ]);
 
-<<<<<<< Updated upstream
   isEmailValid(): boolean {
     return this.emailFormControl.valid;
-=======
-  password = new FormControl('', {
-    validators: [Validators.required, Validators.pattern(this.StrongPasswordRegx), Validators.minLength(8)],
-  })
-
-  getPasswordErrorMessage(){
-    if(this.password.hasError('required')){
-      return 'You must enter a value';
-    }if(this.password.hasError('minlength')){
-      return 'Must be 8 characters';
-    }
-    return this.password.hasError('pattern') ? 'Password must contain an uppercase, number and special character':'';
->>>>>>> Stashed changes
   }
 
   public signUp(username: string, organization: string): void {
@@ -53,15 +39,9 @@ export class SignUpComponent {
   
     this.cognitoService.signUp(this.user)
       .then(() => {
-<<<<<<< Updated upstream
         this.createS3UserFolder(username);
+        this.subscribeUserToSnsTopic(this.user.email);
         this.router.navigate(['/signIn']);
-=======
-        this.createS3UserFolder(this.user.username);
-        this.router.navigate(['/signIn']).then(()=>{
-          this.snackBar.open("Successfully registered", "Dismiss",{duration: 5000})
-        })
->>>>>>> Stashed changes
       })
       .catch((error) => {
         console.error('Sign Up Error:', error);
@@ -95,4 +75,11 @@ export class SignUpComponent {
         this.loading = false;
       });
   }
+  public subscribeUserToSnsTopic(userEmail: string): void {
+    const topicArn = 'arn:aws:sns:ca-central-1:952490130013:prvcy';
+    this.cognitoService.subscribeUserToSnsTopic(userEmail, topicArn)
+      .then(() => console.log('User subscribed to SNS topic'))
+      .catch((error) => console.error('Error subscribing user to SNS topic:', error));
+  }
+  
 }

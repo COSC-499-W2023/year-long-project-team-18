@@ -19,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCommonModule } from '@angular/material/core';
 import { ShareVideoComponent } from './share-video/share-video.component';
 import { VideoListComponent } from './video-list/video-list.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { VideoListComponent } from './video-list/video-list.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatCommonModule
+    MatCommonModule,
+    MatSnackBarModule
   ],
   providers: [
   ],
