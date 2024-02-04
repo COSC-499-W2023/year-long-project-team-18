@@ -23,8 +23,6 @@ export interface IUser {
   'custom:account_type': string;
   'custom:organization': string;
 }
-  
-
 
 @Injectable({
   providedIn: 'root'
