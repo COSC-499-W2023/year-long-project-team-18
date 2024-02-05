@@ -1,3 +1,22 @@
+## Jan 29 - Feb 4
+
+### Student goals
+
+Fix up some errors and bugs for peer testing. Evaluate and implement changes from feedback. 
+
+### Student tasks on board
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/c1ca7a85-de1b-4b78-8230-2914c95faf4d)
+
+
+### In progress tasks
+
+- Dockerization
+- Implement privacy features for organizations
+
+### Peer evaluation
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/48b78888-8335-445a-8501-ccd2123b4f2f)
+
+
 ## Jan 22 - 28
 
 ### Student Goals
