@@ -1,3 +1,24 @@
+## Term 2 Week 4: Jan 30th - Feb 1st
+
+### Tasks Worked On:
+  - After spending a few days encountering errors in SST, I attempted to fix the AWS RDS problem. After reviewing some AWS documentation I was able to troubleshoot the issue. I made two new changes to the RDS while troubleshooting, I first changed the default port number from 3306 to 13306. Then I added a new route (0.0.0.0/0) in each subnet route table within the VPC. I am not sure which of these new changes solved the issue but conenction with the RDS is finally possible! 
+  - Comments attached to the video UI is implemented, but the backend is not
+  - User contact remains a task I need to get working on
+  - Started to implement database connectivity into our prvcy code, currently trying to allow sign up information to transfer into the 'Users' table within the database when a sign up occurs.
+
+### Tasks I am planning to work on this upcoming week:
+  - Having the RDS implemented to a greater extent within our existing functionalities
+  - User contact list work
+  - Write up more jest test cases
+  
+### Peer Evaluations:
+
+![Screenshot 2024-02-04 at 11 59 32 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/19ca92ff-1d34-4a96-96fc-a29d419529b0)
+
+### Tasks I Am Assigned To:
+
+![Screenshot 2024-02-04 at 11 57 31 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/4e8f6e75-13cf-48f8-87b5-4d8b4db32cfd)
+
 ## Term 2 Week 3: Jan 23th - 25th
 
 ### Tasks Worked On:
