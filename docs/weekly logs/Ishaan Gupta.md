@@ -2,6 +2,21 @@
 
 ## TERM 2
 
+## Week 3:
+Dates: 22nd Jan - 28th Jan
+
+### Student Goals:
+* Import code into our own project.
+* Set up all the dependencies and connect the face blurring features to our AWS project.
+* Make code adjustments to fit into our own project.
+
+### Completed Tasks:
+* Imported the code into my local directory into the appropriate location and set up the files.
+* Downloaded required files and dependencies.
+* Spent a lot of time debugging and finding appropriate modules to use as many of the recommended versions are deprecated or don't work.
+* ![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/9ca07bf1-78d2-4352-8569-9c6d81d994db)
+
+
 ## Week 2:
 Dates: 15th Jan - 21st Jan
 

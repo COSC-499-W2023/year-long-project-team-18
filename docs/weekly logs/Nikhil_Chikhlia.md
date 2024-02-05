@@ -1,3 +1,24 @@
+<h1>Week Jan 21 - Jan 28</h1>
+<h1>Student Goals</h1>
+
+* Troubleshooting the captioning, trying to finish it.
+* Helping with face blurring, but was unsuccessful due to having sunk a lot of time into the captioning.
+* Thinking of and getting the messaging page started (will happen tomorrow, the 29th)
+
+<h2>Student Tasks on board:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/912657b7-46ee-4f93-bc0c-613f8b2fe0eb)
+
+<h2>In progress tasks:</h2>
+
+* Auto captioning
+* Profile editing (may be on the backburner until we have our database)
+* Messaging system
+
+<h2>Screenshot of peer evaluation:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/e95d010c-187b-48c7-938f-247fab1594de)
+
 <h1>Week Jan 14 - Jan 21</h1>
 <h1>Student Goals</h1>
 

@@ -9,6 +9,7 @@ The following are milestones we worked towards/completed:
 4. RDS transferred into DynamoDB, but looking to implement RDS through SST as it was advised we keep our database relational
 5. Working on Captioning feature for videos
 6. Working on Blurring privacy feature
+7. Updated the CSS on the main dashboard page
 ### Usernames:
 - Mackenzie Atkins - maxa2
 - Segundo Parra Jurado- smparra

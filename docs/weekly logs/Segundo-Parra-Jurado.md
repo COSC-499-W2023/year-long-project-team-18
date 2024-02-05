@@ -1,3 +1,23 @@
+## Term 2 Week 3: Jan 23th - 25th
+
+### Tasks Worked On:
+  - Worked on implementing the SST infrastructure, ran into some issues during test deployment. I am meeting with Professor Hui on Monday and am hoping to receive feedback on how to proceed.
+  - Updated the main dashboard page to better prepare for the upcoming peer testing.
+  - Comments attached to the video + user contact list is still a work in progress. At this moment there is no code significant enough to commit to Github.
+
+### Tasks I am planning to work on this upcoming week:
+  - Resolve SST issues
+  - Work together with the team to improve more CSS pages for peer testing
+  - Write up more jest test cases
+  
+### Peer Evaluations:
+
+![Screenshot 2024-01-28 at 11 51 19 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/5abde6a7-01fb-4f8d-ac9c-e5cf66d96794)
+
+### Tasks I Am Assigned To:
+
+![Screenshot 2024-01-28 at 11 48 36 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/0fa1b761-2447-4c86-b250-931ab65e5732)
+
 ## Term 2 Week 2: Jan 16th - 18th
 
 ### Tasks Worked On:

@@ -1,4 +1,4 @@
-$nav-colour: #E3F4F2;
+$nav-colour: #194a81;
 $nav-font: Lato;
 
 nav.navbar.navbar-expand-sm.navbar-light.bg-light {
@@ -16,18 +16,19 @@ div.container-fluid {
     font-weight: regular;
     font-size: 18px;
     display: flex;
-
     a:hover {
-        background-color: #BDD6DC;
+        color: lightblue;
     }
 }
 
 a.navbar-brand {
     font-size: 22px;
+    color: white;
 }
 
 a.nav-link {
     font-weight: bold;
+    color: white;
 }
 
 #signOut {

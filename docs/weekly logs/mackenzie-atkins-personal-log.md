@@ -1,3 +1,33 @@
+## Jan 22 - 28
+
+### Student Goals
+
+Upgrade the UI as well as having error checking for input fields. Dockerization is also part of the goals but is on the backburner at the moment.
+
+### Roadblocks
+
+There was a bit of a learning curve with the Angular UI Materials. but once they were worked out there was smooth sailing
+
+### Extra work done
+
+Although there's not any code pushed from my end, I assisted Ishaan in troubleshooting the face blurring feature. We worked collaboratively for many hours to progress to the point we are at right now. 
+
+### Student tasks on board
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/b024474b-08cf-486a-9232-a1709ab9d1a3)
+
+
+### In progress tasks
+
+- Dockerization
+- Improving UI on logged in pages - profile, dashboard etc
+- Testing
+
+### Peer evaluation
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/52aa37ae-a2a1-4cf6-adbf-b51b383fe74f)
+
+
 ## Jan 15 - 21
 
 ### Student Goals
