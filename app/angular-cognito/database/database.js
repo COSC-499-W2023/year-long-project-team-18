@@ -7,10 +7,10 @@ const app = express();
 app.use(cors());
 
 var connection = mysql.createConnection({
-  host     : prvcy-main-db.cjrkirabesjd.ca-central-1.rds.amazonaws.com,
-  user     : prvcy-main-db,
-  password : admin499,
-  port     : 13306
+  host     : 'prvcy-main-db.cjrkirabesjd.ca-central-1.rds.amazonaws.com',
+  user     : 'prvcy-main-db',
+  password : 'admin499',
+  port     : '13306'
 });
 
 const connection = mysql.createConnection(dbConfig);

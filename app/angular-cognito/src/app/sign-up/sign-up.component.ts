@@ -21,8 +21,6 @@ export class SignUpComponent {
   constructor(private router: Router, private cognitoService: CognitoService, private snackBar: MatSnackBar) {
     this.loading = false;
     this.user = {} as IUser;
-
-    
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
