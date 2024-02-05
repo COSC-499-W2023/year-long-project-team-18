@@ -1,3 +1,22 @@
+<h1>Week Jan 28 - Feb 4</h1>
+<h1>Student Goals</h1>
+
+* Captioning is stull undergoing development, my goals from last week have not changed.
+* However, I am looking to integrate a little bit more of the database into my existing code to make sure that I could, for instance, update the profile picture and related information.
+
+<h2>Student tasks on board:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/54486aa8-9211-455e-82b1-9daba5e272fc)
+
+<h2>In progress tasks:</h2>
+* Auto captioning
+* Need to start/get the basic layout for the messaging page going
+* Profile editing features. Namely username (alias) and profile picture for now.
+
+<h2>Screenshot of Peer Evaluation:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/895296b7-b137-4e18-9f98-7428e79a9778)
+
 <h1>Week Jan 21 - Jan 28</h1>
 <h1>Student Goals</h1>
 
