@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import {Amplify, Auth } from 'aws-amplify';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import * as AWS from 'aws-sdk';
-
 
 import { environment } from '../environments/environment';
 
@@ -35,9 +33,7 @@ export class CognitoService {
     Amplify.configure({
       Auth: environment.cognito
     });
-
     this.authenticationSubject = new BehaviorSubject<boolean>(false);
-
    }
 
    public signIn(user: IUser): Promise<any> {
@@ -60,17 +56,6 @@ export class CognitoService {
         'custom:organization': user['custom:organization']
       }
     })
-    /*.then(signUpResult => {
-      // Call your backend to store the user details in the database
-      this.http.post('/register', user).subscribe({
-        next: data => {
-          console.log('User registered in DB:', data);
-        },
-        error: error => {
-          console.error('There was an error!', error);
-        }
-    })
-    }*/
     .then((signUpResult) => {
       console.log('User confirmed:', signUpResult.userConfirmed);
     })

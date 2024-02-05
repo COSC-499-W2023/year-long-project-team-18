@@ -5,6 +5,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { IUser, CognitoService } from '../cognito.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-up',
@@ -44,10 +45,8 @@ export class SignUpComponent {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
     }
-
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
-
 
    public signUp(username: string, organization: string): void {
     this.loading = true;
@@ -111,7 +110,18 @@ export class SignUpComponent {
           this.snackBar.open("Successfully registered", "Dismiss",{duration: 5000})
         })
       })
-      .catch((error) => {
+      .then(() => {
+      // Call your backend to store the user details in the database
+      this.http.post('/register', this.user).subscribe({
+        next: data => {
+          console.log('User registered in DB:', data);
+        },
+        error: error => {
+          console.error('There was an error!', error);
+        }
+      })
+    })
+    .catch((error) => {
         console.error('Sign Up Error:', error);
         this.loading = false;
       });
