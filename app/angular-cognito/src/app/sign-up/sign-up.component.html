@@ -12,6 +12,7 @@
           <hr>
           <p class="subheader-text">Video Sharing</p>
         </div>
+        <form action="../dbWrite.php" method="post">
         <div class="row">
           <div class="col mb-2">
             <mat-form-field class="matFormField" appearance="outline">
@@ -90,13 +91,12 @@
         </div>
         <div class="row">
           <div class="col d-grid">
-            <button type="button" (click)="signUp(user.username, user['custom:organization'])" class="btn btn-sm btn-success"
-              [disabled]="loading">
+            <input id="submit" name="signup" type="submit" (click)="signUp(user.username, user['custom:organization'])" class="btn btn-sm btn-success"
+              [disabled]="loading">  
               <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
-              Sign up
-            </button>
           </div>
         </div>
+      </form>
       </div>
     </div>
   </div>

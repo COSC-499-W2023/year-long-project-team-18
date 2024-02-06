@@ -110,17 +110,6 @@ export class SignUpComponent {
           this.snackBar.open("Successfully registered", "Dismiss",{duration: 5000})
         })
       })
-      .then(() => {
-      // Call your backend to store the user details in the database
-      this.http.post('/register', this.user).subscribe({
-        next: data => {
-          console.log('User registered in DB:', data);
-        },
-        error: error => {
-          console.error('There was an error!', error);
-        }
-      })
-    })
     .catch((error) => {
         console.error('Sign Up Error:', error);
         this.loading = false;
