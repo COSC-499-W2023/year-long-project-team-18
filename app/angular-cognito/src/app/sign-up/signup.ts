@@ -4,7 +4,7 @@ export interface signup{
     password: string;
     firstname: string;
     lastname: string;
-    birthdate?: number;
-    organizationcode?: string;
-    accounttype?: string;
+    birthdate: string;
+    organizationcode: string;
+    accounttype: string;
 }

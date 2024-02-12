@@ -18,7 +18,7 @@ import { SignupService } from './signup.service';
 export class SignUpComponent implements OnInit {
 
   signup: signup[] = [];
-  sign: signup = {email: '', username:'', password:'', firstname:'', lastname:'', organizationcode:'',accounttype:''};
+  sign: signup = {email: '', username:'', password:'', firstname:'', lastname:'',birthdate:'', organizationcode:'',accounttype:''};
   loading: boolean;
   user: IUser;
   hide = true;
