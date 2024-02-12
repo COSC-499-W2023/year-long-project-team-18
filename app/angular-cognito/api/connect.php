@@ -10,7 +10,6 @@ try{
     $pdo = new PDO($dsn, $user, $password);
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "success";
 }catch (PDOException $e){
     echo json_encode(['error'=> 'Connection failed: ' . $e->getMessage()]);
 }
