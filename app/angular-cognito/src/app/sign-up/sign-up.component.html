@@ -12,11 +12,12 @@
           <hr>
           <p class="subheader-text">Video Sharing</p>
         </div>
+        <form #f="ngForm" name="theForm">
         <div class="row">
           <div class="col mb-2">
             <mat-form-field class="matFormField" appearance="outline">
               <mat-label class="matLabel">Email: </mat-label>
-              <input class="matInput" matInput placeholder="user@example.com" [formControl]="email" required [(ngModel)]="user.email">
+              <input name="email" class="matInput" matInput placeholder="user@example.com" [formControl]="email" required [(ngModel)]="user.email">
               <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </div>
@@ -25,7 +26,7 @@
           <div class="col mb-2">
             <mat-form-field class="matFormField" appearance="outline">
               <mat-label class="matLabel">Username: </mat-label>
-              <input class="matInput" matInput placeholder="user123" required [(ngModel)]="user.username">
+              <input name="username" class="matInput" matInput placeholder="user123" required [(ngModel)]="user.username">
             </mat-form-field>
           </div>
         </div>
@@ -33,7 +34,7 @@
           <div class="col mb-2">
             <mat-form-field class="matFormField" appearance="outline">
               <mat-label class="matLabel" for="password">Password: </mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'"  [formControl]="$any(password)" required [(ngModel)]="user.password">
+              <input name="password" matInput [type]="hide ? 'password' : 'text'"  [formControl]="$any(password)" required [(ngModel)]="user.password">
               <button id="maticon" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon id="eye">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
@@ -45,7 +46,7 @@
           <div class="col mb-2">
             <mat-form-field class="matFormField" appearance="outline">
               <mat-label class="matLabel">Name: </mat-label>
-              <input class="matInput" matInput required [(ngModel)]="user.given_name">
+              <input name="firstname" class="matInput" matInput required [(ngModel)]="user.given_name">
             </mat-form-field>
           </div>
         </div>
@@ -53,7 +54,7 @@
           <div class="col mb-2">
             <mat-form-field class="matFormField" appearance="outline">
               <mat-label class="matLabel">Family Name: </mat-label>
-              <input class="matInput" matInput  required [(ngModel)]="user.family_name">
+              <input name="lastname" class="matInput" matInput  required [(ngModel)]="user.family_name">
             </mat-form-field>
           </div>
         </div>
@@ -61,7 +62,7 @@
           <div class="col mb-2">
             <mat-form-field class="matFormField" appearance="outline">
             <mat-label Class="matLabel">Birthdate</mat-label>
-            <input matInput [matDatepicker]="picker" required [(ngModel)]="user.birthdate">
+            <input name="birthdate" matInput [matDatepicker]="picker" required [(ngModel)]="user.birthdate">
               <mat-hint class="matLabel">MM/DD/YYYY</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -72,7 +73,7 @@
           <div class="col mb-2">
             <mat-form-field class="matFormField" appearance="outline">
               <mat-label class="matLabel">Account type: </mat-label>
-              <mat-select required id="account_type" name="account_type" [(ngModel)]="user['custom:account_type']">
+              <mat-select name="accounttype" required id="account_type" name="account_type" [(ngModel)]="user['custom:account_type']">
                 <mat-option value="personal">Personal</mat-option>
                 <mat-option value="business">Business</mat-option>
               </mat-select>
@@ -84,18 +85,20 @@
             <mat-form-field class="matFormField" appearance="outline">
               <mat-label class="matLabel">Organization code: </mat-label>
               <mat-hint>Enter your organization code if you have one.</mat-hint>
-              <input class="matInput" matInput [(ngModel)]="user['custom:organization']">
+              <input name="organization" class="matInput" matInput [(ngModel)]="user['custom:organization']">
             </mat-form-field>
           </div>
         </div>
         <div class="row">
           <div class="col d-grid">
-            <input id="submit" name="signup" type="submit" (click)="signUp(user.username, user['custom:organization'])" class="btn btn-sm btn-success"
+            <input id="submit" name="signup" type="submit" (click)="signUp(user.username, user['custom:organization'], f)" class="btn btn-sm btn-success"
               [disabled]="loading">  
               <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
           </div>
         </div>
+      </form>
       </div>
+      
     </div>
   </div>
 </div>

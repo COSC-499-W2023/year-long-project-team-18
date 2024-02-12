@@ -37,19 +37,9 @@ export class SignUpComponent implements OnInit {
     this.signUpService.getAll().subscribe(
       (data: signup[])=>{
         this.signup = data;
-        console.log(data);
-        console.log("Success");
       }
     )
 
-  }
-
-  addUser(){
-    this.signUpService.store(this.sign).subscribe(
-      (res: signup)=>{
-        this.signup.push(res)
-      }
-    )
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -76,7 +66,7 @@ export class SignUpComponent implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
-   public signUp(username: string, organization: string): void {
+   public signUp(username: string, organization: string, f: NgForm): void {
     this.loading = true;
 
     var bdate = this.user.birthdate.toString();
@@ -130,8 +120,15 @@ export class SignUpComponent implements OnInit {
       this.user['custom:organization'] = 'default';
     }
     this.user.username = username;
-    this.addUser();
-  
+    this.sign = {email: this.user.email, username:this.user.username, password:this.user.password, 
+      firstname:this.user.given_name, lastname:this.user.family_name,birthdate:this.user.birthdate,
+       organizationcode:this.user['custom:organization'],accounttype:this.user['custom:account_type']};
+    this.signUpService.store(this.sign).subscribe(
+      (res: signup)=>{
+        this.signup.push(res)
+      }
+    )
+
     this.cognitoService.signUp(this.user)
       .then(() => {
         this.createS3UserFolder(this.user.username);
