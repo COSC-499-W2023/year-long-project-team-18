@@ -1,7 +1,7 @@
 // sign-up.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, NgForm, Validators } from '@angular/forms';
 import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { IUser, CognitoService } from '../cognito.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
@@ -18,6 +18,7 @@ import { SignupService } from './signup.service';
 export class SignUpComponent implements OnInit {
 
   signup: signup[] = [];
+  sign: signup = {email: '', username:'', password:'', firstname:'', lastname:'', organizationcode:'',accounttype:''};
   loading: boolean;
   user: IUser;
   hide = true;
@@ -41,6 +42,14 @@ export class SignUpComponent implements OnInit {
       }
     )
 
+  }
+
+  addUser(){
+    this.signUpService.store(this.sign).subscribe(
+      (res: signup)=>{
+        this.signup.push(res)
+      }
+    )
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -121,6 +130,7 @@ export class SignUpComponent implements OnInit {
       this.user['custom:organization'] = 'default';
     }
     this.user.username = username;
+    this.addUser();
   
     this.cognitoService.signUp(this.user)
       .then(() => {
