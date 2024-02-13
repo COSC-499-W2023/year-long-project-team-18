@@ -170,3 +170,15 @@ Goal was complete the project plan and begin with scoping the project while iden
 <h3>Completed Tasks</h3>
 - setup AWS SNS <br>
 - Adding a notification and email system<br>
+
+<h2>T2 Week5 Feb05 - Feb11</h2>
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/1242dce9-6e48-4b97-8944-f2d7206306f6)
+
+<h3>Students Goals</h3>
+- Adding a notification requests for videos
+- Inbox<br>
+<h3>In-Progress Tasks</h3>
+- Adding a notification requests for videos
+- Inbox<br>
+<h3>Completed Tasks</h3>
+
