@@ -2,6 +2,18 @@
 
 ## TERM 2
 
+## Week 5:
+Dates 5th Feb - 11th Feb
+
+### Student Goals:
+* Figure out why the lambda permissions don't work.
+* Test the code to see that it works with the fix.
+
+### Completed Tasks:
+* Figured out that the problem with the permissions was with the Rekognition library as it only works on some AWS servers.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/08239bc6-381d-4b57-a88f-f42e90efbeb0)
+
+
 ## Week 4:
 Dates: 29th Jan - 4th Feb
 

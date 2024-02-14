@@ -1,3 +1,23 @@
+<h1>Week Feb 5 - Feb 11</h1>
+<h1>Student Goals</h1>
+
+* Captioning has been fixed. While not on the video that the user has submitted, the issue with having captions ready for the video has been resolved.
+* Profile editing still remains a task that is to be completed for this week, especially since the database is now going to be working.
+
+<h2>Student tasks on board:</h1>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/46d4b11c-3ec1-4ea5-a788-2dab8948f69c)
+
+<h2>In progress tasks:</h2>
+
+* Finishing up the last part of the captioning, which would entail adding it to the video.
+* Finalizing the profile editing and incorporating the database into that code to allow easier replacement of user attributes.
+* Creating HTML and CSS for the messaging page that would allow the users to communicate with their professionals, and vice versa.
+
+<h2>Screenshot of Peer Evaluation:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/f07f6052-8a25-4ac3-ab55-c7adb3f952f8)
+
 <h1>Week Jan 28 - Feb 4</h1>
 <h1>Student Goals</h1>
 
