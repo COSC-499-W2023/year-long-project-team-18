@@ -1,3 +1,68 @@
+# Week of Feb5th - Feb11th
+## Team 18
+
+### Milestones
+The following are milestones we worked towards/completed:
+1. Fixed AWS Rekognition Libraries to work on all servers for the blurring feature
+2. Fixed captioning and transciption logic in the code
+3. Add backend gateway to connect to the database with PHP.
+4. Created a PHP API to connect to the databse
+5. Implemented read and write features with said API
+6. Changed UI for home page, and Nav bar
+7. Added a collapsible vertical navbar in the app component
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart
+<img width="1029" alt="Screenshot 2024-02-13 at 8 14 25 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/fffa5e96-0752-4a34-87ff-c78e1483fd02">
+
+### In Progress/In Review
+<img width="1114" alt="Screenshot 2024-02-13 at 8 15 32 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/01b2f6f4-fb3c-4fdc-a589-b780c7541868">
+
+### Features in Backlog/Unassigned Features/Tasks for this sprint
+<img width="1114" alt="Screenshot 2024-02-13 at 8 16 16 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/59db424c-9a6a-44de-9fd1-d56fd5642b63">
+
+### Completed Features\
+<img width="1114" alt="Screenshot 2024-02-13 at 8 17 07 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/c37025a3-3daa-46d5-9494-d75d76490343">
+<img width="1114" alt="Screenshot 2024-02-13 at 8 17 47 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/6def9ed7-6ecb-4fb5-954c-ff78c58665c3">
+
+# Week of Jan 22nd - Feb4th (Two weeks worth, I believe we forgot last weeks)
+## Team 18
+
+### Milestones
+The following are milestones we worked towards/completed:
+1. Changed the UI of the webpage to be more intuitive to users
+2. Finally found the solution to the RDS!!! We are now starting to integrate it into our features
+3. Discussed and made notes from our peer testing feedback, we will make improvements to the platform according to the feedback we received
+4. Working on dockerization
+5. Made progress on the captioning feature for videos
+7. Made progress on Blurring privacy feature, docker container and images are working on AWS but encountering other issues
+8. Working on profile editing
+9. Implemented a comment box UI for videos, no backend development as the RDS just started working
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart
+![Screenshot 2024-02-04 at 11 43 26 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/7769a695-adfa-4fe1-8542-8c7532686f7e)
+
+### In Progress/In Review
+![Screenshot 2024-02-04 at 11 46 08 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/c4b5459a-9e69-42ae-b742-ecab648f199e)
+
+### Features in Backlog/Unassigned Features/Tasks for this sprint
+![Screenshot 2024-02-04 at 11 46 30 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d73f471e-9ddb-4666-b4b9-6cf22df2e3b7)
+
+### Completed Features
+![Screenshot 2024-02-04 at 11 44 29 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/45885e5d-3eab-4207-994f-1d9128954f80)
+![Screenshot 2024-02-04 at 11 44 43 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/3278160b-552e-4119-b55f-f4fbc56b5052)
+
 # Week of Jan 15th - Jan 22nd
 ## Team 18
 
@@ -9,6 +74,7 @@ The following are milestones we worked towards/completed:
 4. RDS transferred into DynamoDB, but looking to implement RDS through SST as it was advised we keep our database relational
 5. Working on Captioning feature for videos
 6. Working on Blurring privacy feature
+7. Updated the CSS on the main dashboard page
 ### Usernames:
 - Mackenzie Atkins - maxa2
 - Segundo Parra Jurado- smparra

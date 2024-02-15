@@ -126,6 +126,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     stream.getAudioTracks().forEach(track => track.stop());
     stream.getVideoTracks().forEach(track => track.stop());
     const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+
     this.recordedChunks = [];
     this.mediaRecorder = null;
   }
@@ -374,6 +375,10 @@ async submitVideo() {
 
 onVideoNameChange() {
   this.isSubmitDisabled = this.videoName.trim() === '';
+}
+
+addCommentToVideo(){
+
 }
 
 playback(){

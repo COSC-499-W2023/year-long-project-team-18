@@ -12,24 +12,31 @@
           <hr>
           <p class="subheader-text">Video Sharing</p>
         </div>
-        <div class="row">
-          <div class="col mb-2">
-            <label for="email" class="form-label">Email:</label>
-            <input type="email" id="email" name="email" #email="ngModel" [(ngModel)]="user.email"
-              class="form-control form-control-sm">
+        <div *ngIf="errorMessage" class="row">
+          <div class="col">
+            <div class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col mb-2">
-            <label for="password" class="form-label">Password:</label>
-            <div class="input-group input-group-sm">
-              <input [type]="user.showPassword ? 'text' : 'password'" id="password" name="password" #password="ngModel"
-                [(ngModel)]="user.password" class="form-control form-control-sm">
-              <button type="button" class="btn btn-outline-secondary" (click)="user.showPassword = !user.showPassword">
-                <i class="bi"
-                  [ngClass]="{'bi-eye-fill': !user.showPassword, 'bi-eye-slash-fill': user.showPassword}"></i>
+            <mat-form-field class="matFormField" appearance="outline">
+              <mat-label class="matLabel">Username or Email: </mat-label>
+              <input class="matInput" matInput type="email" id="email" name="email" #email="ngModel" [(ngModel)]="user.email">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col mb-2">
+            <mat-form-field class="matFormField" appearance="outline">
+              <mat-label class="matLabel" for="password">Password: </mat-label>
+              <input matInput [type]="hide? 'password' : 'text'" id="password" name="password" #password="ngModel"
+              [(ngModel)]="user.password">
+              <button id="maticon" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
-            </div>
+            </mat-form-field>
           </div>
         </div>
         <div class="row" id="signInRow">
