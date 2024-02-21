@@ -1,3 +1,22 @@
+## Term 2 Week 6: Feb 13th - Feb 15th
+
+### Tasks Worked On:
+  - Similar to last week, I had a fairly busy workload so I tried to get some work done before submitting my logs (2 days late). However, I was unable to make any significant progress over the past week.
+
+### Tasks I am planning to work on this upcoming week:
+  - (I will be working on the same tasks as described last week over the reading week)
+  - Work through the jest troubleshooting
+  - Work on the CSS & Angular material implementations
+  - If I manage to finish both of these tasks, I will work on the other tasks I am assigned to on the task board.
+  
+### Peer Evaluations:
+
+<img width="1092" alt="Screenshot 2024-02-20 at 11 44 15 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/1ea182c2-1ec5-40f1-858d-29bd3fcf2a1c">
+
+### Tasks I Am Assigned To:
+
+<img width="1440" alt="Screenshot 2024-02-20 at 11 48 33 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/9ee95410-76d2-4fde-8efb-386e1402f4e1">
+
 ## Term 2 Week 5: Feb 6th - Feb 8th
 
 ### Tasks Worked On:
