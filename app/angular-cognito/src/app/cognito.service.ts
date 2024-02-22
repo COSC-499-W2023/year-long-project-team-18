@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import * as AWS from 'aws-sdk';
 import { SNS } from 'aws-sdk';
 
-
 import { environment } from '../environments/environment';
 
 Amplify.configure({
@@ -24,23 +23,18 @@ export interface IUser {
   'custom:account_type': string;
   'custom:organization': string;
 }
-  
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class CognitoService {
   private authenticationSubject: BehaviorSubject<any>;
-  
 
   constructor(private router: Router) {
     Amplify.configure({
       Auth: environment.cognito
     });
-
     this.authenticationSubject = new BehaviorSubject<boolean>(false);
-
    }
 
    public signIn(user: IUser): Promise<any> {
@@ -65,7 +59,6 @@ export class CognitoService {
     })
     .then((signUpResult) => {
       console.log('User confirmed:', signUpResult.userConfirmed);
-
     })
     .then(()=>{
       this.router.navigate(['/signIn']);
@@ -73,11 +66,9 @@ export class CognitoService {
     .catch((error) => {
       console.error('Sign Up Error:', error);
       throw error;
-    });
+    });   
   }
   
-  
-
    public confirmSignUp(user: IUser): Promise<any>{
     return Auth.confirmSignUp(user.email, user.code);
    }

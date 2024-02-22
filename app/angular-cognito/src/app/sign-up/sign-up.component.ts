@@ -1,28 +1,45 @@
 // sign-up.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, NgForm, Validators } from '@angular/forms';
 import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { IUser, CognitoService } from '../cognito.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
+
+import { signup } from './signup';
+import { SignupService } from './signup.service';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnInit {
 
+  signup: signup[] = [];
+  sign: signup = {email: '', username:'', password:'', firstname:'', lastname:'',birthdate:'', organizationcode:'',accounttype:''};
   loading: boolean;
   user: IUser;
   hide = true;
   durationInSeconds = 5;
 
-  constructor(private router: Router, private cognitoService: CognitoService, private snackBar: MatSnackBar) {
+  constructor(private router: Router, private cognitoService: CognitoService, private snackBar: MatSnackBar, private signUpService: SignupService) {
     this.loading = false;
     this.user = {} as IUser;
+  }
 
-    
+  ngOnInit(): void {
+      this.getSignup();
+  }
+
+  getSignup(): void{
+    this.signUpService.getAll().subscribe(
+      (data: signup[])=>{
+        this.signup = data;
+      }
+    )
+
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -46,12 +63,10 @@ export class SignUpComponent {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
     }
-
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
-
-   public signUp(username: string, organization: string): void {
+   public signUp(username: string, organization: string, f: NgForm): void {
     this.loading = true;
 
     var bdate = this.user.birthdate.toString();
@@ -105,7 +120,15 @@ export class SignUpComponent {
       this.user['custom:organization'] = 'default';
     }
     this.user.username = username;
-  
+    this.sign = {email: this.user.email, username:this.user.username, password:this.user.password, 
+      firstname:this.user.given_name, lastname:this.user.family_name,birthdate:this.user.birthdate,
+       organizationcode:this.user['custom:organization'],accounttype:this.user['custom:account_type']};
+    this.signUpService.store(this.sign).subscribe(
+      (res: signup)=>{
+        this.signup.push(res)
+      }
+    )
+
     this.cognitoService.signUp(this.user)
       .then(() => {
         this.createS3UserFolder(username);
@@ -114,7 +137,7 @@ export class SignUpComponent {
           this.snackBar.open("Successfully registered", "Dismiss",{duration: 5000})
         })
       })
-      .catch((error) => {
+    .catch((error) => {
         console.error('Sign Up Error:', error);
         this.loading = false;
       });

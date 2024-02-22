@@ -157,3 +157,29 @@ Goal was complete the project plan and begin with scoping the project while iden
 - Add Feature to exchange and send videos<br>
 - Fix camera issues with recording<br>
 - Fix automatic recording issue when the page loads<br>
+<h2>T2 Week4 Jan31 - Jan6</h2>
+<img width="1139" alt="Screenshot 2024-02-05 at 7 23 02 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/04782c79-b455-48fc-943d-73ef3f2305ce">
+
+<h3>Students Goals</h3>
+- setup AWS SNS <br>
+- Adding a notification and email system<br>
+- Inbox<br>
+<h3>In-Progress Tasks</h3>
+- Jest tests<br>
+- inbox<br>
+<h3>Completed Tasks</h3>
+- setup AWS SNS <br>
+- Adding a notification and email system<br>
+
+<h2>T2 Week5 Feb05 - Feb11</h2>
+<img width="1097" alt="Screenshot 2024-02-12 at 4 07 58 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/1d1ded54-28f5-4026-b7ed-6ae1f784d156">
+
+
+<h3>Students Goals</h3>
+- Adding a notification requests for videos<br>
+- Inbox<br>
+<h3>In-Progress Tasks</h3>
+- Adding a notification requests for videos<br>
+- Inbox<br>
+<h3>Completed Tasks</h3>
+
