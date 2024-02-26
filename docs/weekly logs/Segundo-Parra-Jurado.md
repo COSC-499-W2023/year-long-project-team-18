@@ -5,6 +5,7 @@
 
 ### Tasks I am planning to work on this upcoming week:
   - Add more jest test cases
+  - Calendar Integration
 
 ### Tasks I Am Assigned To:
 
