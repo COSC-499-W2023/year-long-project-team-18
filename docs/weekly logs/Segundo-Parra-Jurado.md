@@ -1,4 +1,4 @@
-## Term 2 Week 7: Feb 20th - Feb 22nd
+## Term 2 Week 7: Feb 20th - Feb 22nd (READING WEEK)
 
 ### Tasks Worked On:
   - Worked on redesigning our website with updated HTML + CSS + Angular Material using the feedback we received from our peer testing. This is a work in progress, but should be done before Tuesday's class.
