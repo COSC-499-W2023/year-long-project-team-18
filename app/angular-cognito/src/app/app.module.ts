@@ -64,7 +64,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatNativeDateModule,
     MatSelectModule,
     MatSnackBarModule,
-    CSS-3,
     HttpClientModule
   ],
   providers: [

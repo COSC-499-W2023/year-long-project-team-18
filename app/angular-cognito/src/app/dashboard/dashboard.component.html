@@ -1,38 +1,23 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
-
-<div class="container-fluid">
-  <div class="row justify-content-center">
-    <div class="col-md-4">
-      <div class="square-box">
-        <div class="square-content">
-          <div class="title">Organizations</div>
-          <div class="content-row">
-            <p>Current Organization</p>
-            <button class="btn btn-sm btn-success button">{{user['custom:organization']}}</button>
-          </div>
-          <div class="content-row">
-            <p>Join Organization</p>
-            <button mat-raised-button (click)="openDialog()" class="btn btn-sm btn-success button">Join</button>
-          </div>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  </head>
+  <body>
+    <section class="welcome">
+      <div class="welcome-text">
+        <h1>WELCOME TO PRVCY!</h1>
+        <p>PRVCY redefines secure video communication, offering a privacy-centric platform tailored for confidential video and message exchanges.
+          Built on a robust tech stack including Angular, HTML, CSS, Amazon AWS, and PHP, it ensures your videos remain private and protected. 
+          Experience unparalleled security and peace of mind with every video.</p>
+          <a href="#" class="button"><i class='bx bx-play'></i>Watch Video Tutorial</a>
+          <a href="#" class="button" id="learn-more">About Us</a>
         </div>
-      </div>
-      <div class="square-box">
-        <div class="square-content">
-          <div class="title">Record a Video</div>
-          <div class="content-row">
-            <button class="btn btn-sm btn-success button" routerLink="/video-recorder" routerLinkActive="active" *ngIf="isAuthenticated">Record</button>
-          </div>
+        <div class="welcome-img">
+          <img src="../assets/PRVCY-Welcome.png" alt="PRVCY Logo">
         </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="rectangle-box">
-        <div class="rectangle-content">
-          <div class="title">Inbox</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    </section>
+  </body>
+</html>
