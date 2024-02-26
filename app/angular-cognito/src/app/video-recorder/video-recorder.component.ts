@@ -2,12 +2,13 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@ang
 import { IUser, CognitoService } from '../cognito.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import * as AWS from 'aws-sdk';
 
 @Component({
   selector: 'app-video-recorder',
   templateUrl: './video-recorder.component.html',
-  styleUrls: ['./video-recorder.component.scss']
+  styleUrls: ['./video-recorder.component.scss'],
 })
 
 export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
@@ -293,47 +294,47 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     document.body.removeChild(downloadLink);
 
     URL.revokeObjectURL(url);
-}
-
-async submitVideo() {
-  if (this.recordedChunks.length === 0) {
-    console.error('No recorded video to submit');
-    return;
-  }
-  if (this.videoName.trim() === '') {
-    console.error('Video name cannot be empty');
-    return;
   }
 
-  try {
-    await this.uploadToS3(this.videoName.trim(), 'mp4');
-    this.videoName = '';
-    this.isSubmitDisabled = true;
-    this.router.navigate(['/share-video']);
-  } catch (error) {
-    console.error('Error during S3 upload:', error);
+  async submitVideo() {
+    if (this.recordedChunks.length === 0) {
+      console.error('No recorded video to submit');
+      return;
+    }
+    if (this.videoName.trim() === '') {
+      console.error('Video name cannot be empty');
+      return;
+    }
+
+    try {
+      await this.uploadToS3(this.videoName.trim(), 'mp4');
+      this.videoName = '';
+      this.isSubmitDisabled = true;
+      this.router.navigate(['/share-video']);
+    } catch (error) {
+      console.error('Error during S3 upload:', error);
+    }
   }
-}
 
-onVideoNameChange() {
-  this.isSubmitDisabled = this.videoName.trim() === '';
-}
-
-addCommentToVideo(){
-
-}
-
-playback(){
-  if (this.recordedChunks.length > 0) {
-    const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
-    const playbackBlobURL = URL.createObjectURL(recordedBlob);
-    let video: HTMLVideoElement = this.video.nativeElement;
-    window.open(playbackBlobURL, '_blank');
+  onVideoNameChange() {
+    this.isSubmitDisabled = this.videoName.trim() === '';
   }
-  else {
-    console.error("No recorded video available for playback");
+
+  addCommentToVideo(){
+
   }
-  
-}
+
+  playback(){
+    if (this.recordedChunks.length > 0) {
+      const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+      const playbackBlobURL = URL.createObjectURL(recordedBlob);
+      let video: HTMLVideoElement = this.video.nativeElement;
+      window.open(playbackBlobURL, '_blank');
+    }
+    else {
+      console.error("No recorded video available for playback");
+    }
+    
+  }
 
 }

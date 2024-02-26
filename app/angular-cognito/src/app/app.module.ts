@@ -29,8 +29,7 @@ import { MatNativeDateModule  } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
-
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -64,7 +63,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatNativeDateModule,
     MatSelectModule,
     MatSnackBarModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonToggleModule
   ],
   providers: [
   ],
