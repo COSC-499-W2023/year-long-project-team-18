@@ -1,3 +1,15 @@
+## Term 2 Week 7: Feb 20th - Feb 22nd
+
+### Tasks Worked On:
+  - Worked on redesigning our website with updated HTML + CSS + Angular Material using the feedback we received from our peer testing. This is a work in progress, but should be done before Tuesday's class.
+
+### Tasks I am planning to work on this upcoming week:
+  - Add more jest test cases
+
+### Tasks I Am Assigned To:
+
+<img width="1440" alt="Screenshot 2024-02-20 at 11 48 33 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/9ee95410-76d2-4fde-8efb-386e1402f4e1">
+
 ## Term 2 Week 6: Feb 13th - Feb 15th
 
 ### Tasks Worked On:
