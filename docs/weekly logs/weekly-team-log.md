@@ -1,3 +1,32 @@
+# Week of Feb 11th - Feb 18th
+## Team 18
+
+### Milestones
+The following are milestones we worked towards/completed:
+1. Continued to troubleshoot our Jest testing enviornment
+2. Worked on reading and writing to our database through PHP
+3. Continued to work on the profile page feature
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart
+<img width="1055" alt="Screenshot 2024-02-20 at 11 52 33 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/4b84d764-0ba4-4758-9aca-b6b89fd2baa0">
+
+### In Progress/In Review
+<img width="1470" alt="Screenshot 2024-02-20 at 11 53 29 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/5551bbed-af48-4f99-bfc4-189ea3367f0b">
+
+### Features in Backlog/Unassigned Features/Tasks for this sprint
+<img width="1470" alt="Screenshot 2024-02-20 at 11 53 08 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/bc231f53-0170-4951-ad4c-970c687ad4fa">
+
+### Completed Features
+<img width="1470" alt="Screenshot 2024-02-20 at 11 54 17 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/f095d5a5-70b5-4789-b348-775a9ecab58e">
+<img width="1470" alt="Screenshot 2024-02-20 at 11 54 37 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/107a7f1c-86d8-4437-8fa3-71c6e15e2a39">
+<img width="1470" alt="Screenshot 2024-02-20 at 11 54 51 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/e7d4f916-96f6-4900-b744-654802811259">
+
 # Week of Feb5th - Feb11th
 ## Team 18
 

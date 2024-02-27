@@ -181,5 +181,15 @@ Goal was complete the project plan and begin with scoping the project while iden
 <h3>In-Progress Tasks</h3>
 - Adding a notification requests for videos<br>
 - Inbox<br>
-<h3>Completed Tasks</h3>
+
+<h2>T2 Week6 Feb12 - Feb19</h2>
+<img width="1114" alt="Screenshot 2024-02-21 at 5 44 54 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/9820a6fd-7006-474a-85a6-c01788476326">
+
+<h3>Students Goals</h3>
+- Adding a notification requests for videos<br>
+- Inbox<br>
+<h3>In-Progress Tasks</h3>
+- Adding a notification requests for videos<br>
+- Inbox<br>
+- Now that database and backend are finally done, I can start working on these features
 
