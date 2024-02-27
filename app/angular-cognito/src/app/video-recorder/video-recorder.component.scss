@@ -38,8 +38,21 @@ section{
 }
 
 .video-container video{
+  position: relative;
   width: 900px;
   height: 600px;
+}
+
+.overlay{
+  position: absolute;
+  z-index: 1;
+}
+
+.overlay img{
+  height: 75px;
+  width: auto;
+  margin-top: 2.5em;
+  margin-left: 50em;
 }
 
 .video-details{
@@ -82,12 +95,19 @@ section{
   text-transform: uppercase;
   transition: all .6s ease;
   margin: 2em 0.5em;
+  &[disabled]{
+    background-color: rgb(122, 122, 122);
+    color: white;
+  }
 }
 
 .button:hover{
   background-color: transparent;
   border: 1px solid white;
   transform: translateX(5px);
+  &[disabled]{
+    background-color: rgb(122, 122, 122);
+  }
 }
 
 #stop-button:hover{

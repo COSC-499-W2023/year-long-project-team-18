@@ -15,6 +15,8 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('video') videoElement!: ElementRef<HTMLVideoElement>;
 
+  playbackDisabled: boolean = true;
+  recordHidden: boolean = false;
   loading: boolean;
   user: IUser;
   isAuthenticated: boolean;
@@ -100,6 +102,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   }
 
   startRecording() {
+    this.recordHidden = true;
     let mediaConstraints: MediaStreamConstraints = {
       video: {
         width: { min: 1280 },
@@ -119,6 +122,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   }
 
   stopRecording() {
+    this.recordHidden = false;
     if (this.mediaRecorder && this.mediaRecorder.state !== 'inactive') {
       this.mediaRecorder.stop();
     }
@@ -130,6 +134,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
 
     this.recordedChunks = [];
     this.mediaRecorder = null;
+    this.playbackDisabled = false;
   }
 
   private uploadToS3(videoName: string, format: string): Promise<void> {
