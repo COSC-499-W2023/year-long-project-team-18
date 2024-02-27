@@ -9,7 +9,7 @@ import { CognitoService, IUser } from './cognito.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  isNavbarCollapsed = false;
+  isNavbarCollapsed = true;
   isAuthenticated: boolean;
   user: IUser;
 
