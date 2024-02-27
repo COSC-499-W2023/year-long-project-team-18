@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { S3Client, CopyObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 import { IUser, CognitoService } from '../cognito.service';
 
@@ -21,12 +22,12 @@ export class ProfileComponent implements OnInit {
     this.cognitoService.getUser()
     .then((user: any) => {
       this.user = user.attributes;
+      console.log(this.user);
     });
   }
 
   public update(): void {
     this.loading = true;
-
     this.cognitoService.updateUser(this.user)
     .then(() => {
       this.loading = false;

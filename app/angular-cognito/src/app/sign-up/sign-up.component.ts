@@ -107,7 +107,7 @@ export class SignUpComponent {
       this.user['custom:organization'] = 'default';
     }
     this.user.username = username;
-  
+    
     this.cognitoService.signUp(this.user)
       .then(() => {
         this.createS3UserFolder(username);

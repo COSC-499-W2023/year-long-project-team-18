@@ -22,6 +22,8 @@ export interface IUser {
   birthdate: string;
   'custom:account_type': string;
   'custom:organization': string;
+  preferred_username: string;
+  gender: string;
 }
   
 
@@ -48,6 +50,11 @@ export class CognitoService {
       this.authenticationSubject.next(true);
     });
   }
+  
+  public changePreferredUsername(user: IUser): void {
+    user.preferred_username = user.username;
+    console.log(user.preferred_username);
+  }
 
   public signUp(user: IUser): Promise<any> {
     return Auth.signUp({
@@ -59,7 +66,7 @@ export class CognitoService {
         family_name: user.family_name,
         birthdate: user.birthdate,
         'custom:account_type': user['custom:account_type'],
-        'custom:organization': user['custom:organization']
+        'custom:organization': user['custom:organization'],
       }
     })
     .then((signUpResult) => {
@@ -68,6 +75,7 @@ export class CognitoService {
     })
     .then(()=>{
       this.router.navigate(['/signIn']);
+      this.changePreferredUsername(user);
     })
     .catch((error) => {
       console.error('Sign Up Error:', error);
