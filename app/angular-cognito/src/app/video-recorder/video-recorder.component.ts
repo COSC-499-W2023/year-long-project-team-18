@@ -1,9 +1,19 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { IUser, CognitoService } from '../cognito.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import * as AWS from 'aws-sdk';
+import {MatButtonModule} from '@angular/material/button';
+import {FormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-video-recorder',
@@ -16,6 +26,8 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   @ViewChild('video') videoElement!: ElementRef<HTMLVideoElement>;
 
   playbackDisabled: boolean = true;
+  submitDisabled: boolean = true;
+  recordAgain: boolean = true;
   recordHidden: boolean = false;
   loading: boolean;
   user: IUser;
@@ -35,7 +47,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
 
-  constructor(private cognitoService: CognitoService, private router: Router) {
+  constructor(private cognitoService: CognitoService, private router: Router, public dialog: MatDialog) {
     this.loading = false;
     this.user = {} as IUser;
     this.isAuthenticated = true;
@@ -118,6 +130,8 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   }
 
   startRecordingButtonClicked() {
+    this.playbackDisabled = true;
+    this.submitDisabled = true;
     this.startRecording();
   }
 
@@ -135,6 +149,8 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     this.recordedChunks = [];
     this.mediaRecorder = null;
     this.playbackDisabled = false;
+    this.submitDisabled = false;
+    this.recordAgain = false;
   }
 
   private uploadToS3(videoName: string, format: string): Promise<void> {
@@ -333,13 +349,23 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     if (this.recordedChunks.length > 0) {
       const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
       const playbackBlobURL = URL.createObjectURL(recordedBlob);
-      let video: HTMLVideoElement = this.video.nativeElement;
+      let newvideo: HTMLVideoElement = this.video.nativeElement;
       window.open(playbackBlobURL, '_blank');
     }
     else {
       console.error("No recorded video available for playback");
-    }
-    
+    } 
   }
 
+  animal: string | undefined;
+  name: string | undefined;
+
+  openDialog(): void {
+    this.dialog.open(DialogOverviewExampleDialog);
+  }
+
+}
+
+export class DialogOverviewExampleDialog {
+  
 }

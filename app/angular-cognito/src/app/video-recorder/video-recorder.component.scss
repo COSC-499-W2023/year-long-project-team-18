@@ -31,6 +31,7 @@ section{
 .video-container-details{
   display: flex;
   margin-top: 2em;
+  justify-content: center;
 }
 
 .video-container{
@@ -112,4 +113,8 @@ section{
 
 #stop-button:hover{
   background-color: red;
+}
+
+#record-button{
+  width: 150px;
 }

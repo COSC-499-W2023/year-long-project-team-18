@@ -31,10 +31,16 @@
             <textarea id="addCommentTextArea" id="commentArea" rows="6" placeholder="Anything to add?"></textarea>
           </div>
           <div>
-            <button class="button" (click)="startRecordingButtonClicked()"> Record </button>
+            <button class="button" (click)="startRecordingButtonClicked()">{{recordAgain?"Record":"Record Again"}}</button>
             <button class="button" id="stop-button" (click)="stopRecording()"> Stop</button>
             <button class="button" [disabled]="playbackDisabled" (click)="playback()">{{playbackDisabled?"No Playback":"Playback"}}</button>
+          </div>
+          <div>
+            <button class="button" [disabled]="submitDisabled" (click)="download()">Download</button>
+            <button id="record-button" class="button" [disabled]="submitDisabled" (click)="submitVideo()" (click)="openDialog()">{{submitDisabled?"Submit":"Submit"}}</button>
           </div>
         </div>
       </div>
     </section>
+  </body>
+</html>
