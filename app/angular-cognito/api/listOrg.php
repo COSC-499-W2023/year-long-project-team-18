@@ -8,7 +8,7 @@ $organizationcode = $_GET['organizationcode'];
 
 $videolist = [];
 
-$sql = "SELECT username FROM Users WHERE organizationcode = '{$organizationcode}' AND username != '{$username}';";
+$sql = "SELECT username FROM Users WHERE organizationcode = '{$organizationcode}' AND NOT username = '{$username}';";
 
 $statement = $pdo->query($sql);
 $cr = 0;
