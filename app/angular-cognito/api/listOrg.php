@@ -3,14 +3,9 @@
 require 'connect.php';
 
 
-$postdata = file_get_contents("php://input");
+$username = $_GET['username'];
+$organizationcode = $_GET['organizationcode'];
 
-if(isset($postdata) && !empty($postdata)){
-    $request = json_decode($postdata);
-
-    $username = $request->data->username;
-    $organizationcode = $request->data->organizationcode;
-}
 $videolist = [];
 
 $sql = "SELECT username FROM Users WHERE organizationcode = '{$organizationcode}' AND username != '{$username}';";
@@ -18,14 +13,14 @@ $sql = "SELECT username FROM Users WHERE organizationcode = '{$organizationcode}
 $statement = $pdo->query($sql);
 $cr = 0;
 while($row = $statement->fetch(PDO::FETCH_ASSOC)){
-    $signup[$cr]['username'] = $row['username'];
+    $videolist[$cr]['username'] = $row['username'];
     $cr++;
 
 }
 
 
 if(!empty($videolist)){
-    echo json_encode(['data'=>$signup]);
+    echo json_encode(['data'=>$videolist]);
 }else{
     http_response_code(404);
 }

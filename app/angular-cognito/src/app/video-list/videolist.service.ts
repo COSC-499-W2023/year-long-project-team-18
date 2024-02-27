@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { map } from 'rxjs';
 import { videolist } from './videolist'; 
@@ -14,7 +14,12 @@ export class VideoListService {
   constructor(private http: HttpClient) { }
 
   getAll(videolist: videolist){
-    return this.http.post('http://localhost/api/listOrg.php', {data: videolist}).pipe(
+    let params = new HttpParams()
+    .set('username', videolist.username)
+    .set('organizationcode', videolist.organizationcode);
+                            
+
+    return this.http.get('http://localhost/api/listOrg.php', {params}).pipe(
       map((res: any)=>{
         return res['data'];
       })

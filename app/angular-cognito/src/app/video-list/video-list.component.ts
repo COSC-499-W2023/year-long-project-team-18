@@ -14,7 +14,7 @@ import { VideoListService } from './videolist.service';
 export class VideoListComponent implements OnInit {
   videos: VideoMetadata[] = [];
   accountType: string | undefined;
-  user: videolist = {username: ''};
+  user: videolist = {username: '', organizationcode: ''};
   IUser: IUser;
   contactList: videolist[] = [];
   selectedContact: any;  
@@ -26,10 +26,14 @@ export class VideoListComponent implements OnInit {
   ) { this.IUser = {} as IUser; }
 
   ngOnInit(): void {
-    this.loadVideos();
-    this.loadAccountType();
-    this.fetchContactList();
-
+    this.cognitoService.getUser()
+    .then((IUser: any) => {
+      this.IUser = IUser.attributes;
+    }).then(()=>{
+      this.loadVideos();
+      this.loadAccountType();
+      this.fetchContactList();
+    })
 
   }
 
@@ -55,12 +59,11 @@ export class VideoListComponent implements OnInit {
     return `https://prvcy-storage-ba20e15b50619-staging.s3.amazonaws.com/${videoKey}`;
   }
 
-  async fetchContactList() {
+fetchContactList() {
     try {
-      const ownUsername = await this.cognitoService.getUsername();
+      console.log(this.IUser.username);
       
-      
-      this.user = {username: ownUsername, organizationcode: this.IUser['custom:organization']};
+      this.user = {username: this.IUser.username, organizationcode: this.IUser['custom:organization']};
       this.VideoListService.getAll(this.user).subscribe(
         (data: videolist[])=>{
           this.contactList = data;
