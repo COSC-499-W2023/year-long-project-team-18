@@ -131,7 +131,8 @@ export class SignUpComponent implements OnInit {
 
     this.cognitoService.signUp(this.user)
       .then(() => {
-        this.createS3UserFolder(this.user.username);
+        this.createS3UserFolder(username);
+        this.subscribeUserToSnsTopic(this.user.email);
         this.router.navigate(['/signIn']).then(()=>{
           this.snackBar.open("Successfully registered", "Dismiss",{duration: 5000})
         })
@@ -170,4 +171,11 @@ export class SignUpComponent implements OnInit {
         this.loading = false;
       });
   }
+  public subscribeUserToSnsTopic(userEmail: string): void {
+    const topicArn = 'arn:aws:sns:ca-central-1:952490130013:prvcy';
+    this.cognitoService.subscribeUserToSnsTopic(userEmail, topicArn)
+      .then(() => console.log('User subscribed to SNS topic'))
+      .catch((error) => console.error('Error subscribing user to SNS topic:', error));
+  }
+  
 }

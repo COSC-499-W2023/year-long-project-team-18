@@ -9,7 +9,7 @@ import { CognitoService, IUser } from './cognito.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
+  isNavbarCollapsed = false;
   isAuthenticated: boolean;
   user: IUser;
 
@@ -34,5 +34,7 @@ export class AppComponent implements OnInit {
   public signOut(): void {
     this.cognitoService.signOut()
   }
-
+  toggleNavbar() {
+    this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
 }

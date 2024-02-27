@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { VideoListingService } from '../video-listing.service';
 import { CognitoService, IUser } from '../cognito.service';
 import { VideoMetadata } from '../video-metadata.model';
+import { SNS } from 'aws-sdk';
+import { Router } from '@angular/router';
 
 import { videolist } from './videolist';
 import { VideoListService } from './videolist.service';
@@ -18,12 +20,19 @@ export class VideoListComponent implements OnInit {
   IUser: IUser;
   contactList: videolist[] = [];
   selectedContact: any;  
+  private sns: SNS;
 
   constructor(
     private VideoListingService: VideoListingService,
     private cognitoService: CognitoService,
-    private VideoListService: VideoListService
-  ) { this.IUser = {} as IUser; }
+    private VideoListService: VideoListService,
+    private router: Router
+  ) { this.IUser = {} as IUser; 
+      this.sns = new SNS();
+    }
+
+
+
 
   ngOnInit(): void {
     this.cognitoService.getUser()
@@ -80,17 +89,52 @@ fetchContactList() {
     if (selectedVideos.length > 0) {
       const sourceKeys = selectedVideos.map(video => video.key);
       console.log('Source Keys:', sourceKeys);
+      const sendPromises: Promise<void>[] = [];
   
       sourceKeys.forEach(sourceKey => {
-        this.cognitoService.copyVideoToContactFolder(sourceKey, contact).then(
+        const sendPromise = this.cognitoService.copyVideoToContactFolder(sourceKey, contact).then(
           () => {
-            console.log(`Video successfully sent to ${contact}`);
+            console.log(`Video successfully sent`);
+            return this.sendMessageToUser(contact, 'Your new video has been sent!');
           },
           (error) => {
-            console.error(`Error sending video to ${contact}:`, error);
+            console.error(`Error sending video:`, error);
           }
         );
+  
+        sendPromises.push(sendPromise);
       });
+  
+      Promise.all(sendPromises).then(() => {
+        console.log('All videos sent successfully');
+        this.router.navigate(['/dashboard']);
+      }).catch(error => {
+        console.error('Error sending videos:', error);
+      });
+    }
+  }
+  
+
+  async sendMessageToUser(userEmail: string, message: string): Promise<void> {
+    try {
+      const params = {
+        Message: message,
+        Subject: 'New Video Sent',
+        TopicArn: 'arn:aws:sns:ca-central-1:952490130013:prvcy',
+        MessageAttributes: {
+          email: {
+            DataType: 'String',
+            StringValue: userEmail
+          }
+        }
+      };
+  
+      await this.sns.publish(params).promise();
+      
+      console.log(`Message sent to ${userEmail}`);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      throw error;
     }
   }
 }

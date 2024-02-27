@@ -54,6 +54,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatCommonModule,
     MatDialogModule,
+    MatCommonModule,
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
@@ -63,6 +64,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatNativeDateModule,
     MatSelectModule,
     MatSnackBarModule,
+    CSS-3,
     HttpClientModule
   ],
   providers: [

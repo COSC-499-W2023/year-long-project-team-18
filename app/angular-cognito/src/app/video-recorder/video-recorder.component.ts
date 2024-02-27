@@ -196,7 +196,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         reject('Error uploading to S3.');
       } else {
         console.log('Upload to S3 successful:', data);
-        this.transcribeUpload(username, videoName, key);
+        //this.transcribeUpload(username, videoName, key);
         resolve();
       }
     });
