@@ -3,6 +3,9 @@ import { VideoListingService } from '../video-listing.service';
 import { CognitoService, IUser } from '../cognito.service';
 import { VideoMetadata } from '../video-metadata.model';
 
+import { videolist } from './videolist';
+import { VideoListService } from './videolist.service';
+
 @Component({
   selector: 'app-video-list',
   templateUrl: './video-list.component.html',
@@ -11,18 +14,22 @@ import { VideoMetadata } from '../video-metadata.model';
 export class VideoListComponent implements OnInit {
   videos: VideoMetadata[] = [];
   accountType: string | undefined;
-  contactList: any[] = [];
+  user: videolist = {username: ''};
+  contactList: videolist[] = [];
   selectedContact: any;  
 
   constructor(
     private VideoListingService: VideoListingService,
-    private cognitoService: CognitoService
+    private cognitoService: CognitoService,
+    private VideoListService: VideoListService
   ) { }
 
   ngOnInit(): void {
     this.loadVideos();
     this.loadAccountType();
     this.fetchContactList();
+
+
   }
 
   loadVideos(): void {
@@ -49,11 +56,13 @@ export class VideoListComponent implements OnInit {
 
   async fetchContactList() {
     try {
-      const usernames = await this.cognitoService.getContactListFromS3();
       const ownUsername = await this.cognitoService.getUsername();
-      const filteredUsernames = usernames.filter(username => username !== ownUsername);
-      
-      this.contactList = filteredUsernames;
+      this.user = {username: ownUsername}
+      this.VideoListService.getAll(this.user).subscribe(
+        (data: videolist[])=>{
+          this.contactList = data;
+        }
+      )
     } catch (error) {
       console.error('Error fetching usernames from S3:', error);
     }
