@@ -1,9 +1,10 @@
-$primary-1: #194a81;
+//$primary-1: #194a81;
+$primary-1: #9d9d9d;
 $primary-2: #0097b2;
 $nav-font: 'Lato', sans-serif;
 
 .container-fluid {
-  background-color: $primary-1;
+  //background-color: $primary-1;
   font-family: $nav-font;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -18,7 +19,7 @@ $nav-font: 'Lato', sans-serif;
   margin-top: 10px;
 }
 .navbar-brand {
-  font-size: 34px;
+  font-size: 20px;
   color: white;
 }
 
@@ -62,6 +63,8 @@ a.nav-link {
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   transition: width 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur;
 
   &.collapsed {
     width: 100px;

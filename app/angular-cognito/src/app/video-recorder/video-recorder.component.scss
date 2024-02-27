@@ -1,87 +1,120 @@
-$page-font: 'Lato', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-//$primary-1: #194a81;
-$primary-1: #e7e7e7;
-//$primary-2: #0097b2;
-$primary-2: #e7e7e7;
-$button-colour: #ff4f4f;
-
-div.row.justify-content-center {
-  margin: 0;
-  vertical-align: baseline;
-  border: 0;
-  padding: 50px 0px 400px;
-  background-image: linear-gradient(to bottom, $primary-1, $primary-2);
+section{
+  padding-top: 3%;
+  background-image: url("/assets/background.png");
+  background-repeat: no-repeat;
+  background-size: auto;
 }
 
-//Button CSS
-button {
-  display: inline-block;
-  width: 6em;
-  margin-left: 1em;
-}
-
-button:hover {
-  background-color: #D3FFE9;
-  color: black;
-}
-
-//Video CSS
-.video-container {
-  margin-top: -150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+.video-recording-page{
   height: 100%;
-  margin-bottom: 5px;
-}
-
-.video {
-  box-shadow: 1px 6px 10px 2px rgba(35, 35, 35, 0.62);
-  height: 600px;
-  max-height: 800px;
-  width: 1067px;
-  border: 2px solid #D3FFE9;
-}
-
-//Video Naming CSS
-.form-group {
-  margin: auto;
-  width: 900px;
-  text-align: center;
-}
-
-.video-name-group {
-  display: flex; 
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-}
-
-//Title CSS
-.text-center{
-  color: #194a81;
-  margin-bottom: 80px;
-}
-
-//Button ID/Class CSS
-.button-record {
-  font-size: 18px;
-  font-family: $page-font;
-  padding: 8px;
-  background-color: $button-colour;
-  border-radius: 25px;
-  border: 0;
-}
-
-#buttons {
-  margin-top: 0em;
-  display: flex;
   width: 100%;
-  justify-content: center;
-  margin-top: -50px;
+  position: relative;
+  align-items: center;
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+  "wdth" 100,
+  "YTLC" 500;
+  color: white;
 }
 
-#addCommentTextArea{
-  margin-top: -80px;
+.title{
+  text-align: center;
+  font-size: 90px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.video-container-details{
+  display: flex;
+  margin-top: 2em;
+  justify-content: center;
+}
+
+.video-container{
+  margin-left: 8em;
+}
+
+.video-container video{
+  position: relative;
+  width: 900px;
+  height: 600px;
+}
+
+.overlay{
+  position: absolute;
+  z-index: 1;
+}
+
+.overlay img{
+  height: 75px;
+  width: auto;
+  margin-top: 2.5em;
+  margin-left: 50em;
+}
+
+.video-details{
+  margin-right: 4em;
+  margin-left: 4em;
+}
+
+.toggleText{
+  margin-right: 10px;
+}
+
+.video-details mat-button-toggle{
+  height: 45px;
+  width: 45px;
+}
+
+.textbox-margin{
+  margin-top: 1em;
+}
+
+#videoName{
+  width: 300px;
+  height: 25px;
+}
+
+#commentArea{
+  width: 300px;
+  height: 200px;
+}
+
+.button{
+  font-size: x-small;
+  border-radius: 50px;
+  display: inline-block;
+  border: 1px solid transparent;
+  color: white;
+  font-weight: bold;
+  background-color: #194a81;
+  padding: 20px;
+  text-transform: uppercase;
+  transition: all .6s ease;
+  margin: 2em 0.5em;
+  &[disabled]{
+    background-color: rgb(122, 122, 122);
+    color: white;
+  }
+}
+
+.button:hover{
+  background-color: transparent;
+  border: 1px solid white;
+  transform: translateX(5px);
+  &[disabled]{
+    background-color: rgb(122, 122, 122);
+  }
+}
+
+#stop-button:hover{
+  background-color: red;
+}
+
+#record-button{
+  width: 150px;
 }
