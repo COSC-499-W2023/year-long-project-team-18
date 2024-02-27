@@ -14,7 +14,7 @@ export class VideoListService {
   constructor(private http: HttpClient) { }
 
   getAll(videolist: videolist){
-    return this.http.get('http://localhost/api/listOrg.php').pipe(
+    return this.http.post('http://localhost/api/listOrg.php', {data: videolist}).pipe(
       map((res: any)=>{
         return res['data'];
       })

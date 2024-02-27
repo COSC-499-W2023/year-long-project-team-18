@@ -15,6 +15,7 @@ export class VideoListComponent implements OnInit {
   videos: VideoMetadata[] = [];
   accountType: string | undefined;
   user: videolist = {username: ''};
+  IUser: IUser;
   contactList: videolist[] = [];
   selectedContact: any;  
 
@@ -22,7 +23,7 @@ export class VideoListComponent implements OnInit {
     private VideoListingService: VideoListingService,
     private cognitoService: CognitoService,
     private VideoListService: VideoListService
-  ) { }
+  ) { this.IUser = {} as IUser; }
 
   ngOnInit(): void {
     this.loadVideos();
@@ -57,7 +58,9 @@ export class VideoListComponent implements OnInit {
   async fetchContactList() {
     try {
       const ownUsername = await this.cognitoService.getUsername();
-      this.user = {username: ownUsername}
+      
+      
+      this.user = {username: ownUsername, organizationcode: this.IUser['custom:organization']};
       this.VideoListService.getAll(this.user).subscribe(
         (data: videolist[])=>{
           this.contactList = data;
