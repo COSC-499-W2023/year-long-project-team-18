@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { S3Client, CopyObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 import { IUser, CognitoService } from '../cognito.service';
+import { ProfileUpdateService } from './profile-update-service';
+import { NgModel } from '@angular/forms';
+import { profile } from './profile';
 
 @Component({
   selector: 'app-profile',
@@ -12,8 +15,10 @@ export class ProfileComponent implements OnInit {
 
   loading: boolean;
   user: IUser;
+  profile: profile = {organizationcode:'', username:''};
 
-  constructor(private cognitoService: CognitoService) {
+
+  constructor(private cognitoService: CognitoService, private profileUpdateService: ProfileUpdateService) {
     this.loading = false;
     this.user = {} as IUser;
   }
@@ -24,6 +29,19 @@ export class ProfileComponent implements OnInit {
       this.user = user.attributes;
       console.log(this.user);
     });
+  }
+
+  updateDb(org: string, username: string){
+
+
+    this.user['custom:organization'] = this.user['custom:organization']
+    this.profileUpdateService
+    .update({organizationcode: org, username: username}).subscribe(
+      (res)=>{
+        console.log("Success")  
+      }
+    );
+    this.cognitoService.updateUser(this.user);
   }
 
   public update(): void {
