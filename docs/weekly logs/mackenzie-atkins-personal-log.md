@@ -1,3 +1,32 @@
+## Feb 26 - March 3
+
+### Student goals
+
+Implement database to frontend and connect elements that were previously dummy elements, and assist Ishaan with the face blurring.
+
+### Completed tasks
+- Got CDK Reckognition stack working
+- Did database programming to handle displaying users in the same organization instead of all users in all orgs
+
+### Extra work
+- Assisted Ishaan and spent several hours troubleshooting AWS/CDK/Reckognition
+- Got it working now Ishaan is going to be working on frontend implementation
+
+### Student tasks on board
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/be8fed49-9f7f-435b-b0a6-a72b58c99e13)
+
+
+### In-progress tasks
+- Changing organization (update in db)
+- Bug fixes for old database functions
+- Attaching comments to videos in DB
+
+### Peer evaluation
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/68fad49d-66f7-4526-96d6-0aeef8994d29)
+
+
+### Student tasks on board
+
 ## Feb 5 - Feb 11
 
 ### Student goals
