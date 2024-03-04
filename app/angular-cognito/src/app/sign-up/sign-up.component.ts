@@ -109,6 +109,7 @@ export class SignUpComponent {
     this.cognitoService.signUp(this.user)
       .then(() => {
         this.createS3UserFolder(this.user.username);
+        this.createS3CaptionFolder(this.user.username);
         this.router.navigate(['/signIn']).then(()=>{
           this.snackBar.open("Successfully registered", "Dismiss",{duration: 5000})
         })
@@ -132,6 +133,18 @@ export class SignUpComponent {
       .catch(err => console.error('Error checking user folder in S3:', err));
   }
 
+  private createS3CaptionFolder(username: string): void {
+    const folderKey = `${username}-captions/`;
+    this.cognitoService.checkS3CaptionsFolder(folderKey)
+      .then(folderExists => {
+        if (!folderExists) {
+          this.cognitoService.createS3CaptionsFolder(folderKey)
+            .then(() => console.log('User caption folder created successfully in S3'))
+            .catch(err => console.error('Error creating user caption folder in S3:', err));
+        }
+      })
+        .catch(err => console.error('Error checking user caption folder in S3:', err));
+  }
 
   public confirmSignUp(): void {
     this.loading = true;

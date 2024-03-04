@@ -232,7 +232,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         MediaFileUri: `s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`
       },
       OutputBucketName: 'prvcy-storage-ba20e15b50619-staging',
-      OutputKey: `${username}/${videoName}-captions.vtt`
+      OutputKey: `${username}-captions/${videoName}-captions.vtt`
     };
     async function startTranscriptionRequest() {
       
