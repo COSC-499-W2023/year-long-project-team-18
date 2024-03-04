@@ -218,22 +218,35 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         reject('Error uploading to S3.');
       } else {
         console.log('Upload to S3 successful:', data);
-        //this.transcribeUpload(username, videoName, key);
+        this.transcriptionCreation(username, videoName, key);
         resolve();
       }
     });
-    
+  }
+
+  async transcriptionCreation(username: string, videoName: string, key: string) {
+    try {
+      await this.transcribeUpload(username, videoName, key);
+      await this.checkTranscription(`${videoName}-captions`);
+      this.router.navigate(['/share-video']);
+    } catch (err) {
+      console.log(err);
+    }
   }
  
-  private transcribeUpload(username: string, videoName: string, mediaFileKey: string) {
-    const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
+  private transcribeUpload(username: string, videoName: string, mediaFileKey: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
     const region = environment.aws.region;
     const credentials = {
       accessKeyId: environment.aws.accessKeyId,
       secretAccessKey: environment.aws.secretAccessKey,
       sessionToken: environment.aws.sessionToken
     };
-    
+    const transcribeConfig = {
+      region,
+      credentials
+    };
     const input = {
       TranscriptionJobName: `${videoName}-captions`,
       LanguageCode: "en-US",
@@ -241,14 +254,10 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         MediaFileUri: `s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`
       },
       OutputBucketName: 'prvcy-storage-ba20e15b50619-staging',
-      OutputKey: `${username}/${videoName}-captions.json`
+      OutputKey: `${username}-captions/${videoName}-captions.vtt`
     };
-
     async function startTranscriptionRequest() {
-      const transcribeConfig = {
-        region,
-        credentials
-      };
+      
       const transcribeClient = new TranscribeClient(transcribeConfig);
       const transcribeCommand = new StartTranscriptionJobCommand(input);
       console.log(`s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`);
@@ -256,11 +265,60 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         const transcribeResponse = await transcribeClient.send(transcribeCommand);
         console.log("Transcription job created, the details:");
         console.log(transcribeResponse.TranscriptionJob);
+        resolve();
       } catch(err) {
         console.log(err);
+        reject('Unable to create transcription job.');
       }
     }
     startTranscriptionRequest();
+    }) 
+  }
+
+  checkTranscription(transcriptionJobName: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const { TranscribeClient, GetTranscriptionJobCommand, GetTranscriptionJobResponse } = require("@aws-sdk/client-transcribe");
+      const region = environment.aws.region;
+      const credentials = {
+        accessKeyId: environment.aws.accessKeyId,
+        secretAccessKey: environment.aws.secretAccessKey,
+        sessionToken: environment.aws.sessionToken
+      };
+      const transcribeConfig = {
+        region,
+        credentials
+      };
+      const input = {
+        TranscriptionJobName: transcriptionJobName
+      }
+      console.log(input);
+      var done = false;
+      async function check() {
+        const transcribeClient = new TranscribeClient(transcribeConfig);
+        while (!done) {
+          var transcribeCommand = new GetTranscriptionJobCommand(input);
+          var transcribeResponse = await transcribeClient.send(transcribeCommand);
+          try {
+            if (transcribeResponse.TranscriptionJob.TranscriptionJobStatus === undefined) {
+              done = false;
+            } else if (transcribeResponse.TranscriptionJob.TranscriptionJobStatus == "IN_PROGRESS") {
+              done = false;
+            } else if (transcribeResponse.TranscriptionJob.TranscriptionJobStatus == "FAILED") {
+              done = true;
+              reject('Transcription job failed. No captions will be generated.');
+            } else if (transcribeResponse.TranscriptionJob.TranscriptionJobStatus == "COMPLETED") {
+              done = true;
+              console.log('Transcription job finished, moving onto the next page.')
+              resolve();
+            }
+          } catch (err) {
+            console.log(err);
+            continue;
+          } 
+        }
+      }
+      check();  
+      });  
   }
 
   successCallback(stream: MediaStream) {
@@ -331,7 +389,6 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
       await this.uploadToS3(this.videoName.trim(), 'mp4');
       this.videoName = '';
       this.isSubmitDisabled = true;
-      this.router.navigate(['/share-video']);
     } catch (error) {
       console.error('Error during S3 upload:', error);
     }
