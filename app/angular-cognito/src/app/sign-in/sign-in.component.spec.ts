@@ -1,89 +1,25 @@
-import { Component } from '@angular/core';
 import { SignInComponent } from './sign-in.component';
 import { Router } from '@angular/router';
-import {expect, jest, test} from '@jest/globals';
 import { CognitoService, IUser } from '../cognito.service';
-import { SignUpComponent } from '../sign-up/sign-up.component';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 describe('Signin Component', () => {
 
-  let fixture: SignInComponent;
-  let router: any;
-  let cognitoservice: any;
-  
+  let component: SignInComponent;
+  let router: Router;
+  let cognitoService: CognitoService;
+
   beforeEach(() => {
-    fixture = new SignInComponent(
-      router,
-      cognitoservice
-    );
+    component = new SignInComponent(router, cognitoService);
   });
 
-  describe('Signin Functionality', () => {
-    it('should return an error if no username or password', () => {
-      const mockUser: any = {
-        email: '',
-        password: '',
-        username: '',
-        showPassword: false,
-        code: '',
-        given_name: '',
-        family_name: '',
-        birthdate: '',
-        'custom:account_type': '',
-        'custom:organization': '',
-      };
+  describe('Signin: No data', () => {
+    it('should display an error message when logging in without any information', async () => {
+      // Calling the signIn function without any user data being entered
+      component.signIn();
+      expect(component.errorMessage).toBe('Email and password are required');
     });
   });
-
-  describe('1+1', () => {
-    it('checks if 1 + 1 equals 2', () => {
-      expect(1 + 1).toBe(2);
-    });
-  });
+  
 
 }); 
-
-/*
-describe('SignInComponent', () => {
-  let component: SignInComponent;
-  let routerMock: Router;
-  let cognitoServiceMock: CognitoService;
-
-  beforeEach(() => {
-    component = new SignInComponent(
-      routerMock,
-      cognitoServiceMock
-    );
-  });
-
-  describe('SignIn', () => {
-    it('should return an error if no username or password', () => {
-      const mockUser: IUser = {
-        email: '',
-        password: '',
-        username: '',
-        showPassword: false,
-        code: '',
-        given_name: '',
-        family_name: '',
-        birthdate: '',
-        'custom:account_type': '',
-        'custom:organization': '',
-      };
-      
-      component.user = mockUser;
-      component.signIn();
-      expect(component.errorMessage).toEqual('Email and password are required');
-    });
-    
-  });
-
-  //Testing
-  describe('1+1', () => {
-    it('checks if 1 + 1 equals 2', () => {
-      expect(1 + 1).toBe(2);
-    });
-  });
-
-});
-*/
