@@ -2,8 +2,10 @@ import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, ViewChild } fr
 import { IUser, CognitoService } from '../cognito.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import * as AWS from 'aws-sdk';
+import { MediaConvertClient, CreateJobCommand } from "@aws-sdk/client-mediaconvert";
+
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
@@ -228,12 +230,131 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     try {
       await this.transcribeUpload(username, videoName, key);
       await this.checkTranscription(`${videoName}-captions`);
+      await this.attachCaptions(username, videoName);
       this.router.navigate(['/share-video']);
     } catch (err) {
       console.log(err);
     }
   }
- 
+  
+  attachCaptions(username: string, videoName: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const { MediaConvertClient, CreateJobCommand } = require("@aws-sdk/client-mediaconvert");
+      const region = environment.aws.region;
+      const credentials = {
+        accessKeyId: environment.aws.accessKeyId,
+        secretAccessKey: environment.aws.secretAccessKey,
+        sessionToken: environment.aws.sessionToken
+      };
+      const mediaConfig = {
+        region,
+        credentials
+      };
+      const mediaClient = new MediaConvertClient(mediaConfig);
+      const mediaInput = {
+        UserMetadata: {},
+        Role: "arn:aws:iam::952490130013:role/service-role/MediaConvert_Default_Role",
+        Settings: {
+          TimecodeConfig: {
+            Source: "ZEROBASED"
+          },
+          FollowSource: 1,
+          Inputs: [
+            {
+              CaptionSelectors: {
+                "Captions Selector 1": {
+                  SourceSettings: {
+                    SourceType: "WEBVTT",
+                    FileSourceSettings: {
+                      SourceFile: `s3://prvcy-storage-ba20e15b50619-staging/${username}-captions/${videoName}-captions.vtt`
+                    }
+                  }
+                }
+              },
+              FileInput: `s3://prvcy-storage-ba20e15b50619-staging/${username}/${videoName}.mp4`,
+              AudioSelectors: {
+                "Audio Selector 1": {
+                  DefaultSelection: "DEFAULT"
+                }
+              },
+              VideoSelector: {},
+              TimecodeSource: "ZEROBASED"
+            },
+          ],
+          OutputGroups: [
+            {
+              Name: "File Group",
+              Outputs: [
+                {
+                  ContainerSettings: {
+                    Container: "MP4",
+                    Mp4Settings: {}
+                  },
+                  VideoDescription: {
+                    CodecSettings: {
+                      Codec: "H_264",
+                      H264Settings: {
+                        MaxBitrate: 5000000,
+                        RateControlMode: "QVBR",
+                        SceneChangeDetect: "TRANSITION_DETECTION"
+                      }
+                    }
+                  },
+                  AudioDescriptions: [
+                    {
+                      CodecSettings: {
+                        Codec: "AAC",
+                        AacSettings: {
+                          Bitrate: 96000,
+                          CodingMode: "CODING_MODE_2_0",
+                          SampleRate: 48000
+                        }
+                      }
+                    }
+                  ],
+                  CaptionDescriptions: [
+                    {
+                      CaptionSelectorName: "Captions Selector 1",
+                      DestinationSettings: {
+                        DestinationType: "BURN_IN",
+                        BurnDestinationSettings: {}
+                      }
+                    }
+                  ]
+                }
+              ],
+              OutputGroupSettings: {
+                Type: "FILE_GROUP_SETTINGS",
+                FileGroupSettings: {
+                  Destination: "s3://prvcy-storage-ba20e15b50619-staging/testembedcaption/"
+                }
+              }
+            }
+          ]
+        },
+        BillingTagsSource: "JOB",
+        AccelerationSettings: {
+          Mode: "DISABLED"
+        },
+        StatusUpdateInterval: "SECONDS_60",
+        Priority: 0
+      };
+      async function mediaConvertRequest() {
+        const mediaCommand = new CreateJobCommand(mediaInput);
+        try {
+          const mediaResponse = await mediaClient.send(mediaCommand);
+          console.log("MediaConvert job created, details are: ");
+          console.log(mediaResponse.CreateJobResponse);
+          resolve();
+        } catch (err) {
+          console.log(err)
+          reject('Unable to attach captions to video.');
+        }
+      }
+      mediaConvertRequest();
+    });
+  }
+
   private transcribeUpload(username: string, videoName: string, mediaFileKey: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
@@ -253,8 +374,14 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
       Media: {
         MediaFileUri: `s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`
       },
+      Subtitles: {
+        Formats: [
+          "vtt"
+        ],
+        OutputStartIndex: 1,
+      },
       OutputBucketName: 'prvcy-storage-ba20e15b50619-staging',
-      OutputKey: `${username}-captions/${videoName}-captions.vtt`
+      OutputKey: `${username}-captions/${videoName}-captions`
     };
     async function startTranscriptionRequest() {
       
