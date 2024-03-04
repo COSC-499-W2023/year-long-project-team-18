@@ -2,6 +2,17 @@
 
 ## TERM 2
 
+## Week 8:
+Dates 26th Feb - 3rd March
+
+### Student Goals: 
+* Finally complete the face blurring feature to automatically upload to output bucket with the blurred video.
+
+### Completed Tasks:
+* Face blurring problem has been solved and it properly blurs faces in videos when uploaded to the bucket and outputs them in the another bucket.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/0a6cb866-c74f-45e3-a1b3-c58cf8e3367e)
+
+
 ## Week 5:
 Dates 5th Feb - 11th Feb
 
