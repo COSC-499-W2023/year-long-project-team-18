@@ -5,7 +5,11 @@ module.exports = {
   transform: {
     '^.+\\.(ts|tsx)?$': 'ts-jest',
     '^.+\\.(js|jsx)$': 'babel-jest',
+    "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest",
   },
+  "transformIgnorePatterns": [
+    "node_modules/(?!variables/.*)"
+  ],
   testEnvironment: 'node',
   collectCoverage: true,
   coverageDirectory: 'coverage',
