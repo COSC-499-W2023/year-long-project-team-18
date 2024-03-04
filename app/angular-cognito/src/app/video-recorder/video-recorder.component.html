@@ -1,23 +1,46 @@
-<div class="row justify-content-center">
-  <div class="col text-center">
-    <h1 class="text-center" style="color: #ffffff">Video Recording</h1>  
-    
-    <div class="video-container row mb-2">
-      <div id="video" class="col">
-        <video #video class="video"></video>
-      </div>
-    </div>
-  
-    <div id="buttons" class="row">
-      <button class="btn btn-sm btn-success button-record" (click)="startRecordingButtonClicked()"> Record </button>
-      <button class="btn btn-sm btn-success button-record" (click)="stopRecording()"> Stop</button>
-      <button class="btn btn-sm btn-success button-record" (click)="playback()"> Playback</button>
-    </div>
+<html>
+  <head>
 
-    <div class="form-group text-center"> 
-      <label for="videoName" style="color: #ffffff">Video Name:</label>
-      <input type="text" id="videoName" [(ngModel)]="videoName" (input)="onVideoNameChange()" class="form-control d-inline-block mx-auto"/>
-      <button class="btn btn-sm btn-success button-record" [disabled]="isSubmitDisabled" (click)="submitVideo()"> Submit</button>
-    </div>
-  </div>
-  </div>
+  </head>
+  <body>
+    <section class="video-recording-page">
+      <div class="title">
+        <h1>VIDEO RECORDING</h1>
+      </div>
+      <div class="video-container-details">
+        <div class="video-container">
+          <div class="overlay" *ngIf="recordHidden == true"><img src="/assets/record-icon.png" alt="Record Icon"></div>
+          <video #video class="video"></video>
+        </div>
+        <div class="video-details">
+          <div>
+            <label class="toggleText" for="togglePrivacy" style="color: #ffffff">Toggle Privacy</label>
+            <mat-button-toggle-group name="privacyToggle" aria-label="Privacy Toggle">
+              <mat-button-toggle value="on">On</mat-button-toggle>
+              <mat-button-toggle value="off">Off</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+          <div>
+            <label class="textbox-margin" for="videoName" style="color: #ffffff">Enter a Video Title</label>
+            <input type="text" id="videoName" [(ngModel)]="videoName" (input)="onVideoNameChange()" class="form-control"/>
+          </div>
+          <div>
+            <label class="textbox-margin" for="addCommentTextArea" style="color: #ffffff">Attach a Comment</label>
+          </div>
+          <div>
+            <textarea id="addCommentTextArea" id="commentArea" rows="6" placeholder="Anything to add?"></textarea>
+          </div>
+          <div>
+            <button class="button" (click)="startRecordingButtonClicked()">{{recordAgain?"Record":"Record Again"}}</button>
+            <button class="button" id="stop-button" (click)="stopRecording()"> Stop</button>
+            <button class="button" [disabled]="playbackDisabled" (click)="playback()">{{playbackDisabled?"No Playback":"Playback"}}</button>
+          </div>
+          <div>
+            <button class="button" [disabled]="submitDisabled" (click)="download()">Download</button>
+            <button id="record-button" class="button" [disabled]="submitDisabled" (click)="submitVideo()" (click)="openDialog()">{{submitDisabled?"Submit":"Submit"}}</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

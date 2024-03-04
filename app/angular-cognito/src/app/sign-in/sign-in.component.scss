@@ -2,6 +2,12 @@ $page-font: Lato, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida
 $primary-1: #194a81;
 $primary-2: #0097b2;
 
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
 label.form-label {
     font-family: $page-font;
     color: $primary-2
@@ -38,7 +44,7 @@ div.col-4 {
 
 div.row.justify-content-center {
     margin: 0;
-    padding: 8px 99px 99px;
+    padding: 8px 99px 600px;
     font-size: 100%;
     vertical-align: baseline;
     border: 0;
@@ -138,4 +144,20 @@ p.subheader-text {
     div.col-4 {
         width: 30%;
     }
+}
+
+.matFormField{
+    width: 100%;
+}
+.matLabel{
+    color:#194a81;
+}
+.matInput{
+    border: #0097b2;
+    border-width: thick;
+}
+#maticon{
+    background-color: white;
+    border: white;
+    width: 50%;
 }

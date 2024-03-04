@@ -30,6 +30,7 @@ const routes: Routes = [
   {
     path: 'video-recorder',
     component: VideoRecorderComponent,
+    
   }, 
   {
     path: 'organizationPage',

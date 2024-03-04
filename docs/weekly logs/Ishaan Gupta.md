@@ -2,6 +2,32 @@
 
 ## TERM 2
 
+## Week 5:
+Dates 5th Feb - 11th Feb
+
+### Student Goals:
+* Figure out why the lambda permissions don't work.
+* Test the code to see that it works with the fix.
+
+### Completed Tasks:
+* Figured out that the problem with the permissions was with the Rekognition library as it only works on some AWS servers.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/08239bc6-381d-4b57-a88f-f42e90efbeb0)
+
+
+## Week 4:
+Dates: 29th Jan - 4th Feb
+
+### Student Goals:
+* Finish setting up the face blurring code into our repository with the required dependencies.
+* Connect the code to our own AWS account and making necessary changes required.
+
+### Completed Tasks:
+* Fully set up the code on local machine.
+* Connected to our own AWS account to use the correct services.
+* The code creates the new S3 buckets to access the videos and trigger lamda functions but now there is a problem with the lamda permissions.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/6f497bb2-4a9a-41e2-8f53-0a8a6720158a)
+
+
 ## Week 3:
 Dates: 22nd Jan - 28th Jan
 

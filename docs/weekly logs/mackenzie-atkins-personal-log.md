@@ -1,3 +1,45 @@
+## Feb 5 - Feb 11
+
+### Student goals
+
+Add backend gateway to connect to the database with PHP. 
+
+### Completed tasks
+- Created a PHP API to connect to the databse
+- Implemented read and write features with said API
+
+### Student tasks on baord
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/9beff6b7-59c6-48a2-b17f-366a96b1fd3d)
+
+
+### In progress tasks
+- Implement update feature with API
+- Dockerization
+- Bug fixes for some sign up logic
+
+### Peer evaluation
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/88d86ae2-38b8-4a3c-ad38-6191fe76a26e)
+
+
+## Jan 29 - Feb 4
+
+### Student goals
+
+Fix up some errors and bugs for peer testing. Evaluate and implement changes from feedback. 
+
+### Student tasks on board
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/c1ca7a85-de1b-4b78-8230-2914c95faf4d)
+
+
+### In progress tasks
+
+- Dockerization
+- Implement privacy features for organizations
+
+### Peer evaluation
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/48b78888-8335-445a-8501-ccd2123b4f2f)
+
+
 ## Jan 22 - 28
 
 ### Student Goals

@@ -27,8 +27,10 @@ import { matHideSourceOutline, matCircleOutline } from '@ng-icons/material-icons
 import {MatDatepicker, MatDatepickerModule} from '@angular/material/datepicker'
 import { MatNativeDateModule  } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
-import {MatSnackBarModule} from '@angular/material/snack-bar'
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar'
     BrowserAnimationsModule,
     MatCommonModule,
     MatDialogModule,
+    MatCommonModule,
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
@@ -61,8 +64,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar'
     MatNativeDateModule,
     MatSelectModule,
     MatSnackBarModule,
-    
-
+    HttpClientModule,
+    MatButtonToggleModule,
   ],
   providers: [
   ],

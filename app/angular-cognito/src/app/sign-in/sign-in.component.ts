@@ -12,6 +12,7 @@ export class SignInComponent {
   loading: boolean;
   user: IUser;
   errorMessage: string = '';
+  hide = true;
 
   constructor(private router: Router, private cognitoService: CognitoService) {
     this.loading = false;
