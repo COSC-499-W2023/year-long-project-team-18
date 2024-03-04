@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import {Amplify, Auth } from 'aws-amplify';
 import { Router } from '@angular/router';
 import * as AWS from 'aws-sdk';
-
+import { SNS } from 'aws-sdk';
 
 import { environment } from '../environments/environment';
 
@@ -23,23 +23,18 @@ export interface IUser {
   'custom:account_type': string;
   'custom:organization': string;
 }
-  
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class CognitoService {
   private authenticationSubject: BehaviorSubject<any>;
-  
 
   constructor(private router: Router) {
     Amplify.configure({
       Auth: environment.cognito
     });
-
     this.authenticationSubject = new BehaviorSubject<boolean>(false);
-
    }
 
    public signIn(user: IUser): Promise<any> {
@@ -64,7 +59,6 @@ export class CognitoService {
     })
     .then((signUpResult) => {
       console.log('User confirmed:', signUpResult.userConfirmed);
-
     })
     .then(()=>{
       this.router.navigate(['/signIn']);
@@ -72,11 +66,9 @@ export class CognitoService {
     .catch((error) => {
       console.error('Sign Up Error:', error);
       throw error;
-    });
+    });   
   }
   
-  
-
    public confirmSignUp(user: IUser): Promise<any>{
     return Auth.confirmSignUp(user.email, user.code);
    }
@@ -293,5 +285,30 @@ export class CognitoService {
           }
         });
       });
+    }   
+    public async subscribeUserToSnsTopic(email: string, topicArn: string): Promise<void> {
+      try {
+        AWS.config.update({
+          accessKeyId: environment.aws.accessKeyId,
+          secretAccessKey: environment.aws.secretAccessKey,
+          sessionToken: environment.aws.sessionToken,
+          region: environment.aws.region
+        });
+    
+        const sns = new AWS.SNS();
+    
+        const params = {
+          Protocol: 'email',
+          TopicArn: topicArn,
+          Endpoint: email,
+        };
+    
+        await sns.subscribe(params).promise();
+    
+        console.log(`Subscribed ${email} to topic ${topicArn}`);
+      } catch (error) {
+        console.error('Error subscribing user to SNS topic:', error);
+        throw error;
+      }
     }    
   }    
