@@ -1,3 +1,34 @@
+# Week of Feb 25th - Mar 3rd
+## Team 18
+
+### Milestones
+The following are milestones we worked towards/completed:
+1. Successfully worked around our JEST testing environment and are now able to test
+2. Worked on perfecting captioning. Manual testing provided results with captions attached to the video.
+3. Implementing database integration with profile editing
+4. Fixed an issue with the face blurring lambda functions and triggers, so we are now able to have faces blurred (this feature is not done)
+5. Added Angular materials to change the CSS and HTML layout of the page and look of it.
+6. New nav bar created on the left side of screen instead of the top.
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/5099f084-192a-4fb7-9bc0-e8864230e822)
+
+### In Progress/In Review
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/34117476-39cb-41e8-8564-5798e59aedbc)
+
+### Features in Backlog/Unassigned Features/Tasks for this sprint
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/a2b8cd2e-cd20-469e-a0d7-a619c21a90df)
+
+### Completed Features
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/329c248b-b83f-46cb-abb9-cd0a45c3a4fa)
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/5e20d6d7-152f-422f-9a4a-6eab7355b506)
+
 # Week of Feb 11th - Feb 18th
 ## Team 18
 
