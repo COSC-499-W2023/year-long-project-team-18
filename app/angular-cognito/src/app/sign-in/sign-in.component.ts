@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { IUser, CognitoService } from '../cognito.service';
 
 @Component({
@@ -12,6 +11,8 @@ export class SignInComponent {
 
   loading: boolean;
   user: IUser;
+  errorMessage: string = '';
+  hide = true;
 
   constructor(private router: Router, private cognitoService: CognitoService) {
     this.loading = false;
@@ -19,15 +20,22 @@ export class SignInComponent {
   }
 
   public signIn(): void {
-    this.loading = true;
-    this.cognitoService.signIn(this.user)
-    .then(() => {
-      this.router.navigate(['/dashboard']);
-    }).then(()=>{
-      window.location.reload();
-    }).catch(() => {
+    if (!this.user.email || !this.user.password) {
+      this.errorMessage = 'Email and password are required';
       this.loading = false;
-    });
+      return;
+    }
+    else{
+      this.loading = true;
+      this.cognitoService.signIn(this.user)
+      .then(() => {
+        this.router.navigate(['/dashboard']);
+      }).then(()=>{
+        window.location.reload();
+      }).catch(() => {
+        this.loading = false;
+        this.errorMessage = 'Failed to sign in';
+      });
+    }
   }
-
 }

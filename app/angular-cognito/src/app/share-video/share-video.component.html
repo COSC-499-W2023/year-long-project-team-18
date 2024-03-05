@@ -3,8 +3,9 @@
     <div class="row">
       <div class="video-container">
         <ng-container *ngIf="recentVideo">
-          <video controls>
+          <video controls crossorigin="anonymous">
             <source [src]="getVideoUrl(recentVideo.key)" type="video/webm">
+            <track [src]="getCaptionsUrl(recentVideo.key)" label="English" kind="subtitles" srclang="en-us" default>
             Your browser does not support the video tag.
           </video>
           <div class="video-metadata">

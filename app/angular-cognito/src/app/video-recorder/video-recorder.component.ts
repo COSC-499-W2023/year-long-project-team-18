@@ -1,19 +1,34 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { IUser, CognitoService } from '../cognito.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import * as AWS from 'aws-sdk';
+import {MatButtonModule} from '@angular/material/button';
+import {FormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-video-recorder',
   templateUrl: './video-recorder.component.html',
-  styleUrls: ['./video-recorder.component.scss']
+  styleUrls: ['./video-recorder.component.scss'],
 })
 
 export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('video') videoElement!: ElementRef<HTMLVideoElement>;
 
+  playbackDisabled: boolean = true;
+  submitDisabled: boolean = true;
+  recordAgain: boolean = true;
+  recordHidden: boolean = false;
   loading: boolean;
   user: IUser;
   isAuthenticated: boolean;
@@ -32,7 +47,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
 
-  constructor(private cognitoService: CognitoService, private router: Router) {
+  constructor(private cognitoService: CognitoService, private router: Router, public dialog: MatDialog) {
     this.loading = false;
     this.user = {} as IUser;
     this.isAuthenticated = true;
@@ -99,6 +114,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   }
 
   startRecording() {
+    this.recordHidden = true;
     let mediaConstraints: MediaStreamConstraints = {
       video: {
         width: { min: 1280 },
@@ -114,10 +130,13 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   }
 
   startRecordingButtonClicked() {
+    this.playbackDisabled = true;
+    this.submitDisabled = true;
     this.startRecording();
   }
 
   stopRecording() {
+    this.recordHidden = false;
     if (this.mediaRecorder && this.mediaRecorder.state !== 'inactive') {
       this.mediaRecorder.stop();
     }
@@ -126,8 +145,12 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     stream.getAudioTracks().forEach(track => track.stop());
     stream.getVideoTracks().forEach(track => track.stop());
     const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+
     this.recordedChunks = [];
     this.mediaRecorder = null;
+    this.playbackDisabled = false;
+    this.submitDisabled = false;
+    this.recordAgain = false;
   }
 
   private uploadToS3(videoName: string, format: string): Promise<void> {
@@ -195,22 +218,35 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         reject('Error uploading to S3.');
       } else {
         console.log('Upload to S3 successful:', data);
-        this.transcribeUpload(username, videoName, key);
+        this.transcriptionCreation(username, videoName, key);
         resolve();
       }
     });
-    
+  }
+
+  async transcriptionCreation(username: string, videoName: string, key: string) {
+    try {
+      await this.transcribeUpload(username, videoName, key);
+      await this.checkTranscription(`${videoName}-captions`);
+      this.router.navigate(['/share-video']);
+    } catch (err) {
+      console.log(err);
+    }
   }
  
-  private transcribeUpload(username: string, videoName: string, mediaFileKey: string) {
-    const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
+  private transcribeUpload(username: string, videoName: string, mediaFileKey: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
     const region = environment.aws.region;
     const credentials = {
       accessKeyId: environment.aws.accessKeyId,
       secretAccessKey: environment.aws.secretAccessKey,
       sessionToken: environment.aws.sessionToken
     };
-    
+    const transcribeConfig = {
+      region,
+      credentials
+    };
     const input = {
       TranscriptionJobName: `${videoName}-captions`,
       LanguageCode: "en-US",
@@ -218,14 +254,10 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         MediaFileUri: `s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`
       },
       OutputBucketName: 'prvcy-storage-ba20e15b50619-staging',
-      OutputKey: `${username}/${videoName}-captions.json`
+      OutputKey: `${username}-captions/${videoName}-captions.vtt`
     };
-
     async function startTranscriptionRequest() {
-      const transcribeConfig = {
-        region,
-        credentials
-      };
+      
       const transcribeClient = new TranscribeClient(transcribeConfig);
       const transcribeCommand = new StartTranscriptionJobCommand(input);
       console.log(`s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`);
@@ -233,11 +265,60 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         const transcribeResponse = await transcribeClient.send(transcribeCommand);
         console.log("Transcription job created, the details:");
         console.log(transcribeResponse.TranscriptionJob);
+        resolve();
       } catch(err) {
         console.log(err);
+        reject('Unable to create transcription job.');
       }
     }
     startTranscriptionRequest();
+    }) 
+  }
+
+  checkTranscription(transcriptionJobName: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const { TranscribeClient, GetTranscriptionJobCommand, GetTranscriptionJobResponse } = require("@aws-sdk/client-transcribe");
+      const region = environment.aws.region;
+      const credentials = {
+        accessKeyId: environment.aws.accessKeyId,
+        secretAccessKey: environment.aws.secretAccessKey,
+        sessionToken: environment.aws.sessionToken
+      };
+      const transcribeConfig = {
+        region,
+        credentials
+      };
+      const input = {
+        TranscriptionJobName: transcriptionJobName
+      }
+      console.log(input);
+      var done = false;
+      async function check() {
+        const transcribeClient = new TranscribeClient(transcribeConfig);
+        while (!done) {
+          var transcribeCommand = new GetTranscriptionJobCommand(input);
+          var transcribeResponse = await transcribeClient.send(transcribeCommand);
+          try {
+            if (transcribeResponse.TranscriptionJob.TranscriptionJobStatus === undefined) {
+              done = false;
+            } else if (transcribeResponse.TranscriptionJob.TranscriptionJobStatus == "IN_PROGRESS") {
+              done = false;
+            } else if (transcribeResponse.TranscriptionJob.TranscriptionJobStatus == "FAILED") {
+              done = true;
+              reject('Transcription job failed. No captions will be generated.');
+            } else if (transcribeResponse.TranscriptionJob.TranscriptionJobStatus == "COMPLETED") {
+              done = true;
+              console.log('Transcription job finished, moving onto the next page.')
+              resolve();
+            }
+          } catch (err) {
+            console.log(err);
+            continue;
+          } 
+        }
+      }
+      check();  
+      });  
   }
 
   successCallback(stream: MediaStream) {
@@ -292,44 +373,56 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     document.body.removeChild(downloadLink);
 
     URL.revokeObjectURL(url);
+  }
+
+  async submitVideo() {
+    if (this.recordedChunks.length === 0) {
+      console.error('No recorded video to submit');
+      return;
+    }
+    if (this.videoName.trim() === '') {
+      console.error('Video name cannot be empty');
+      return;
+    }
+
+    try {
+      await this.uploadToS3(this.videoName.trim(), 'mp4');
+      this.videoName = '';
+      this.isSubmitDisabled = true;
+    } catch (error) {
+      console.error('Error during S3 upload:', error);
+    }
+  }
+
+  onVideoNameChange() {
+    this.isSubmitDisabled = this.videoName.trim() === '';
+  }
+
+  addCommentToVideo(){
+
+  }
+
+  playback(){
+    if (this.recordedChunks.length > 0) {
+      const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
+      const playbackBlobURL = URL.createObjectURL(recordedBlob);
+      let newvideo: HTMLVideoElement = this.video.nativeElement;
+      window.open(playbackBlobURL, '_blank');
+    }
+    else {
+      console.error("No recorded video available for playback");
+    } 
+  }
+
+  animal: string | undefined;
+  name: string | undefined;
+
+  openDialog(): void {
+    this.dialog.open(DialogOverviewExampleDialog);
+  }
+
 }
 
-async submitVideo() {
-  if (this.recordedChunks.length === 0) {
-    console.error('No recorded video to submit');
-    return;
-  }
-  if (this.videoName.trim() === '') {
-    console.error('Video name cannot be empty');
-    return;
-  }
-
-  try {
-    await this.uploadToS3(this.videoName.trim(), 'mp4');
-    this.videoName = '';
-    this.isSubmitDisabled = true;
-    this.router.navigate(['/share-video']);
-  } catch (error) {
-    console.error('Error during S3 upload:', error);
-  }
-}
-
-onVideoNameChange() {
-  this.isSubmitDisabled = this.videoName.trim() === '';
-}
-
-
-playback(){
-  if (this.recordedChunks.length > 0) {
-    const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
-    const playbackBlobURL = URL.createObjectURL(recordedBlob);
-    let video: HTMLVideoElement = this.video.nativeElement;
-    window.open(playbackBlobURL, '_blank');
-  }
-  else {
-    console.error("No recorded video available for playback");
-  }
+export class DialogOverviewExampleDialog {
   
-}
-
 }

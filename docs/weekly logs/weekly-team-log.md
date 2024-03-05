@@ -1,3 +1,128 @@
+# Week of Feb 25th - Mar 3rd
+## Team 18
+
+### Milestones
+The following are milestones we worked towards/completed:
+1. Successfully worked around our JEST testing environment and are now able to test
+2. Worked on perfecting captioning. Manual testing provided results with captions attached to the video.
+3. Implementing database integration with profile editing
+4. Fixed an issue with the face blurring lambda functions and triggers, so we are now able to have faces blurred (this feature is not done)
+5. Added Angular materials to change the CSS and HTML layout of the page and look of it.
+6. New nav bar created on the left side of screen instead of the top.
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/5099f084-192a-4fb7-9bc0-e8864230e822)
+
+### In Progress/In Review
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/34117476-39cb-41e8-8564-5798e59aedbc)
+
+### Features in Backlog/Unassigned Features/Tasks for this sprint
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/a2b8cd2e-cd20-469e-a0d7-a619c21a90df)
+
+### Completed Features
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/329c248b-b83f-46cb-abb9-cd0a45c3a4fa)
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/5e20d6d7-152f-422f-9a4a-6eab7355b506)
+
+# Week of Feb 11th - Feb 18th
+## Team 18
+
+### Milestones
+The following are milestones we worked towards/completed:
+1. Continued to troubleshoot our Jest testing enviornment
+2. Worked on reading and writing to our database through PHP
+3. Continued to work on the profile page feature
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart
+<img width="1055" alt="Screenshot 2024-02-20 at 11 52 33 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/4b84d764-0ba4-4758-9aca-b6b89fd2baa0">
+
+### In Progress/In Review
+<img width="1470" alt="Screenshot 2024-02-20 at 11 53 29 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/5551bbed-af48-4f99-bfc4-189ea3367f0b">
+
+### Features in Backlog/Unassigned Features/Tasks for this sprint
+<img width="1470" alt="Screenshot 2024-02-20 at 11 53 08 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/bc231f53-0170-4951-ad4c-970c687ad4fa">
+
+### Completed Features
+<img width="1470" alt="Screenshot 2024-02-20 at 11 54 17 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/f095d5a5-70b5-4789-b348-775a9ecab58e">
+<img width="1470" alt="Screenshot 2024-02-20 at 11 54 37 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/107a7f1c-86d8-4437-8fa3-71c6e15e2a39">
+<img width="1470" alt="Screenshot 2024-02-20 at 11 54 51 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/e7d4f916-96f6-4900-b744-654802811259">
+
+# Week of Feb5th - Feb11th
+## Team 18
+
+### Milestones
+The following are milestones we worked towards/completed:
+1. Fixed AWS Rekognition Libraries to work on all servers for the blurring feature
+2. Fixed captioning and transciption logic in the code
+3. Add backend gateway to connect to the database with PHP.
+4. Created a PHP API to connect to the databse
+5. Implemented read and write features with said API
+6. Changed UI for home page, and Nav bar
+7. Added a collapsible vertical navbar in the app component
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart
+<img width="1029" alt="Screenshot 2024-02-13 at 8 14 25 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/fffa5e96-0752-4a34-87ff-c78e1483fd02">
+
+### In Progress/In Review
+<img width="1114" alt="Screenshot 2024-02-13 at 8 15 32 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/01b2f6f4-fb3c-4fdc-a589-b780c7541868">
+
+### Features in Backlog/Unassigned Features/Tasks for this sprint
+<img width="1114" alt="Screenshot 2024-02-13 at 8 16 16 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/59db424c-9a6a-44de-9fd1-d56fd5642b63">
+
+### Completed Features\
+<img width="1114" alt="Screenshot 2024-02-13 at 8 17 07 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/c37025a3-3daa-46d5-9494-d75d76490343">
+<img width="1114" alt="Screenshot 2024-02-13 at 8 17 47 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/6def9ed7-6ecb-4fb5-954c-ff78c58665c3">
+
+# Week of Jan 22nd - Feb4th (Two weeks worth, I believe we forgot last weeks)
+## Team 18
+
+### Milestones
+The following are milestones we worked towards/completed:
+1. Changed the UI of the webpage to be more intuitive to users
+2. Finally found the solution to the RDS!!! We are now starting to integrate it into our features
+3. Discussed and made notes from our peer testing feedback, we will make improvements to the platform according to the feedback we received
+4. Working on dockerization
+5. Made progress on the captioning feature for videos
+7. Made progress on Blurring privacy feature, docker container and images are working on AWS but encountering other issues
+8. Working on profile editing
+9. Implemented a comment box UI for videos, no backend development as the RDS just started working
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart
+![Screenshot 2024-02-04 at 11 43 26 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/7769a695-adfa-4fe1-8542-8c7532686f7e)
+
+### In Progress/In Review
+![Screenshot 2024-02-04 at 11 46 08 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/c4b5459a-9e69-42ae-b742-ecab648f199e)
+
+### Features in Backlog/Unassigned Features/Tasks for this sprint
+![Screenshot 2024-02-04 at 11 46 30 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d73f471e-9ddb-4666-b4b9-6cf22df2e3b7)
+
+### Completed Features
+![Screenshot 2024-02-04 at 11 44 29 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/45885e5d-3eab-4207-994f-1d9128954f80)
+![Screenshot 2024-02-04 at 11 44 43 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/3278160b-552e-4119-b55f-f4fbc56b5052)
+
 # Week of Jan 15th - Jan 22nd
 ## Team 18
 
@@ -9,6 +134,7 @@ The following are milestones we worked towards/completed:
 4. RDS transferred into DynamoDB, but looking to implement RDS through SST as it was advised we keep our database relational
 5. Working on Captioning feature for videos
 6. Working on Blurring privacy feature
+7. Updated the CSS on the main dashboard page
 ### Usernames:
 - Mackenzie Atkins - maxa2
 - Segundo Parra Jurado- smparra

@@ -1,3 +1,99 @@
+## Term 2 Week (8 + Reading Week): Feb 20th - Feb 29th
+
+### Tasks Worked On:
+  - Worked on redesigning our website with updated HTML + CSS + Angular Material using the feedback we received from our peer testing. This is a work in progress, but should be done before Tuesday's class. (Week 7 Update: It remains a WIP as I am waiting for the team to finish up some other pages so I can then update the CSS/HTML + Angular Material for them.
+  - Troubleshooted Jest more, I realized that Jest was simply not working with our app so I managed to research and configure a new environment for our testing. The new testing framework is called Vitest and it solves the problem with being able to locate imports called within the test cases. I'll be steadidly catching up with our test cases for the project over the coming weeks until I am fully caught up.
+
+### Tasks I am planning to work on this upcoming week:
+  - Calendar Integration UI (Not sure if I will be able to get backend work done for peer testing)
+  - Adding more UI changes in preparation for our peer testing session on Tuesday.
+
+### Tasks I Am Assigned To:
+
+<img width="1470" alt="Screenshot 2024-03-03 at 11 47 48 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d6c47277-7ccd-434e-b5ce-eb1bc849688e">
+
+### Peer Evaluations:
+
+<img width="1093" alt="Screenshot 2024-03-03 at 11 52 07 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/9d19ba9e-d202-467d-9bf7-317368996d61">
+
+## Term 2 Week 6: Feb 13th - Feb 15th
+
+### Tasks Worked On:
+  - Similar to last week, I had a fairly busy workload so I tried to get some work done before submitting my logs (2 days late). However, I was unable to make any significant progress over the past week.
+
+### Tasks I am planning to work on this upcoming week:
+  - (I will be working on the same tasks as described last week over the reading week)
+  - Work through the jest troubleshooting
+  - Work on the CSS & Angular material implementations
+  - If I manage to finish both of these tasks, I will work on the other tasks I am assigned to on the task board.
+  
+### Peer Evaluations:
+
+<img width="1092" alt="Screenshot 2024-02-20 at 11 44 15 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/1ea182c2-1ec5-40f1-858d-29bd3fcf2a1c">
+
+### Tasks I Am Assigned To:
+
+<img width="1440" alt="Screenshot 2024-02-20 at 11 48 33 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/9ee95410-76d2-4fde-8efb-386e1402f4e1">
+
+## Term 2 Week 5: Feb 6th - Feb 8th
+
+### Tasks Worked On:
+  - Had a fairly busy week with assignments and midterm review, I was only able to continue working on the jest troubleshooting.
+
+### Tasks I am planning to work on this upcoming week:
+  - Work through the jest troubleshooting
+  - Work on the CSS & Angular material implementations
+  - If I manage to finish both of these tasks, I will work on the other tasks I am assigned to on the task board.
+  
+### Peer Evaluations:
+
+![Screenshot 2024-02-13 at 11 54 53 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/bd82ca49-66fe-4e68-a06d-cc39ffbb5531)
+
+### Tasks I Am Assigned To:
+
+![Screenshot 2024-02-13 at 11 52 22 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/c7b6d239-daf5-47d1-8150-e1355e0db050)
+
+## Term 2 Week 4: Jan 30th - Feb 1st
+
+### Tasks Worked On:
+  - After spending a few days encountering errors in SST, I attempted to fix the AWS RDS problem. After reviewing some AWS documentation I was able to troubleshoot the issue. I made two new changes to the RDS while troubleshooting, I first changed the default port number from 3306 to 13306. Then I added a new route (0.0.0.0/0) in each subnet route table within the VPC. I am not sure which of these new changes solved the issue but conenction with the RDS is finally possible! 
+  - Comments attached to the video UI is implemented, but the backend is not
+  - User contact remains a task I need to get working on
+  - Started to implement database connectivity into our prvcy code, currently trying to allow sign up information to transfer into the 'Users' table within the database when a sign up occurs.
+
+### Tasks I am planning to work on this upcoming week:
+  - Having the RDS implemented to a greater extent within our existing functionalities
+  - User contact list work
+  - Write up more jest test cases
+  
+### Peer Evaluations:
+
+![Screenshot 2024-02-04 at 11 59 32 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/19ca92ff-1d34-4a96-96fc-a29d419529b0)
+
+### Tasks I Am Assigned To:
+
+![Screenshot 2024-02-04 at 11 57 31 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/4e8f6e75-13cf-48f8-87b5-4d8b4db32cfd)
+
+## Term 2 Week 3: Jan 23th - 25th
+
+### Tasks Worked On:
+  - Worked on implementing the SST infrastructure, ran into some issues during test deployment. I am meeting with Professor Hui on Monday and am hoping to receive feedback on how to proceed.
+  - Updated the main dashboard page to better prepare for the upcoming peer testing.
+  - Comments attached to the video + user contact list is still a work in progress. At this moment there is no code significant enough to commit to Github.
+
+### Tasks I am planning to work on this upcoming week:
+  - Resolve SST issues
+  - Work together with the team to improve more CSS pages for peer testing
+  - Write up more jest test cases
+  
+### Peer Evaluations:
+
+![Screenshot 2024-01-28 at 11 51 19 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/5abde6a7-01fb-4f8d-ac9c-e5cf66d96794)
+
+### Tasks I Am Assigned To:
+
+![Screenshot 2024-01-28 at 11 48 36 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/0fa1b761-2447-4c86-b250-931ab65e5732)
+
 ## Term 2 Week 2: Jan 16th - 18th
 
 ### Tasks Worked On:

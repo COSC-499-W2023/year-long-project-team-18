@@ -2,6 +2,58 @@
 
 ## TERM 2
 
+## Week 8:
+Dates 26th Feb - 3rd March
+
+### Student Goals: 
+* Finally complete the face blurring feature to automatically upload to output bucket with the blurred video.
+
+### Completed Tasks:
+* Face blurring problem has been solved and it properly blurs faces in videos when uploaded to the bucket and outputs them in the another bucket.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/0a6cb866-c74f-45e3-a1b3-c58cf8e3367e)
+
+
+## Week 5:
+Dates 5th Feb - 11th Feb
+
+### Student Goals:
+* Figure out why the lambda permissions don't work.
+* Test the code to see that it works with the fix.
+
+### Completed Tasks:
+* Figured out that the problem with the permissions was with the Rekognition library as it only works on some AWS servers.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/08239bc6-381d-4b57-a88f-f42e90efbeb0)
+
+
+## Week 4:
+Dates: 29th Jan - 4th Feb
+
+### Student Goals:
+* Finish setting up the face blurring code into our repository with the required dependencies.
+* Connect the code to our own AWS account and making necessary changes required.
+
+### Completed Tasks:
+* Fully set up the code on local machine.
+* Connected to our own AWS account to use the correct services.
+* The code creates the new S3 buckets to access the videos and trigger lamda functions but now there is a problem with the lamda permissions.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/6f497bb2-4a9a-41e2-8f53-0a8a6720158a)
+
+
+## Week 3:
+Dates: 22nd Jan - 28th Jan
+
+### Student Goals:
+* Import code into our own project.
+* Set up all the dependencies and connect the face blurring features to our AWS project.
+* Make code adjustments to fit into our own project.
+
+### Completed Tasks:
+* Imported the code into my local directory into the appropriate location and set up the files.
+* Downloaded required files and dependencies.
+* Spent a lot of time debugging and finding appropriate modules to use as many of the recommended versions are deprecated or don't work.
+* ![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/9ca07bf1-78d2-4352-8569-9c6d81d994db)
+
+
 ## Week 2:
 Dates: 15th Jan - 21st Jan
 
