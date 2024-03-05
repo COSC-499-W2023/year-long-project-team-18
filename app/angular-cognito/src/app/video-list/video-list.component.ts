@@ -68,6 +68,13 @@ export class VideoListComponent implements OnInit {
     return `https://prvcy-storage-ba20e15b50619-staging.s3.amazonaws.com/${videoKey}`;
   }
 
+  // getCaptionsUrl(videoKey: string): string {
+  //   //this.user = {username: this.IUser.username, organizationcode: this.IUser['custom:organization']};
+  //   const username = this.cognitoService.getUsername();
+  //   const captionKey = videoKey.substring(0, videoKey.length - 4) + "-captions.vtt";
+  //   const captionFolderKey = username;
+  //   return `https://prvcy-storage-ba20e15b50619-staging.s3.amazonaws.com/${captionFolderKey}/${captionKey}`;
+  // }
 fetchContactList() {
     try {
       console.log(this.IUser.username);

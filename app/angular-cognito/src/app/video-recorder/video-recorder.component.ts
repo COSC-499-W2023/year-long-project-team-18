@@ -2,8 +2,9 @@ import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, ViewChild } fr
 import { IUser, CognitoService } from '../cognito.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import * as AWS from 'aws-sdk';
+
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
@@ -233,7 +234,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
       console.log(err);
     }
   }
- 
+  
   private transcribeUpload(username: string, videoName: string, mediaFileKey: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
@@ -253,8 +254,14 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
       Media: {
         MediaFileUri: `s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`
       },
+      Subtitles: {
+        Formats: [
+          "vtt"
+        ],
+        OutputStartIndex: 1,
+      },
       OutputBucketName: 'prvcy-storage-ba20e15b50619-staging',
-      OutputKey: `${username}-captions/${videoName}-captions.vtt`
+      OutputKey: `${username}-captions/${videoName}-captions`
     };
     async function startTranscriptionRequest() {
       
@@ -272,7 +279,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
       }
     }
     startTranscriptionRequest();
-    }) 
+    });
   }
 
   checkTranscription(transcriptionJobName: string): Promise<void> {
