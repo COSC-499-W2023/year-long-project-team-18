@@ -237,7 +237,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   
   private transcribeUpload(username: string, videoName: string, mediaFileKey: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      const { TranscribeClient, StartTranscriptionJobCommand, ConflictException, DeleteTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
+      const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
     const region = environment.aws.region;
     const credentials = {
       accessKeyId: environment.aws.accessKeyId,
@@ -280,7 +280,6 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     }
     startTranscriptionRequest();
     });
-    
   }
 
   checkTranscription(transcriptionJobName: string): Promise<void> {
