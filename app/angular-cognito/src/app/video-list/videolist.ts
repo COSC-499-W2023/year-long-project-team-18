@@ -1,5 +1,5 @@
 export interface videolist{
-    email?: string;
+    email: string;
     username: string;
     password?: string;
     firstname?: string;

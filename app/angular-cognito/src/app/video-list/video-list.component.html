@@ -26,7 +26,11 @@
   </div>
   <div *ngIf="accountType === 'business'" class="notification-area">
     <h3>Notification Requests</h3>
-    <p>Notification content goes here...</p>
+    <p>Request a video:</p>
+    <select [(ngModel)]="selectedContact">
+      <option *ngFor="let contact of contactList" [value]="contact">{{ contact.username }}</option>
+    </select>
+    <button (click)="sendRequest(selectedContact, 'Message sent')">Request</button>
   </div>
   
 <div *ngIf="accountType === 'personal'" class="heading-container">

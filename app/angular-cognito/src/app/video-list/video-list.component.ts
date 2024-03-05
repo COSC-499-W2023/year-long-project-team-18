@@ -16,9 +16,10 @@ import { VideoListService } from './videolist.service';
 export class VideoListComponent implements OnInit {
   videos: VideoMetadata[] = [];
   accountType: string | undefined;
-  user: videolist = {username: '', organizationcode: ''};
+  user: videolist = {username: '', organizationcode: '', email:''};
   IUser: IUser;
   contactList: videolist[] = [];
+  email: videolist[] = [];
   selectedContact: any;  
   private sns: SNS;
 
@@ -79,7 +80,7 @@ fetchContactList() {
     try {
       console.log(this.IUser.username);
       
-      this.user = {username: this.IUser.username, organizationcode: this.IUser['custom:organization']};
+      this.user = {username: this.IUser.username, organizationcode: this.IUser['custom:organization'], email: this.IUser.email};
       this.VideoListService.getAll(this.user).subscribe(
         (data: videolist[])=>{
           this.contactList = data;
@@ -119,6 +120,33 @@ fetchContactList() {
         console.error('Error sending videos:', error);
       });
     }
+  }
+
+  async sendRequest(contact: any, message: string): Promise<void>{
+    try{
+      this.VideoListService.getEmail({username: '', organizationcode: '', email: ''}).subscribe(
+        (data: videolist[])=>{
+          this.email = data;
+        }
+      )
+      const params = {
+        Message: message,
+        Subject: 'New Request Received',
+        TopicArn: 'arn:aws:sns:ca-central-1:952490130013:prvcy',
+        MessageAttributes: {
+          email:{
+            DataType: 'String',
+            StringValue: this.email[0].email
+          }
+        }
+      };
+      await this.sns.publish(params).promise();
+      console.log(`Message sent to ${this.email[0].email}`)
+    }catch (error) {
+      console.error('Error sending message:', error);
+      throw error;
+    }
+
   }
   
 
