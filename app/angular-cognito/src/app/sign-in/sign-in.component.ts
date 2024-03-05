@@ -12,6 +12,7 @@ export class SignInComponent {
   loading: boolean;
   user: IUser;
   errorMessage: string = '';
+  sucessMessage: string = '';
   hide = true;
 
   constructor(private router: Router, private cognitoService: CognitoService) {
@@ -30,6 +31,7 @@ export class SignInComponent {
       this.cognitoService.signIn(this.user)
       .then(() => {
         this.router.navigate(['/dashboard']);
+        this.sucessMessage = 'Success';
       }).then(()=>{
         window.location.reload();
       }).catch(() => {
