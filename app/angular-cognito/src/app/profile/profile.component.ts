@@ -3,7 +3,6 @@ import { S3Client, CopyObjectCommand, DeleteObjectCommand } from "@aws-sdk/clien
 
 import { IUser, CognitoService } from '../cognito.service';
 import { ProfileUpdateService } from './profile-update-service';
-import { NgModel } from '@angular/forms';
 import { profile } from './profile';
 
 @Component({
@@ -31,17 +30,22 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  updateDb(org: string, username: string){
+  updateDb(org: string){
 
+    this.cognitoService.getUser()
+    .then((user: any) => {
 
-    this.user['custom:organization'] = this.user['custom:organization']
-    this.profileUpdateService
-    .update({organizationcode: org, username: username}).subscribe(
-      (res)=>{
-        console.log("Success")  
-      }
-    );
-    this.cognitoService.updateUser(this.user);
+      user['custom:organization'] = org
+      this.cognitoService.updateUser(this.user);
+      this.profileUpdateService
+      .update({organizationcode: org, username: user.username}).subscribe(
+        (res)=>{
+          console.log("Success")  
+        }
+      );
+      
+    });
+
   }
 
   public update(): void {

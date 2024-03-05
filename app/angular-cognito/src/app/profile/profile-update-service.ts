@@ -17,7 +17,7 @@ export class ProfileUpdateService {
 
 
 
-    return this.http.post('http://localhost/api/update.php', {data: profile});
+    return this.http.put('http://localhost/api/update.php', {data: profile});
   }
 
 }
