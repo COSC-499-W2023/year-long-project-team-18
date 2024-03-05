@@ -193,3 +193,13 @@ Goal was complete the project plan and begin with scoping the project while iden
 - Inbox<br>
 - Now that database and backend are finally done, I can start working on these features
 
+<h2>T2 Week8 Feb26 - Mar03</h2>
+<img width="1114" alt="Screenshot 2024-03-04 at 7 13 51 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/3a89ef2f-3212-420a-be8d-2646ed02a24f">
+
+<h3>Students Goals</h3>
+- Adding a notification requests for videos<br>
+<h3>In-Progress Tasks</h3>
+- Adding a notification requests for videos<br>
+- Inbox<br>
+<h3>Completed Tasks</h3>
+- Implemented changes to backed to recieve, send and store video transfer requests
