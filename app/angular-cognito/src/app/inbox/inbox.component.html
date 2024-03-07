@@ -1,1 +1,9 @@
-<p>inbox works!</p>
+<!-- inbox.component.html -->
+<div *ngFor="let request of pendingRequests">
+    <div>
+      Video Request: {{ request.videoName }} from {{ request.senderUsername }}
+      <button (click)="respondToRequest(request.id, 'accept')">Accept</button>
+      <button (click)="respondToRequest(request.id, 'deny')">Deny</button>
+    </div>
+  </div>
+  

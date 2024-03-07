@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import {Amplify, Auth } from 'aws-amplify';
 import { Router } from '@angular/router';
 import * as AWS from 'aws-sdk';
+import { HttpClient } from '@angular/common/http';
 import { SNS } from 'aws-sdk';
 
 import { environment } from '../environments/environment';
@@ -31,8 +32,9 @@ export interface IUser {
 })
 export class CognitoService {
   private authenticationSubject: BehaviorSubject<any>;
+  private apiUrl = 'http://yourbackend.api'
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpClient) {
     Amplify.configure({
       Auth: environment.cognito
     });
@@ -319,4 +321,21 @@ export class CognitoService {
         throw error;
       }
     }    
-  }    
+    sendShareRequest(receiverUsername: string, videoKey: string): Observable<any> {
+      const requestBody = {
+        receiverUsername,
+        videoKey,
+      };
+      return this.http.post(`http://localhost/api/video_share_requests.php`, requestBody);
+    }
+
+    fetchPendingShareRequests(): Observable<any> {
+      return this.http.get(`http://localhost/api/video_share_requests.php`);
+    }
+
+    respondToShareRequest(requestId: string, action: 'accept' | 'deny'): Observable<any> {
+      const requestBody = { requestId, action };
+      return this.http.post(`http://localhost/api/video_share_requests.php`, requestBody);
+    }
+
+  }   

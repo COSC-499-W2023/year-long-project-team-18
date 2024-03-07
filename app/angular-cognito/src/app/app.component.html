@@ -21,6 +21,8 @@
           *ngIf="isAuthenticated && user['custom:account_type']=='personal'"><img src="assets/video.png" alt="Profile Image" class="profile-image"><span *ngIf="!isNavbarCollapsed">Create a new Video</span></a>
         <a class="nav-link" routerLink="/video-list" routerLinkActive="active"
           *ngIf="isAuthenticated"><img src="assets/video-marketing.png" alt="Profile Image" class="profile-image"><span *ngIf="!isNavbarCollapsed">Video Archive</span></a>
+          <a class="nav-link" routerLink="/inbox" routerLinkActive="active"
+          *ngIf="isAuthenticated"><img src="assets/mail.png" alt="Profile Image" class="profile-image"><span *ngIf="!isNavbarCollapsed">Inbox</span></a>
           <a class="nav-link" routerLink="/support" routerLinkActive="active" *ngIf="isAuthenticated"><img src="assets/customer-support.png" alt="Profile Image" class="profile-image"><span *ngIf="!isNavbarCollapsed">Support</span></a>
       <!-- signout to right margin -->
         <a class="nav-link" routerLink="" (click)="signOut()" *ngIf="isAuthenticated" id="signOut"><img src="assets/logout.png" alt="Profile Image" class="profile-image"><span *ngIf="!isNavbarCollapsed">Sign Out</span></a>

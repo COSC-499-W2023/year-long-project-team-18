@@ -73,19 +73,19 @@ export class ShareVideoComponent implements OnInit {
     if (this.recentVideo) {
       const sourceKey = this.recentVideo.key;
       console.log('Source Key:', sourceKey);
-  
-      this.cognitoService.copyVideoToContactFolder(sourceKey, contact).then(
+      this.cognitoService.sendShareRequest(contact.username, sourceKey).subscribe(
         async () => {
-          console.log(`Video successfully sent`);
-          await this.sendMessageToUser(contact, 'Your new video has been sent!');
+          console.log(`Share request for video ${sourceKey} successfully sent to ${contact.username}`);
+          await this.sendMessageToUser(contact.email, 'A new video share request has been sent to you!');
           this.router.navigate(['/dashboard']);
         },
         (error) => {
-          console.error(`Error sending video to ${contact}:`, error);
+          console.error(`Error sending share request to ${contact.username}:`, error);
         }
       );
     }
-  }  
+  }
+  
 
   async sendMessageToUser(userEmail: string, message: string): Promise<void> {
     try {
