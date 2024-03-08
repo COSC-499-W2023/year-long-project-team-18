@@ -14,6 +14,9 @@ import { VideoListService } from './videolist.service';
   styleUrls: ['./video-list.component.scss']
 })
 export class VideoListComponent implements OnInit {
+  static fetchContactList() {
+    throw new Error('Method not implemented.');
+  }
   videos: VideoMetadata[] = [];
   accountType: string | undefined;
   user: videolist = {username: '', organizationcode: ''};
@@ -90,12 +93,13 @@ fetchContactList() {
     }
   }
 
-  sendSelectedVideosToContact(contact: any): void {
+  async sendSelectedVideosToContact(contactUsername: string): Promise<void> {
     const selectedVideos = this.videos.filter(video => video.isSelected);
-  
     if (selectedVideos.length > 0) {
+      const senderId = await this.cognitoService.getUsername();
+      console.log(senderId);
       const shareRequests$ = selectedVideos.map(video => 
-        this.cognitoService.sendShareRequest(contact.username, video.key)
+        this.cognitoService.sendShareRequest(senderId, contactUsername, video.key)
       );
   
       forkJoin(shareRequests$).subscribe({

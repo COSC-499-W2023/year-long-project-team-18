@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map } from 'rxjs';
 import {Amplify, Auth } from 'aws-amplify';
 import { Router } from '@angular/router';
 import * as AWS from 'aws-sdk';
-import { HttpClient } from '@angular/common/http';
-import { SNS } from 'aws-sdk';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
 
@@ -32,7 +31,6 @@ export interface IUser {
 })
 export class CognitoService {
   private authenticationSubject: BehaviorSubject<any>;
-  private apiUrl = 'http://yourbackend.api'
 
   constructor(private router: Router, private http: HttpClient) {
     Amplify.configure({
@@ -321,21 +319,31 @@ export class CognitoService {
         throw error;
       }
     }    
-    sendShareRequest(receiverUsername: string, videoKey: string): Observable<any> {
+    sendShareRequest(senderId: string, receiverId: string, videoKey: string): Observable<any> {
+      const url = `http://localhost/api/createShareRequest`;
       const requestBody = {
-        receiverUsername,
-        videoKey,
+        senderId,
+        receiverId,
+        videoKey
       };
-      return this.http.post(`http://localhost/api/video_share_requests.php`, requestBody);
+      console.log('Sending request with body:', requestBody);
+      return this.http.post(url, requestBody).pipe(
+        map((res: any) => res)
+      );
     }
+    
 
-    fetchPendingShareRequests(): Observable<any> {
-      return this.http.get(`http://localhost/api/video_share_requests.php`);
+    fetchPendingShareRequests(userId: string): Observable<any[]> {
+      console.log('User ID:', userId);
+      const url = `http://localhost/api/fetchPendingRequests?userId=${userId}`;
+      console.log('Fetching pending requests for user:', userId);
+      return this.http.get<any[]>(url);
     }
+    
 
-    respondToShareRequest(requestId: string, action: 'accept' | 'deny'): Observable<any> {
+    respondToShareRequest(requestId: number, action: 'accept' | 'deny'): Observable<any> {
       const requestBody = { requestId, action };
-      return this.http.post(`http://localhost/api/video_share_requests.php`, requestBody);
+      return this.http.post(`http://localhost/api/respondToRequest`, requestBody);
     }
 
   }   

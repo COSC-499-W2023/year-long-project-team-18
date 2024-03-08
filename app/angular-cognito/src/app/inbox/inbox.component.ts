@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CognitoService } from '../cognito.service';
+import { Router } from '@angular/router';
+
+interface PendingRequest {
+  success: boolean;
+  data: any[];
+}
 
 @Component({
   selector: 'app-inbox',
@@ -7,30 +13,57 @@ import { CognitoService } from '../cognito.service';
   styleUrls: ['./inbox.component.scss']
 })
 export class InboxComponent implements OnInit {
-  pendingRequests: any[] = [];
+  pendingRequests: PendingRequest = { success: false, data: [] };
+  loading: boolean = true;
 
-  constructor(private cognitoService: CognitoService) { }
+  constructor(private cognitoService: CognitoService, private router: Router) { 
+  }
 
   ngOnInit(): void {
-    this.loadPendingRequests();
+      this.loadPendingRequests();
   }
 
-  loadPendingRequests(): void {
-    this.cognitoService.fetchPendingShareRequests().subscribe({
-      next: (requests) => {
+  async loadPendingRequests(): Promise<void> {
+    const userId = await this.cognitoService.getUsername();
+    this.cognitoService.fetchPendingShareRequests(userId).subscribe({
+      next: (response: any) => {
+        const requests: PendingRequest = response;
+        console.log('Pending Requests:', requests);
         this.pendingRequests = requests;
+        this.loading = false;
       },
-      error: (error) => console.error('Error fetching pending share requests:', error)
+      error: (error) => {
+        console.error('Error fetching pending share requests:', error);
+        this.loading = false;
+      }
     });
   }
+
 
   respondToRequest(requestId: string, action: 'accept' | 'deny'): void {
-    this.cognitoService.respondToShareRequest(requestId, action).subscribe({
+    this.cognitoService.respondToShareRequest(+requestId, action).subscribe({
       next: () => {
         console.log(`Request ${action} successfully.`);
+        if (action === 'accept') {
+          const requestData = this.pendingRequests.data.find((request: any) => request.id === requestId);
+          if (requestData) {
+            this.cognitoService.copyVideoToContactFolder(requestData.video_key, requestData.receiver_id)
+            .then(() => {
+              console.log('Data copied successfully.');
+              this.router.navigate(['/video-list']);
+              //this.loadPendingRequests();
+            })
+              .catch((error) => console.error('Error copying data:', error));
+          }
+        }
         this.loadPendingRequests();
       },
-      error: (error) => console.error(`Error responding to request:`, error)
+      error: (error: any) => console.error('Error responding to request:', error)
     });
   }
+  
+  removeFolderName(videoKey: string): string {
+    return videoKey.split('/')[1];
+  }
+  
 }
