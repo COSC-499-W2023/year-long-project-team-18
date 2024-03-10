@@ -1,6 +1,6 @@
-import { SignInComponent } from './sign-in.component';
+import { SignInComponent } from '../src/app/sign-in/sign-in.component';
 import { Router } from '@angular/router';
-import { CognitoService, IUser } from '../cognito.service';
+import { CognitoService, IUser } from '../src/app/cognito.service';
 import { describe, it, expect, beforeEach } from 'vitest';
 
 describe('Signin Component', () => {
