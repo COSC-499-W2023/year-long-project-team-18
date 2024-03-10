@@ -16,7 +16,9 @@ To get started with testing in the PRVCY project, follow these steps:
 
 1. Ensure you have the Angular CLI installed. If not, you can install it via npm by running:
 
+    ```bash
     npm i @angular/cli
+    ```
 
 2. Clone the PRVCY app repository to your local machine.
 
