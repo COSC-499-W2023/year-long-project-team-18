@@ -1,4 +1,4 @@
-## Term 2 Week (8 + Reading Week): Feb 20th - Feb 29th
+## Term 2 Week 9: Mar. 5th - Mar. 7th
 
 ### Tasks Worked On:
   - Created more Vitest test cases
