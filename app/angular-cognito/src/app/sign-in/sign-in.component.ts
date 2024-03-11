@@ -36,7 +36,7 @@ export class SignInComponent {
         window.location.reload();
       }).catch(() => {
         this.loading = false;
-        this.errorMessage = 'Failed to sign in';
+        this.errorMessage = 'Incorrect email or password';
       });
     }
   }
