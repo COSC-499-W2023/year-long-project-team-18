@@ -1,3 +1,29 @@
+## Mar 4 = Mar 10
+
+### Student goals
+
+Ensure a successful peer testing session, and continue work on database. 
+
+### Completed tasks
+- Fixed some bugs related to account creation
+- Worked on some notification system stuff in branch 'admin-permissions'
+
+### Student tasks on board
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/d8e4855c-9c6f-45ec-bc01-78b2435040e2)
+
+
+### In progress tasks
+- Attaching comments to videos
+- Fixes based on peer feedback
+
+### Peer evaluation
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/83057a46-a6fc-4a89-a1b5-bf36ce92e034)
+
+
+
+
 ## Feb 26 - March 3
 
 ### Student goals
