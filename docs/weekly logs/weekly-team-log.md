@@ -1,3 +1,33 @@
+# Week Mar 4 - Mar 11
+## Team 18
+
+### Milestones
+The following are milestones we worked towards/completed:
+1. Worked on notifications for videos so that people would get requests when they send a video to them.
+2. Worked on automated testing/test cases using the Vi testing framework instead of JEST. This has proven to be much better.
+3. Talked about changing our S3 buckets to better flow into our current workflow with face blurring.
+4. Captioning now functions, looking to implement it to the video listing page to ensure captions are available at any stage of the app.
+### Usernames:
+- Mackenzie Atkins - maxa2
+- Segundo Parra Jurado- smparra
+- Ishaan Gupta - Ishaan2207
+- Sam Garg - sam131102
+- Nikhil Chikhlia - nikhilchikhlia
+
+### Burnup Chart
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/67fa8dc4-e167-452d-b481-4834ee17995c)
+
+### In Progress/In Review
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/b2b421f2-d026-4de8-84e6-6710c573e4e1)
+
+### Features in Backlog/Unassigned Features/Tasks for this sprint
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/4cf7244f-6162-42e0-9972-37e942c76b84)
+
+### Completed Features
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/974a00f6-7d3d-4b39-8b3a-365e7ff9d518)
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/a2f543b0-da4b-4821-8ff9-0f93b940c3bb)
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/af4cfd0e-3a09-4629-b7cc-78c91a565057)
+
 # Week of Feb 25th - Mar 3rd
 ## Team 18
 
