@@ -1,3 +1,19 @@
+## Term 2 Week 9: Mar. 5th - Mar. 7th
+
+### Tasks Worked On:
+  - Created more Vitest test cases
+
+### Tasks I am planning to work on this upcoming week:
+  - Calendar Integration UI (frontend + backend)
+
+### Tasks I Am Assigned To:
+
+<img width="1470" alt="Screenshot 2024-03-03 at 11 47 48 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d6c47277-7ccd-434e-b5ce-eb1bc849688e">
+
+### Peer Evaluations:
+
+![Screenshot 2024-03-10 at 11 32 54 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/b7aeee41-1bb6-412b-9e4e-05ee5ea7f8d6)
+
 ## Term 2 Week (8 + Reading Week): Feb 20th - Feb 29th
 
 ### Tasks Worked On:
