@@ -9,14 +9,9 @@ describe('OrganizationPageComponent', () => {
 
   beforeEach(() => {
     vi.resetAllMocks();
-    
-     // Mocking CognitoService methods
-     mockCognitoService = {
-      getUser: vi.fn().mockResolvedValue({
-        username: 'testUser',
-        attributes: {},
-        'custom:organization': ''
-      }),
+     
+    mockCognitoService = {
+      getUser: vi.fn().mockResolvedValue({}),
       updateUser: vi.fn().mockResolvedValue({})
     };
 
