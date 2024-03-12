@@ -122,30 +122,30 @@ fetchContactList() {
     }
   }
 
-  async sendRequest(contact: any, message: string): Promise<void>{
-    try{
-      this.VideoListService.getEmail({username: '', organizationcode: '', email: ''}).subscribe(
+sendRequest(contact: string, message: string){
+    
+      this.VideoListService.getEmail({username: 'maxbusiness', organizationcode: '', email: ''}).subscribe(
         (data: videolist[])=>{
           this.email = data;
+          const params = {
+            Message: message,
+            Subject: 'New Request Received',
+            TopicArn: 'arn:aws:sns:ca-central-1:952490130013:prvcy',
+            MessageAttributes: {
+              email:{
+                DataType: 'String',
+                StringValue: this.email[0].email
+              }
+            }
+          };
+          this.sns.publish(params);
+          console.log(`Message sent`)
         }
+        
       )
-      const params = {
-        Message: message,
-        Subject: 'New Request Received',
-        TopicArn: 'arn:aws:sns:ca-central-1:952490130013:prvcy',
-        MessageAttributes: {
-          email:{
-            DataType: 'String',
-            StringValue: this.email[0].email
-          }
-        }
-      };
-      await this.sns.publish(params).promise();
-      console.log(`Message sent to ${this.email[0].email}`)
-    }catch (error) {
-      console.error('Error sending message:', error);
-      throw error;
-    }
+     
+      
+
 
   }
   

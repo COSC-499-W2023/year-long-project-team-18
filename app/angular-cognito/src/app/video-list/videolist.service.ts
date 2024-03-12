@@ -29,7 +29,6 @@ export class VideoListService {
   getEmail(videolist: videolist){
     let params = new HttpParams()
     .set('username', videolist.username)
-    .set('email', videolist.organizationcode);
 
     return this.http.get('http://localhost/api/getEmail.php', {params}).pipe(
       map((res: any)=>{
@@ -38,12 +37,5 @@ export class VideoListService {
     )
   }
 
-//   store(signup: signup){
-//     return this.http.post('http://localhost/api/store.php', {data: signup}).pipe(
-//       map((res: any)=>{
-//         return res['data'];
-//       })
-//     )
-//   }
 
 }

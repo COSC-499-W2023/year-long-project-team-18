@@ -30,7 +30,7 @@
     <select [(ngModel)]="selectedContact">
       <option *ngFor="let contact of contactList" [value]="contact">{{ contact.username }}</option>
     </select>
-    <button (click)="sendRequest(selectedContact, 'Message sent')">Request</button>
+    <button (click)="sendRequest(selectedContact, 'You have received a request for a video')">Request</button>
   </div>
   
 <div *ngIf="accountType === 'personal'" class="heading-container">
