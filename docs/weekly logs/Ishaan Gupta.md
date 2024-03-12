@@ -2,6 +2,19 @@
 
 ## TERM 2
 
+## Week 9: 
+Dates 4th March - 10th March
+
+### Students Goals:
+* Have the face blurring code properly deployed with the correct region and versions.
+* Resturcture the S3 bucket system to accomodate for the face blurring to work with the rest of the system.
+
+### Completed Tasks:
+* The face blurring code finally works properly with it outputting a blurred video into the output bucket when a video is uploaded.
+* Could not do the bucket restructuring as Sam was finishing a different feature that interfered and needed to be completed before moving onto the buckets.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/49fbda18-a31c-4a04-8377-574e0a250f0d)
+
+
 ## Week 8:
 Dates 26th Feb - 3rd March
 
