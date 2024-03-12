@@ -1,12 +1,36 @@
+<h1>Week Mar 3 - Mar 10</h1>
+<h1>Student Goals:</h1>
+
+* Receive feedback from the Peer Review session
+* Work on the points brought up in the feedback
+
+<h2>Student tasks on board:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/c3f2eb3a-2c40-430e-a481-7fc2422bbab2)
+
+<h2>In progress tasks:</h2>
+
+* Profile editing will be the focus for this week
+* Adding some finishing touches to captioning to allow it to appear to the Video list page
+* Changing the structure of our S3 code in our app to reflect how the videos get moved for the face blurring feature
+
+<h2>Screenshot of Peer Eval:</h2>
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/4bf69846-9d62-4e20-bb02-1d1cfef55432)
+
+
 <h1>Week Feb 25 - Mar 3</h1>
 <h1>Student Goals</h1>
+
 * Have captioning done for peer review
 * Have profile editing (at least the username) ready for peer review
 
 <h2>Student Tasks on Board:</h2>
+
 ![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/45404470/84330bd3-80a6-4749-ae7c-77d61d829a7e)
 
 <h2>In progress tasks:</h2>
+
 * Captioning was wrong the entire time. Previously I had thought that supplying the correct file format to the file when uploading to S3 would work, but I had not provided a parameter to the transcription request, so it did not format the file properly. That has now been fixed, and videos can now have captions attached. However, that is not done yet. It took me this week to figure out this issue and fix it, and I plan to hopefully have captions ready on videos for our next peer review session.
 * Idenitified what needs to be done to change the username on the front end. I do not want to change the username using the database since there could be a mismatch between the db and Cognito, so I will use the Alias attribute given in Cognito.
 
