@@ -5,6 +5,9 @@ import { VideoMetadata } from '../video-metadata.model';
 import { SNS } from 'aws-sdk';
 import { Router } from '@angular/router';
 
+import { videolist } from './videolist';
+import { VideoListService } from './videolist.service';
+
 @Component({
   selector: 'app-video-list',
   templateUrl: './video-list.component.html',
@@ -13,22 +16,34 @@ import { Router } from '@angular/router';
 export class VideoListComponent implements OnInit {
   videos: VideoMetadata[] = [];
   accountType: string | undefined;
-  contactList: any[] = [];
+  user: videolist = {username: '', organizationcode: ''};
+  IUser: IUser;
+  contactList: videolist[] = [];
   selectedContact: any;  
   private sns: SNS;
 
   constructor(
     private VideoListingService: VideoListingService,
     private cognitoService: CognitoService,
+    private VideoListService: VideoListService,
     private router: Router
-  ) { 
-    this.sns = new SNS();
-  }
+  ) { this.IUser = {} as IUser; 
+      this.sns = new SNS();
+    }
+
+
+
 
   ngOnInit(): void {
-    this.loadVideos();
-    this.loadAccountType();
-    this.fetchContactList();
+    this.cognitoService.getUser()
+    .then((IUser: any) => {
+      this.IUser = IUser.attributes;
+    }).then(()=>{
+      this.loadVideos();
+      this.loadAccountType();
+      this.fetchContactList();
+    })
+
   }
 
   loadVideos(): void {
@@ -53,13 +68,23 @@ export class VideoListComponent implements OnInit {
     return `https://prvcy-storage-ba20e15b50619-staging.s3.amazonaws.com/${videoKey}`;
   }
 
-  async fetchContactList() {
+  // getCaptionsUrl(videoKey: string): string {
+  //   //this.user = {username: this.IUser.username, organizationcode: this.IUser['custom:organization']};
+  //   const username = this.cognitoService.getUsername();
+  //   const captionKey = videoKey.substring(0, videoKey.length - 4) + "-captions.vtt";
+  //   const captionFolderKey = username;
+  //   return `https://prvcy-storage-ba20e15b50619-staging.s3.amazonaws.com/${captionFolderKey}/${captionKey}`;
+  // }
+fetchContactList() {
     try {
-      const usernames = await this.cognitoService.getContactListFromS3();
-      const ownUsername = await this.cognitoService.getUsername();
-      const filteredUsernames = usernames.filter(username => username !== ownUsername);
+      console.log(this.IUser.username);
       
-      this.contactList = filteredUsernames;
+      this.user = {username: this.IUser.username, organizationcode: this.IUser['custom:organization']};
+      this.VideoListService.getAll(this.user).subscribe(
+        (data: videolist[])=>{
+          this.contactList = data;
+        }
+      )
     } catch (error) {
       console.error('Error fetching usernames from S3:', error);
     }

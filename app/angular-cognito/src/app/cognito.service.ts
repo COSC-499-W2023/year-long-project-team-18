@@ -22,6 +22,8 @@ export interface IUser {
   birthdate: string;
   'custom:account_type': string;
   'custom:organization': string;
+  preferred_username: string;
+  gender: string;
 }
 
 @Injectable({
@@ -43,6 +45,11 @@ export class CognitoService {
       this.authenticationSubject.next(true);
     });
   }
+  
+  public changePreferredUsername(user: IUser): void {
+    user.preferred_username = user.username;
+    console.log(user.preferred_username);
+  }
 
   public signUp(user: IUser): Promise<any> {
     return Auth.signUp({
@@ -54,7 +61,7 @@ export class CognitoService {
         family_name: user.family_name,
         birthdate: user.birthdate,
         'custom:account_type': user['custom:account_type'],
-        'custom:organization': user['custom:organization']
+        'custom:organization': user['custom:organization'],
       }
     })
     .then((signUpResult) => {
@@ -62,6 +69,7 @@ export class CognitoService {
     })
     .then(()=>{
       this.router.navigate(['/signIn']);
+      this.changePreferredUsername(user);
     })
     .catch((error) => {
       console.error('Sign Up Error:', error);
@@ -162,6 +170,55 @@ export class CognitoService {
       });
     }
     
+    public checkS3CaptionsFolder(folderKey: string): Promise<boolean> {
+      return new Promise<boolean>((resolve, reject) => {
+        const params = {
+          Bucket: environment.s3.bucketName,
+          Prefix: folderKey
+        };
+        AWS.config.update({
+          accessKeyId: environment.aws.accessKeyId,
+          secretAccessKey: environment.aws.secretAccessKey,
+          sessionToken: environment.aws.sessionToken,
+          region: environment.aws.region
+        });
+
+        const s3 = new AWS.S3();
+        s3.listObjectsV2(params, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(!!(data && data.Contents && data.Contents.length > 0));
+          }
+        });
+      });
+    }
+
+    public createS3CaptionsFolder(folderKey: string): Promise<void> {
+      return new Promise<void>((resolve, reject) => {
+        const params = {
+          Bucket: environment.s3.bucketName,
+          Key: folderKey
+        };
+
+        AWS.config.update({
+          accessKeyId: environment.aws.accessKeyId,
+          secretAccessKey: environment.aws.secretAccessKey,
+          sessionToken: environment.aws.sessionToken,
+          region: environment.aws.region
+        });
+
+        const s3 = new AWS.S3();
+        s3.putObject(params, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        });
+      });
+    }
+
     public createS3UserFolder(folderKey: string): Promise<void> {
       return new Promise<void>((resolve, reject) => {
         const params = {
