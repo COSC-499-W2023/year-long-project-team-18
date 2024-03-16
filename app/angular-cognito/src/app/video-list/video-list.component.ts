@@ -4,7 +4,7 @@ import { CognitoService, IUser } from '../cognito.service';
 import { VideoMetadata } from '../video-metadata.model';
 import { SNS } from 'aws-sdk';
 import { Router } from '@angular/router';
-
+import { forkJoin } from 'rxjs';
 import { videolist } from './videolist';
 import { VideoListService } from './videolist.service';
 
@@ -14,6 +14,9 @@ import { VideoListService } from './videolist.service';
   styleUrls: ['./video-list.component.scss']
 })
 export class VideoListComponent implements OnInit {
+  static fetchContactList() {
+    throw new Error('Method not implemented.');
+  }
   videos: VideoMetadata[] = [];
   accountType: string | undefined;
   user: videolist = {username: '', organizationcode: ''};
@@ -90,33 +93,23 @@ fetchContactList() {
     }
   }
 
-  sendSelectedVideosToContact(contact: any): void {
+  async sendSelectedVideosToContact(contactUsername: string): Promise<void> {
     const selectedVideos = this.videos.filter(video => video.isSelected);
-  
     if (selectedVideos.length > 0) {
-      const sourceKeys = selectedVideos.map(video => video.key);
-      console.log('Source Keys:', sourceKeys);
-      const sendPromises: Promise<void>[] = [];
+      const senderId = await this.cognitoService.getUsername();
+      console.log(senderId);
+      const shareRequests$ = selectedVideos.map(video => 
+        this.cognitoService.sendShareRequest(senderId, contactUsername, video.key)
+      );
   
-      sourceKeys.forEach(sourceKey => {
-        const sendPromise = this.cognitoService.copyVideoToContactFolder(sourceKey, contact).then(
-          () => {
-            console.log(`Video successfully sent`);
-            return this.sendMessageToUser(contact, 'Your new video has been sent!');
-          },
-          (error) => {
-            console.error(`Error sending video:`, error);
-          }
-        );
-  
-        sendPromises.push(sendPromise);
-      });
-  
-      Promise.all(sendPromises).then(() => {
-        console.log('All videos sent successfully');
-        this.router.navigate(['/dashboard']);
-      }).catch(error => {
-        console.error('Error sending videos:', error);
+      forkJoin(shareRequests$).subscribe({
+        next: () => {
+          console.log('All share requests sent successfully');
+          this.router.navigate(['/dashboard']);
+        },
+        error: (error) => {
+          console.error('Error sending share requests:', error);
+        }
       });
     }
   }

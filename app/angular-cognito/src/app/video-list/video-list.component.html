@@ -35,8 +35,9 @@
   <div class="contact-list">
     <p>Select Contact:</p>
     <select [(ngModel)]="selectedContact">
-      <option *ngFor="let contact of contactList" [value]="contact">{{ contact.username }}</option>
+      <option *ngFor="let contact of contactList" [ngValue]="contact.username">{{ contact.username }}</option>
     </select>
+    
     <button (click)="sendSelectedVideosToContact(selectedContact)">Send</button>
   </div>
 </div>
