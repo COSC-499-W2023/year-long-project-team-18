@@ -2,10 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, NgForm, Validators } from '@angular/forms';
-import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { IUser, CognitoService } from '../cognito.service';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { signup } from './signup';
 import { SignupService } from './signup.service';
@@ -132,7 +130,6 @@ export class SignUpComponent implements OnInit {
     this.cognitoService.signUp(this.user)
       .then(() => {
         this.createS3CaptionFolder(this.user.username);
-        this.createS3UserFolder(username);
         this.subscribeUserToSnsTopic(this.user.email);
 
         this.router.navigate(['/signIn']).then(()=>{
@@ -145,18 +142,6 @@ export class SignUpComponent implements OnInit {
       });
   }
   
-  private createS3UserFolder(username: string): void {
-    const folderKey = `${username}/`;
-    this.cognitoService.checkS3UserFolder(folderKey)
-      .then(folderExists => {
-        if (!folderExists) {
-          this.cognitoService.createS3UserFolder(folderKey)
-            .then(() => console.log('User folder created successfully in S3'))
-            .catch(err => console.error('Error creating user folder in S3:', err));
-        }
-      })
-      .catch(err => console.error('Error checking user folder in S3:', err));
-  }
 
   private createS3CaptionFolder(username: string): void {
     const folderKey = `${username}-captions/`;

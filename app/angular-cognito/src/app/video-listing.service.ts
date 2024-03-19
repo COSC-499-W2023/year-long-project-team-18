@@ -85,7 +85,7 @@ export class VideoListingService {
                   key: videoKey,
                   name: videoName,
                   date: videoDate,
-                  creator: this.cognitoService.getUsername(),
+                  creator: this.cognitoService.getCreator(),
                 };
               });
           }),

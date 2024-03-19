@@ -4,6 +4,8 @@ import { VideoListingService } from '../video-listing.service';
 import { VideoMetadata } from '../video-metadata.model';
 import { SNS } from 'aws-sdk';
 import { Router } from '@angular/router';
+import { videolist } from '../video-list/videolist';
+import { VideoListService } from '../video-list/videolist.service';
 
 @Component({
   selector: 'app-video-sharing',
@@ -18,11 +20,13 @@ export class ShareVideoComponent implements OnInit {
   recentVideo: VideoMetadata | null = null;
   private sns: SNS;
   IUser: IUser;
+  user: videolist = {username: '', organizationcode: ''};
 
   constructor(
     private VideoListingService: VideoListingService,
     private cognitoService: CognitoService,
-    private router: Router
+    private router: Router,
+    private VideoListService: VideoListService,
   ) {
     this.IUser = {} as IUser; 
     this.sns = new SNS();
@@ -33,18 +37,20 @@ export class ShareVideoComponent implements OnInit {
     this.loadMostRecentVideo();
   }
 
-  async fetchContactList() {
+  fetchContactList() {
     try {
-      const usernames = await this.cognitoService.getContactListFromS3();
-      const ownUsername = await this.cognitoService.getUsername();
-      const filteredUsernames = usernames.filter(username => username !== ownUsername);
+      console.log(this.IUser.username);
       
-      this.contactList = filteredUsernames;
+      this.user = {username: this.IUser.username, organizationcode: this.IUser['custom:organization']};
+      this.VideoListService.getAll(this.user).subscribe(
+        (data: videolist[])=>{
+          this.contactList = data;
+        }
+      )
     } catch (error) {
       console.error('Error fetching usernames from S3:', error);
     }
   }
-  
 
   loadMostRecentVideo(): void {
     this.VideoListingService.getVideos().subscribe(
