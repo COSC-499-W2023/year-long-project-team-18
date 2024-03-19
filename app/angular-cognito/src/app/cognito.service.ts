@@ -196,12 +196,14 @@ export class CognitoService {
     }
 
     public copyVideoToContactFolder(sourceKey: string, receiverId: string): Promise<void> {
+      const buttonPressed = document.getElementsByClassName("mat-button-toggle-button mat-focus-indicator");
+      const bucketAddress = buttonPressed[0].ariaPressed === 'true' ? 'rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759' : 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27';
       return new Promise<void>((resolve, reject) => {
         const videoName = sourceKey.substring(sourceKey.lastIndexOf('-') + 1);
         const destinationKey = `${receiverId}-${videoName}`;
         const params = {
           Bucket: environment.s3.bucketName,
-          CopySource: `prvcy-storage-ba20e15b50619-staging/${sourceKey}`,
+          CopySource: `${bucketAddress}/${sourceKey}`,
           Key: destinationKey
         };
     

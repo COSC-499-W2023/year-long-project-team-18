@@ -1,10 +1,10 @@
+
 import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { IUser, CognitoService } from '../cognito.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import * as AWS from 'aws-sdk';
-
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import * as AWS from 'aws-sdk';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
@@ -159,33 +159,29 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
       this.cognitoService.getUsername()
         .then(username => {
           console.log('Username:', username);
-  
-          if (!username) {
-            console.error('User information not available for creating a folder.');
-            reject('User information not available for creating a folder.');
-            return;
-          }
-  
+
+          this.uploadVideo(username, videoName, format, resolve, reject);
+        
           const folderKey = `${username}/`;
-  
-          this.s3.headObject({ Bucket: 'prvcy-storage-ba20e15b50619-staging', Key: folderKey }, (err, metadata) => {
-            if (err && err.code === 'NotFound') {
-              this.s3.putObject({ Bucket: 'prvcy-storage-ba20e15b50619-staging', Key: folderKey }, (folderErr, folderData) => {
-                if (folderErr) {
-                  console.error('Error creating user folder in S3:', folderErr);
-                  reject('Error creating user folder in S3.');
+          this.s3.headObject({ Bucket: 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27', Key: folderKey }, (err, metadata) => {
+          if (err && err.code === 'NotFound') {
+          this.s3.putObject({ Bucket: 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27', Key: folderKey }, (folderErr, folderData) => {
+          if (folderErr) {
+              console.error('Error creating user folder in S3:', folderErr);
+               reject('Error creating user folder in S3.');
                 } else {
                   console.log('User folder created successfully in S3:', folderData);
-                  this.uploadVideo(username, videoName, format, resolve, reject);
-                }
-              });
+                 this.uploadVideo(username, videoName, format, resolve, reject);
+               }
+            });
             } else if (!err) {
-              this.uploadVideo(username, videoName, format, resolve, reject);
+              
             } else {
               console.error('Error checking user folder in S3:', err);
               reject('Error checking user folder in S3.');
-            }
+             }
           });
+
         })
         .catch(error => {
           console.error('Error getting username:', error);
@@ -201,13 +197,18 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
       return;
     }
   
-    const key = `${username}/${videoName}.${format}`;
-  
+    const key = `${username}-${videoName}.${format}`;
+
+    // Checks if the button for privacy is toggled. If it is, it will upload the video the face blurring cdk bucket, otherwise it will go to the standard bucket
+    const buttonPressed = document.getElementsByClassName("mat-button-toggle-button mat-focus-indicator");
+    const bucketAddress = buttonPressed[0].ariaPressed === 'true' ? 'rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759' : 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27';
+    const transcribeRegion = buttonPressed[0].ariaPressed === 'true' ? 'us-west-2' : `ca-central-1`;
+    const transcriptionJobName = buttonPressed[0].ariaPressed === 'true' ? `${username}-${videoName}-captions` : `${videoName}-captions`;
     const recordedBlob = new Blob(this.recordedChunks, { type: `video/${format}` });
     this.recordedChunks = [];
   
     const params: AWS.S3.PutObjectRequest = {
-      Bucket: 'prvcy-storage-ba20e15b50619-staging',
+      Bucket: bucketAddress,
       Key: key,
       Body: recordedBlob,
       ContentType: `video/${format}`,
@@ -219,73 +220,64 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         reject('Error uploading to S3.');
       } else {
         console.log('Upload to S3 successful:', data);
-        this.transcriptionCreation(username, videoName, key);
+        this.transcriptionCreation(username, videoName, key, bucketAddress, transcribeRegion, transcriptionJobName);
         resolve();
       }
     });
   }
-
-  async transcriptionCreation(username: string, videoName: string, key: string) {
+  async transcriptionCreation(username: string, videoName: string, key: string, bucketAddress: string, region: string, transcriptionJobName: string) {
     try {
-      await this.transcribeUpload(username, videoName, key);
-      await this.checkTranscription(`${videoName}-captions`);
+      await this.transcribeUpload(username, videoName, key, bucketAddress, region, transcriptionJobName);
+      await this.checkTranscription(transcriptionJobName, region);
       this.router.navigate(['/share-video']);
     } catch (err) {
       console.log(err);
     }
   }
-  
-  private transcribeUpload(username: string, videoName: string, mediaFileKey: string): Promise<void> {
+ 
+  private transcribeUpload(username: string, videoName: string, mediaFileKey: string, bucketAddress: string, region: string, transcriptionJobName: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
-    const region = environment.aws.region;
-    const credentials = {
-      accessKeyId: environment.aws.accessKeyId,
-      secretAccessKey: environment.aws.secretAccessKey,
-      sessionToken: environment.aws.sessionToken
-    };
-    const transcribeConfig = {
-      region,
-      credentials
-    };
-    const input = {
-      TranscriptionJobName: `${videoName}-captions`,
-      LanguageCode: "en-US",
-      Media: {
-        MediaFileUri: `s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`
-      },
-      Subtitles: {
-        Formats: [
-          "vtt"
-        ],
-        OutputStartIndex: 1,
-      },
-      OutputBucketName: 'prvcy-storage-ba20e15b50619-staging',
-      OutputKey: `${username}-captions/${videoName}-captions`
-    };
-    async function startTranscriptionRequest() {
-      
-      const transcribeClient = new TranscribeClient(transcribeConfig);
-      const transcribeCommand = new StartTranscriptionJobCommand(input);
-      console.log(`s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`);
-      try {
-        const transcribeResponse = await transcribeClient.send(transcribeCommand);
-        console.log("Transcription job created, the details:");
-        console.log(transcribeResponse.TranscriptionJob);
-        resolve();
-      } catch(err) {
-        console.log(err);
-        reject('Unable to create transcription job.');
+      const credentials = {
+        accessKeyId: environment.aws.accessKeyId,
+        secretAccessKey: environment.aws.secretAccessKey,
+        sessionToken: environment.aws.sessionToken
+      };
+      const transcribeConfig = {
+        region,
+        credentials
+      };
+      console.log(transcriptionJobName);
+      const input = {
+        TranscriptionJobName: transcriptionJobName,
+        LanguageCode: "en-US",
+        Media: {
+          MediaFileUri: `s3://${bucketAddress}/${mediaFileKey}`
+        },
+        OutputBucketName: bucketAddress === 'rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759' ? 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27' : 'prvcy-storage-ba20e15b50619-staging',
+        OutputKey: `${username}-captions/${videoName}-captions.vtt`
+      };
+      async function startTranscriptionRequest() {
+        
+        const transcribeClient = new TranscribeClient(transcribeConfig);
+        const transcribeCommand = new StartTranscriptionJobCommand(input);
+        try {
+          const transcribeResponse = await transcribeClient.send(transcribeCommand);
+          console.log("Transcription job created, the details:");
+          console.log(transcribeResponse.TranscriptionJob);
+          resolve();
+        } catch(err) {
+          console.log(err);
+          reject('Unable to create transcription job.');
+        }
       }
-    }
-    startTranscriptionRequest();
-    });
+      startTranscriptionRequest();
+    }) 
   }
 
-  checkTranscription(transcriptionJobName: string): Promise<void> {
+  checkTranscription(transcriptionJobName: string, region: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       const { TranscribeClient, GetTranscriptionJobCommand, GetTranscriptionJobResponse } = require("@aws-sdk/client-transcribe");
-      const region = environment.aws.region;
       const credentials = {
         accessKeyId: environment.aws.accessKeyId,
         secretAccessKey: environment.aws.secretAccessKey,
@@ -420,16 +412,4 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
       console.error("No recorded video available for playback");
     } 
   }
-
-  animal: string | undefined;
-  name: string | undefined;
-
-  openDialog(): void {
-    this.dialog.open(DialogOverviewExampleDialog);
-  }
-
-}
-
-export class DialogOverviewExampleDialog {
-  
 }

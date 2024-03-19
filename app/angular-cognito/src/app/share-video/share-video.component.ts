@@ -67,7 +67,7 @@ export class ShareVideoComponent implements OnInit {
   
 
   getVideoUrl(videoKey: string): string {
-    return `https://prvcy-storage-ba20e15b50619-staging.s3.amazonaws.com/${videoKey}`;
+    return `https://rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759.s3.amazonaws.com/${videoKey}`;
   }
 
   getCaptionsUrl(videoKey: string): string {
