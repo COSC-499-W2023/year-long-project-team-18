@@ -412,4 +412,15 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
       console.error("No recorded video available for playback");
     } 
   }
+  animal: string | undefined;
+  name: string | undefined;
+
+  openDialog(): void {
+    this.dialog.open(DialogOverviewExampleDialog);
+  }
+
+}
+
+export class DialogOverviewExampleDialog {
+  
 }
