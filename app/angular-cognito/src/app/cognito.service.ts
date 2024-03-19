@@ -149,7 +149,7 @@ export class CognitoService {
     public checkS3UserFolder(folderKey: string): Promise<boolean> {
       return new Promise<boolean>((resolve, reject) => {
         const params = {
-          Bucket: environment.s3.bucketName,
+          Bucket: "rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27",
           Prefix: folderKey
         };
         AWS.config.update({
@@ -173,7 +173,7 @@ export class CognitoService {
     public checkS3CaptionsFolder(folderKey: string): Promise<boolean> {
       return new Promise<boolean>((resolve, reject) => {
         const params = {
-          Bucket: environment.s3.bucketName,
+          Bucket: "rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27",
           Prefix: folderKey
         };
         AWS.config.update({
@@ -197,7 +197,7 @@ export class CognitoService {
     public createS3CaptionsFolder(folderKey: string): Promise<void> {
       return new Promise<void>((resolve, reject) => {
         const params = {
-          Bucket: environment.s3.bucketName,
+          Bucket: "rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27",
           Key: folderKey
         };
 
@@ -222,7 +222,7 @@ export class CognitoService {
     public createS3UserFolder(folderKey: string): Promise<void> {
       return new Promise<void>((resolve, reject) => {
         const params = {
-          Bucket: environment.s3.bucketName,
+          Bucket: "rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27",
           Key: folderKey
         };
   
@@ -273,7 +273,7 @@ export class CognitoService {
       return new Promise<void>((resolve, reject) => {
         const params = {
           Bucket: environment.s3.bucketName,
-          CopySource: `prvcy-storage-ba20e15b50619-staging/${sourceKey}`,
+          CopySource: `rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27/${sourceKey}`,
           Key: `${destinationFolder}/${sourceKey.substring(sourceKey.lastIndexOf('/') + 1)}`
         };
     

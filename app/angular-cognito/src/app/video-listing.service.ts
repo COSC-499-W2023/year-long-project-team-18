@@ -64,7 +64,7 @@ export class VideoListingService {
   
         return from(
           this.s3.listObjectsV2({
-            Bucket: 'prvcy-storage-ba20e15b50619-staging',
+            Bucket: 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27',
             Prefix: folderKey
           }).promise()
         ).pipe(
