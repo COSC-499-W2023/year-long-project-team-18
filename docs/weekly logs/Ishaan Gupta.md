@@ -2,6 +2,17 @@
 
 ## TERM 2
 
+## Week 10:
+Dates 11th March - 17th March
+
+### Student Goals:
+* Continue working on restructuring the S3 buckets system with Nikhil and Sam to accomodate the face blurring and make changes to accomodate exisiting features as well.
+
+### Completed Tasks:
+* Haven't finished moving the system to the new bucket system yet but we have an idea of how we are going to implement it. Spent time talking with Nikhil and Sam to figure out a solution and we have started implementing it but are not done yet. Just need to continue coding and we will be done soon.
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/77289891/1749fef4-a680-4e13-acd4-19f19bf37cd0)
+
+
 ## Week 9: 
 Dates 4th March - 10th March
 
