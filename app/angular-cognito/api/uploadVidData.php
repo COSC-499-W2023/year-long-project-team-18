@@ -8,7 +8,7 @@ if(isset($postdata) && !empty($postdata)){
 
     $username = $request->data->username;
     $title = $request->data->title;
-    $comment = $request->data->comment
+    $comment = $request->data->comment;
 
     $sql = "INSERT INTO video_data VALUES ('{$username}', '{$title}', '{$comment}');";
     $statement = $pdo->prepare($sql);
