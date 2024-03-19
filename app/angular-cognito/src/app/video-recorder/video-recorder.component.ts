@@ -11,10 +11,15 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
+import { videodata } from './video-data';
+import { VideoDataService } from './video-data.service';
+
 export interface DialogData {
   animal: string;
   name: string;
 }
+
+
 
 @Component({
   selector: 'app-video-recorder',
@@ -25,7 +30,7 @@ export interface DialogData {
 export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('video') videoElement!: ElementRef<HTMLVideoElement>;
-
+  
   playbackDisabled: boolean = true;
   submitDisabled: boolean = true;
   recordAgain: boolean = true;
@@ -34,8 +39,12 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   user: IUser;
   isAuthenticated: boolean;
 
+  comment: string = '';
   videoName: string = '';
   isSubmitDisabled: boolean = true;
+
+  videoData: videodata[] = [];
+  vidData: videodata = {username: '', title: '', comment: ''}
 
   private stream!: MediaStream;
   private kinesisVideoClient: AWS.KinesisVideo | null = null;
@@ -48,7 +57,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
 
-  constructor(private cognitoService: CognitoService, private router: Router, public dialog: MatDialog) {
+  constructor(private cognitoService: CognitoService, private router: Router, public dialog: MatDialog, private vidDataService: VideoDataService) {
     this.loading = false;
     this.user = {} as IUser;
     this.isAuthenticated = true;
@@ -202,6 +211,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     }
   
     const key = `${username}/${videoName}.${format}`;
+    
   
     const recordedBlob = new Blob(this.recordedChunks, { type: `video/${format}` });
     this.recordedChunks = [];
@@ -393,6 +403,12 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     }
 
     try {
+      this.vidData = {username: this.user.username, title: this.videoName, comment: this.comment};
+      this.vidDataService.store(this.vidData).subscribe(
+        (res: videodata)=>{
+          this.videoData.push(res)
+        }
+      )     
       await this.uploadToS3(this.videoName.trim(), 'mp4');
       this.videoName = '';
       this.isSubmitDisabled = true;
