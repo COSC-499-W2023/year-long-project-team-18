@@ -403,7 +403,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     }
 
     try {
-      this.vidData = {username: this.user.username, title: this.videoName, comment: this.comment};
+      this.vidData = {username: (await this.cognitoService.getUsername()).toString(), title: this.videoName, comment: this.comment};
       this.vidDataService.store(this.vidData).subscribe(
         (res: videodata)=>{
           this.videoData.push(res)
