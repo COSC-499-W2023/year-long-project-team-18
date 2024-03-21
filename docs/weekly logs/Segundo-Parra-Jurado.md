@@ -6,6 +6,7 @@
  ### Tasks I am planning to work on this upcoming week:
   - Calendar Integration UI (frontend + backend)
   - Finish the Vitest cases
+  - Finish the UI (HTML/CSS/Angular Component/(possibly Bootstrap?)) for any remaining areas of the project + the peer testing feedback
 
 ### Tasks I Am Assigned To:
 
