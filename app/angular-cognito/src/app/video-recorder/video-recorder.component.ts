@@ -155,76 +155,39 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   }
 
   private uploadToS3(videoName: string, format: string): Promise<void> {
+    const buttonPressed = document.getElementsByClassName("mat-button-toggle-button mat-focus-indicator");
+    const bucketAddress = buttonPressed[0].ariaPressed === 'true' ? 'rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759' : 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27';
     return new Promise<void>((resolve, reject) => {
       this.cognitoService.getUsername()
         .then(username => {
           console.log('Username:', username);
-
-          this.uploadVideo(username, videoName, format, resolve, reject);
-        
-          const folderKey = `${username}/`;
-          this.s3.headObject({ Bucket: 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27', Key: folderKey }, (err, metadata) => {
-          if (err && err.code === 'NotFound') {
-          this.s3.putObject({ Bucket: 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27', Key: folderKey }, (folderErr, folderData) => {
-          if (folderErr) {
-              console.error('Error creating user folder in S3:', folderErr);
-               reject('Error creating user folder in S3.');
-                } else {
-                  console.log('User folder created successfully in S3:', folderData);
-                 this.uploadVideo(username, videoName, format, resolve, reject);
-               }
-            });
-            } else if (!err) {
-              
+          const recordedBlob = new Blob(this.recordedChunks, { type: `video/${format}` });
+          this.recordedChunks = [];
+  
+          const key = `${username}-${videoName}.${format}`;
+          const params: AWS.S3.PutObjectRequest = {
+            Bucket: bucketAddress,
+            Key: key,
+            Body: recordedBlob,
+            ContentType: `video/${format}`,
+          };
+          this.s3.upload(params, (uploadErr, data) => {
+            if (uploadErr) {
+              console.error('Error uploading to S3:', uploadErr);
+              reject('Error uploading to S3.');
             } else {
-              console.error('Error checking user folder in S3:', err);
-              reject('Error checking user folder in S3.');
-             }
+              console.log('Upload to S3 successful:', data);
+              resolve();
+            }
           });
-
+  
         })
         .catch(error => {
           console.error('Error getting username:', error);
           reject('Error getting username.');
         });
     });
-  }
-
-  private uploadVideo(username: string, videoName: string, format: string, resolve: () => void, reject: (error: string) => void) {
-    if (!videoName.trim()) {
-      console.error('Video name cannot be empty');
-      reject('Video name cannot be empty.');
-      return;
-    }
-  
-    const key = `${username}-${videoName}.${format}`;
-
-    // Checks if the button for privacy is toggled. If it is, it will upload the video the face blurring cdk bucket, otherwise it will go to the standard bucket
-    const buttonPressed = document.getElementsByClassName("mat-button-toggle-button mat-focus-indicator");
-    const bucketAddress = buttonPressed[0].ariaPressed === 'true' ? 'rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759' : 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27';
-    const transcribeRegion = buttonPressed[0].ariaPressed === 'true' ? 'us-west-2' : `ca-central-1`;
-    const transcriptionJobName = buttonPressed[0].ariaPressed === 'true' ? `${username}-${videoName}-captions` : `${videoName}-captions`;
-    const recordedBlob = new Blob(this.recordedChunks, { type: `video/${format}` });
-    this.recordedChunks = [];
-  
-    const params: AWS.S3.PutObjectRequest = {
-      Bucket: bucketAddress,
-      Key: key,
-      Body: recordedBlob,
-      ContentType: `video/${format}`,
-    };
-  
-    this.s3.upload(params, (uploadErr, data) => {
-      if (uploadErr) {
-        console.error('Error uploading to S3:', uploadErr);
-        reject('Error uploading to S3.');
-      } else {
-        console.log('Upload to S3 successful:', data);
-        this.transcriptionCreation(username, videoName, key, bucketAddress, transcribeRegion, transcriptionJobName);
-        resolve();
-      }
-    });
-  }
+  }  
   async transcriptionCreation(username: string, videoName: string, key: string, bucketAddress: string, region: string, transcriptionJobName: string) {
     try {
       await this.transcribeUpload(username, videoName, key, bucketAddress, region, transcriptionJobName);
