@@ -22,6 +22,7 @@ export class VideoListComponent implements OnInit {
   videos: VideoMetadata[] = [];
   accountType: string | undefined;
   user: videolist = {username: '', organizationcode: ''};
+  comment: comment[] = [];
   comments: comment = {username: '', comment: '', title: ''};
   IUser: IUser;
   contactList: videolist[] = [];
@@ -65,12 +66,17 @@ export class VideoListComponent implements OnInit {
       }
     );
     for(let i=0; i < this.videos.length;i++){
-      
+      this.comments[i].username = this.videos[i].creator;
+      this.comments[i].title = this.videos[i].name;
+      this.comments[i].comment = '';
     }
 
 
     this.commentService.getComments(this.comments).subscribe(
-
+      (data: comment[])=>{
+        this.comment = data;
+        console.log(this.comment);
+      }
     )
   }
 
