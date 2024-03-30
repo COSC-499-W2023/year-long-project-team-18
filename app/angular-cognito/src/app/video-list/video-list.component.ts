@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { videolist } from './videolist';
 import { VideoListService } from './videolist.service';
+import { comment } from './comment';
+import { CommentService } from './comment.service';
 
 @Component({
   selector: 'app-video-list',
@@ -20,6 +22,7 @@ export class VideoListComponent implements OnInit {
   videos: VideoMetadata[] = [];
   accountType: string | undefined;
   user: videolist = {username: '', organizationcode: ''};
+  comments: comment = {username: '', comment: '', title: ''};
   IUser: IUser;
   contactList: videolist[] = [];
   selectedContact: any;  
@@ -29,6 +32,7 @@ export class VideoListComponent implements OnInit {
     private VideoListingService: VideoListingService,
     private cognitoService: CognitoService,
     private VideoListService: VideoListService,
+    private commentService: CommentService,
     private router: Router
   ) { this.IUser = {} as IUser; 
       this.sns = new SNS();
@@ -45,8 +49,29 @@ export class VideoListComponent implements OnInit {
       this.loadVideos();
       this.loadAccountType();
       this.fetchContactList();
+      this.getComments();
     })
 
+  }
+
+  getComments(): void {
+    this.VideoListingService.getVideos().subscribe(
+      (videos: VideoMetadata[]) => {
+        console.log('Videos:', videos);
+        this.videos = videos;
+      },
+      error => {
+        console.error('Error fetching videos:', error);
+      }
+    );
+    for(let i=0; i < this.videos.length;i++){
+      
+    }
+
+
+    this.commentService.getComments(this.comments).subscribe(
+
+    )
   }
 
   loadVideos(): void {
@@ -79,9 +104,7 @@ export class VideoListComponent implements OnInit {
   //   return `https://prvcy-storage-ba20e15b50619-staging.s3.amazonaws.com/${captionFolderKey}/${captionKey}`;
   // }
 fetchContactList() {
-    try {
-      console.log(this.IUser.username);
-      
+    try {      
       this.user = {username: this.IUser.username, organizationcode: this.IUser['custom:organization']};
       this.VideoListService.getAll(this.user).subscribe(
         (data: videolist[])=>{
