@@ -82,10 +82,11 @@ export class VideoListingService {
                 const timestampFromMetadata = item.LastModified && item.LastModified.getTime();
                 const videoDate = this.extractVideoDate(videoKey, timestampFromMetadata);
                 return {
+
                   key: videoKey,
                   name: videoName,
                   date: videoDate,
-                  creator: this.cognitoService.getUsername(),
+                  creator: this.cognitoService.getUsername()
                 };
               });
           }),
