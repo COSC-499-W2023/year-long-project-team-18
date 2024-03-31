@@ -1,15 +1,72 @@
-## Term 2 Week 7: Feb 20th - Feb 22nd (READING WEEK)
+## Term 2 Week 11: Mar. 19th - Mar. 21st
 
 ### Tasks Worked On:
-  - Worked on redesigning our website with updated HTML + CSS + Angular Material using the feedback we received from our peer testing. This is a work in progress, but should be done before Tuesday's class.
+  - None (I had a super busy week with other courses, I should be good now until the last submission for the capstone though!)
 
-### Tasks I am planning to work on this upcoming week:
-  - Add more jest test cases
-  - Calendar Integration
+ ### Tasks I am planning to work on this upcoming week:
+  - Calendar Integration UI (frontend + backend)
+  - Finish the Vitest cases
+  - Finish the UI (HTML/CSS/Angular Component/(possibly Bootstrap?)) for any remaining areas of the project + the peer testing feedback
 
 ### Tasks I Am Assigned To:
 
-<img width="1440" alt="Screenshot 2024-02-20 at 11 48 33 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/9ee95410-76d2-4fde-8efb-386e1402f4e1">
+<img width="1470" alt="Screenshot 2024-03-03 at 11 47 48 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d6c47277-7ccd-434e-b5ce-eb1bc849688e">
+
+### Peer Evaluations:
+
+<img width="1091" alt="Screenshot 2024-03-27 at 11 53 47 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/0e6261a4-7628-41a5-b4c7-435098e0ff68">
+
+## Term 2 Week 10: Mar. 12th - Mar. 14th
+
+### Tasks Worked On:
+  - None (I had a super busy week with other courses and was also sick for the past week)
+
+ ### Tasks I am planning to work on this upcoming week:
+  - Calendar Integration UI (frontend + backend)
+  - Finish the Vitest cases
+  - Finish the UI (HTML/CSS/Angular Component/(possibly Bootstrap?)) for any remaining areas of the project + the peer testing feedback
+
+### Tasks I Am Assigned To:
+
+<img width="1470" alt="Screenshot 2024-03-03 at 11 47 48 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d6c47277-7ccd-434e-b5ce-eb1bc849688e">
+
+### Peer Evaluations:
+
+![Screenshot 2024-03-20 at 10 44 58 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/46d34648-5d4b-4a13-a8da-b11d00bee1c0)
+
+## Term 2 Week 9: Mar. 5th - Mar. 7th
+
+### Tasks Worked On:
+  - Created more Vitest test cases
+
+### Tasks I am planning to work on this upcoming week:
+  - Calendar Integration UI (frontend + backend)
+
+### Tasks I Am Assigned To:
+
+<img width="1470" alt="Screenshot 2024-03-03 at 11 47 48 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d6c47277-7ccd-434e-b5ce-eb1bc849688e">
+
+### Peer Evaluations:
+
+![Screenshot 2024-03-10 at 11 32 54 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/b7aeee41-1bb6-412b-9e4e-05ee5ea7f8d6)
+
+## Term 2 Week (8 + Reading Week): Feb 20th - Feb 29th
+
+### Tasks Worked On:
+  - Worked on redesigning our website with updated HTML + CSS + Angular Material using the feedback we received from our peer testing. This is a work in progress, but should be done before Tuesday's class. (Week 7 Update: It remains a WIP as I am waiting for the team to finish up some other pages so I can then update the CSS/HTML + Angular Material for them.
+  - Troubleshooted Jest more, I realized that Jest was simply not working with our app so I managed to research and configure a new environment for our testing. The new testing framework is called Vitest and it solves the problem with being able to locate imports called within the test cases. I'll be steadidly catching up with our test cases for the project over the coming weeks until I am fully caught up.
+
+### Tasks I am planning to work on this upcoming week:
+  - Calendar Integration UI (Not sure if I will be able to get frontend or backend work done for peer testing)
+  - Adding more UI changes in preparation for our peer testing session on Tuesday.
+
+### Tasks I Am Assigned To:
+
+<img width="1470" alt="Screenshot 2024-03-03 at 11 47 48 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d6c47277-7ccd-434e-b5ce-eb1bc849688e">
+
+### Peer Evaluations:
+
+<img width="1093" alt="Screenshot 2024-03-03 at 11 52 07 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/9d19ba9e-d202-467d-9bf7-317368996d61">
 
 ## Term 2 Week 6: Feb 13th - Feb 15th
 

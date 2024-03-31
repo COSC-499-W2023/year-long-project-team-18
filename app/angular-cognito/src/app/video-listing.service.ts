@@ -61,7 +61,6 @@ export class VideoListingService {
         }
   
         const folderKey = `${username}/`;
-  
         return from(
           this.s3.listObjectsV2({
             Bucket: 'prvcy-storage-ba20e15b50619-staging',
@@ -86,7 +85,7 @@ export class VideoListingService {
                   key: videoKey,
                   name: videoName,
                   date: videoDate,
-                  creator: username
+                  creator: this.cognitoService.getUsername(),
                 };
               });
           }),

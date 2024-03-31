@@ -6,7 +6,6 @@ import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { IUser, CognitoService } from '../cognito.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
-
 import { signup } from './signup';
 import { SignupService } from './signup.service';
 
@@ -44,7 +43,7 @@ export class SignUpComponent implements OnInit {
 
   email = new FormControl('', [Validators.required, Validators.email]);
   StrongPasswordRegx: RegExp =
-  /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/;
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   password = new FormControl('', {
     validators: [Validators.required, Validators.pattern(this.StrongPasswordRegx), Validators.minLength(8)],
