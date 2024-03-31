@@ -16,7 +16,8 @@ export class CommentService {
   getComments(comment: comment){
     let params = new HttpParams()
     .set('username', comment.username)
-    .set('title', comment.title);
+    .set('title', comment.title)
+    .set('comment', comment.comment);
                             
 
     return this.http.get('http://localhost/api/getComments.php', {params}).pipe(

@@ -23,7 +23,7 @@ export class VideoListComponent implements OnInit {
   accountType: string | undefined;
   user: videolist = {username: '', organizationcode: ''};
   comment: comment[] = [];
-  comments: comment = {username: '', comment: '', title: ''};
+  comment_list: comment = {username: '', comment: '', title: ''};
   IUser: IUser;
   contactList: videolist[] = [];
   selectedContact: any;  
@@ -56,23 +56,26 @@ export class VideoListComponent implements OnInit {
   }
 
   getComments(): void {
-    this.VideoListingService.getVideos().subscribe(
-      (videos: VideoMetadata[]) => {
-        console.log('Videos:', videos);
-        this.videos = videos;
-      },
-      error => {
-        console.error('Error fetching videos:', error);
-      }
-    );
-    for(let i=0; i < this.videos.length;i++){
-      this.comments[i].username = this.videos[i].creator;
-      this.comments[i].title = this.videos[i].name;
-      this.comments[i].comment = '';
-    }
+    // this.VideoListingService.getVideos().subscribe(
+    //   (videos: VideoMetadata[]) => {
+    //     this.videos = videos;
+    //   },
+    //   error => {
+    //     console.error('Error fetching videos:', error);
+    //   }
+    // );
 
+    // let creator = [];
+    // let test = [];
+    
+    // for(let i=0; i < this.videos.length;i++){
+    //   creator[i] = this.videos[i].name;
+    //   test[i] = this.videos[i].creator;
+    // }
+    // console.log(creator);
+    // console.log(test);
 
-    this.commentService.getComments(this.comments).subscribe(
+    this.commentService.getComments({ username:'maxa6', title: 'video', comment:'' }).subscribe(
       (data: comment[])=>{
         this.comment = data;
         console.log(this.comment);

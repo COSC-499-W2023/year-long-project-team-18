@@ -1,5 +1,5 @@
 export interface comment{
-    [key: number]: any;
+    [key: string]: any;
     username: string,
     comment: string,
     title: string
