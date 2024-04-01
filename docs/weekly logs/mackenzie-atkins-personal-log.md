@@ -11,6 +11,9 @@ Work on video comments still, just reading now.
 
 ### Peer evaluation
 
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/206d573c-b71f-4ac5-b434-e9094c9dc4b5)
+
+
 ## Mar 18 - Mar 24
 
 ### Student goals
