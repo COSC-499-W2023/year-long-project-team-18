@@ -1,3 +1,16 @@
+##Mar 24 - Mar 31
+
+### Student goals
+Work on video comments still, just reading now.
+
+### Completed tasks
+- Got comments to read when there is one video, not working for more than one. Not working on anymore tasks except for report now
+
+### In progress tasks
+- Final report
+
+### Peer evaluation
+
 ## Mar 18 - Mar 24
 
 ### Student goals
