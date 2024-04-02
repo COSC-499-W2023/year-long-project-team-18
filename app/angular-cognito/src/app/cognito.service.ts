@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map } from 'rxjs';
 import {Amplify, Auth } from 'aws-amplify';
 import { Router } from '@angular/router';
 import * as AWS from 'aws-sdk';
-import { SNS } from 'aws-sdk';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
 
@@ -32,7 +32,7 @@ export interface IUser {
 export class CognitoService {
   private authenticationSubject: BehaviorSubject<any>;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpClient) {
     Amplify.configure({
       Auth: environment.cognito
     });
@@ -170,6 +170,55 @@ export class CognitoService {
       });
     }
     
+    public checkS3CaptionsFolder(folderKey: string): Promise<boolean> {
+      return new Promise<boolean>((resolve, reject) => {
+        const params = {
+          Bucket: environment.s3.bucketName,
+          Prefix: folderKey
+        };
+        AWS.config.update({
+          accessKeyId: environment.aws.accessKeyId,
+          secretAccessKey: environment.aws.secretAccessKey,
+          sessionToken: environment.aws.sessionToken,
+          region: environment.aws.region
+        });
+
+        const s3 = new AWS.S3();
+        s3.listObjectsV2(params, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(!!(data && data.Contents && data.Contents.length > 0));
+          }
+        });
+      });
+    }
+
+    public createS3CaptionsFolder(folderKey: string): Promise<void> {
+      return new Promise<void>((resolve, reject) => {
+        const params = {
+          Bucket: environment.s3.bucketName,
+          Key: folderKey
+        };
+
+        AWS.config.update({
+          accessKeyId: environment.aws.accessKeyId,
+          secretAccessKey: environment.aws.secretAccessKey,
+          sessionToken: environment.aws.sessionToken,
+          region: environment.aws.region
+        });
+
+        const s3 = new AWS.S3();
+        s3.putObject(params, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        });
+      });
+    }
+
     public createS3UserFolder(folderKey: string): Promise<void> {
       return new Promise<void>((resolve, reject) => {
         const params = {
@@ -270,4 +319,31 @@ export class CognitoService {
         throw error;
       }
     }    
-  }    
+    sendShareRequest(senderId: string, receiverId: string, videoKey: string): Observable<any> {
+      const url = `http://localhost/api/createShareRequest`;
+      const requestBody = {
+        senderId,
+        receiverId,
+        videoKey
+      };
+      console.log('Sending request with body:', requestBody);
+      return this.http.post(url, requestBody).pipe(
+        map((res: any) => res)
+      );
+    }
+    
+
+    fetchPendingShareRequests(userId: string): Observable<any[]> {
+      console.log('User ID:', userId);
+      const url = `http://localhost/api/fetchPendingRequests?userId=${userId}`;
+      console.log('Fetching pending requests for user:', userId);
+      return this.http.get<any[]>(url);
+    }
+    
+
+    respondToShareRequest(requestId: number, action: 'accept' | 'deny'): Observable<any> {
+      const requestBody = { requestId, action };
+      return this.http.post(`http://localhost/api/respondToRequest`, requestBody);
+    }
+
+  }   

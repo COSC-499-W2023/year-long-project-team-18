@@ -31,12 +31,13 @@ export class ProfileComponent implements OnInit {
   }
 
   updateDb(org: string){
-
+    console.log("Success");
     this.cognitoService.getUser()
-    .then((user: any) => {
 
+    .then((user: any) => {
       user['custom:organization'] = org
       this.cognitoService.updateUser(this.user);
+      
       this.profileUpdateService
       .update({organizationcode: org, username: user.username}).subscribe(
         (res)=>{

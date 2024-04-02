@@ -17,12 +17,14 @@ export class ShareVideoComponent implements OnInit {
   recentRecordedVideo: string = '';
   recentVideo: VideoMetadata | null = null;
   private sns: SNS;
+  IUser: IUser;
 
   constructor(
     private VideoListingService: VideoListingService,
     private cognitoService: CognitoService,
     private router: Router
   ) {
+    this.IUser = {} as IUser; 
     this.sns = new SNS();
    }
 
@@ -57,30 +59,44 @@ export class ShareVideoComponent implements OnInit {
     );
   }
   
-  
+
   getVideoUrl(videoKey: string): string {
     return `https://prvcy-storage-ba20e15b50619-staging.s3.amazonaws.com/${videoKey}`;
   }
 
-  sendVideoToContact(contact: any) {
+  getCaptionsUrl(videoKey: string): string {
+    const array = videoKey.split("/");
+    const videoKeyFile = array[1].substring(0, array[1].length - 4) + "-captions.vtt";
+    const videoKeyFolder = array[0] + "-captions";
+    return `https://prvcy-storage-ba20e15b50619-staging.s3.amazonaws.com/${videoKeyFolder}/${videoKeyFile}`;
+  }
+
+  async sendVideoToContact(contactUsername: any) {
     if (this.recentVideo) {
       const sourceKey = this.recentVideo.key;
       console.log('Source Key:', sourceKey);
-  
-      this.cognitoService.copyVideoToContactFolder(sourceKey, contact).then(
+      const senderId = await this.cognitoService.getUsername();
+      
+      this.cognitoService.sendShareRequest(senderId, contactUsername, sourceKey).subscribe(
         async () => {
-          console.log(`Video successfully sent`);
-          await this.sendMessageToUser(contact, 'Your new video has been sent!');
+          console.log(`Share request for video ${sourceKey} successfully sent to ${contactUsername}`);
+          await this.sendMessageToUser(contactUsername, 'A new video share request has been sent to you!');
           this.router.navigate(['/dashboard']);
         },
         (error) => {
-          console.error(`Error sending video to ${contact}:`, error);
+          console.error(`Error sending share request to ${contactUsername}:`, error);
         }
       );
     }
-  }  
+  }
+  
 
   async sendMessageToUser(userEmail: string, message: string): Promise<void> {
+    if (!userEmail || typeof userEmail !== 'string' || userEmail.trim() === '') {
+      console.error('Invalid or empty userEmail provided:', userEmail);
+      throw new Error('Invalid or empty userEmail provided');
+    }
+  
     try {
       const params = {
         Message: message,
@@ -89,19 +105,19 @@ export class ShareVideoComponent implements OnInit {
         MessageAttributes: {
           email: {
             DataType: 'String',
-            StringValue: userEmail
-          }
-        }
+            StringValue: userEmail,
+          },
+        },
       };
   
-      // Send message to SNS
       await this.sns.publish(params).promise();
-      
+  
       console.log(`Message sent to ${userEmail}`);
     } catch (error) {
       console.error('Error sending message:', error);
       throw error;
     }
   }
+  
   
 }  
