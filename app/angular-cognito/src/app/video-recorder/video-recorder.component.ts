@@ -229,12 +229,44 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     try {
       await this.transcribeUpload(username, videoName, key);
       await this.checkTranscription(`${videoName}-captions`);
+      await this.deleteTranscription(`${videoName}-captions`);
       this.router.navigate(['/share-video']);
     } catch (err) {
       console.log(err);
     }
   }
-  
+  private deleteTranscription(transcriptionJobName: string) {
+    return new Promise<void>((resolve, reject) => {
+      const { TranscribeClient, DeleteTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
+      const region = environment.aws.region;
+      const credentials = {
+        accessKeyId: environment.aws.accessKeyId,
+        secretAccessKey: environment.aws.secretAccessKey,
+        sessionToken: environment.aws.sessionToken
+      };
+      const transcribeConfig = {
+        region,
+        credentials
+      };
+      const input = {
+        TranscriptionJobName: transcriptionJobName
+      };
+      const transcribeClient = new TranscribeClient(transcribeConfig);
+      async function deleteJob() {
+        const deleteCommand = new DeleteTranscriptionJobCommand(input);
+        try {
+          console.log("Deleting job right now.")
+          const response = await transcribeClient.send(deleteCommand);
+          console.log("Job deleted.");
+          resolve();
+        } catch (err) {
+          console.log(err);
+          reject('Failed.');
+        }
+      }
+      deleteJob();
+    });
+  }
   private transcribeUpload(username: string, videoName: string, mediaFileKey: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
