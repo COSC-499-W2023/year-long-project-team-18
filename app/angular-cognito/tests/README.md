@@ -39,9 +39,3 @@ To get started with testing in the PRVCY project, follow these steps:
    ```bash
    vitest
    ```
-
-## Contact
-
-For any questions or concerns regarding the testing process or the PRVCY app in general, please reach out to us via our project's communication channels.
-
-Thank you for your interest in the PRVCY app. Happy testing!

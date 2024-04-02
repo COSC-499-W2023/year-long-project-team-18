@@ -23,6 +23,7 @@ export class DialogComponent {
 
 
   public joinOrg(orgCode: string): void{
+    console.log("joinOrg Success");
     this.loading = true;
     this.cognitoService.updateUserAttribute(orgCode)
     .then(() =>{

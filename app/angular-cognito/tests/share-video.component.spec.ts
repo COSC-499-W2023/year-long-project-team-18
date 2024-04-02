@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ShareVideoComponent } from './share-video.component';
+import { ShareVideoComponent } from '../src/app/share-video/share-video.component';
 
 describe('ShareVideoComponent', () => {
   let component: ShareVideoComponent;
