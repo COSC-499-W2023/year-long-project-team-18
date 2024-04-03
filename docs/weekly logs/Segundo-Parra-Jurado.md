@@ -1,3 +1,20 @@
+## Term 2 Week 12: Mar. 26thth - Mar. 28th
+
+### Tasks Worked On:
+  - Finished all the testing for the components (not all of them work, but the overall testing is complete and pushed! NOTE: I worked on and finished the testing mainly on Monday and Tuesday so I don't know if that counts for week 12 or this upcoming week.)
+
+ ### Tasks I am planning to work on this upcoming week:
+  - (NOTE: Priority #1) Finish the UI (HTML/CSS/Angular Component/(possibly Bootstrap?)) for any remaining areas of the project + the peer testing feedback
+  - (NOTE: May not have time) Calendar Integration UI (frontend + backend)
+
+### Tasks I Am Assigned To:
+
+<img width="1470" alt="Screenshot 2024-04-03 at 2 12 04 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/92d390f5-d250-4a4b-b641-021011ab176a">
+
+### Peer Evaluations:
+
+<img width="1098" alt="Screenshot 2024-04-03 at 2 08 35 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/777efe36-81b9-448d-92ef-2055242df6aa">
+
 ## Term 2 Week 11: Mar. 19th - Mar. 21st
 
 ### Tasks Worked On:
