@@ -215,3 +215,18 @@ Goal was complete the project plan and begin with scoping the project while iden
 <h3>Completed Tasks</h3>
 - Inbox and video requests
 
+<h2>T2 Week9 Mar04 - Mar10</h2>
+<img width="1165" alt="Screenshot 2024-03-19 at 10 00 28 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/78362105/e3d96609-94e7-4041-8ded-2151cc626bba">
+
+<h3>Students Goals</h3>
+- Fix CSS on Video Request Page<br>
+- Fix Creator Name<br>
+- Webcam Preview <br>
+- Fix S3 bucket <br>
+<h3>In-Progress Tasks</h3>
+- Fix CSS on Video Request Page<br>
+- Fix Creator Name<br>
+- Webcam Preview <br>
+- Fix S3 bucket <br>
+<h3>Completed Tasks</h3>
+- Inbox and video requests

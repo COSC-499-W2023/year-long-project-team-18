@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, NgForm, Validators } from '@angular/forms';
 import { IUser, CognitoService } from '../cognito.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
 import { signup } from './signup';
 import { SignupService } from './signup.service';
 
