@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { videolist } from './videolist';
 import { VideoListService } from './videolist.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-video-list',
@@ -29,7 +31,8 @@ export class VideoListComponent implements OnInit {
     private VideoListingService: VideoListingService,
     private cognitoService: CognitoService,
     private VideoListService: VideoListService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ) { this.IUser = {} as IUser; 
       this.sns = new SNS();
     }
@@ -98,7 +101,7 @@ fetchContactList() {
       forkJoin(shareRequests$).subscribe({
         next: () => {
           console.log('All share requests sent successfully');
-          this.router.navigate(['/dashboard']);
+          this.openConfirmationDialog();
         },
         error: (error) => {
           console.error('Error sending share requests:', error);
@@ -106,8 +109,13 @@ fetchContactList() {
       });
     }
   }
-  
 
+  openConfirmationDialog() {
+    this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+    });
+  }
+  
   async sendMessageToUser(userEmail: string, message: string): Promise<void> {
     try {
       const params = {

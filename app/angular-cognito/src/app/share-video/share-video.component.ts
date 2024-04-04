@@ -6,6 +6,8 @@ import { SNS } from 'aws-sdk';
 import { Router } from '@angular/router';
 import { videolist } from '../video-list/videolist';
 import { VideoListService } from '../video-list/videolist.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-video-sharing',
@@ -27,6 +29,7 @@ export class ShareVideoComponent implements OnInit {
     private cognitoService: CognitoService,
     private router: Router,
     private VideoListService: VideoListService,
+    private dialog: MatDialog,
   ) {
     this.IUser = {} as IUser; 
     this.sns = new SNS();
@@ -87,13 +90,19 @@ export class ShareVideoComponent implements OnInit {
         async () => {
           console.log(`Share request for video ${sourceKey} successfully sent to ${contactUsername}`);
           await this.sendMessageToUser(contactUsername, 'A new video share request has been sent to you!');
-          this.router.navigate(['/dashboard']);
+          this.openConfirmationDialog();
         },
         (error) => {
           console.error(`Error sending share request to ${contactUsername}:`, error);
         }
       );
     }
+  }
+
+  openConfirmationDialog() {
+    this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+    });
   }
   
 
