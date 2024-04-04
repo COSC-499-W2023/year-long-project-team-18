@@ -62,6 +62,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    this.startWebcamPreview();
     let video: HTMLVideoElement = this.video.nativeElement;
     video.muted = false;
     video.controls = true;
@@ -80,6 +81,20 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.stopCamera();
   }
+
+  private startWebcamPreview(): void {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then(stream => {
+        this.stream = stream;
+        if (this.videoElement && this.videoElement.nativeElement) {
+          this.videoElement.nativeElement.srcObject = stream;
+        }
+      })
+      .catch(error => {
+        console.error('Error accessing the webcam:', error);
+      });
+  }
+
 
   private stopCamera() {
     if (this.stream) {
@@ -207,7 +222,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         sessionToken: environment.aws.sessionToken
       };
       const transcribeConfig = {
-        region,
+        region : 'us-west-2',
         credentials
       };
       console.log(transcriptionJobName);
@@ -215,7 +230,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         TranscriptionJobName: transcriptionJobName,
         LanguageCode: "en-US",
         Media: {
-          MediaFileUri: `s3://${bucketAddress}/${mediaFileKey}`
+          MediaFileUri: `s3://${bucketAddress}${mediaFileKey}`
         },
         OutputBucketName: bucketAddress === 'rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759' ? 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27' : 'prvcy-storage-ba20e15b50619-staging',
         OutputKey: `${username}-captions/${videoName}-captions.vtt`
@@ -247,7 +262,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         sessionToken: environment.aws.sessionToken
       };
       const transcribeConfig = {
-        region,
+        region : 'us-west-2',
         credentials
       };
       const input = {
