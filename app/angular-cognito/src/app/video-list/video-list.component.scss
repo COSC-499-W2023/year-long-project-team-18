@@ -1,5 +1,5 @@
 // video-list.component.scss
-$primary-1: #194a81;
+$primary-1: #0097b2;
 $primary-2: #194a81;
 $button-colour: #ff4f4f;
 $page-font: 'Lato', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -26,7 +26,7 @@ $text-color: #ffffff;
 .heading-container {
   position: sticky;
   top: 0;
-  background-color: $primary-2;
+  background-color: $primary-1;
   padding: 10px;
   z-index: 1;
   color: $text-color;
@@ -89,7 +89,7 @@ video {
 }
 .contact-list {
   padding: 10px;
-  background-color: #194a81;
+  background-color: $primary-1;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); 
   margin-top: 20px;
@@ -105,10 +105,6 @@ video {
 .contact-list p {
   font-weight: bold;
   margin-bottom: 10px;
-}
-.contact-list select,
-.contact-list option {
-  color: $text-color;
 }
 
 .contact-list ul {
