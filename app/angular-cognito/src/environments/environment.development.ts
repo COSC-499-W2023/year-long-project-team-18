@@ -5,14 +5,17 @@ export const environment = {
     userPoolWebClientId: '39fj6c7ose3j5426adh5ar8lu7',
   },
   aws: {
-    accessKeyId: 'ASIA53RGV7JO6CLDARX5',
-    secretAccessKey: 'F0TPKFNY2CYMbyIe3nzqgweCdU+HVoH7OHAhGqy1',
-    sessionToken: 'IQoJb3JpZ2luX2VjEND//////////wEaDGNhLWNlbnRyYWwtMSJHMEUCIH5OpXDMGs5j8s9mROvwGDImoZd9YKUCwX3oXmi4V0snAiEAkqtyaCQCe7ym4KaibgvoUix8+zfSqmiO6qQe3ia9iY4qkQMIyf//////////ARAAGgw5NTI0OTAxMzAwMTMiDKbaHsGwFFp635f9UirlAkxCfVQyuw8JayjCU8ZvvnnCb89VyGGeHN5Ef+UasdieyYMPRLcC5uzJ6NK8D/ML+dYI0pEb4HLB0UCrdHKAsChuQ2YtWZMYNIW3zkF0Vli/EcGXOa4EurHjrw9aJiMTddInyXwa+E8fcUBjgpQLhKOf5yGAxUN2TiYlOT9xsJKbsDTHp/ecMhKk6N9Kn0uAmZyNso/PGsbMCxnaUb0XmRo33FChM2HP/DpPf0AhLQ2IPAyyVl92b5cLIe5gUqwiGaeJspl6bgy2mmmpAY1vNkNFt/0OTHK7cjPA8CJ38Lk6zjCKepuD1x8pzf7hw/shyPccMftgO4zMcS6RmWrtPUcUa0RQNXOzA/cUO8FX5ssvbT36frRGq3Df3E+brnteK1VTYjW0QeQEqQZzeojDTu2xS08gY2+qmJjcVPZEGbusgrAfmNqAaPvWzKgEXbuCmKMOdL7rb7LYqSOcizscGWNTDBUy9DDenqmvBjqmAaB7iL/0oB+c7FnwByIs6VAkYnbdshB2gr5ww+1JuUNy3KJrqyQ+dWoNnQztzRFkavyavgXVwKKTPRB7c0/hRCtgmy/LQijHxEspfYR43bsiP5kjUJbM1cUlJHj1SGdFDsFjdZts7JLcI1o0kqsWvxeQpF3WHnUoTKcAWw7+NOGMVnH1U04qwfR01e+AROsbmQodJTZqKZOLIkbDkLrTt3+S+nJtTz8=',
+    
+    accessKeyId: 'ASIA53RGV7JOYISJ3K7M',
+    secretAccessKey: 'Gmkd/a5LAcSmphTMxoroqWX4fcMAg9hfZoEP1tIq',
+    sessionToken: 'IQoJb3JpZ2luX2VjEGwaDGNhLWNlbnRyYWwtMSJHMEUCIQDdx14mNDCSXX6NIyiNzWoKiYcTzct4/ZFCOm5EVpAAlgIgRp6CXg2NkbgyxQxtT4js5oV1Tti/DnVOO3Co6Ou1yqgqkQMIlf//////////ARAAGgw5NTI0OTAxMzAwMTMiDBJG7M5iGusMWq2nBirlAiVjwIM6AD6xMhcysjMxgEIUfACmUMLZQi8b/KebT3FKxnLJTYCym1m9eBYddWYrIonuvZqNgPZNbhH5H3acCaN/t5HfFvkkkZ8ChOCRKhfBN3mdEdHB+f8wTZFzfOD/IzV3TUX4tlQXwr8awLPjZ2V3lkG9TTGSpx6nr7+KOjGmaYtM89hAR3quVqRKUfgLwe3FmmbiczGKp20IB8QasxkL1EDT3+4fq+4Oap3rI3bay/w4f+FVUHVhr9HMRUIWozIstLlmyF04LLPY173JTkgex3QMocMrGlvoq6mx9z9PklFJXB6rGGSsQ4vul1cov8ld7BBorVrsJJdOrNzr5mIYAfQHgoW+FJPlhvlmO/7F8YoMY4oZqs15wKm1L76LEmVCa0Myw1f21aZXI/XfwVi/VMnVIFZUtSvXng8eHUcVD+zF/ND38/oOsSiG7TnnR7vM7MTIJuRJS12kcgAPzBW9MdyiGjCGhrywBjqmAUWN+TdJf08jg5kWSDWtBwVSD2iJr/+F/p/+g1I/cO+DmvcszppZSEmRNrvcLA/RYa6ddqaVAJnMu2FPulmyRIHv9z8QNhUgP3jFzNr10MaZyipZW0qAxBMQ+Q7Ukk+QtDOkYPE7rnq0S5+WLW4cGBi9Zv7dQEFMNH7DgzLuFaRkZ1ujRgmIb2xbu18xoEo/61XwJqL0z3LR5buvNklD22TDMjTlt1o=',
+
 
     region: 'ca-central-1',
   },
     s3: {
-      bucketName: 'prvcy-storage-ba20e15b50619-staging',
+      bucketName: 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27',
+
     },
     apiUrl:'http://localhost/api',
   };

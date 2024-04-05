@@ -1,10 +1,10 @@
+
 import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { IUser, CognitoService } from '../cognito.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import * as AWS from 'aws-sdk';
-
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import * as AWS from 'aws-sdk';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
@@ -62,6 +62,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
+    this.startWebcamPreview();
     let video: HTMLVideoElement = this.video.nativeElement;
     video.muted = false;
     video.controls = true;
@@ -80,6 +81,20 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.stopCamera();
   }
+
+  private startWebcamPreview(): void {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then(stream => {
+        this.stream = stream;
+        if (this.videoElement && this.videoElement.nativeElement) {
+          this.videoElement.nativeElement.srcObject = stream;
+        }
+      })
+      .catch(error => {
+        console.error('Error accessing the webcam:', error);
+      });
+  }
+
 
   private stopCamera() {
     if (this.stream) {
@@ -131,6 +146,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   }
 
   startRecordingButtonClicked() {
+    console.log("Success");
     this.playbackDisabled = true;
     this.submitDisabled = true;
     this.startRecording();
@@ -155,144 +171,101 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   }
 
   private uploadToS3(videoName: string, format: string): Promise<void> {
+    const buttonPressed = document.getElementsByClassName("mat-button-toggle-button mat-focus-indicator");
+    const bucketAddress = buttonPressed[0].ariaPressed === 'true' ? 'rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759' : 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27';
     return new Promise<void>((resolve, reject) => {
       this.cognitoService.getUsername()
         .then(username => {
           console.log('Username:', username);
+          const recordedBlob = new Blob(this.recordedChunks, { type: `video/${format}` });
+          this.recordedChunks = [];
   
-          if (!username) {
-            console.error('User information not available for creating a folder.');
-            reject('User information not available for creating a folder.');
-            return;
-          }
-  
-          const folderKey = `${username}/`;
-  
-          this.s3.headObject({ Bucket: 'prvcy-storage-ba20e15b50619-staging', Key: folderKey }, (err, metadata) => {
-            if (err && err.code === 'NotFound') {
-              this.s3.putObject({ Bucket: 'prvcy-storage-ba20e15b50619-staging', Key: folderKey }, (folderErr, folderData) => {
-                if (folderErr) {
-                  console.error('Error creating user folder in S3:', folderErr);
-                  reject('Error creating user folder in S3.');
-                } else {
-                  console.log('User folder created successfully in S3:', folderData);
-                  this.uploadVideo(username, videoName, format, resolve, reject);
-                }
-              });
-            } else if (!err) {
-              this.uploadVideo(username, videoName, format, resolve, reject);
+          const key = `${username}-${videoName}.${format}`;
+          const params: AWS.S3.PutObjectRequest = {
+            Bucket: bucketAddress,
+            Key: key,
+            Body: recordedBlob,
+            ContentType: `video/${format}`,
+          };
+          this.s3.upload(params, (uploadErr, data) => {
+            if (uploadErr) {
+              console.error('Error uploading to S3:', uploadErr);
+              reject('Error uploading to S3.');
             } else {
-              console.error('Error checking user folder in S3:', err);
-              reject('Error checking user folder in S3.');
+              console.log('Upload to S3 successful:', data);
+              //this.mediaConvertJob(key);
+              //sthis.transcriptionCreation(username, videoName, key, bucketAddress, region, '${username}-${videoName}')
+              resolve();
             }
           });
+  
         })
         .catch(error => {
           console.error('Error getting username:', error);
           reject('Error getting username.');
         });
     });
-  }
-
-  private uploadVideo(username: string, videoName: string, format: string, resolve: () => void, reject: (error: string) => void) {
-    if (!videoName.trim()) {
-      console.error('Video name cannot be empty');
-      reject('Video name cannot be empty.');
-      return;
-    }
-  
-    const key = `${username}/${videoName}.${format}`;
-  
-    const recordedBlob = new Blob(this.recordedChunks, { type: `video/${format}` });
-    this.recordedChunks = [];
-  
-    const params: AWS.S3.PutObjectRequest = {
-      Bucket: 'prvcy-storage-ba20e15b50619-staging',
-      Key: key,
-      Body: recordedBlob,
-      ContentType: `video/${format}`,
-    };
-  
-    this.s3.upload(params, (uploadErr, data) => {
-      if (uploadErr) {
-        console.error('Error uploading to S3:', uploadErr);
-        reject('Error uploading to S3.');
-      } else {
-        console.log('Upload to S3 successful:', data);
-        this.transcriptionCreation(username, videoName, key);
-        resolve();
-      }
-    });
-  }
-
-  async transcriptionCreation(username: string, videoName: string, key: string) {
+  }  
+  async transcriptionCreation(username: string, videoName: string, key: string, bucketAddress: string, region: string, transcriptionJobName: string) {
     try {
-      await this.transcribeUpload(username, videoName, key);
-      await this.checkTranscription(`${videoName}-captions`);
+      await this.transcribeUpload(username, videoName, key, bucketAddress, region, transcriptionJobName);
+      await this.checkTranscription(transcriptionJobName, region);
       this.router.navigate(['/share-video']);
     } catch (err) {
       console.log(err);
     }
   }
-  
-  private transcribeUpload(username: string, videoName: string, mediaFileKey: string): Promise<void> {
+ 
+  private transcribeUpload(username: string, videoName: string, mediaFileKey: string, bucketAddress: string, region: string, transcriptionJobName: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
-    const region = environment.aws.region;
-    const credentials = {
-      accessKeyId: environment.aws.accessKeyId,
-      secretAccessKey: environment.aws.secretAccessKey,
-      sessionToken: environment.aws.sessionToken
-    };
-    const transcribeConfig = {
-      region,
-      credentials
-    };
-    const input = {
-      TranscriptionJobName: `${videoName}-captions`,
-      LanguageCode: "en-US",
-      Media: {
-        MediaFileUri: `s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`
-      },
-      Subtitles: {
-        Formats: [
-          "vtt"
-        ],
-        OutputStartIndex: 1,
-      },
-      OutputBucketName: 'prvcy-storage-ba20e15b50619-staging',
-      OutputKey: `${username}-captions/${videoName}-captions`
-    };
-    async function startTranscriptionRequest() {
-      
-      const transcribeClient = new TranscribeClient(transcribeConfig);
-      const transcribeCommand = new StartTranscriptionJobCommand(input);
-      console.log(`s3://prvcy-storage-ba20e15b50619-staging/${mediaFileKey}`);
-      try {
-        const transcribeResponse = await transcribeClient.send(transcribeCommand);
-        console.log("Transcription job created, the details:");
-        console.log(transcribeResponse.TranscriptionJob);
-        resolve();
-      } catch(err) {
-        console.log(err);
-        reject('Unable to create transcription job.');
-      }
-    }
-    startTranscriptionRequest();
-    });
-  }
-
-  checkTranscription(transcriptionJobName: string): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      const { TranscribeClient, GetTranscriptionJobCommand, GetTranscriptionJobResponse } = require("@aws-sdk/client-transcribe");
-      const region = environment.aws.region;
       const credentials = {
         accessKeyId: environment.aws.accessKeyId,
         secretAccessKey: environment.aws.secretAccessKey,
         sessionToken: environment.aws.sessionToken
       };
       const transcribeConfig = {
-        region,
+        region : 'us-west-2',
+        credentials
+      };
+      console.log(transcriptionJobName);
+      const input = {
+        TranscriptionJobName: transcriptionJobName,
+        LanguageCode: "en-US",
+        Media: {
+          MediaFileUri: `s3://${bucketAddress}${mediaFileKey}`
+        },
+        OutputBucketName: bucketAddress === 'rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759' ? 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27' : 'prvcy-storage-ba20e15b50619-staging',
+        OutputKey: `${username}-captions/${videoName}-captions.vtt`
+      };
+      async function startTranscriptionRequest() {
+        
+        const transcribeClient = new TranscribeClient(transcribeConfig);
+        const transcribeCommand = new StartTranscriptionJobCommand(input);
+        try {
+          const transcribeResponse = await transcribeClient.send(transcribeCommand);
+          console.log("Transcription job created, the details:");
+          console.log(transcribeResponse.TranscriptionJob);
+          resolve();
+        } catch(err) {
+          console.log(err);
+          reject('Unable to create transcription job.');
+        }
+      }
+      startTranscriptionRequest();
+    }) 
+  }
+
+  checkTranscription(transcriptionJobName: string, region: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      const { TranscribeClient, GetTranscriptionJobCommand, GetTranscriptionJobResponse } = require("@aws-sdk/client-transcribe");
+      const credentials = {
+        accessKeyId: environment.aws.accessKeyId,
+        secretAccessKey: environment.aws.secretAccessKey,
+        sessionToken: environment.aws.sessionToken
+      };
+      const transcribeConfig = {
+        region : 'us-west-2',
         credentials
       };
       const input = {
@@ -420,7 +393,6 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
       console.error("No recorded video available for playback");
     } 
   }
-
   animal: string | undefined;
   name: string | undefined;
 

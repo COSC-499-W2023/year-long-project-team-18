@@ -4,6 +4,10 @@ import { VideoListingService } from '../video-listing.service';
 import { VideoMetadata } from '../video-metadata.model';
 import { SNS } from 'aws-sdk';
 import { Router } from '@angular/router';
+import { videolist } from '../video-list/videolist';
+import { VideoListService } from '../video-list/videolist.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-video-sharing',
@@ -18,11 +22,14 @@ export class ShareVideoComponent implements OnInit {
   recentVideo: VideoMetadata | null = null;
   private sns: SNS;
   IUser: IUser;
+  user: videolist = {username: '', organizationcode: ''};
 
   constructor(
     private VideoListingService: VideoListingService,
     private cognitoService: CognitoService,
-    private router: Router
+    private router: Router,
+    private VideoListService: VideoListService,
+    private dialog: MatDialog,
   ) {
     this.IUser = {} as IUser; 
     this.sns = new SNS();
@@ -33,18 +40,20 @@ export class ShareVideoComponent implements OnInit {
     this.loadMostRecentVideo();
   }
 
-  async fetchContactList() {
+  fetchContactList() {
     try {
-      const usernames = await this.cognitoService.getContactListFromS3();
-      const ownUsername = await this.cognitoService.getUsername();
-      const filteredUsernames = usernames.filter(username => username !== ownUsername);
+      console.log(this.IUser.username);
       
-      this.contactList = filteredUsernames;
+      this.user = {username: this.IUser.username, organizationcode: this.IUser['custom:organization']};
+      this.VideoListService.getAll(this.user).subscribe(
+        (data: videolist[])=>{
+          this.contactList = data;
+        }
+      )
     } catch (error) {
       console.error('Error fetching usernames from S3:', error);
     }
   }
-  
 
   loadMostRecentVideo(): void {
     this.VideoListingService.getVideos().subscribe(
@@ -61,7 +70,7 @@ export class ShareVideoComponent implements OnInit {
   
 
   getVideoUrl(videoKey: string): string {
-    return `https://prvcy-storage-ba20e15b50619-staging.s3.amazonaws.com/${videoKey}`;
+    return `https://rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759.s3.amazonaws.com/${videoKey}`;
   }
 
   getCaptionsUrl(videoKey: string): string {
@@ -81,13 +90,19 @@ export class ShareVideoComponent implements OnInit {
         async () => {
           console.log(`Share request for video ${sourceKey} successfully sent to ${contactUsername}`);
           await this.sendMessageToUser(contactUsername, 'A new video share request has been sent to you!');
-          this.router.navigate(['/dashboard']);
+          this.openConfirmationDialog();
         },
         (error) => {
           console.error(`Error sending share request to ${contactUsername}:`, error);
         }
       );
     }
+  }
+
+  openConfirmationDialog() {
+    this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+    });
   }
   
 

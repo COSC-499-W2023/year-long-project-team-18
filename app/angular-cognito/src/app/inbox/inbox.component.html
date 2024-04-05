@@ -1,7 +1,7 @@
 <div *ngIf="loading">
   Loading...
 </div>
-<div *ngIf="pendingRequests.success && pendingRequests.data.length > 0">
+<div *ngIf="pendingRequests.success && pendingRequests.data.length > 0" class="pending-requests-container">
   <div *ngFor="let request of pendingRequests.data" class="request-item">
     <div>
       Video Request: {{ removeFolderName(request.video_key) }} from {{ request.sender_id }}

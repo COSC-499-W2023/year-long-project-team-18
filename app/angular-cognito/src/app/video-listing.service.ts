@@ -30,13 +30,15 @@ export class VideoListingService {
   }
 
   private extractVideoName(videoKey: string): string {
-    const lastSlashIndex = videoKey.lastIndexOf('/');
-    return lastSlashIndex !== -1 ? videoKey.slice(lastSlashIndex + 1) : videoKey;
+    const parts = videoKey.split('-');
+    if (parts.length > 1) {
+      return parts.slice(1).join('-'); // Re-join the parts to account for names with '-'
+    }
+    return videoKey; // Fallback to the original key if the expected '-' is not found
   }
   
   private extractVideoDate(videoKey: string, timestampFromMetadata: number): string {
     let timestamp = timestampFromMetadata || 0; 
-  
     if (timestamp) {
       const dateObj = new Date(timestamp);
       const formattedDate = `${dateObj.getUTCFullYear()}-${this.padZero(dateObj.getUTCMonth() + 1)}-${this.padZero(dateObj.getUTCDate())} ${this.padZero(dateObj.getUTCHours())}:${this.padZero(dateObj.getUTCMinutes())}:${this.padZero(dateObj.getUTCSeconds())}`;
@@ -54,38 +56,36 @@ export class VideoListingService {
   getVideos(): Observable<VideoMetadata[]> {
     return from(this.cognitoService.getUsername() as Promise<string>).pipe(
       switchMap(username => {
-        console.log('Username:', username);
         if (!username) {
           console.error('User information not available.');
           return of([]);
         }
   
-        const folderKey = `${username}/`;
+        const prefix = `${username}-`;
         return from(
           this.s3.listObjectsV2({
-            Bucket: 'prvcy-storage-ba20e15b50619-staging',
-            Prefix: folderKey
+            Bucket: 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27',
+            Prefix: prefix
           }).promise()
         ).pipe(
-          map((data: any) => {
-            console.log('S3 Response:', data);
+          map((data: AWS.S3.ListObjectsV2Output) => {
             if (!data || !data.Contents) {
               console.error('No data or Contents in S3 response.');
               return [];
             }
   
             return data.Contents
-              .filter((item: any) => !item.Key.endsWith('/'))
-              .map((item: any) => {
-                const videoKey = item.Key;
+              .filter((item: AWS.S3.Object) => item.Key && item.Key !== prefix)
+              .map((item: AWS.S3.Object) => {
+                const videoKey = item.Key || '';
                 const videoName = this.extractVideoName(videoKey);
-                const timestampFromMetadata = item.LastModified && item.LastModified.getTime();
+                const timestampFromMetadata = item.LastModified?.getTime() || 0;
                 const videoDate = this.extractVideoDate(videoKey, timestampFromMetadata);
                 return {
                   key: videoKey,
                   name: videoName,
                   date: videoDate,
-                  creator: this.cognitoService.getUsername(),
+                  creator: username,
                 };
               });
           }),
@@ -97,5 +97,4 @@ export class VideoListingService {
       })
     );
   }
-  
 }
