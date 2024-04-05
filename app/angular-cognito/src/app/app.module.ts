@@ -31,6 +31,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatButtonModule} from '@angular/material/button';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {MatButtonModule} from '@angular/material/button';
     DialogComponent,
     ShareVideoComponent,
     VideoListComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
