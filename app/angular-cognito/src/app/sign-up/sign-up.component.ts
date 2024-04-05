@@ -131,7 +131,7 @@ export class SignUpComponent implements OnInit {
       .then(() => {
         this.createS3CaptionFolder(this.user.username);
         this.subscribeUserToSnsTopic(this.user.email);
-
+        console.log("Test Case 1: Success Sign Up");
         this.router.navigate(['/signIn']).then(()=>{
           this.snackBar.open("Successfully registered", "Dismiss",{duration: 5000})
         })
