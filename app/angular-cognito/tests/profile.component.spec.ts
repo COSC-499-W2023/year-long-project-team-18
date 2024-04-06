@@ -1,7 +1,7 @@
 import { ProfileComponent } from '../src/app/profile/profile.component';
 import { describe, it, expect, beforeEach, vi} from 'vitest';
 
-describe('OrganizationPageComponent', () => {
+describe('ProfileComponent', () => {
   
   let component: ProfileComponent;
   let mockProfileService;
@@ -27,17 +27,23 @@ describe('OrganizationPageComponent', () => {
     component = new ProfileComponent(mockCognitoService as any, mockProfileService as any);
   });
 
-  describe('Update database succesfully', () => {
-    it('should return success message when database is updated', async() => {
+  describe('Update database successfully', () => {
+    it('should return success message when database function is called successfully', async() => {
       component.updateDb('123');
       expect(console.log).toHaveBeenCalledWith('Test Case 1: Success');
     });
   });
 
-  describe('Update database unsuccesfully', () => {
+  describe('Update database unsuccessfully', () => {
     it('should return an empty string message when no org code is input', async() => {
       component.updateDb('');
       expect(console.log).toHaveBeenCalledWith('Test Case 2: Empty String');
+    });
+  });
+
+  describe('ProfileComponent created', () => {
+    it('should check to see if ProfileComponent has been successfully created', () => {
+      expect(component);
     });
   });
 

@@ -1,5 +1,5 @@
 import { AppComponent } from '../src/app/app.component';
-import { describe, it, expect, beforeEach, vi, Mock} from 'vitest';
+import { describe, it, expect, beforeEach, vi} from 'vitest';
 
 describe('AppComponent has been created', () => {
   let component: AppComponent;
@@ -16,15 +16,14 @@ describe('AppComponent has been created', () => {
     };
 
     mockRouter = {};
-
+    
     vi.spyOn(console, 'log');
     component = new AppComponent(mockCognitoService as any, mockRouter as any);
   });
 
-  describe('Signout Test', () => {
-    it('should output a success message to console.log', async () => {
+  describe('signOut Function', () => {
+    it('should output a success message if the signOut function is called with success', async () => {
       component.signOut();
-
       expect(console.log).toHaveBeenCalledWith("Successfully signed out!");
     });
   });
@@ -33,7 +32,6 @@ describe('AppComponent has been created', () => {
     it('should check to see if AppComponent has been successfully created', () => {
       expect(component);
     });
-    
   });
 
 });

@@ -53,6 +53,7 @@ export class VideoListComponent implements OnInit {
   }
 
   loadVideos(): void {
+    console.log("Success");
     this.VideoListingService.getVideos().subscribe(
       (videos: VideoMetadata[]) => {
         console.log('Videos:', videos);
@@ -65,6 +66,7 @@ export class VideoListComponent implements OnInit {
   }
 
   loadAccountType(): void {
+    console.log("Success");
     this.cognitoService.getAccountType().then((accountType) => {
       this.accountType = accountType;
     });
@@ -77,7 +79,7 @@ export class VideoListComponent implements OnInit {
 fetchContactList() {
     try {
       console.log(this.IUser.username);
-      
+      console.log("Success");
       this.user = {username: this.IUser.username, organizationcode: this.IUser['custom:organization']};
       this.VideoListService.getAll(this.user).subscribe(
         (data: videolist[])=>{

@@ -43,7 +43,7 @@ export class ShareVideoComponent implements OnInit {
   fetchContactList() {
     try {
       console.log(this.IUser.username);
-      
+      console.log("Success");
       this.user = {username: this.IUser.username, organizationcode: this.IUser['custom:organization']};
       this.VideoListService.getAll(this.user).subscribe(
         (data: videolist[])=>{

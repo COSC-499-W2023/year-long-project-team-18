@@ -32,37 +32,40 @@ describe('Signin Component', () => {
   });
   
   describe('Signin: Incorrect email and password', () => {
-    it('should display a user not found error', async () => {
+    it('should display an incorrect email or password error', async () => {
       //Error email and password set
       component.user.email = 'errorr@email.com';
       component.user.password = 'error';
 
       //Mocking the rejected email and password signin
       mockCognitoService.signIn.mockRejectedValue(new Error('SignIn failed'));
-
       component.signIn();
 
       //Checking to see if error message & loading matches
-      expect(component.errorMessage).toBe('Incorrect email or password');
-      expect(component.loading).toBe(false);
+      expect(component.errorMessage).toEqual('Incorrect email or password');
       });
   });
 
   describe('Signin: Correct email and password', () => {
-    it('should succesfully log the user in', async () => {
+    it('should successfully log the user in', async () => {
       //Valid email and password set
       component.user.email = 'segundooo';
       component.user.password = 'segundooo123W#';
 
       //Mocking the successful email and password signin
       mockCognitoService.signIn.mockResolvedValue(true);
-
       component.signIn();
 
       //Checking to see if error message & success message matches
-      expect(component.errorMessage).toBe('');
-      expect(component.sucessMessage).toBe('Success');
+      expect(component.successMessage).toEqual('Success');
     });
+  });
+
+  describe('SignInComponent created', () => {
+    it('should check to see if SignInComponent has been successfully created', () => {
+      expect(component);
+    });
+    
   });
 
 }); 

@@ -1,11 +1,9 @@
 import { SupportComponent } from '../src/app/about/about.component';
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import {expect, jest, test} from '@jest/globals';
+import { describe, expect, it} from 'vitest';
 
-describe('OrganizationPageComponent', () => {
+describe('AboutUsComponent', () => {
   let component: SupportComponent;
-  test('Component is created',()=>{
+  it('should successfully create the AboutUsComponent (SupportComponent) component', () => {
       expect(component)
   });
 

@@ -1,7 +1,7 @@
 import { DialogComponent } from '../src/app/dialog/dialog.component';
 import { describe, it, expect, beforeEach, vi} from 'vitest';
 
-describe('OrganizationPageComponent', () => {
+describe('DialogComponent', () => {
   let component: DialogComponent;
   let mockRouter: any;
   let mockCognitoService: any;
@@ -19,10 +19,17 @@ describe('OrganizationPageComponent', () => {
   });
 
   describe('joinOrg Function', () => {
-    it('should join and organization succesfully', () => {
+    it('should output success message if joinOrg is called successfully', () => {
       component.joinOrg("test");
       expect(console.log).toHaveBeenLastCalledWith("joinOrg Success");
     });
+  });
+
+  describe('DialogComponent created', () => {
+    it('should check to see if DialogComponent has been successfully created', () => {
+      expect(component);
+    });
+    
   });
 
 });

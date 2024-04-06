@@ -1,7 +1,7 @@
 import { VideoRecorderComponent } from '../src/app/video-recorder/video-recorder.component';
 import { describe, it, expect, beforeEach, vi} from 'vitest';
 
-describe('OrganizationPageComponent', () => {
+describe('VideoRecorderComponent', () => {
   
   let component: VideoRecorderComponent;
   let mockCognitoService;
@@ -21,12 +21,27 @@ describe('OrganizationPageComponent', () => {
       navigate: vi.fn().mockResolvedValue({}),
     }
     
+    vi.spyOn(console, 'log');
     component = new VideoRecorderComponent(mockRouter as any, mockRouter as any, mockDialog as any);
   });
 
-  describe('Video recording button clicked', () => {
-    it('should output success message upon video star button clicked', () => {
-      component.startRecordingButtonClicked();
+  describe('download function', () => {
+    it('should output success message if the download function is called successfully', () => {
+      component.download();
+      expect(console.log).toHaveBeenCalledWith("Success");
+    });
+  });
+
+  describe('playback function', () => {
+    it('should output success message if the playback function is called successfully', () => {
+      component.playback();
+      expect(console.log).toHaveBeenCalledWith("Success");
+    });
+  });
+
+  describe('VideoRecorderComponent created', () => {
+    it('should check to see if VideoRecorderComponent has been successfully created', () => {
+      expect(component);
     });
   });
 

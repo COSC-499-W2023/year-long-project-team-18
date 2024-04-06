@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public joinOrg(orgCode: string): void{
-    console.log("joinCode Success");
+    console.log("joinOrg Success");
     this.loading = true;
     this.cognitoService.updateUserAttribute(orgCode)
     .then(() =>{

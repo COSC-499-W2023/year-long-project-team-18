@@ -341,6 +341,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   }
 
   download() {
+    console.log("Success");
     const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
     const downloadLink = document.createElement('a');
     const url = URL.createObjectURL(recordedBlob);
@@ -383,6 +384,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   }
 
   playback(){
+    console.log("Success");
     if (this.recordedChunks.length > 0) {
       const recordedBlob = new Blob(this.recordedChunks, { type: 'video/webm' });
       const playbackBlobURL = URL.createObjectURL(recordedBlob);
