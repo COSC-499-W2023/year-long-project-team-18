@@ -60,7 +60,16 @@ export class ShareVideoComponent implements OnInit {
       (videos: VideoMetadata[]) => {
         console.log('Videos:', videos);
         videos.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-        this.recentVideo = videos[0];
+        for(let i = 0; i < videos.length; i++) {
+          var splitArray = videos[i].name.split(".");
+          if (splitArray[1] == "mp4") {
+            this.recentVideo = videos[i];
+            break;
+          } else {
+            continue;
+          }
+        }
+        //this.recentVideo = videos[0];
       },
       error => {
         console.error('Error fetching videos:', error);
@@ -70,14 +79,15 @@ export class ShareVideoComponent implements OnInit {
   
 
   getVideoUrl(videoKey: string): string {
-    return `https://rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759.s3.amazonaws.com/${videoKey}`;
+    return `https://rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27.s3.amazonaws.com/${videoKey}`;
   }
 
   getCaptionsUrl(videoKey: string): string {
-    const array = videoKey.split("/");
+    const array = videoKey.split("-");
     const videoKeyFile = array[1].substring(0, array[1].length - 4) + "-captions.vtt";
     const videoKeyFolder = array[0] + "-captions";
-    return `https://prvcy-storage-ba20e15b50619-staging.s3.amazonaws.com/${videoKeyFolder}/${videoKeyFile}`;
+    console.log("Captions file information: " + videoKeyFile + " and folder: " + videoKeyFolder);
+    return `https://rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27.s3.amazonaws.com/${videoKeyFolder}/${videoKeyFile}`;
   }
 
   async sendVideoToContact(contactUsername: any) {

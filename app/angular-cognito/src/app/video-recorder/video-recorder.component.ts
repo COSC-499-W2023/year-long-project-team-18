@@ -10,6 +10,7 @@ import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { integer } from 'aws-sdk/clients/cloudfront';
 
 export interface DialogData {
   animal: string;
@@ -171,7 +172,9 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
 
   private uploadToS3(videoName: string, format: string): Promise<void> {
     const buttonPressed = document.getElementsByClassName("mat-button-toggle-button mat-focus-indicator");
-    const bucketAddress = buttonPressed[0].ariaPressed === 'true' ? 'rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759' : 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27';
+    const bucketAddress = buttonPressed[0].ariaPressed === 'true' ? 'prvcy-storage-ba20e15b50619-staging' : 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27';
+    const region = 'us-west-2';
+    const encodeBool = buttonPressed[0].ariaPressed === 'true' ? true : false;
     return new Promise<void>((resolve, reject) => {
       this.cognitoService.getUsername()
         .then(username => {
@@ -192,8 +195,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
               reject('Error uploading to S3.');
             } else {
               console.log('Upload to S3 successful:', data);
-              //this.mediaConvertJob(key);
-              //sthis.transcriptionCreation(username, videoName, key, bucketAddress, region, '${username}-${videoName}')
+              this.transcriptionAndEncoding(username, videoName, key, bucketAddress, region, `${username}-${videoName}`, encodeBool);
               resolve();
             }
           });
@@ -204,17 +206,232 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
           reject('Error getting username.');
         });
     });
-  }  
-  async transcriptionCreation(username: string, videoName: string, key: string, bucketAddress: string, region: string, transcriptionJobName: string) {
+  }
+
+  private mediaConvertCodec(key: string) {
+    return new Promise<void>((resolve, reject) => {
+      const { MediaConvertClient, CreateJobCommand } = require("@aws-sdk/client-mediaconvert");
+      const credentials = {
+        accessKeyId: environment.aws.accessKeyId,
+        secretAccessKey: environment.aws.secretAccessKey,
+        sessionToken: environment.aws.sessionToken
+      };
+      const mediaConfig = {
+        region: "us-west-2",
+        credentials
+      }
+      const input = {
+      Role: "arn:aws:iam::952490130013:role/service-role/MediaConvert_Default_Role",
+      Settings: {
+        TimecodeConfig: {
+          Source: "ZEROBASED"
+        },
+        OutputGroups: [
+          {
+            Name: "File Group",
+            Outputs: [
+              {
+                ContainerSettings: {
+                  Container: "MP4",
+                  Mp4Settings: {}
+                },
+                VideoDescription: {
+                  CodecSettings: {
+                    Codec: "H_264",
+                    H264Settings: {
+                      MaxBitrate: 3500000,
+                      RateControlMode: "QVBR",
+                      SceneChangeDetect: "TRANSITION_DETECTION"
+                    }
+                  }
+                },
+                AudioDescriptions: [
+                  {
+                    AudioSourceName: "Audio Selector 1",
+                    CodecSettings: {
+                      Codec: "AAC",
+                      AacSettings: {
+                        Bitrate: 96000,
+                        CodingMode: "CODING_MODE_2_0",
+                        SampleRate: 48000
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            OutputGroupSettings: {
+              Type: "FILE_GROUP_SETTINGS",
+              FileGroupSettings: {
+                Destination: "s3://rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759/"
+              }
+            }
+          }
+        ],
+        FollowSource: 1,
+        Inputs: [
+          {
+            AudioSelectors: {
+              "Audio Selector 1": {
+                DefaultSelection: "DEFAULT"
+              }
+            },
+            VideoSelector: {},
+            TimecodeSource: "ZEROBASED",
+            FileInput: `s3://prvcy-storage-ba20e15b50619-staging/${key}`
+          }
+        ]
+      },
+      BillingTagSource: "JOB",
+      AccelerationSettings: {
+        Mode: "DISABLED"
+      },
+      StatusUpdateInterval: "SECONDS_60",
+      Priority: 0
+      }
+    
+      async function convertCodec() {
+        const mediaClient = new MediaConvertClient(mediaConfig);
+        const mediaCommand = new CreateJobCommand(input);
+      
+        try {
+          const mediaResponse = await mediaClient.send(mediaCommand);
+          console.log("Changing codec to H.264, details are: ")
+          console.log(mediaResponse.Job);
+          resolve();
+        } catch (err) {
+          console.log(err);
+          reject("Unable to change codec.");
+        }
+      }
+      convertCodec();
+    });
+    
+    
+  }
+
+  checkFaceBlur(key: string) {
+    return new Promise<void>((resolve, reject) => {
+      const { SFNClient, ListExecutionsCommand, DescribeExecutionCommand } = require("@aws-sdk/client-sfn");
+      const credentials = {
+          accessKeyId: environment.aws.accessKeyId,
+          secretAccessKey: environment.aws.secretAccessKey,
+          sessionToken: environment.aws.sessionToken
+      };
+      const SFNConfig = {
+        region: "us-west-2",
+        credentials
+      };
+    
+      const listInput = {
+        stateMachineArn: "arn:aws:states:us-west-2:952490130013:stateMachine:StateMachine2E01A3A5-QNnIzCsageEU",
+        maxResults: 10
+      };
+      var describeInput;
+      var found = false;
+      const sleep = (delay: integer) => new Promise((resolve) => setTimeout(resolve, delay));
+      const listCommand = new ListExecutionsCommand(listInput);
+      var listResponse;
+      var describeResponse;
+      var done = false;
+      async function check() {
+        await sleep(10000);
+        const stepFunctionClient = new SFNClient(SFNConfig);
+        try {
+          listResponse = await stepFunctionClient.send(listCommand);
+          for(let i = 0; i < 1; i++) {
+            describeInput = {
+              executionArn: listResponse.executions[0].executionArn
+            };
+            var describeCommand = new DescribeExecutionCommand(describeInput);
+            describeResponse = await stepFunctionClient.send(describeCommand);
+            var inputArray = describeResponse.input.split(":");
+            var videoNameInput = inputArray[inputArray.length - 1].split("\"");
+            console.log(videoNameInput[1]);
+          }
+          if (videoNameInput[1] === key) {
+            while (!done) {
+              describeInput = {
+                executionArn: listResponse.executions[0].executionArn
+              };
+              var describeCommand = new DescribeExecutionCommand(describeInput);
+              describeResponse = await stepFunctionClient.send(describeCommand);
+              if (describeResponse.status == "RUNNING") {
+                done = false;
+              } else if (describeResponse.status == "FAILED") {
+                done = true;
+                reject('Failed to blur face. Please try re-recording.');
+              } else if (describeResponse.status == "SUCCEEDED") {
+                done = true;
+                console.log('Face has been blurred. Continuing to next page.');
+                resolve();
+              }
+            }
+          }
+        } catch (err) {
+          console.log(err);
+        }
+        
+      }
+      check();
+    });
+    
+    
+  }
+
+  async transcriptionAndEncoding(username: string, videoName: string, key: string, bucketAddress: string, region: string, transcriptionJobName: string, encodeBool: Boolean) {
     try {
-      await this.transcribeUpload(username, videoName, key, bucketAddress, region, transcriptionJobName);
-      await this.checkTranscription(transcriptionJobName, region);
+      if (encodeBool) {
+        await this.mediaConvertCodec(key);
+        await this.checkFaceBlur(key);
+        await this.transcribeUpload(username, videoName, key, "rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759", region, transcriptionJobName);
+        await this.checkTranscription(transcriptionJobName, region);
+        await this.deleteTranscription(transcriptionJobName);
+      } else {
+        await this.transcribeUpload(username, videoName, key, "rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27", region, transcriptionJobName);
+        await this.checkTranscription(transcriptionJobName, region);
+        await this.deleteTranscription(transcriptionJobName);
+      }
+      
+      
+      
       this.router.navigate(['/share-video']);
     } catch (err) {
       console.log(err);
     }
   }
  
+  private deleteTranscription(transcriptionJobName: string) {
+    return new Promise<void>((resolve, reject) => {
+      const { TranscribeClient, DeleteTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
+      const credentials = {
+        accessKeyId: environment.aws.accessKeyId,
+        secretAccessKey: environment.aws.secretAccessKey,
+        sessionToken: environment.aws.sessionToken
+      };
+      const transcribeConfig = {
+        region: "us-west-2",
+        credentials
+      };
+      const input = {
+        TranscriptionJobName: transcriptionJobName
+      };
+      async function deleteJob() {
+        try {
+          const deleteClient = new TranscribeClient(transcribeConfig);
+          const deleteCommand = new DeleteTranscriptionJobCommand(input);
+          const response = await deleteClient.send(deleteCommand);
+          console.log("Job deleted to prevent duplication. Details are: " + response);
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+        
+      }
+      deleteJob()
+    });
+  }
+
   private transcribeUpload(username: string, videoName: string, mediaFileKey: string, bucketAddress: string, region: string, transcriptionJobName: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       const { TranscribeClient, StartTranscriptionJobCommand } = require("@aws-sdk/client-transcribe");
@@ -224,7 +441,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         sessionToken: environment.aws.sessionToken
       };
       const transcribeConfig = {
-        region : 'us-west-2',
+        region: "us-west-2",
         credentials
       };
       console.log(transcriptionJobName);
@@ -234,8 +451,13 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         Media: {
           MediaFileUri: `s3://${bucketAddress}${mediaFileKey}`
         },
-        OutputBucketName: bucketAddress === 'rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759' ? 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27' : 'prvcy-storage-ba20e15b50619-staging',
-        OutputKey: `${username}-captions/${videoName}-captions.vtt`
+        Subtitles: {
+          Formats: [
+            "vtt"
+          ]
+        },
+        OutputBucketName: 'rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27',
+        OutputKey: `${username}-captions/${videoName}-captions`
       };
       async function startTranscriptionRequest() {
         
@@ -264,7 +486,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         sessionToken: environment.aws.sessionToken
       };
       const transcribeConfig = {
-        region : 'us-west-2',
+        region: "us-west-2",
         credentials
       };
       const input = {
