@@ -144,6 +144,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   }
 
   startRecordingButtonClicked() {
+    console.log("Success");
     this.playbackDisabled = true;
     this.submitDisabled = true;
     this.startRecording();
