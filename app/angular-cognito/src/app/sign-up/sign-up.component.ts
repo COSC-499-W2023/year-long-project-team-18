@@ -16,7 +16,7 @@ import { SignupService } from './signup.service';
 export class SignUpComponent implements OnInit {
 
   signup: signup[] = [];
-  sign: signup = {email: '', username:'', password:'', firstname:'', lastname:'',birthdate:'', organizationcode:'',accounttype:''};
+  sign: signup = {email: '', username:'', password:'', firstname:'', lastname:'',birthdate:'', organizationcode:'', accounttype:'',  preferred_username:''};
   loading: boolean;
   user: IUser;
   hide = true;
@@ -118,9 +118,11 @@ export class SignUpComponent implements OnInit {
       this.user['custom:organization'] = 'default';
     }
     this.user.username = username;
+    this.user['custom:avatar_num'] = 0;
     this.sign = {email: this.user.email, username:this.user.username, password:this.user.password, 
       firstname:this.user.given_name, lastname:this.user.family_name,birthdate:this.user.birthdate,
-       organizationcode:this.user['custom:organization'],accounttype:this.user['custom:account_type']};
+       organizationcode:this.user['custom:organization'],accounttype:this.user['custom:account_type'], 
+       preferred_username: this.user['custom:preferred_username']};
     this.signUpService.store(this.sign).subscribe(
       (res: signup)=>{
         this.signup.push(res)

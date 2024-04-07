@@ -27,7 +27,7 @@
             <label class="textbox-margin" for="addCommentTextArea" style="color: #ffffff">Attach a Comment</label>
           </div>
           <div>
-            <textarea id="addCommentTextArea" id="commentArea" rows="6" placeholder="Anything to add?"></textarea>
+            <input type="text" id="addCommentTextArea" id="commentArea" rows="6" [(ngModel)]="comment" placeholder="Anything to add?"/>
           </div>
           <div>
             <button class="button" (click)="startRecordingButtonClicked()">{{recordAgain?"Record":"Record Again"}}</button>

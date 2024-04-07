@@ -75,13 +75,14 @@ export class VideoListingService {
             }
   
             return data.Contents
-              .filter((item: AWS.S3.Object) => item.Key && item.Key !== prefix)
+              .filter((item: AWS.S3.Object) => item.Key && item.Key.endsWith('.mp4'))
               .map((item: AWS.S3.Object) => {
                 const videoKey = item.Key || '';
                 const videoName = this.extractVideoName(videoKey);
                 const timestampFromMetadata = item.LastModified?.getTime() || 0;
                 const videoDate = this.extractVideoDate(videoKey, timestampFromMetadata);
                 return {
+
                   key: videoKey,
                   name: videoName,
                   date: videoDate,

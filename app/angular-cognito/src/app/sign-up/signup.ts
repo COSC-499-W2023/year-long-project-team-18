@@ -7,4 +7,5 @@ export interface signup{
     birthdate: string;
     organizationcode: string;
     accounttype: string;
+    preferred_username: string;
 }
