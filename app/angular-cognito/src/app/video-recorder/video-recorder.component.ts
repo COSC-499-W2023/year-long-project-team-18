@@ -133,10 +133,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   startRecording() {
     this.recordHidden = true;
     let mediaConstraints: MediaStreamConstraints = {
-      video: {
-        width: { min: 1280 },
-        height: { min: 720 },
-      },
+      video: true,
       audio: true,
     };
 
@@ -450,7 +447,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         TranscriptionJobName: transcriptionJobName,
         LanguageCode: "en-US",
         Media: {
-          MediaFileUri: `s3://${bucketAddress}${mediaFileKey}`
+          MediaFileUri: `s3://${bucketAddress}/${mediaFileKey}`
         },
         Subtitles: {
           Formats: [

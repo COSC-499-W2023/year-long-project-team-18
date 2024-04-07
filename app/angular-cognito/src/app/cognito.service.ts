@@ -22,7 +22,8 @@ export interface IUser {
   birthdate: string;
   'custom:account_type': string;
   'custom:organization': string;
-  preferred_username: string;
+  'custom:preferred_username': string;
+  'custom:avatar_num': number;
   gender: string;
 }
 
@@ -46,10 +47,7 @@ export class CognitoService {
     });
   }
   
-  public changePreferredUsername(user: IUser): void {
-    user.preferred_username = user.username;
-    console.log(user.preferred_username);
-  }
+  
 
   public signUp(user: IUser): Promise<any> {
     return Auth.signUp({
@@ -62,6 +60,7 @@ export class CognitoService {
         birthdate: user.birthdate,
         'custom:account_type': user['custom:account_type'],
         'custom:organization': user['custom:organization'],
+        'custom:avatar_num': user['custom:avatar_num']
       }
     })
     .then((signUpResult) => {
@@ -69,7 +68,6 @@ export class CognitoService {
     })
     .then(()=>{
       this.router.navigate(['/signIn']);
-      this.changePreferredUsername(user);
     })
     .catch((error) => {
       console.error('Sign Up Error:', error);
@@ -113,6 +111,17 @@ export class CognitoService {
       return Auth.updateUserAttributes(cognitoUser, user);
     })
    }
+
+  public updateProfileIcon(attributeValue: any): Promise<any> {
+    return Auth.currentAuthenticatedUser()
+      .then((user) => {
+        return Auth.updateUserAttributes(user, {"custom:avatar_num": attributeValue});
+      })
+      .catch((error) => {
+        console.error('Error updating Profile Picture', error);
+        throw error;
+      });
+  }
    
    public getUsername(): Promise<string> {
     return Auth.currentAuthenticatedUser()
