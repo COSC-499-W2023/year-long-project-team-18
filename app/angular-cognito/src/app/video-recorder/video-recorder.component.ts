@@ -14,6 +14,7 @@ import { integer } from 'aws-sdk/clients/cloudfront';
 
 import { videodata } from './video-data';
 import { VideoDataService } from './video-data.service';
+import { TranscriptionConfiguration } from 'aws-sdk/clients/chime';
 
 export interface DialogData {
   animal: string;
@@ -214,7 +215,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         });
     });
   }
-
+  
 
   private uploadVideo(username: string, videoName: string, format: string, resolve: () => void, reject: (error: string) => void) {
     if (!videoName.trim()) {
@@ -242,7 +243,6 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
         reject('Error uploading to S3.');
       } else {
         console.log('Upload to S3 successful:', data);
-        this.transcriptionCreation(username, videoName, key);
         resolve();
         }
     });
