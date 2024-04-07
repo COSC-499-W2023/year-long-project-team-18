@@ -1,0 +1,4 @@
+**/index.html
+**/clover.xml
+**/environments.ts
+**/environments.development.ts
