@@ -28,17 +28,24 @@ describe('InboxComponent', () => {
   });
 
   describe('removeFolderName Function', () => {
-    it('should succesfully call the removeFolderName function', () => {
+    it('should successfully call the removeFolderName function', () => {
       component.removeFolderName("test");
       expect(console.log).toHaveBeenCalledWith("removeFolderName Success");
     });
   });
 
   describe('respondToRequest Function', () => {
-    it('should succesfully call the fucntion', () => {
+    it('should successfully call the respondToRequest function', () => {
       component.respondToRequest("test","accept");
       expect(console.log).toHaveBeenCalledWith("respondtoRequest Success");
     });
+  });
+
+  describe('InboxComponent created', () => {
+    it('should check to see if InboxComponent has been successfully created', () => {
+      expect(component);
+    });
+    
   });
 
 });

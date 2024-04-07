@@ -1,7 +1,7 @@
 import { DashboardComponent } from '../src/app/dashboard/dashboard.component';
 import { describe, it, expect, beforeEach, vi} from 'vitest';
 
-describe('OrganizationPageComponent', () => {
+describe('DashboardComponent', () => {
 
   let component: DashboardComponent;
   let mockRouter;
@@ -23,11 +23,18 @@ describe('OrganizationPageComponent', () => {
     component = new DashboardComponent(mockRouter as any, mockCognitoService as any, mockMatDialog as any);
   });
 
-  describe('joinCode Function', () => {
-    it('should succesfully join an org', () => {
+  describe('joinOrg Function', () => {
+    it('should output success message if joinOrg function is called successfully', () => {
       component.joinOrg("test");
-      expect(console.log).toHaveBeenCalledWith("joinCode Success")
+      expect(console.log).toHaveBeenCalledWith("joinOrg Success")
     });
+  });
+
+  describe('DashboardComponent created', () => {
+    it('should check to see if DashboardComponent has been successfully created', () => {
+      expect(component);
+    });
+    
   });
 
 });

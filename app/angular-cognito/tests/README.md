@@ -1,10 +1,6 @@
 # PRVCY Testing Folder
 
-Welcome to the testing folder for **PRVCY**. This folder contains comprehensive tests covering the various features and functionalities within the project.
-
-## Overview
-
-PRVCY  aims to allow privacy and security through video sharing communications. This testing folder is a critical component of our development process, allowing us to maintain high-quality standards and swiftly address any potential issues.
+Welcome to the testing folder for **PRVCY**. This folder contains tests covering the various features and functionalities within the project.
 
 ## Testing Framework
 

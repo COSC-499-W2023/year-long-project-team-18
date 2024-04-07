@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { SupportComponent } from './support/support.component';
+import { SupportComponent } from './about/about.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VideoRecorderComponent } from './video-recorder/video-recorder.component';
 import { InboxComponent } from './inbox/inbox.component';

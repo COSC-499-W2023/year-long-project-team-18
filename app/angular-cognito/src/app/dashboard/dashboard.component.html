@@ -9,11 +9,10 @@
     <section class="welcome">
       <div class="welcome-text">
         <h1>WELCOME TO PRVCY</h1>
-        <p>PRVCY redefines secure video communication, offering a privacy-centric platform tailored for confidential video and message exchanges.
-          Built on a robust tech stack including Angular, HTML, CSS, Amazon AWS, and PHP, it ensures your videos remain private and protected. 
-          Experience unparalleled security and peace of mind with every video.</p>
-          <a href="#" class="button"><i class='bx bx-play'></i>Watch Video Tutorial</a>
-          <a href="#" class="button" id="learn-more">About Us</a>
+        <p>PRVCY is more than just a video sharing platform. We value the importance of privacy and security when sharing videos with other users on the platform. 
+          We are able to provide a high quality service through leveraging a variety of AWS services.</p>
+          <a class="button" routerLink="/video-recorder" routerLinkActive="active" *ngIf="isAuthenticated">Get Started</a>
+          <a class="button" id="learn-more" routerLink="/support" routerLinkActive="active" *ngIf="isAuthenticated">About Us</a>
         </div>
         <div class="welcome-img">
           <img src="../assets/PRVCY-Welcome.png" alt="PRVCY Logo">

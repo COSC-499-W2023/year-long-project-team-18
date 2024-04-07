@@ -32,8 +32,8 @@ export class AppComponent implements OnInit {
   }
 
   public signOut(): void {
-    this.cognitoService.signOut()
     console.log("Successfully signed out!");
+    this.cognitoService.signOut()
   }
   toggleNavbar() {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
