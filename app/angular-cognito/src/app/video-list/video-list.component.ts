@@ -79,7 +79,7 @@ export class VideoListComponent implements OnInit {
     // console.log(creator);
     // console.log(test);
 
-    this.commentService.getComments({ username:'maxa6', title: 'video', comment:'' }).subscribe(
+    this.commentService.getComments({ username:this.videos[0].creator, title: this.videos[0].name, comment:'' }).subscribe(
       (data: comment[])=>{
         this.comment = data;
         console.log(this.comment);
