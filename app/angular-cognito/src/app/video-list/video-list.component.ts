@@ -71,7 +71,7 @@ export class VideoListComponent implements OnInit {
   }
 
   getVideoUrl(videoKey: string): string {
-    return `https://rekognitionvideofaceblurr-inputimagebucket20b2ba6b-6anfoc4ah759.s3.amazonaws.com/${videoKey}`;
+    return `https://rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27.s3.amazonaws.com/${videoKey}`;
   }
 
 fetchContactList() {

@@ -35,8 +35,14 @@ export class ShareVideoComponent implements OnInit {
     this.sns = new SNS();
    }
 
-  ngOnInit() {
-    this.fetchContactList();
+   ngOnInit(): void {
+    this.cognitoService.getUser()
+    .then((IUser: any) => {
+      this.IUser = IUser.attributes;
+    }).then(()=>{
+      this.fetchContactList();
+    })
+
     this.loadMostRecentVideo();
   }
 

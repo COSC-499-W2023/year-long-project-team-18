@@ -31,7 +31,10 @@ export class ProfileComponent implements OnInit {
   }
 
   updateDb(org: string){
-    console.log("Success");
+    if(!org){
+      console.log("Test Case 2: Empty String");
+    }
+    console.log("Test Case 1: Success");
     this.cognitoService.getUser()
 
     .then((user: any) => {
