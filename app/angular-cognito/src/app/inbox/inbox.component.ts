@@ -41,6 +41,7 @@ export class InboxComponent implements OnInit {
 
 
   respondToRequest(requestId: string, action: 'accept' | 'deny'): void {
+    console.log("respondtoRequest Success");
     this.cognitoService.respondToShareRequest(+requestId, action).subscribe({
       next: () => {
         console.log(`Request ${action} successfully.`);
@@ -63,6 +64,7 @@ export class InboxComponent implements OnInit {
   }
   
   removeFolderName(videoKey: string): string {
+    console.log("removeFolderName Success");
     return videoKey.split('/')[1];
   }
   

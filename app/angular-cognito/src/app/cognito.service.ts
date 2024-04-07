@@ -22,7 +22,8 @@ export interface IUser {
   birthdate: string;
   'custom:account_type': string;
   'custom:organization': string;
-  preferred_username: string;
+  'custom:preferred_username': string;
+  'custom:avatar_num': number;
   gender: string;
 }
 
@@ -46,10 +47,7 @@ export class CognitoService {
     });
   }
   
-  public changePreferredUsername(user: IUser): void {
-    user.preferred_username = user.username;
-    console.log(user.preferred_username);
-  }
+  
 
   public signUp(user: IUser): Promise<any> {
     return Auth.signUp({
@@ -62,6 +60,7 @@ export class CognitoService {
         birthdate: user.birthdate,
         'custom:account_type': user['custom:account_type'],
         'custom:organization': user['custom:organization'],
+        'custom:avatar_num': user['custom:avatar_num']
       }
     })
     .then((signUpResult) => {
@@ -69,7 +68,6 @@ export class CognitoService {
     })
     .then(()=>{
       this.router.navigate(['/signIn']);
-      this.changePreferredUsername(user);
     })
     .catch((error) => {
       console.error('Sign Up Error:', error);
@@ -113,6 +111,17 @@ export class CognitoService {
       return Auth.updateUserAttributes(cognitoUser, user);
     })
    }
+
+  public updateProfileIcon(attributeValue: any): Promise<any> {
+    return Auth.currentAuthenticatedUser()
+      .then((user) => {
+        return Auth.updateUserAttributes(user, {"custom:avatar_num": attributeValue});
+      })
+      .catch((error) => {
+        console.error('Error updating Profile Picture', error);
+        throw error;
+      });
+  }
    
    public getUsername(): Promise<string> {
     return Auth.currentAuthenticatedUser()
@@ -144,30 +153,6 @@ export class CognitoService {
           console.error('Error getting account type:', error);
           return undefined;
         });
-    }
-
-    public checkS3UserFolder(folderKey: string): Promise<boolean> {
-      return new Promise<boolean>((resolve, reject) => {
-        const params = {
-          Bucket: environment.s3.bucketName,
-          Prefix: folderKey
-        };
-        AWS.config.update({
-          accessKeyId: environment.aws.accessKeyId,
-          secretAccessKey: environment.aws.secretAccessKey,
-          sessionToken: environment.aws.sessionToken,
-          region: environment.aws.region
-        });
-    
-        const s3 = new AWS.S3();
-        s3.listObjectsV2(params, (err, data) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(!!(data && data.Contents && data.Contents.length > 0));
-          }
-        });
-      });
     }
     
     public checkS3CaptionsFolder(folderKey: string): Promise<boolean> {
@@ -219,62 +204,16 @@ export class CognitoService {
       });
     }
 
-    public createS3UserFolder(folderKey: string): Promise<void> {
+    public copyVideoToContactFolder(sourceKey: string, receiverId: string): Promise<void> {
       return new Promise<void>((resolve, reject) => {
+        const parts = sourceKey.split('-');
+        const videoNameParts = parts.slice(1);
+        const videoName = videoNameParts.join('-');
+        const destinationKey = `${receiverId}-${videoName}`;
         const params = {
           Bucket: environment.s3.bucketName,
-          Key: folderKey
-        };
-  
-        AWS.config.update({
-          accessKeyId: environment.aws.accessKeyId,
-          secretAccessKey: environment.aws.secretAccessKey,
-          sessionToken: environment.aws.sessionToken,
-          region: environment.aws.region
-        });
-  
-        const s3 = new AWS.S3();
-        s3.putObject(params, (err, data) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve();
-          }
-        });
-      });
-    }
-    public getContactListFromS3(): Promise<string[]> {
-      return new Promise<string[]>((resolve, reject) => {
-        const params = {
-          Bucket: environment.s3.bucketName,
-          Delimiter: '/'
-        };
-  
-        AWS.config.update({
-          accessKeyId: environment.aws.accessKeyId,
-          secretAccessKey: environment.aws.secretAccessKey,
-          sessionToken: environment.aws.sessionToken,
-          region: environment.aws.region
-        });
-  
-        const s3 = new AWS.S3();
-        s3.listObjectsV2(params, (err, data) => {
-          if (err) {
-            reject(err);
-          } else {
-            const usernames = data.CommonPrefixes?.map(prefix => prefix.Prefix?.replace('/', '') || '') || [];
-            resolve(usernames);
-          }
-        });
-      });
-    }
-
-    public copyVideoToContactFolder(sourceKey: string, destinationFolder: string): Promise<void> {
-      return new Promise<void>((resolve, reject) => {
-        const params = {
-          Bucket: environment.s3.bucketName,
-          CopySource: `prvcy-storage-ba20e15b50619-staging/${sourceKey}`,
-          Key: `${destinationFolder}/${sourceKey.substring(sourceKey.lastIndexOf('/') + 1)}`
+          CopySource: `${environment.s3.bucketName}/${sourceKey}`,
+          Key: destinationKey
         };
     
         AWS.config.update({
@@ -344,6 +283,10 @@ export class CognitoService {
     respondToShareRequest(requestId: number, action: 'accept' | 'deny'): Observable<any> {
       const requestBody = { requestId, action };
       return this.http.post(`http://localhost/api/respondToRequest`, requestBody);
+    }
+
+    getCreator(){
+      
     }
 
   }   

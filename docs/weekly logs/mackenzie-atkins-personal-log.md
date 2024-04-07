@@ -1,3 +1,42 @@
+##Mar 24 - Mar 31
+
+### Student goals
+Work on video comments still, just reading now.
+
+### Completed tasks
+- Got comments to read when there is one video, not working for more than one. Not working on anymore tasks except for report now
+
+### In progress tasks
+- Final report
+
+### Peer evaluation
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/206d573c-b71f-4ac5-b434-e9094c9dc4b5)
+
+
+## Mar 18 - Mar 24
+
+### Student goals
+
+Do some work on video comments - reading/writing in the database. Work on final report.
+
+### Completed tasks
+
+- Added write capabilities from video-record page
+
+### Student tasks on board  
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/26035eed-76d4-4367-b475-4cc27cada82a)
+
+
+### In progress tasks
+- Reading comments into the video-archive page
+- Determining specific tasks with group members
+
+### Peer evaluation
+
+![image](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/91855027/6a24f57d-a6cf-4b10-9010-c3b14aa68c61)
+
+
 ## Mar 4 = Mar 10
 
 ### Student goals

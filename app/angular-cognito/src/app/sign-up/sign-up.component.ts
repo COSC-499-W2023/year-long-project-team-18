@@ -2,11 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, NgForm, Validators } from '@angular/forms';
-import { AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { IUser, CognitoService } from '../cognito.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
-
 import { signup } from './signup';
 import { SignupService } from './signup.service';
 
@@ -18,7 +16,7 @@ import { SignupService } from './signup.service';
 export class SignUpComponent implements OnInit {
 
   signup: signup[] = [];
-  sign: signup = {email: '', username:'', password:'', firstname:'', lastname:'',birthdate:'', organizationcode:'',accounttype:''};
+  sign: signup = {email: '', username:'', password:'', firstname:'', lastname:'',birthdate:'', organizationcode:'', accounttype:'',  preferred_username:''};
   loading: boolean;
   user: IUser;
   hide = true;
@@ -120,9 +118,11 @@ export class SignUpComponent implements OnInit {
       this.user['custom:organization'] = 'default';
     }
     this.user.username = username;
+    this.user['custom:avatar_num'] = 0;
     this.sign = {email: this.user.email, username:this.user.username, password:this.user.password, 
       firstname:this.user.given_name, lastname:this.user.family_name,birthdate:this.user.birthdate,
-       organizationcode:this.user['custom:organization'],accounttype:this.user['custom:account_type']};
+       organizationcode:this.user['custom:organization'],accounttype:this.user['custom:account_type'], 
+       preferred_username: this.user['custom:preferred_username']};
     this.signUpService.store(this.sign).subscribe(
       (res: signup)=>{
         this.signup.push(res)
@@ -132,9 +132,8 @@ export class SignUpComponent implements OnInit {
     this.cognitoService.signUp(this.user)
       .then(() => {
         this.createS3CaptionFolder(this.user.username);
-        this.createS3UserFolder(username);
         this.subscribeUserToSnsTopic(this.user.email);
-
+        console.log("Test Case 1: Success Sign Up");
         this.router.navigate(['/signIn']).then(()=>{
           this.snackBar.open("Successfully registered", "Dismiss",{duration: 5000})
         })
@@ -145,18 +144,6 @@ export class SignUpComponent implements OnInit {
       });
   }
   
-  private createS3UserFolder(username: string): void {
-    const folderKey = `${username}/`;
-    this.cognitoService.checkS3UserFolder(folderKey)
-      .then(folderExists => {
-        if (!folderExists) {
-          this.cognitoService.createS3UserFolder(folderKey)
-            .then(() => console.log('User folder created successfully in S3'))
-            .catch(err => console.error('Error creating user folder in S3:', err));
-        }
-      })
-      .catch(err => console.error('Error checking user folder in S3:', err));
-  }
 
   private createS3CaptionFolder(username: string): void {
     const folderKey = `${username}-captions/`;

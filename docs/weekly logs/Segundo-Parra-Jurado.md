@@ -1,3 +1,56 @@
+## Term 2 Week 12: Mar. 26thth - Mar. 28th
+
+### Tasks Worked On:
+  - Finished all the testing for the components (not all of them work, but the overall testing is complete and pushed! NOTE: I worked on and finished the testing mainly on Monday and Tuesday so I don't know if that counts for week 12 or this upcoming week.)
+
+ ### Tasks I am planning to work on this upcoming week:
+  - (NOTE: Priority #1) Finish the UI (HTML/CSS/Angular Component/(possibly Bootstrap?)) for any remaining areas of the project + the peer testing feedback
+  - (NOTE: May not have time) Calendar Integration UI (frontend + backend)
+
+### Tasks I Am Assigned To:
+
+<img width="1470" alt="Screenshot 2024-04-03 at 2 12 04 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/92d390f5-d250-4a4b-b641-021011ab176a">
+
+### Peer Evaluations:
+
+<img width="1098" alt="Screenshot 2024-04-03 at 2 08 35 AM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/777efe36-81b9-448d-92ef-2055242df6aa">
+
+## Term 2 Week 11: Mar. 19th - Mar. 21st
+
+### Tasks Worked On:
+  - None (I had a super busy week with other courses, I should be good now until the last submission for the capstone though!)
+
+ ### Tasks I am planning to work on this upcoming week:
+  - Calendar Integration UI (frontend + backend)
+  - Finish the Vitest cases
+  - Finish the UI (HTML/CSS/Angular Component/(possibly Bootstrap?)) for any remaining areas of the project + the peer testing feedback
+
+### Tasks I Am Assigned To:
+
+<img width="1470" alt="Screenshot 2024-03-03 at 11 47 48 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d6c47277-7ccd-434e-b5ce-eb1bc849688e">
+
+### Peer Evaluations:
+
+<img width="1091" alt="Screenshot 2024-03-27 at 11 53 47 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/0e6261a4-7628-41a5-b4c7-435098e0ff68">
+
+## Term 2 Week 10: Mar. 12th - Mar. 14th
+
+### Tasks Worked On:
+  - None (I had a super busy week with other courses and was also sick for the past week)
+
+ ### Tasks I am planning to work on this upcoming week:
+  - Calendar Integration UI (frontend + backend)
+  - Finish the Vitest cases
+  - Finish the UI (HTML/CSS/Angular Component/(possibly Bootstrap?)) for any remaining areas of the project + the peer testing feedback
+
+### Tasks I Am Assigned To:
+
+<img width="1470" alt="Screenshot 2024-03-03 at 11 47 48 PM" src="https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/d6c47277-7ccd-434e-b5ce-eb1bc849688e">
+
+### Peer Evaluations:
+
+![Screenshot 2024-03-20 at 10 44 58 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/46d34648-5d4b-4a13-a8da-b11d00bee1c0)
+
 ## Term 2 Week 9: Mar. 5th - Mar. 7th
 
 ### Tasks Worked On:
@@ -21,7 +74,7 @@
   - Troubleshooted Jest more, I realized that Jest was simply not working with our app so I managed to research and configure a new environment for our testing. The new testing framework is called Vitest and it solves the problem with being able to locate imports called within the test cases. I'll be steadidly catching up with our test cases for the project over the coming weeks until I am fully caught up.
 
 ### Tasks I am planning to work on this upcoming week:
-  - Calendar Integration UI (Not sure if I will be able to get backend work done for peer testing)
+  - Calendar Integration UI (Not sure if I will be able to get frontend or backend work done for peer testing)
   - Adding more UI changes in preparation for our peer testing session on Tuesday.
 
 ### Tasks I Am Assigned To:

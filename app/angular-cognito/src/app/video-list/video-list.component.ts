@@ -10,6 +10,9 @@ import { VideoListService } from './videolist.service';
 import { comment } from './comment';
 import { CommentService } from './comment.service';
 
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+
 @Component({
   selector: 'app-video-list',
   templateUrl: './video-list.component.html',
@@ -34,7 +37,8 @@ export class VideoListComponent implements OnInit {
     private cognitoService: CognitoService,
     private VideoListService: VideoListService,
     private commentService: CommentService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ) { this.IUser = {} as IUser; 
       this.sns = new SNS();
     }
@@ -102,16 +106,9 @@ export class VideoListComponent implements OnInit {
   }
 
   getVideoUrl(videoKey: string): string {
-    return `https://prvcy-storage-ba20e15b50619-staging.s3.amazonaws.com/${videoKey}`;
+    return `https://rekognitionvideofaceblurr-outputimagebucket1311836-k4clgp1hsh27.s3.amazonaws.com/${videoKey}`;
   }
 
-  // getCaptionsUrl(videoKey: string): string {
-  //   //this.user = {username: this.IUser.username, organizationcode: this.IUser['custom:organization']};
-  //   const username = this.cognitoService.getUsername();
-  //   const captionKey = videoKey.substring(0, videoKey.length - 4) + "-captions.vtt";
-  //   const captionFolderKey = username;
-  //   return `https://prvcy-storage-ba20e15b50619-staging.s3.amazonaws.com/${captionFolderKey}/${captionKey}`;
-  // }
 fetchContactList() {
     try {      
       this.user = {username: this.IUser.username, organizationcode: this.IUser['custom:organization']};
@@ -137,7 +134,7 @@ fetchContactList() {
       forkJoin(shareRequests$).subscribe({
         next: () => {
           console.log('All share requests sent successfully');
-          this.router.navigate(['/dashboard']);
+          this.openConfirmationDialog();
         },
         error: (error) => {
           console.error('Error sending share requests:', error);
@@ -145,8 +142,13 @@ fetchContactList() {
       });
     }
   }
-  
 
+  openConfirmationDialog() {
+    this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+    });
+  }
+  
   async sendMessageToUser(userEmail: string, message: string): Promise<void> {
     try {
       const params = {
