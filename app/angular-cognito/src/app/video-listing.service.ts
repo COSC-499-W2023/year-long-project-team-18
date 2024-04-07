@@ -82,6 +82,7 @@ export class VideoListingService {
                 const timestampFromMetadata = item.LastModified?.getTime() || 0;
                 const videoDate = this.extractVideoDate(videoKey, timestampFromMetadata);
                 return {
+
                   key: videoKey,
                   name: videoName,
                   date: videoDate,

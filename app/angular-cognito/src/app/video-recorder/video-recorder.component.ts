@@ -12,10 +12,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { integer } from 'aws-sdk/clients/cloudfront';
 
+import { videodata } from './video-data';
+import { VideoDataService } from './video-data.service';
+
 export interface DialogData {
   animal: string;
   name: string;
 }
+
+
 
 @Component({
   selector: 'app-video-recorder',
@@ -26,7 +31,7 @@ export interface DialogData {
 export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('video') videoElement!: ElementRef<HTMLVideoElement>;
-
+  
   playbackDisabled: boolean = true;
   submitDisabled: boolean = true;
   recordAgain: boolean = true;
@@ -35,8 +40,12 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
   user: IUser;
   isAuthenticated: boolean;
 
+  comment: string = '';
   videoName: string = '';
   isSubmitDisabled: boolean = true;
+
+  videoData: videodata[] = [];
+  vidData: videodata = {username: '', title: '', comment: ''}
 
   private stream!: MediaStream;
   private kinesisVideoClient: AWS.KinesisVideo | null = null;
@@ -49,7 +58,7 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
 
-  constructor(private cognitoService: CognitoService, private router: Router, public dialog: MatDialog) {
+  constructor(private cognitoService: CognitoService, private router: Router, public dialog: MatDialog, private vidDataService: VideoDataService) {
     this.loading = false;
     this.user = {} as IUser;
     this.isAuthenticated = true;
@@ -203,6 +212,39 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
           console.error('Error getting username:', error);
           reject('Error getting username.');
         });
+    });
+  }
+
+
+  private uploadVideo(username: string, videoName: string, format: string, resolve: () => void, reject: (error: string) => void) {
+    if (!videoName.trim()) {
+      console.error('Video name cannot be empty');
+      reject('Video name cannot be empty.');
+      return;
+    }
+  
+    const key = `${username}/${videoName}.${format}`;
+    
+  
+    const recordedBlob = new Blob(this.recordedChunks, { type: `video/${format}` });
+    this.recordedChunks = [];
+  
+    const params: AWS.S3.PutObjectRequest = {
+      Bucket: 'prvcy-storage-ba20e15b50619-staging',
+      Key: key,
+      Body: recordedBlob,
+      ContentType: `video/${format}`,
+    };
+  
+    this.s3.upload(params, (uploadErr, data) => {
+      if (uploadErr) {
+        console.error('Error uploading to S3:', uploadErr);
+        reject('Error uploading to S3.');
+      } else {
+        console.log('Upload to S3 successful:', data);
+        this.transcriptionCreation(username, videoName, key);
+        resolve();
+        }
     });
   }
 
@@ -585,6 +627,12 @@ export class VideoRecorderComponent implements AfterViewInit, OnDestroy {
     }
 
     try {
+      this.vidData = {username: (await this.cognitoService.getUsername()).toString(), title: this.videoName, comment: this.comment};
+      this.vidDataService.store(this.vidData).subscribe(
+        (res: videodata)=>{
+          this.videoData.push(res)
+        }
+      )     
       await this.uploadToS3(this.videoName.trim(), 'mp4');
       this.videoName = '';
       this.isSubmitDisabled = true;

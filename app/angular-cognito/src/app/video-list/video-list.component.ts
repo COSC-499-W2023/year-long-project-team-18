@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { videolist } from './videolist';
 import { VideoListService } from './videolist.service';
+import { comment } from './comment';
+import { CommentService } from './comment.service';
+
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
@@ -22,6 +25,8 @@ export class VideoListComponent implements OnInit {
   videos: VideoMetadata[] = [];
   accountType: string | undefined;
   user: videolist = {username: '', organizationcode: ''};
+  comment: comment[] = [];
+  comment_list: comment = {username: '', comment: '', title: ''};
   IUser: IUser;
   contactList: videolist[] = [];
   selectedContact: any;  
@@ -31,6 +36,7 @@ export class VideoListComponent implements OnInit {
     private VideoListingService: VideoListingService,
     private cognitoService: CognitoService,
     private VideoListService: VideoListService,
+    private commentService: CommentService,
     private router: Router,
     private dialog: MatDialog,
   ) { this.IUser = {} as IUser; 
@@ -48,8 +54,37 @@ export class VideoListComponent implements OnInit {
       this.loadVideos();
       this.loadAccountType();
       this.fetchContactList();
+      this.getComments();
     })
 
+  }
+
+  getComments(): void {
+    // this.VideoListingService.getVideos().subscribe(
+    //   (videos: VideoMetadata[]) => {
+    //     this.videos = videos;
+    //   },
+    //   error => {
+    //     console.error('Error fetching videos:', error);
+    //   }
+    // );
+
+    // let creator = [];
+    // let test = [];
+    
+    // for(let i=0; i < this.videos.length;i++){
+    //   creator[i] = this.videos[i].name;
+    //   test[i] = this.videos[i].creator;
+    // }
+    // console.log(creator);
+    // console.log(test);
+
+    this.commentService.getComments({ username:'maxa6', title: 'video', comment:'' }).subscribe(
+      (data: comment[])=>{
+        this.comment = data;
+        console.log(this.comment);
+      }
+    )
   }
 
   loadVideos(): void {
@@ -75,9 +110,7 @@ export class VideoListComponent implements OnInit {
   }
 
 fetchContactList() {
-    try {
-      console.log(this.IUser.username);
-      
+    try {      
       this.user = {username: this.IUser.username, organizationcode: this.IUser['custom:organization']};
       this.VideoListService.getAll(this.user).subscribe(
         (data: videolist[])=>{
