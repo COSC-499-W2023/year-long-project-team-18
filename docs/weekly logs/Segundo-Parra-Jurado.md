@@ -1,3 +1,20 @@
+## Term 2 Week 13: Apr. 2nd - Apr. 4th
+
+### Tasks Worked On:
+  - Completed all work in progress tasks assigned to myself (Testing, About us page)
+  - Completed video walkthrough and final written report
+
+ ### Tasks I am planning to work on this upcoming week:
+  - None
+
+### Tasks I Am Assigned To:
+
+None
+
+### Peer Evaluations:
+
+![Screenshot 2024-04-10 at 11 53 10 PM](https://github.com/COSC-499-W2023/year-long-project-team-18/assets/49846907/988e5504-be54-4134-a740-27f1445ea430)
+
 ## Term 2 Week 12: Mar. 26thth - Mar. 28th
 
 ### Tasks Worked On:
